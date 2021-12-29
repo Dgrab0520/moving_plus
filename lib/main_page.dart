@@ -1,5 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:moving_plus/c_mypage.dart';
+import 'package:moving_plus/main_arlim.dart';
+import 'package:moving_plus/p_login.dart';
+import 'package:moving_plus/partner_search.dart';
+import 'package:moving_plus/receive_estimate.dart';
+
+
+import 'arlim_checkbox.dart';
+import 'homepage.dart';
 
 class Main_Page extends StatefulWidget {
   const Main_Page({Key? key}) : super(key: key);
@@ -9,867 +19,83 @@ class Main_Page extends StatefulWidget {
 }
 
 class _Main_PageState extends State<Main_Page> {
+  bool _isChecked = false;
+  int _selectedIndex = 1;
+  DateTime currentBackPressTime = DateTime.now();
+
+  void moveIndex(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  List<Widget> _widgetOptions = [];
+
+  @override
+  void initState() {
+    _widgetOptions = [
+      Container(),
+      HomePage(),
+      Container(),
+    ];
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-      home:Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            title: Row(
-              children: [
-                Expanded(child:
-                Align(
-                  alignment: Alignment.centerLeft,
-                    child: Icon(Icons.menu,color:Color(0xFF025595))),),
-                Expanded(child: Image.asset("assets/logo_3.jpg",width:65,height:35)),
-                Expanded(child:
-                  Row(
-                    children: [
-                      Expanded(
-                        flex:3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:8.0),
-                          child: Container(
-                            padding: EdgeInsets.only(top:4.0,bottom:4,left:4,right:4),
-                            decoration: BoxDecoration(
-                              color:Color(0xFF025595),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text('파트너 로그인',
-                              style: TextStyle(
-                                color:Colors.white,
-                                fontSize:12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                              child: Icon(Icons.notifications,color:Color(0xFF025595))),
-                        ),
-                      ),
-                    ],
-                   ),
-                ),
-              ],
-            ),
-          ),
-        body: ListView(
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Color(0xFF025595)),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Row(
           children: [
-            Container(
-              width: double.infinity,
-              height: 170,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fitWidth,
-                  image: AssetImage("assets/main_banner.png"),
-                )
-              ),
-              child: Container(
-                padding: EdgeInsets.only(top:75.0,),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text("쾌적하고 아름다운 공간을 만드는",
-                      style:TextStyle(
-                        fontFamily: 'NanumSquareR',
-                        fontSize:12,
-                      ),
-                    ),
-                    SizedBox(height:5),
-                    Text("토탈 홈케어 올인원 서비스",
-                      style:TextStyle(
-                        fontFamily: 'NanumSquareR',
-                        fontSize:12,
-                      ),
-                    ),
-                    SizedBox(height:15),
-                    Text("입주 플러스 +",
-                      style:TextStyle(
-                        fontFamily: 'Jalnan',
-                        fontSize:21,
-                        color:Color(0xFF025595),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left:10.0,right:10),
-              child: Column(
-                  children: [
-                    SizedBox(height:30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(width:10),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon1-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('클린',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:15),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),  // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon2-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('인테리어',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:15),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),  // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon3-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('홈 스타일링',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                      ],
-                    ),
-                    SizedBox(height:15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(width:10),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),  // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon4-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('가전/가구 케어',
-                                  style: TextStyle(
-                                    fontSize:12,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:15),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),  // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon5-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('렌탈',
-                                  style: TextStyle(
-                                    fontSize:12,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width:15),
-                        Expanded(
-                          child: Container(
-                            width:105,
-                            height:105,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 2,
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),  // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/main_icon6-1.png", width:60 ,height:60),
-                                const SizedBox(height:10),
-                                const Text('기타',
-                                  style: TextStyle(
-                                    fontSize:12,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                      ],
-                    ),
-                    SizedBox(height:30),
-                    Container(
-                      padding: EdgeInsets.only(left:10.0,right:10),
-                      child: Column(
-                          children:  [
-                            Row(
-                              children: const [
-                                Text('자주 찾는 서비스',
-                                  style:TextStyle(
-                                    fontFamily: 'NanumSquareEB',
-                                    fontSize:15,
-                                  )
-                                ),
-                                SizedBox(height:10),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  alignment:Alignment.bottomLeft,
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_1.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:70,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#클린 서비스',
-                                            style:TextStyle(
-                                              color:Colors.white,
-                                              fontSize:9,
-                                              fontFamily: 'NanumSquareR',
-                                            )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment:Alignment.bottomLeft,
-                                        margin: EdgeInsets.only(left:3.0,bottom:13),
-                                        width:75,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#인테리어 청소',
-                                            style:TextStyle(
-                                              color:Color(0xFF444444),
-                                              fontSize:9,
-                                              fontFamily: 'NanumSquareR',
-                                            )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width:10),
-                                Container(
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_2.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:80,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#인테리어 서비스',
-                                              style:TextStyle(
-                                                color:Colors.white,
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:3.0,bottom:13),
-                                        width:65,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#올 인테리어',
-                                              style:TextStyle(
-                                                color:Color(0xFF444444),
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_3.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:90,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#홈스타일링 서비스',
-                                              style:TextStyle(
-                                                color:Colors.white,
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:3.0,bottom:13),
-                                        width:55,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#정리정돈',
-                                              style:TextStyle(
-                                                color:Color(0xFF444444),
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width:10),
-                                Container(
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_4.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:95,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#가전/가구 케어서비스',
-                                              style:TextStyle(
-                                                color:Colors.white,
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:5.0,bottom:13),
-                                        width:55,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#조명설치',
-                                              style:TextStyle(
-                                                color:Color(0xFF444444),
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_5.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:65,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#렌탈 서비스',
-                                              style:TextStyle(
-                                                color:Colors.white,
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:3.0,bottom:13),
-                                        width:35,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#TV',
-                                              style:TextStyle(
-                                                color:Color(0xFF444444),
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width:10),
-                                Container(
-                                  width:171,
-                                  height:120,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/service_6.png"),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left:8.0,bottom:13),
-                                        width:40,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Color(0xFF444444),
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#기타',
-                                              style:TextStyle(
-                                                color:Colors.white,
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:5.0,bottom:13),
-                                        width:55,
-                                        height:15,
-                                        decoration:BoxDecoration(
-                                          color:Colors.white,
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                        child: Center(
-                                          child: Text('#소독/방역',
-                                              style:TextStyle(
-                                                color:Color(0xFF444444),
-                                                fontSize:9,
-                                                fontFamily: 'NanumSquareR',
-                                              )
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                    ),
-                    SizedBox(height:30),
-                  ],
-                ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 95,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage("assets/sub_banner.jpg"),
-                  )
-              ),
-            ),
-
-            SizedBox(height:30),
-
-            Container(
-              padding: EdgeInsets.only(left:20.0,right:20),
-              child: Column(
+            Expanded(
+                flex:2,
+                child: Container()),
+            Expanded(
+                flex:4,
+                child: Image.asset("assets/logo_3.jpg",width:65,height:35)),
+            Expanded(
+              flex:4,
+              child:
+              Row(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('파트너 추천',
-                          style:TextStyle(
-                            fontFamily: 'NanumSquareEB',
-                            fontSize:15,
-                          )
-                      ),
-                      Text('더 보기',
-                        style:TextStyle(
-                          color:Color(0xFF444444),
-                          fontFamily:'NanumSquareR',
-                          fontSize:15,
+                  Expanded(
+                    flex:3,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: InkWell(
+                        onTap: (){
+                          Get.dialog(P_Login()
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(top:4.0,bottom:4,left:4,right:4),
+                          decoration: BoxDecoration(
+                            color:Color(0xFF025595),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text('파트너 로그인',
+                            style: TextStyle(
+                              color:Colors.white,
+                              fontSize:12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height:10),
-
-                  Container(
-                    padding: EdgeInsets.only(left:10,right:10),
-                    width:double.infinity,
-                    height:100,
-                    decoration:BoxDecoration(
-                      color:Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/p_img-1.png", width:60,height:60),
-                        SizedBox(width:10),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text('인테리어 작업대',
-                                  style:TextStyle(
-                                    color:Color(0xFF444444),
-                                    fontFamily: 'NanumSquareEB',
-                                    fontSize:14,
-                                  ),
-                                ),
-                                SizedBox(width:5),
-                                Container(
-                                  width:30,
-                                  height:15,
-                                  decoration:BoxDecoration(
-                                    color:Color(0xFF025595),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Center(
-                                    child: Text('인기',
-                                      style:TextStyle(
-                                        color:Colors.white,
-                                        fontSize:10,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height:5),
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text('총 공사 20건',
-                                      style:TextStyle(
-                                       fontSize:12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(width:20),
-                                Row(
-                                  children: [
-                                    Image.asset("assets/star1.png",width:13,height:13),
-                                    Text('4.7',
-                                      style:TextStyle(
-                                        fontSize:12,
-                                      )
-                                    ),
-                                    Text('(10개)',
-                                      style:TextStyle(
-                                        fontSize:8,
-                                      )
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height:10),
-
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.only(left:7,right:7),
-                                  height:17,
-                                  decoration:BoxDecoration(
-                                    color:Color(0xFF444444),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text('인테리어 서비스',
-                                        style:TextStyle(
-                                          color:Colors.white,
-                                          fontSize:7,
-                                          fontFamily: 'NanumSquareR',
-                                        )
-                                    ),
-                                  ),
-                                ),
-
-                                SizedBox(width:3),
-
-                                Container(
-                                  padding: EdgeInsets.only(left:7,right:7),
-                                  height:17,
-                                  decoration:BoxDecoration(
-                                    color:Color(0xFF444444),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text('카드결제',
-                                        style:TextStyle(
-                                          color:Colors.white,
-                                          fontSize:7,
-                                          fontFamily: 'NanumSquareR',
-                                        )
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width:3),
-                                Container(
-                                  padding: EdgeInsets.only(left:7,right:7),
-                                  height:17,
-                                  decoration:BoxDecoration(
-                                    color:Color(0xFF444444),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text('일반도면',
-                                        style:TextStyle(
-                                          color:Colors.white,
-                                          fontSize:7,
-                                          fontFamily: 'NanumSquareR',
-                                        )
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width:3),
-                                Container(
-                                  padding: EdgeInsets.only(left:7,right:7),
-                                  height:17,
-                                  decoration:BoxDecoration(
-                                    color:Color(0xFF444444),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text('보증보험',
-                                        style:TextStyle(
-                                          color:Colors.white,
-                                          fontSize:7,
-                                          fontFamily: 'NanumSquareR',
-                                        )
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        ),
-                        Image.asset("assets/p_img2-1.png")
-                      ],
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap:(){
+                        Get.dialog(Main_Arlim());
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                            child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
+                      ),
                     ),
                   ),
                 ],
@@ -877,6 +103,299 @@ class _Main_PageState extends State<Main_Page> {
             ),
           ],
         ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Container(
+              color:Color(0xFF025595),
+              height:150,
+              child: DrawerHeader(
+                child: Row(
+                  children: [
+                    Expanded(
+                        flex:2,
+                        child: Image.asset("assets/avatar_c.png",width:70,height:70)),
+                    SizedBox(width:10),
+                    Expanded(
+                      flex:4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('김이박',
+                            style:TextStyle(
+                              fontSize:15,
+                              color:Colors.white,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          SizedBox(height:5),
+                          Row(
+                            children: [
+                              Text('kep123@naver.com',
+                                  style:TextStyle(
+                                    color:Colors.white,
+                                    fontSize: 12,
+                                    fontFamily: 'NanumSquareR',
+                                  )
+                              ),
+                              SizedBox(width:7),
+                              Image.asset("assets/kakao_w.png", width:13,height:13),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        flex:1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            InkWell(
+                                onTap:(){
+                                  Navigator.pop(context);
+                                  print('ss');
+                                },
+                                child: Container(child: Image.asset("assets/close.png"))),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.dialog(Receive_Estimate());
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/list_g.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('받은 견적서',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/chat_g.png",width:18,height:18),
+                    // Icon(Icons.speaker_notes_rounded,
+                    //   color: Color(0xFf444444),
+                    // ),
+                    SizedBox(width:15),
+                    Text('채팅',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                    SizedBox(width:5),
+                    Container(
+                      width:20,
+                      height:15,
+                      decoration:BoxDecoration(
+                        color:Color(0xFF025595),
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Center(
+                        child: Text('5',
+                          style: TextStyle(
+                            color:Colors.white,
+                            fontSize:12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.dialog(Partner_Search());
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/search_g"".png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('파트너 찾기',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.dialog(C_Mypage());
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/user_g.png",width:18,height:18),
+                    SizedBox(width:14),
+                    Text('마이페이지',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 10,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide( // POINT
+                    color: Color(0xFFf1f1f1),
+                    width: 3.0,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height:5),
+            InkWell(
+              onTap: (){
+                print('ss');
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/setting_g.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('설정',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                print('ss');
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/logout-(1)_g@2x.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('로그아웃',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      extendBody: true,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color(0xFF025595),
+          unselectedFontSize: 12,
+          currentIndex: _selectedIndex, //현재 선택된 Index
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              title: Text('견적신청',
+                style: TextStyle(
+                  color:Colors.white,
+                  fontSize: 11,
+                ),
+              ),
+              icon: new Image.asset(
+                "assets/notice.png",
+                width: 22,
+                height: 20,
+              ),
+              activeIcon: Image.asset(
+                "assets/notice.png",
+                width: 22,
+                height: 20,
+              ),
+            ),
+            BottomNavigationBarItem(
+              title: Text('홈',
+                  style:TextStyle(
+                    color:Colors.white,
+                    fontSize:11,
+                  )
+              ),
+              icon: new Image.asset(
+                "assets/home.png",
+                width: 22,
+                height: 20,
+              ),
+              activeIcon: Image.asset(
+                "assets/home.png",
+                width: 22,
+                height: 20,
+              ),
+            ),
+            BottomNavigationBarItem(
+              title: Text('채팅',
+                  style:TextStyle(
+                    color:Colors.white,
+                    fontSize:11,
+                  )
+              ),
+              icon: new Image.asset(
+                "assets/chat.png",
+                width: 22,
+                height: 20,
+              ),
+              activeIcon: Image.asset(
+                "assets/chat.png",
+                width: 22,
+                height: 20,
+              ),
+            ),
+          ],
+        ),
+      ),
+      backgroundColor: Color(0xFF616CA1),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
   }
