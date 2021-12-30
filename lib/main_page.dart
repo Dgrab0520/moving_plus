@@ -6,9 +6,6 @@ import 'package:moving_plus/main_arlim.dart';
 import 'package:moving_plus/p_login.dart';
 import 'package:moving_plus/partner_search.dart';
 import 'package:moving_plus/receive_estimate.dart';
-
-
-import 'arlim_checkbox.dart';
 import 'homepage.dart';
 
 class Main_Page extends StatefulWidget {
@@ -47,62 +44,42 @@ class _Main_PageState extends State<Main_Page> {
         iconTheme: IconThemeData(color: Color(0xFF025595)),
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            Expanded(
-                flex:2,
-                child: Container()),
-            Expanded(
-                flex:4,
-                child: Image.asset("assets/logo_3.jpg",width:65,height:35)),
-            Expanded(
-              flex:4,
-              child:
-              Row(
-                children: [
-                  Expanded(
-                    flex:3,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-                      child: InkWell(
-                        onTap: (){
-                          Get.dialog(P_Login()
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(top:4.0,bottom:4,left:4,right:4),
-                          decoration: BoxDecoration(
-                            color:Color(0xFF025595),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text('파트너 로그인',
-                            style: TextStyle(
-                              color:Colors.white,
-                              fontSize:12,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap:(){
-                        Get.dialog(Main_Arlim());
-                      },
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                            child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
-                      ),
-                    ),
-                  ),
-                ],
+        title: Image.asset("assets/logo_3.jpg",width:65,height:35),
+        centerTitle: true,
+        actions: [
+          InkWell(
+            onTap: (){
+              Get.dialog(P_Login()
+              );
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top:15.0,bottom:15,left:2,right:5),
+              padding: EdgeInsets.only(left:10.0,right:10),
+              decoration: BoxDecoration(
+                color:Color(0xFF025595),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text('파트너 로그인',
+                style: TextStyle(
+                  color:Colors.white,
+                  fontSize:12,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
-          ],
-        ),
+          ),
+          InkWell(
+            onTap:(){
+              Get.dialog(Main_Arlim());
+            },
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                  child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -335,6 +312,7 @@ class _Main_PageState extends State<Main_Page> {
               _selectedIndex = index;
             });
           },
+
           items: [
             BottomNavigationBarItem(
               title: Text('견적신청',

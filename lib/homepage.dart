@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:moving_plus/interior_page.dart';
 import 'package:moving_plus/partner_sub.dart';
 import 'package:moving_plus/partner_sub2.dart';
 
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-                          print('success');
+                          Get.dialog(Interior_Page());
                         },
                         child: Container(
                           width:70,

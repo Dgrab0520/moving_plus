@@ -133,7 +133,7 @@ class _C_ChatListState extends State<C_ChatList> {
                   margin: EdgeInsets.only(left:15,right:15),
                   padding: EdgeInsets.all(10),
                   width:MediaQuery.of(context).size.width,
-                  height:135,
+                  height:145,
                   decoration:BoxDecoration(
                     border: Border.all(
                       width: 1.0,
@@ -163,7 +163,7 @@ class _C_ChatListState extends State<C_ChatList> {
                                     ),
                                     Text('어제',
                                       style:TextStyle(
-                                        fontSize:15,
+                                        fontSize:12,
                                       ),
                                     ),
                                   ],
@@ -180,7 +180,7 @@ class _C_ChatListState extends State<C_ChatList> {
                           ),
                         ],
                       ),
-                      SizedBox(height:10),
+                      SizedBox(height:20),
                       Container(
                         padding: EdgeInsets.only(bottom:10),
                         width:MediaQuery.of(context).size.width,
