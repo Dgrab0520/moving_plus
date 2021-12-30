@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'homepage.dart';
+import 'main_arlim.dart';
 
 class Receive_Estimate extends StatefulWidget {
   const Receive_Estimate({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.back();
+                              Get.dialog(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),

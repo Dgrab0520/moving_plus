@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.1
   custom_check_box: ^0.0.4
   dropdown_button2: ^1.0.7
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:

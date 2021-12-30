@@ -4,6 +4,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:moving_plus/partner_sub.dart';
 import 'package:moving_plus/partner_sub2.dart';
 
+import 'main_arlim.dart';
+
 class Partner_Search extends StatefulWidget {
   const Partner_Search({Key? key}) : super(key: key);
 
@@ -70,7 +72,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.back();
+                              Get.dialog(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),
@@ -154,6 +156,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                             ),
                           ),
                           SizedBox(width:10),
+
                           Expanded(
                             child: Container(
                               width:220,

@@ -64,15 +64,15 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(width:10),
+                    SizedBox(width:25),
                     Expanded(
                       child: InkWell(
                         onTap: (){
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -109,8 +109,8 @@ class _HomePageState extends State<HomePage> {
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -147,8 +147,8 @@ class _HomePageState extends State<HomePage> {
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.asset("assets/main_icon3-1.png", width:60 ,height:60),
+                              Image.asset("assets/main_icon3-1.png",  width:60 ,height:60),
                               const SizedBox(height:10),
                               const Text('홈 스타일링',
                                 style: TextStyle(
@@ -178,23 +178,23 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width:10),
+                    SizedBox(width:25),
                   ],
                 ),
-                SizedBox(height:15),
+                SizedBox(height:20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(width:10),
+                    SizedBox(width:25),
                     Expanded(
                       child: InkWell(
                         onTap: (){
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -231,8 +231,8 @@ class _HomePageState extends State<HomePage> {
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -269,8 +269,8 @@ class _HomePageState extends State<HomePage> {
                           print('success');
                         },
                         child: Container(
-                          width:105,
-                          height:105,
+                          width:70,
+                          height:90,
                           decoration:BoxDecoration(
                             color:Colors.white,
                             borderRadius: BorderRadius.circular(15),
@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width:10),
+                    SizedBox(width:25),
                   ],
                 ),
                 SizedBox(height:30),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/main_arlim.dart';
 
 class Account_Set extends StatefulWidget {
   const Account_Set({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _Account_SetState extends State<Account_Set> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.back();
+                              Get.dialog(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),
