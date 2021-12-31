@@ -69,12 +69,12 @@ class _Main_PageState extends State<Main_Page> {
               ),
             ),
           ),
-          InkWell(
-            onTap:(){
-              Get.dialog(Main_Arlim());
-            },
-            child: Align(
-              alignment: Alignment.centerRight,
+          Container(
+            padding: EdgeInsets.only(right:15),
+            child: InkWell(
+              onTap:(){
+                Get.dialog(Main_Arlim());
+              },
               child: Container(
                   child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
             ),
