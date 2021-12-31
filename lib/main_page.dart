@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:moving_plus/c_mypage.dart';
 import 'package:moving_plus/main_arlim.dart';
 import 'package:moving_plus/p_login.dart';
+import 'package:moving_plus/p_mypage.dart';
 import 'package:moving_plus/partner_search.dart';
-import 'package:moving_plus/receive_estimate.dart';
+import 'package:moving_plus/request_received..dart';
 import 'homepage.dart';
 
 class Main_Page extends StatefulWidget {
@@ -69,12 +70,12 @@ class _Main_PageState extends State<Main_Page> {
               ),
             ),
           ),
-          InkWell(
-            onTap:(){
-              Get.dialog(Main_Arlim());
-            },
-            child: Align(
-              alignment: Alignment.centerRight,
+          Container(
+            padding: EdgeInsets.only(right:15),
+            child: InkWell(
+              onTap:(){
+                Get.dialog(Main_Arlim());
+              },
               child: Container(
                   child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
             ),
@@ -93,7 +94,7 @@ class _Main_PageState extends State<Main_Page> {
                   children: [
                     Expanded(
                         flex:2,
-                        child: Image.asset("assets/avatar_c.png",width:70,height:70)),
+                        child: Image.asset("assets/arlim2.png",width:70,height:70)),
                     SizedBox(width:10),
                     Expanded(
                       flex:4,
@@ -101,7 +102,7 @@ class _Main_PageState extends State<Main_Page> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('김이박',
+                          Text('인테리어 작업대',
                             style:TextStyle(
                               fontSize:15,
                               color:Colors.white,
@@ -111,7 +112,7 @@ class _Main_PageState extends State<Main_Page> {
                           SizedBox(height:5),
                           Row(
                             children: [
-                              Text('kep123@naver.com',
+                              Text('i_desk123@naver.com',
                                   style:TextStyle(
                                     color:Colors.white,
                                     fontSize: 12,
@@ -119,7 +120,7 @@ class _Main_PageState extends State<Main_Page> {
                                   )
                               ),
                               SizedBox(width:7),
-                              Image.asset("assets/kakao_w.png", width:13,height:13),
+                              Image.asset("assets/i_partner.png", width:13,height:13),
                             ],
                           ),
                         ],
@@ -145,7 +146,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.dialog(Receive_Estimate());
+                Get.dialog(Request_Received());
               },
               child: Container(
                 padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
@@ -153,7 +154,7 @@ class _Main_PageState extends State<Main_Page> {
                   children: [
                     Image.asset("assets/list_g.png",width:18,height:18),
                     SizedBox(width:15),
-                    Text('받은 견적서',
+                    Text('받은 요청서',
                         style:TextStyle(
                           fontFamily: 'NanumSquareB',
                           fontSize:14,
@@ -205,27 +206,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.dialog(Partner_Search());
-              },
-              child: Container(
-                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
-                child: Row(
-                  children: [
-                    Image.asset("assets/search_g"".png",width:18,height:18),
-                    SizedBox(width:15),
-                    Text('파트너 찾기',
-                        style:TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize:14,
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: (){
-                Get.dialog(C_Mypage());
+                Get.dialog(P_Mypage());
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),

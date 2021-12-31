@@ -72,7 +72,7 @@ class _Main_ArlimState extends State<Main_Arlim> {
                         children: [
                           Stack(
                             children: [
-                              Image.asset('assets/arlim1.png',width:50,height:50),
+                              Image.asset('assets/partner_1.png',width:50,height:50),
                               Positioned(
                                   child:
                                   Container(
@@ -89,13 +89,13 @@ class _Main_ArlimState extends State<Main_Arlim> {
                           SizedBox(width:12),
                           Row(
                             children: [
-                              Text('클린서비스',
+                              Text('김이박',
                                 style: TextStyle(
                                   fontSize:14,
                                   fontFamily: 'NanumSquareB',
                                 ),
                               ),
-                              Text('님이 견적서를 보냈습니다.',
+                              Text('님이 견적서를 요청했습니다.',
                                 style: TextStyle(
                                   fontSize:13,
                                 ),
@@ -129,19 +129,19 @@ class _Main_ArlimState extends State<Main_Arlim> {
                         children: [
                           Stack(
                             children: [
-                              Image.asset('assets/arlim2.png',width:50,height:50),
+                              Image.asset('assets/partner_2.png',width:50,height:50),
                             ],
                           ),
                           SizedBox(width:12),
                           Row(
                             children: [
-                              Text('인테리어서비스',
+                              Text('유운성',
                                 style: TextStyle(
                                   fontSize:14,
                                   fontFamily: 'NanumSquareB',
                                 ),
                               ),
-                              Text('님이 견적서를 보냈습니다.',
+                              Text('님이 견적서를 요청했습니다.',
                                 style: TextStyle(
                                   fontSize:13,
                                 ),
