@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/request_form.dart';
+import 'package:moving_plus/pages/request_form.dart';
 
 import 'main_arlim.dart';
 
@@ -227,51 +227,58 @@ class _Request_ReceivedState extends State<Request_Received> {
                       SizedBox(height:20),
                       Row(
                         children: [
-                          InkWell(
-                            onTap:(){
-                            },
-                            child: Container(
-                              width:165,
-                              height:30,
-                              decoration:BoxDecoration(
-                                color:Color(0xFFE9E9E9),
-                                borderRadius: BorderRadius.circular(5),
-                                border:Border.all(
-                                  width:0.5,
-                                  color:Color(0xFFCCCCCC),
-                                )
-                              ),
-                              child: Center(
-                                child: Text('삭제',
-                                  style:TextStyle(
-                                    fontSize:13,
+                          Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap:(){
+                              },
+                              child: Container(
+                                width:165,
+                                height:30,
+                                decoration:BoxDecoration(
+                                    color:Color(0xFFE9E9E9),
+                                    borderRadius: BorderRadius.circular(5),
+                                    border:Border.all(
+                                      width:0.5,
+                                      color:Color(0xFFCCCCCC),
+                                    )
+                                ),
+                                child: Center(
+                                  child: Text('삭제',
+                                    style:TextStyle(
+                                      fontSize:13,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                           SizedBox(width:10),
-                          InkWell(
-                            onTap:(){
-                              Get.dialog(RequestForm());
-                            },
-                            child: Container(
-                              width:165,
-                              height:30,
-                              decoration:BoxDecoration(
-                                color:Color(0xFF025595),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Text('자세히 보기',
-                                  style:TextStyle(
-                                    color:Colors.white,
-                                    fontSize:13,
+                          Expanded(
+                              flex: 1,
+                              child:InkWell(
+                                onTap:(){
+                                  Get.dialog(RequestForm());
+                                },
+                                child: Container(
+                                  width:165,
+                                  height:30,
+                                  decoration:BoxDecoration(
+                                    color:Color(0xFF025595),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Center(
+                                    child: Text('자세히 보기',
+                                      style:TextStyle(
+                                        color:Colors.white,
+                                        fontSize:13,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                           ),
+
                         ],
                       ),
                     ],

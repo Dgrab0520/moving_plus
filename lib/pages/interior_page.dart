@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/partner_sub.dart';
-import 'package:moving_plus/partner_sub2.dart';
+import 'package:moving_plus/pages/partner_sub.dart';
+import 'package:moving_plus/pages/partner_sub2.dart';
 
+
+import 'api.dart';
 import 'homepage.dart';
 import 'main_arlim.dart';
 import 'p_login.dart';
@@ -14,8 +16,7 @@ class Interior_Page extends StatefulWidget {
   _Interior_PageState createState() => _Interior_PageState();
 }
 
-class _Interior_PageState extends State<Interior_Page>
-    with SingleTickerProviderStateMixin {
+class _Interior_PageState extends State<Interior_Page> with SingleTickerProviderStateMixin {
   final Api api = Api();
   List<Category> categories = [];
 

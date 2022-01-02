@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/c_mypage.dart';
-import 'package:moving_plus/main_arlim.dart';
-import 'package:moving_plus/p_login.dart';
-import 'package:moving_plus/p_mypage.dart';
-import 'package:moving_plus/partner_search.dart';
-import 'package:moving_plus/request_received..dart';
+import 'package:moving_plus/pages/c_mypage.dart';
+import 'package:moving_plus/pages/main_arlim.dart';
+import 'package:moving_plus/pages/p_login.dart';
+import 'package:moving_plus/pages/p_mypage.dart';
+import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
 
 class Main_Page extends StatefulWidget {

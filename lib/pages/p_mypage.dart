@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/account_set.dart';
-import 'package:moving_plus/c_chatlist.dart';
-import 'package:moving_plus/c_review.dart';
-import 'package:moving_plus/mypage_arlim.dart';
-import 'package:moving_plus/notice.dart';
-import 'package:moving_plus/transaction_breakdown.dart';
+import 'package:moving_plus/pages/p_account_set.dart';
+import 'package:moving_plus/pages/p_chat.dart';
+import 'package:moving_plus/pages/transaction_breakdown.dart';
 
+import 'account_set.dart';
+import 'c_chatlist.dart';
+import 'c_review.dart';
 import 'main_arlim.dart';
+import 'mypage_arlim.dart';
+import 'notice.dart';
+import 'p_portfolio_page.dart';
 
-class C_Mypage extends StatefulWidget {
-  const C_Mypage({Key? key}) : super(key: key);
+class P_Mypage extends StatefulWidget {
+  const P_Mypage({Key? key}) : super(key: key);
 
   @override
-  _C_MypageState createState() => _C_MypageState();
+  _P_MypageState createState() => _P_MypageState();
 }
 
-class _C_MypageState extends State<C_Mypage> {
+class _P_MypageState extends State<P_Mypage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +74,7 @@ class _C_MypageState extends State<C_Mypage> {
                   children: [
                     InkWell(
                       onTap:(){
-                        Get.dialog(Account_Set());
+                        Get.dialog(P_Account_Set());
                       },
                       child: Container(
                         padding: EdgeInsets.only(left:10,right:10,bottom:25,top:25),
@@ -83,8 +86,8 @@ class _C_MypageState extends State<C_Mypage> {
                         child: Row(
                           children: [
                             Expanded(
-                              flex:2,
-                                child: Image.asset("assets/avatar_c.png",width:60,height:60)),
+                                flex:2,
+                                child: Image.asset("assets/arlim2.png",width:60,height:60)),
                             SizedBox(width:10),
                             Expanded(
                               flex:8,
@@ -92,30 +95,34 @@ class _C_MypageState extends State<C_Mypage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('김이박',
-                                    style:TextStyle(
-                                      fontSize:15,
-                                      fontFamily: 'NanumSquareEB',
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text('인테리어 작업대',
+                                        style:TextStyle(
+                                          fontSize:15,
+                                          fontFamily: 'NanumSquareEB',
+                                        ),
+                                      ),
+                                      SizedBox(width:7),
+                                      Image.asset('assets/i_partner2.png',width:20,height:15),
+                                    ],
                                   ),
                                   SizedBox(height:5),
                                   Row(
                                     children: [
-                                      Text('kep123@naver.com',
+                                      Text('i_desk123@naver.com',
                                           style:TextStyle(
                                             fontSize: 12,
                                             fontFamily: 'NanumSquareR',
                                           )
                                       ),
-                                      SizedBox(width:7),
-                                      Image.asset("assets/kakao_b.png", width:13,height:13),
                                     ],
                                   ),
                                 ],
                               ),
                             ),
                             Expanded(
-                              flex:1,
+                                flex:1,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -143,7 +150,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(Transaction_Breakdown());
+
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:15,bottom:10),
@@ -168,7 +175,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(C_ChatList());
+                              Get.dialog(P_Chat());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:10,bottom:10),
@@ -193,7 +200,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(C_Review());
+                              Get.to(ProFolio_Page());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:10,bottom:10),
@@ -204,7 +211,7 @@ class _C_MypageState extends State<C_Mypage> {
                                     children: [
                                       Image.asset("assets/notes-(1).png",width:17,height:17),
                                       SizedBox(width:10),
-                                      Text('작성한 후기'),
+                                      Text('포트폴리오'),
                                     ],
                                   ),
                                   Row(

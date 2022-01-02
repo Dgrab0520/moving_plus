@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/main_arlim.dart';
+import 'package:moving_plus/pages/main_arlim.dart';
 
 class Account_Set extends StatefulWidget {
   const Account_Set({Key? key}) : super(key: key);
