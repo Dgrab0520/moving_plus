@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'account_set.dart';
+import 'client/account_set.dart';
 import 'main_arlim.dart';
 
 class Transaction_Breakdown extends StatefulWidget {
@@ -54,7 +54,7 @@ class _Transaction_BreakdownState extends State<Transaction_Breakdown> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.dialog(Main_Arlim());
+                              Get.to(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),

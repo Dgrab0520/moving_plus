@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-                          Get.dialog(Interior_Page());
+                          Get.to(Interior_Page());
                         },
                         child: Container(
                           width:70,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/pages/c_login.dart';
+import 'package:moving_plus/pages/client/c_login.dart';
 import 'package:moving_plus/pages/p_signup.dart';
 
 import 'arlim_checkbox.dart';

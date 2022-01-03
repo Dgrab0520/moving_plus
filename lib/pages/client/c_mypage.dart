@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/pages/account_set.dart';
-import 'package:moving_plus/pages/c_chatlist.dart';
-import 'package:moving_plus/pages/c_review.dart';
+import 'package:moving_plus/pages/client/account_set.dart';
+import 'package:moving_plus/pages/client/c_chatlist.dart';
+import 'package:moving_plus/pages/client/c_review.dart';
 import 'package:moving_plus/pages/mypage_arlim.dart';
 import 'package:moving_plus/pages/notice.dart';
 import 'package:moving_plus/pages/transaction_breakdown.dart';
 
-import 'main_arlim.dart';
+import '../main_arlim.dart';
 
 class C_Mypage extends StatefulWidget {
   const C_Mypage({Key? key}) : super(key: key);
@@ -59,7 +59,7 @@ class _C_MypageState extends State<C_Mypage> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.dialog(Main_Arlim());
+                              Get.to(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),
@@ -71,7 +71,7 @@ class _C_MypageState extends State<C_Mypage> {
                   children: [
                     InkWell(
                       onTap:(){
-                        Get.dialog(Account_Set());
+                        Get.to(Account_Set());
                       },
                       child: Container(
                         padding: EdgeInsets.only(left:10,right:10,bottom:25,top:25),
@@ -143,7 +143,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(Transaction_Breakdown());
+                              Get.to(Transaction_Breakdown());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:15,bottom:10),
@@ -168,7 +168,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(C_ChatList());
+                              Get.to(C_ChatList());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:10,bottom:10),
@@ -193,7 +193,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(C_Review());
+                              Get.to(C_Review());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:10,bottom:10),
@@ -231,7 +231,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(MyPage_Arlim());
+                              Get.to(MyPage_Arlim());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:15,bottom:10),
@@ -256,7 +256,7 @@ class _C_MypageState extends State<C_Mypage> {
                           ),
                           InkWell(
                             onTap:(){
-                              Get.dialog(Notice());
+                              Get.to(Notice());
                             },
                             child: Container(
                               padding: EdgeInsets.only(top:10,bottom:10),

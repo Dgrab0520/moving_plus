@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/pages/c_mypage.dart';
+import 'package:moving_plus/pages/client/c_mypage.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
@@ -74,7 +74,7 @@ class _Main_PageState extends State<Main_Page> {
             padding: EdgeInsets.only(right:15),
             child: InkWell(
               onTap:(){
-                Get.dialog(Main_Arlim());
+                Get.to(Main_Arlim());
               },
               child: Container(
                   child: Icon(Icons.notifications,color:Color(0xFF025595), size:22)),
@@ -146,7 +146,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.dialog(Request_Received());
+                Get.to(Request_Received());
               },
               child: Container(
                 padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
@@ -206,7 +206,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.dialog(P_Mypage());
+                Get.to(P_Mypage());
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
@@ -286,7 +286,7 @@ class _Main_PageState extends State<Main_Page> {
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Color(0xFF025595),
-          unselectedFontSize: 12,
+          unselectedFontSize: 11,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
             setState(() {

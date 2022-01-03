@@ -13,7 +13,6 @@ class _Account_SetState extends State<Account_Set> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(
@@ -52,7 +51,7 @@ class _Account_SetState extends State<Account_Set> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.dialog(Main_Arlim());
+                              Get.to(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),

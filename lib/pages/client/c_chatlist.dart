@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'main_arlim.dart';
+import '../main_arlim.dart';
 
 class C_ChatList extends StatefulWidget {
   const C_ChatList({Key? key}) : super(key: key);
@@ -53,7 +53,7 @@ class _C_ChatListState extends State<C_ChatList> {
                         flex:1,
                         child: InkWell(
                             onTap: (){
-                              Get.dialog(Main_Arlim());
+                              Get.to(Main_Arlim());
                             },
                             child: Icon(Icons.notifications,color: Colors.white,size: 22,)),
                       ),

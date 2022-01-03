@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'arlim_checkbox.dart';
-import 'main_page.dart';
-import 'p_signup.dart';
+import '../arlim_checkbox.dart';
+import '../main_page.dart';
+import '../p_signup.dart';
 
 class C_Login extends StatefulWidget {
   const C_Login({Key? key}) : super(key: key);
@@ -101,7 +101,7 @@ class _C_LoginState extends State<C_Login> {
                   InkWell(
                     onTap:(){
                       Get.back();
-                      Get.dialog(P_Signup());
+                      Get.to(P_Signup());
                     },
                     child: Container(
                       child: Center(

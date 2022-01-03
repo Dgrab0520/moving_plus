@@ -2,7 +2,7 @@ class Api {
   Future<List<Category>> getCategories() async {
     return Future.delayed(
       Duration(milliseconds: 100),
-      () {
+          () {
         return Category.allCategories;
       },
     );
@@ -12,7 +12,7 @@ class Api {
   Future<List<CategorySub>> getProductsByCategory(String category) async {
     return Future.delayed(
       Duration(milliseconds: 100),
-      () {
+          () {
         return CategorySub.allCategory
             .where((p) => p.category == category)
             .toList();
