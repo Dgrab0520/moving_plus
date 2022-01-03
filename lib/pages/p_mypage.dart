@@ -11,6 +11,7 @@ import 'client/c_review.dart';
 import 'main_arlim.dart';
 import 'mypage_arlim.dart';
 import 'notice.dart';
+import 'p_portfolio_edit_page.dart';
 import 'p_portfolio_page.dart';
 
 class P_Mypage extends StatefulWidget {
@@ -176,7 +177,7 @@ class _P_MypageState extends State<P_Mypage> {
                         ),
                         InkWell(
                           onTap:(){
-                            Get.to(ProFolio_Page());
+                            Get.to(PortfolioEdit_Page());
                           },
                           child: Container(
                             padding: EdgeInsets.only(top:10,bottom:10),
