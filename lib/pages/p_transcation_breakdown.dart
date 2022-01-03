@@ -100,7 +100,7 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                   Container(
                     padding: EdgeInsets.all(15),
                     width:MediaQuery.of(context).size.width,
-                    height:140,
+                    height:115,
                     decoration:BoxDecoration(
                       color:Color(0xFFF1F5F8),
                       borderRadius: BorderRadius.circular(15),
@@ -119,24 +119,24 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('김이박',
-                                    style:TextStyle(
-                                      color:Color(0xFF444444),
-                                      fontFamily: 'NanumSquareEB',
-                                      fontSize:15,
-                                    ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('김이박',
+                                  style:TextStyle(
+                                    color:Color(0xFF444444),
+                                    fontFamily: 'NanumSquareEB',
+                                    fontSize:15,
                                   ),
-                                  Text('완료',
-                                    style:TextStyle(
-                                      fontSize:12,
-                                      color:Color(0xFf777777),
-                                    ),
+                                ),
+                                Text('완료',
+                                  style:TextStyle(
+                                    fontSize:12,
+                                    color:Color(0xFf777777),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
+                            ),
                             SizedBox(height:7),
 
                             Column(
@@ -144,6 +144,7 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('인테리어 서비스 | 올 인테리어',
                                       style:TextStyle(
@@ -155,20 +156,26 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                                       children: [
                                         Text('5,247,000',
                                           style:TextStyle(
-                                            fontSize:12,
-                                            color:Color(0xfF777777),
+                                            fontSize:20,
+                                            color:Color(0xfF025595),
+                                            fontFamily: 'NanumSquareB',
                                           ),
                                         ),
+                                        SizedBox(width:5),
                                         Container(
                                           width:15,
                                           height:15,
                                           decoration:BoxDecoration(
+                                            borderRadius: BorderRadius.circular(15),
                                             color:Color(0xFF025595),
                                           ),
-                                          child: Text('',
-                                            style:TextStyle(
-                                              fontSize:12,
-                                              color:Color(0xfF777777),
+                                          child: Center(
+                                            child: Text('C',
+                                              style:TextStyle(
+                                                fontSize:10,
+                                                color:Colors.white,
+                                                fontFamily: 'Jalnan',
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -180,51 +187,12 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                             ),
                           ],
                         ),
-                        SizedBox(width:10),
                         SizedBox(height:20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Image.asset('assets/star1.png',width:12,height:12),
-                                SizedBox(width:3),
-                                Image.asset('assets/star1.png',width:12,height:12),
-                                SizedBox(width:3),
-                                Image.asset('assets/star1.png',width:12,height:12),
-                                SizedBox(width:3),
-                                Image.asset('assets/star1.png',width:12,height:12),
-                                SizedBox(width:3),
-                                Image.asset('assets/star1.png',width:12,height:12),
-                                SizedBox(width:7),
-                                Text('5.00 ',
-                                  style:TextStyle(
-                                    color:Color(0xFF025595),
-                                    fontSize:13,
-                                  ),
-                                ),
-                                Text('/ 5.00',
-                                  style:TextStyle(
-                                    fontSize:13,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width:100,
-                              height:25,
-                              decoration:BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color:Color(0xFF929292),
-                              ),
-                              child: Center(
-                                child: Text('후기 작성 완료',
-                                  style:TextStyle(
-                                    color:Colors.white,
-                                    fontSize:12,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
+                            Text('2021/12/10 16:44:05',
+                              style:TextStyle(
+                                fontSize:12,
                               ),
                             ),
                           ],
@@ -234,9 +202,9 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                   ),
                   SizedBox(height:20),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(15),
                     width:MediaQuery.of(context).size.width,
-                    height:140,
+                    height:115,
                     decoration:BoxDecoration(
                       color:Colors.white,
                       borderRadius: BorderRadius.circular(15),
@@ -251,65 +219,68 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                     ),
                     child: Column(
                       children: [
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.asset("assets/img5.png", width:70,height:70),
-                            SizedBox(width:10),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  width:250,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('클린 작업대',
-                                        style:TextStyle(
-                                          color:Color(0xFF444444),
-                                          fontFamily: 'NanumSquareEB',
-                                          fontSize:14,
-                                        ),
-                                      ),
-                                      Text('2021.06.06',
-                                        style:TextStyle(
-                                          fontSize:12,
-                                          color:Color(0xFf777777),
-                                        ),
-                                      ),
-                                    ],
+                                Text('유운성',
+                                  style:TextStyle(
+                                    color:Color(0xFF444444),
+                                    fontFamily: 'NanumSquareEB',
+                                    fontSize:15,
                                   ),
                                 ),
-                                SizedBox(height:2),
+                                Text('대기중',
+                                  style:TextStyle(
+                                    fontSize:12,
+                                    color:Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height:7),
 
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text('클린 서비스 | 이사 청소',
-                                          style:TextStyle(
-                                            fontSize:12,
-                                            color:Color(0xfF777777),
-                                          ),
-                                        ),
-                                      ],
+                                    Text('인테리어 서비스 | 필름 시공',
+                                      style:TextStyle(
+                                        fontSize:12,
+                                        color:Color(0xfF777777),
+                                      ),
                                     ),
-                                    SizedBox(height:10),
                                     Row(
                                       children: [
-                                        Text('계약금',
+                                        Text('524,000',
                                           style:TextStyle(
-                                            fontSize:12,
-                                            fontFamily: 'NanumSquareR',
+                                            fontSize:20,
+                                            color:Colors.black,
+                                            fontFamily: 'NanumSquareB',
                                           ),
                                         ),
                                         SizedBox(width:5),
-                                        Text('30,000원',
-                                          style:TextStyle(
-                                            fontSize:12,
-                                            fontFamily: 'NanumSquareB',
+                                        Container(
+                                          width:15,
+                                          height:15,
+                                          decoration:BoxDecoration(
+                                            borderRadius: BorderRadius.circular(15),
+                                            color:Colors.black,
+                                          ),
+                                          child: Center(
+                                            child: Text('C',
+                                              style:TextStyle(
+                                                fontSize:10,
+                                                color:Colors.white,
+                                                fontFamily: 'Jalnan',
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -318,43 +289,14 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                                 ),
                               ],
                             ),
-                            SizedBox(width:10),
                           ],
                         ),
                         SizedBox(height:20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Text('후기를 작성해주세요.',
-                                  style:TextStyle(
-                                    fontSize:13,
-                                    color:Color(0xFF777777),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            InkWell(
-                              onTap:(){
-                                print('xx');
-                              },
-                              child: Container(
-                                width:100,
-                                height:25,
-                                decoration:BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  color:Color(0xFF025595),
-                                ),
-                                child: Center(
-                                  child: Text('후기 작성 하기',
-                                    style:TextStyle(
-                                      color:Colors.white,
-                                      fontSize:12,
-                                      fontFamily: 'NanumSquareB',
-                                    ),
-                                  ),
-                                ),
+                            Text('2021/12/10 16:44:05',
+                              style:TextStyle(
+                                fontSize:12,
                               ),
                             ),
                           ],
@@ -365,6 +307,7 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                 ],
               ),
             ),
+
           ],
         ),
       ),
