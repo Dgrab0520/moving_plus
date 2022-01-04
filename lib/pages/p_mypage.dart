@@ -11,6 +11,7 @@ import 'client/c_review.dart';
 import 'main_arlim.dart';
 import 'mypage_arlim.dart';
 import 'notice.dart';
+import 'p_portfolio_edit_page.dart';
 import 'p_portfolio_page.dart';
 
 class P_Mypage extends StatefulWidget {

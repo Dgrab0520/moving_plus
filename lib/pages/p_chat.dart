@@ -16,24 +16,6 @@ class _P_ChatState extends State<P_Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text('채팅',
-          style: TextStyle(
-            color:Colors.white,
-            fontSize:17,
-            fontFamily: 'NanumSquareB',
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF025595),
-        leading: IconButton(
-            onPressed: (){
-              Get.back();
-            },
-            icon: Icon(Icons.arrow_back,color: Colors.white,)
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -43,6 +25,7 @@ class _P_ChatState extends State<P_Chat> {
               height:95,
               decoration:BoxDecoration(
                   image: DecorationImage(
+                    fit: BoxFit.cover,
                     image: AssetImage("assets/chat_banner.png"),
                   )
               ),

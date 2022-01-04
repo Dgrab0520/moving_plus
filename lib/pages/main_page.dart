@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/client/c_mypage.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
+import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/partner_search.dart';
@@ -35,7 +36,7 @@ class _Main_PageState extends State<Main_Page> {
     _widgetOptions = [
       Request_Estimate(),
       HomePage(),
-      Request_Estimate(),
+      P_Chat(),
     ];
     super.initState();
   }
@@ -82,7 +83,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
           ),
         ],
-      ) : AppBar(
+      ) : _selectedIndex==0 ? AppBar(
         elevation: 0,
         title: Text('견적 신청',
           style: TextStyle(
@@ -99,6 +100,23 @@ class _Main_PageState extends State<Main_Page> {
         //     },
         //     icon: Icon(Icons.arrow_back,color: Colors.white,)
         // ),
+      ): AppBar(
+        elevation: 0,
+        title: Text('채팅',
+          style: TextStyle(
+            color:Colors.white,
+            fontSize:17,
+            fontFamily: 'NanumSquareB',
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF025595),
+        leading: IconButton(
+            onPressed: (){
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back,color: Colors.white,)
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -184,7 +202,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-
+                Get.to(P_Chat());
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
