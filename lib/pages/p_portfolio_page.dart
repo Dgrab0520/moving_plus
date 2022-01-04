@@ -35,6 +35,7 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
       body: SingleChildScrollView(
         child: Container(
           width: Get.width,
+          height: Get.height*0.8,
           child: Column(
             children: <Widget>[
               Container(
@@ -118,11 +119,14 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('안녕하세요! \n전체 인테리어 요청 합니다. 깔끔하고 모던한 느낌으로...',
-                                style:TextStyle(
-                                  fontSize:12,
-                                  height:1.6,
-                                ),
+                              Text('안녕하세요! 인테리어 작업대입니다. 공간을 사용하는 클라이언트의 입장을 고려하여 설계, 디자인하여 완성도 높은 시공으로 고객과 소통하겠습니다!', style:
+                              TextStyle(
+                                color:Colors.black54,
+                                fontSize:14.0,
+                              ),
+                                maxLines: 4,
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               Icon(Icons.arrow_forward_ios,color:Colors.black,size:18,),
                             ],
@@ -132,7 +136,7 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
                 ),
               ),
 
-              SizedBox(height:25),
+              SizedBox(height:30),
               InkWell(
                 onTap:(){},
                 child: Container(
@@ -276,7 +280,7 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
                 ),
               ),
 
-              SizedBox(height:25),
+              SizedBox(height:30),
               Container(
                 width:Get.width,
                 padding: EdgeInsets.only(left:15.0,right:15),
@@ -397,7 +401,8 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
                 ),
               ),
 
-              SizedBox(height:25),
+              SizedBox(height:30),
+
               Container(
                 width:Get.width,
                 padding: EdgeInsets.only(left:15.0,right:15),
@@ -413,78 +418,67 @@ class _ProFolio_PageState extends State<ProFolio_Page>{
                     ),
 
                     SizedBox(height:10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap:(){},
-                                  child: Container(
-                                    width:70,
-                                    height:70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
 
-                                SizedBox(width:7),
-                                InkWell(
-                                  onTap:(){},
-                                  child: Container(
-                                    width:70,
-                                    height:70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-
-                                SizedBox(width:7),
-                                InkWell(
-                                  onTap:(){},
-                                  child: Container(
-                                    width:70,
-                                    height:70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                                SizedBox(width:7),
-                                InkWell(
-                                  onTap:(){},
-                                  child: Container(
-                                    width:70,
-                                    height:70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                              ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap:(){},
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Image.asset('assets/p_img2-1.png'),
                             ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap:(){},
-                          child: Icon(Icons.arrow_forward_ios, color:Colors.black, size:18),
-                        ),
-                      ],
+                          ),
+                          SizedBox(width:7),
+                          InkWell(
+                            onTap:(){},
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Image.asset('assets/p_img2-1.png'),
+                            ),
+                          ),
+                          SizedBox(width:7),
+                          InkWell(
+                            onTap:(){},
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Image.asset('assets/p_img2-1.png'),
+                            ),
+                          ),
+                          SizedBox(width:7),
+                          InkWell(
+                            onTap:(){},
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Image.asset('assets/p_img2-1.png'),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              SizedBox(height:40),
+              Spacer(),
               InkWell(
                 onTap:(){
                 },

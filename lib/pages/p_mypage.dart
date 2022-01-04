@@ -12,7 +12,6 @@ import 'main_arlim.dart';
 import 'mypage_arlim.dart';
 import 'notice.dart';
 import 'p_portfolio_page.dart';
-import 'p_profile_edit_page.dart';
 
 class P_Mypage extends StatefulWidget {
   const P_Mypage({Key? key}) : super(key: key);
