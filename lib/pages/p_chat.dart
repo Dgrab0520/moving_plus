@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/chat_estimate.dart';
+import 'package:moving_plus/pages/p_chatting.dart';
 
 import 'main_arlim.dart';
 
@@ -104,91 +106,96 @@ class _P_ChatState extends State<P_Chat> {
               ),
             ),
             SizedBox(height:20),
-            Container(
-              margin: EdgeInsets.only(left:15,right:15),
-              padding: EdgeInsets.all(10),
-              width:MediaQuery.of(context).size.width,
-              height:120,
-              decoration:BoxDecoration(
-                border: Border.all(
-                  width: 1.0,
-                  color: Color(0xFFcccccc),
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset('assets/arlim4.png',width:50,height:50),
-                      SizedBox(width:10),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('유운성',
-                                  style:TextStyle(
-                                    fontSize:15,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
-                                Text('어제',
-                                  style:TextStyle(
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height:5),
-                            Text('필름 시공 | 서울 송파구',
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareR',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+            InkWell(
+              onTap:(){
+                Get.to(Chat_Estimate());
+              },
+              child: Container(
+                margin: EdgeInsets.only(left:15,right:15),
+                padding: EdgeInsets.all(10),
+                width:MediaQuery.of(context).size.width,
+                height:120,
+                decoration:BoxDecoration(
+                  border: Border.all(
+                    width: 1.0,
+                    color: Color(0xFFcccccc),
                   ),
-                  SizedBox(height:20),
-                  Container(
-                    padding: EdgeInsets.only(bottom:10),
-                    width:MediaQuery.of(context).size.width,
-                    decoration:BoxDecoration(
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Text('안녕하세요! 인테리어 작업대 입니다. 요청해주신 ...',
-                          style:TextStyle(
-                            fontSize:12,
+                        Image.asset('assets/arlim4.png',width:50,height:50),
+                        SizedBox(width:10),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('유운성',
+                                    style:TextStyle(
+                                      fontSize:15,
+                                      fontFamily: 'NanumSquareB',
+                                    ),
+                                  ),
+                                  Text('어제',
+                                    style:TextStyle(
+                                      fontSize:12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height:5),
+                              Text('필름 시공 | 서울 송파구',
+                                style:TextStyle(
+                                  fontSize:14,
+                                  fontFamily: 'NanumSquareR',
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        // Container(
-                        //   width:22,
-                        //   height:15,
-                        //   decoration:BoxDecoration(
-                        //     color:Color(0xFF025595),
-                        //     borderRadius: BorderRadius.circular(3),
-                        //   ),
-                        //   child: Center(
-                        //     child: Text('5',
-                        //       style:TextStyle(
-                        //         color:Colors.white,
-                        //         fontSize:11,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
-                  ),
-                ],
+                    SizedBox(height:20),
+                    Container(
+                      padding: EdgeInsets.only(bottom:10),
+                      width:MediaQuery.of(context).size.width,
+                      decoration:BoxDecoration(
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('안녕하세요! 인테리어 작업대 입니다. 요청해주신 ...',
+                            style:TextStyle(
+                              fontSize:12,
+                            ),
+                          ),
+                          // Container(
+                          //   width:22,
+                          //   height:15,
+                          //   decoration:BoxDecoration(
+                          //     color:Color(0xFF025595),
+                          //     borderRadius: BorderRadius.circular(3),
+                          //   ),
+                          //   child: Center(
+                          //     child: Text('5',
+                          //       style:TextStyle(
+                          //         color:Colors.white,
+                          //         fontSize:11,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

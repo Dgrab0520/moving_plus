@@ -6,6 +6,7 @@ import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
 
@@ -32,16 +33,16 @@ class _Main_PageState extends State<Main_Page> {
   @override
   void initState() {
     _widgetOptions = [
-      Container(),
+      Request_Estimate(),
       HomePage(),
-      Container(),
+      Request_Estimate(),
     ];
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _selectedIndex == 1 ? AppBar(
         iconTheme: IconThemeData(color: Color(0xFF025595)),
         elevation: 0,
         backgroundColor: Colors.white,
@@ -81,6 +82,23 @@ class _Main_PageState extends State<Main_Page> {
             ),
           ),
         ],
+      ) : AppBar(
+        elevation: 0,
+        title: Text('견적 신청',
+          style: TextStyle(
+            color:Colors.white,
+            fontSize:17,
+            fontFamily: 'NanumSquareB',
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF025595),
+        // leading: IconButton(
+        //     onPressed: (){
+        //       Get.back();
+        //     },
+        //     icon: Icon(Icons.arrow_back,color: Colors.white,)
+        // ),
       ),
       drawer: Drawer(
         child: ListView(
