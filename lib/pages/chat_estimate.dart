@@ -75,7 +75,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                               Expanded(
                                 child: Container(
                                   padding: EdgeInsets.all(15),
-                                  height:230,
+                                  height:240,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color:Colors.white,

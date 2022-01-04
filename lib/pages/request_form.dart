@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/request_estimate.dart';
 
+import 'estimate_page.dart';
 import 'main_arlim.dart';
 
 class RequestForm extends StatefulWidget {
@@ -241,7 +243,7 @@ class _RequestFormState extends State<RequestForm> {
                 SizedBox(height:30),
                 InkWell(
                   onTap:(){
-                    
+                    Get.to(Estimate_Page());
                   },
                   child: Container(
                     width:200,

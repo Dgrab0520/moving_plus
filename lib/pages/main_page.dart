@@ -83,7 +83,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
           ),
         ],
-      ) : _selectedIndex==0 ? AppBar(
+      ) : AppBar(
         elevation: 0,
         title: Text('견적 신청',
           style: TextStyle(
@@ -100,23 +100,6 @@ class _Main_PageState extends State<Main_Page> {
         //     },
         //     icon: Icon(Icons.arrow_back,color: Colors.white,)
         // ),
-      ): AppBar(
-        elevation: 0,
-        title: Text('채팅',
-          style: TextStyle(
-            color:Colors.white,
-            fontSize:17,
-            fontFamily: 'NanumSquareB',
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF025595),
-        leading: IconButton(
-            onPressed: (){
-              Get.back();
-            },
-            icon: Icon(Icons.arrow_back,color: Colors.white,)
-        ),
       ),
       drawer: Drawer(
         child: ListView(

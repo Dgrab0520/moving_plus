@@ -97,87 +97,91 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                     ],
                   ),
                   SizedBox(height:20),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    width:MediaQuery.of(context).size.width,
-                    height:115,
-                    decoration:BoxDecoration(
-                      color:Color(0xFFF1F5F8),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('김이박',
-                                  style:TextStyle(
-                                    color:Color(0xFF444444),
-                                    fontFamily: 'NanumSquareEB',
-                                    fontSize:15,
-                                  ),
-                                ),
-                                Text('완료',
-                                  style:TextStyle(
-                                    fontSize:12,
-                                    color:Color(0xFf777777),
-                                  ),
-                                ),
-                              ],
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(15),
+                        width:MediaQuery.of(context).size.width,
+                        height:115,
+                        decoration:BoxDecoration(
+                          color:Color(0xFFF1F5F8),
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 3), // changes position of shadow
                             ),
-                            SizedBox(height:7),
-
+                          ],
+                        ),
+                        child: Column(
+                          children: [
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('인테리어 서비스 | 올 인테리어',
+                                    Text('김이박',
                                       style:TextStyle(
-                                        fontSize:12,
-                                        color:Color(0xfF777777),
+                                        color:Color(0xFF444444),
+                                        fontFamily: 'NanumSquareEB',
+                                        fontSize:15,
                                       ),
                                     ),
+                                    Text('완료',
+                                      style:TextStyle(
+                                        fontSize:12,
+                                        color:Color(0xFf777777),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height:7),
+
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('5,247,000',
+                                        Text('인테리어 서비스 | 올 인테리어',
                                           style:TextStyle(
-                                            fontSize:20,
-                                            color:Color(0xfF025595),
-                                            fontFamily: 'NanumSquareB',
+                                            fontSize:12,
+                                            color:Color(0xfF777777),
                                           ),
                                         ),
-                                        SizedBox(width:5),
-                                        Container(
-                                          width:15,
-                                          height:15,
-                                          decoration:BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15),
-                                            color:Color(0xFF025595),
-                                          ),
-                                          child: Center(
-                                            child: Text('C',
+                                        Row(
+                                          children: [
+                                            Text('5,247,000',
                                               style:TextStyle(
-                                                fontSize:10,
-                                                color:Colors.white,
-                                                fontFamily: 'Jalnan',
+                                                fontSize:20,
+                                                color:Color(0xfF025595),
+                                                fontFamily: 'NanumSquareB',
                                               ),
                                             ),
-                                          ),
+                                            SizedBox(width:5),
+                                            Container(
+                                              width:15,
+                                              height:15,
+                                              decoration:BoxDecoration(
+                                                borderRadius: BorderRadius.circular(15),
+                                                color:Color(0xFF025595),
+                                              ),
+                                              child: Center(
+                                                child: Text('C',
+                                                  style:TextStyle(
+                                                    fontSize:10,
+                                                    color:Colors.white,
+                                                    fontFamily: 'Jalnan',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -185,103 +189,103 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        SizedBox(height:20),
-                        Row(
-                          children: [
-                            Text('2021/12/10 16:44:05',
-                              style:TextStyle(
-                                fontSize:12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height:20),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    width:MediaQuery.of(context).size.width,
-                    height:115,
-                    decoration:BoxDecoration(
-                      color:Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 3,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                            SizedBox(height:20),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('유운성',
-                                  style:TextStyle(
-                                    color:Color(0xFF444444),
-                                    fontFamily: 'NanumSquareEB',
-                                    fontSize:15,
-                                  ),
-                                ),
-                                Text('대기중',
+                                Text('2021/12/10 16:44:05',
                                   style:TextStyle(
                                     fontSize:12,
-                                    color:Colors.black,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height:7),
-
+                          ],
+                        ),
+                      ),
+                      SizedBox(height:20),
+                      Container(
+                        padding: EdgeInsets.all(15),
+                        width:MediaQuery.of(context).size.width,
+                        height:115,
+                        decoration:BoxDecoration(
+                          color:Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('인테리어 서비스 | 필름 시공',
+                                    Text('유운성',
                                       style:TextStyle(
-                                        fontSize:12,
-                                        color:Color(0xfF777777),
+                                        color:Color(0xFF444444),
+                                        fontFamily: 'NanumSquareEB',
+                                        fontSize:15,
                                       ),
                                     ),
+                                    Text('대기중',
+                                      style:TextStyle(
+                                        fontSize:12,
+                                        color:Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height:7),
+
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('524,000',
+                                        Text('인테리어 서비스 | 필름 시공',
                                           style:TextStyle(
-                                            fontSize:20,
-                                            color:Colors.black,
-                                            fontFamily: 'NanumSquareB',
+                                            fontSize:12,
+                                            color:Color(0xfF777777),
                                           ),
                                         ),
-                                        SizedBox(width:5),
-                                        Container(
-                                          width:15,
-                                          height:15,
-                                          decoration:BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15),
-                                            color:Colors.black,
-                                          ),
-                                          child: Center(
-                                            child: Text('C',
+                                        Row(
+                                          children: [
+                                            Text('524,000',
                                               style:TextStyle(
-                                                fontSize:10,
-                                                color:Colors.white,
-                                                fontFamily: 'Jalnan',
+                                                fontSize:20,
+                                                color:Colors.black,
+                                                fontFamily: 'NanumSquareB',
                                               ),
                                             ),
-                                          ),
+                                            SizedBox(width:5),
+                                            Container(
+                                              width:15,
+                                              height:15,
+                                              decoration:BoxDecoration(
+                                                borderRadius: BorderRadius.circular(15),
+                                                color:Colors.black,
+                                              ),
+                                              child: Center(
+                                                child: Text('C',
+                                                  style:TextStyle(
+                                                    fontSize:10,
+                                                    color:Colors.white,
+                                                    fontFamily: 'Jalnan',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -289,20 +293,20 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        SizedBox(height:20),
-                        Row(
-                          children: [
-                            Text('2021/12/10 16:44:05',
-                              style:TextStyle(
-                                fontSize:12,
-                              ),
+                            SizedBox(height:20),
+                            Row(
+                              children: [
+                                Text('2021/12/10 16:44:05',
+                                  style:TextStyle(
+                                    fontSize:12,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),

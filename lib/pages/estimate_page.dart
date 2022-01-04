@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'chat_estimate.dart';
+
 class Estimate_Page extends StatefulWidget{
   @override
   _Estimate_PageState createState() => _Estimate_PageState();
@@ -140,27 +142,32 @@ class _Estimate_PageState extends State<Estimate_Page>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text('견적서 보내기', style:
-                        TextStyle(
-                          color:Colors.white,
-                          fontSize:17,
-                          fontFamily: 'NanumSquareB',
-                        ),
-                        ),
-                        Container(
-                          width: 100.0,
-                          height: 33.0,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.0),
-                              color: Colors.white
+                          TextStyle(
+                            color:Colors.white,
+                            fontSize:17,
+                            fontFamily: 'NanumSquareB',
                           ),
-                          child: Center(
-                              child: Text('보내기', style:
-                              TextStyle(
-                                  color:Color(0xFF025595),
-                                  fontSize:16.0,
-                                  fontWeight: FontWeight.bold
-                              ),
-                              )
+                        ),
+                        InkWell(
+                          onTap:(){
+                            Get.to(Chat_Estimate());
+                          },
+                          child: Container(
+                            width: 100.0,
+                            height: 33.0,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: Colors.white
+                            ),
+                            child: Center(
+                                child: Text('보내기', style:
+                                TextStyle(
+                                    color:Color(0xFF025595),
+                                    fontSize:16.0,
+                                    fontWeight: FontWeight.bold
+                                ),
+                                )
+                            ),
                           ),
                         )
                       ],
