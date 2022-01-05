@@ -410,7 +410,6 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),

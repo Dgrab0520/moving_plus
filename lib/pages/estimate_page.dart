@@ -111,7 +111,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     width: Get.width*0.71,
-                    height: 105.0,
+                    height: 110.0,
                     decoration: BoxDecoration(
                         color: Color(0xFFe6e6e6),
                         borderRadius: BorderRadius.circular(5.0)
