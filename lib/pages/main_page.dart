@@ -132,6 +132,7 @@ class _Main_PageState extends State<Main_Page> {
                             ),
                           ),
                           SizedBox(height:5),
+
                           Row(
                             children: [
                               Text('i_desk123@naver.com',
@@ -259,26 +260,26 @@ class _Main_PageState extends State<Main_Page> {
               ),
             ),
             SizedBox(height:5),
-            InkWell(
-              onTap: (){
-                print('ss');
-              },
-              child: Container(
-                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
-                child: Row(
-                  children: [
-                    Image.asset("assets/setting_g.png",width:18,height:18),
-                    SizedBox(width:15),
-                    Text('설정',
-                        style:TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize:14,
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: (){
+            //     print('ss');
+            //   },
+            //   child: Container(
+            //     padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+            //     child: Row(
+            //       children: [
+            //         Image.asset("assets/setting_g.png",width:18,height:18),
+            //         SizedBox(width:15),
+            //         Text('설정',
+            //             style:TextStyle(
+            //               fontFamily: 'NanumSquareB',
+            //               fontSize:14,
+            //             )
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             InkWell(
               onTap: (){
                 print('ss');

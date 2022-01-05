@@ -15,6 +15,11 @@ class Request_Estimate2 extends StatefulWidget {
 }
 
 class _Request_Estimate2State extends State<Request_Estimate2> {
+  bool _gongan1 = false;
+  bool _gongan2 = false;
+  bool _gongan3 = false;
+  bool _gongan4 = false;
+
   int _selectedIndex = 1;
   DateTime currentBackPressTime = DateTime.now();
   @override
@@ -119,11 +124,33 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   SizedBox(height:10),
                   Row(
                     children: [
-                      Expanded(
-                        flex:2,
+                      Container(
+                        width: Get.width*0.4,
                         child: TextField(
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold
+                          ),
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            hintText: '0 원',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF025595)),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF025595)),
+                            ),
+                            suffixText: '원  ',
+                            suffixStyle: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54
+                            ),
+                            hintText: '예산을 입력 해주세요',
+                            hintStyle: TextStyle(
+                              color:Color(0xFF777777),
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
@@ -233,52 +260,44 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   Row(
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan1 = !_gongan1;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFF025595),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('아파트',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('아파트'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan1 ? RoundedRectangleBorder(
+                              side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan2 = !_gongan2;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFFCCCCCC),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('오피스텔',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('오피스텔'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan2 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                     ],
@@ -287,52 +306,44 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   Row(
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan3 = !_gongan3;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFFCCCCCC),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('빌라',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('빌라'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan3 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan4 = !_gongan4;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFFCCCCCC),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('주택',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('주택'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan4 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                     ],
