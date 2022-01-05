@@ -14,6 +14,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation:0,
           title: Text('견적서 작성', style:
           TextStyle(
             color:Colors.white,
@@ -37,7 +38,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
           child: SingleChildScrollView(
             child: Container(
               width: Get.width,
-              height: Get.height*0.95-AppBar().preferredSize.height,
+              height: Get.height*0.97-AppBar().preferredSize.height,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 70.0,),
@@ -173,7 +174,6 @@ class _Estimate_PageState extends State<Estimate_Page>{
                       ],
                     ),
                   )
-
                 ],
               ),
             ),

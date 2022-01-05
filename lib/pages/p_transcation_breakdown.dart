@@ -102,7 +102,7 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                       Container(
                         padding: EdgeInsets.all(15),
                         width:MediaQuery.of(context).size.width,
-                        height:115,
+                        height:120,
                         decoration:BoxDecoration(
                           color:Color(0xFFF1F5F8),
                           borderRadius: BorderRadius.circular(15),
@@ -206,7 +206,7 @@ class _P_Transaction_BreakdownState extends State<P_Transaction_Breakdown> {
                       Container(
                         padding: EdgeInsets.all(15),
                         width:MediaQuery.of(context).size.width,
-                        height:115,
+                        height:120,
                         decoration:BoxDecoration(
                           color:Colors.white,
                           borderRadius: BorderRadius.circular(15),

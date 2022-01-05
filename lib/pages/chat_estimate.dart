@@ -109,50 +109,52 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                         ),
                                       ),
                                       SizedBox(height:10),
-                                      Container(
-                                        padding: EdgeInsets.all(10.0),
-                                        width:Get.width,
-                                        height:60,
-                                        decoration: BoxDecoration(
-                                          color:Color(0xFFD8E3EB),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('서비스',
-                                                  style:TextStyle(
-                                                    fontSize:13,
-                                                  )
-                                                ),
-                                                Text('인테리어 시공',
-                                                    style:TextStyle(
-                                                      fontSize:13,
-                                                      fontFamily: 'NanumSquareB'
-                                                    )
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height:10),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('예상 금액',
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.all(10.0),
+                                          width:Get.width,
+                                          height:60,
+                                          decoration: BoxDecoration(
+                                            color:Color(0xFFD8E3EB),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text('서비스',
                                                     style:TextStyle(
                                                       fontSize:13,
                                                     )
-                                                ),
-                                                Text('100,000원~',
-                                                    style:TextStyle(
+                                                  ),
+                                                  Text('인테리어 시공',
+                                                      style:TextStyle(
                                                         fontSize:13,
-                                                        color:Color(0xFF025595),
                                                         fontFamily: 'NanumSquareB'
-                                                    )
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                      )
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height:10),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text('예상 금액',
+                                                      style:TextStyle(
+                                                        fontSize:13,
+                                                      )
+                                                  ),
+                                                  Text('100,000원~',
+                                                      style:TextStyle(
+                                                          fontSize:13,
+                                                          color:Color(0xFF025595),
+                                                          fontFamily: 'NanumSquareB'
+                                                      )
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       SizedBox(height:13),

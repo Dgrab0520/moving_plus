@@ -108,6 +108,7 @@ class _Main_PageState extends State<Main_Page> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Container(
+              width:Get.width,
               color:Color(0xFF025595),
               height:150,
               child: DrawerHeader(
@@ -118,7 +119,7 @@ class _Main_PageState extends State<Main_Page> {
                         child: Image.asset("assets/arlim2.png",width:70,height:70)),
                     SizedBox(width:10),
                     Expanded(
-                      flex:4,
+                      flex:5,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
