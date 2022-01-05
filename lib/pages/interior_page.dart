@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 
 import 'api.dart';
@@ -112,13 +113,19 @@ class _Interior_PageState extends State<Interior_Page>
           Expanded(
             child: _tabController == null
                 ? const Center(child: CircularProgressIndicator())
-                : VerticalTabBarView(
-              controller: _tabController,
-              children: [
-                for (Category category in categories)
-                  TabView(category: category)
-              ],
-            ),
+                : VerticalScrollableTabView(
+                tabController: _tabController,
+                listItemData: categories,
+                verticalScrollPosition: VerticalScrollPosition.middle,
+                //Change this to your preferred scroll direction
+                scrollDirection: Axis.vertical,
+                eachItemChild: (object, index) =>
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 60.0),
+                      child: TabView(
+                        category: object,
+                      ),
+                    )),
           ),
         ],
       ),
