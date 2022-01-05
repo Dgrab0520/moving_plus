@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/interior_page.dart';
+import 'package:moving_plus/pages/partner_search.dart';
 import 'package:moving_plus/pages/partner_sub.dart';
 import 'package:moving_plus/pages/partner_sub2.dart';
 
@@ -736,7 +737,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: (){
-                        print('success');
+                        Get.to(Partner_Search());
                       },
                       child: Text('더 보기',
                         style:TextStyle(

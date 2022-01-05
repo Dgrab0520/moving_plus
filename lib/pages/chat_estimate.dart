@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/estimate_page.dart';
@@ -217,7 +218,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                   child: Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left:10),
+                        padding: EdgeInsets.only(left:10,bottom:7),
                         height:42,
                         decoration:BoxDecoration(
                           color: Color(0xFFF9F9F9),
@@ -227,23 +228,31 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          onChanged: (text){
-                          },
-                          decoration: InputDecoration(
-                            labelText: '고객이 응답 할 경우 채팅이 활성화 됩니다.',
-                            labelStyle: TextStyle(
-                              fontSize:12,
-                            ),
-                              border: InputBorder.none,
+                          child: TextField(
+                            keyboardType: TextInputType.text,
+                            onChanged: (text){
+                            },
+                            decoration: InputDecoration(
+                              hintText: '고객이 응답 할 경우 채팅이 활성화 됩니다.',
+                              hintStyle: TextStyle(
+                                fontSize:12,
                               ),
-                        ),
+                              labelStyle: TextStyle(
+                                fontSize:12,
+                              ),
+
+                                border: InputBorder.none,
+                                ),
+                          ),
                       ),
                       Positioned(
                           right:3,
                           top:3,
-                          child: Image.asset('assets/uparrow.png',width:35,height:35))
+                          child: InkWell(
+                              onTap:(){
+
+                              },
+                              child: Image.asset('assets/uparrow.png',width:35,height:35)))
                     ],
                   ),
                 ),

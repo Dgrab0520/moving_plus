@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'NanumSquareR',
       ),
-      home: Main_Page(),
+      home: Main_Page(index: 1,),
     );
   }
 }

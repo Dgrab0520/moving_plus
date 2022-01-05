@@ -151,7 +151,7 @@ class _P_MypageState extends State<P_Mypage> {
                       ),
                       InkWell(
                         onTap:(){
-                          Get.to(P_Chat());
+                          Get.to(P_Chat(isMain: false,));
                         },
                         child: Container(
                           padding: EdgeInsets.only(top:10,bottom:10),

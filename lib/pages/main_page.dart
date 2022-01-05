@@ -12,7 +12,8 @@ import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
 
 class Main_Page extends StatefulWidget {
-  const Main_Page({Key? key}) : super(key: key);
+  const Main_Page({Key? key, required this.index}) : super(key: key);
+  final int index;
 
   @override
   _Main_PageState createState() => _Main_PageState();
@@ -33,10 +34,11 @@ class _Main_PageState extends State<Main_Page> {
 
   @override
   void initState() {
+    _selectedIndex = widget.index;
     _widgetOptions = [
       Request_Estimate(),
       HomePage(),
-      P_Chat(),
+      P_Chat(isMain: true,),
     ];
     super.initState();
   }
@@ -83,7 +85,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
           ),
         ],
-      ) : AppBar(
+      ) : _selectedIndex == 0 ? AppBar(
         elevation: 0,
         title: Text('견적 신청',
           style: TextStyle(
@@ -100,7 +102,7 @@ class _Main_PageState extends State<Main_Page> {
         //     },
         //     icon: Icon(Icons.arrow_back,color: Colors.white,)
         // ),
-      ),
+      ):null,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -185,7 +187,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.to(P_Chat());
+                Get.to(P_Chat(isMain: false,));
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),

@@ -238,7 +238,7 @@ class _P_SignupState extends State<P_Signup> {
               onTap:(){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Main_Page()),
+                  MaterialPageRoute(builder: (context) => Main_Page(index: 1,)),
                 );
               },
               child: Container(

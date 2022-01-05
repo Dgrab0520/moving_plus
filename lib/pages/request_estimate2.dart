@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:progress_indicator/progress_indicator.dart';
 
 import 'homepage.dart';
+import 'p_chat.dart';
 
 class Request_Estimate2 extends StatefulWidget {
   const Request_Estimate2({Key? key}) : super(key: key);
@@ -15,22 +17,8 @@ class Request_Estimate2 extends StatefulWidget {
 class _Request_Estimate2State extends State<Request_Estimate2> {
   int _selectedIndex = 1;
   DateTime currentBackPressTime = DateTime.now();
-
-  void moveIndex(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<Widget> _widgetOptions = [];
-
   @override
   void initState() {
-    _widgetOptions = [
-      Request_Estimate(),
-      HomePage(),
-      Request_Estimate(),
-    ];
     super.initState();
   }
   @override
@@ -476,7 +464,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
             SizedBox(height:30),
             InkWell(
               onTap: (){
-                Get.to(Request_Estimate2());
+                Get.off(Main_Page(index: 1,));
               },
               child: Align(
                 alignment: Alignment.center,
@@ -515,9 +503,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
           unselectedFontSize: 11,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            Get.off(Main_Page(index: index,));
           },
 
           items: [

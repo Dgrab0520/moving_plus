@@ -251,7 +251,7 @@ class _P_LoginState extends State<P_Login> {
               onTap:(){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Main_Page()),
+                  MaterialPageRoute(builder: (context) => Main_Page(index: 1,)),
                 );
               },
               child: Container(

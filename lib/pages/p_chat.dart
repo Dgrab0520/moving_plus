@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/chat_estimate.dart';
 import 'package:moving_plus/pages/p_chatting.dart';
+import 'package:moving_plus/pages/request_received..dart';
 
 import 'main_arlim.dart';
+import 'p_mypage.dart';
 
 class P_Chat extends StatefulWidget {
-  const P_Chat({Key? key}) : super(key: key);
-
+  const P_Chat({Key? key,required this.isMain}) : super(key: key);
+  final bool isMain;
   @override
   _P_ChatState createState() => _P_ChatState();
 }
@@ -16,6 +18,222 @@ class _P_ChatState extends State<P_Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('채팅',
+          style: TextStyle(
+            color:Colors.white,
+            fontSize:17,
+            fontFamily: 'NanumSquareB',
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF025595),
+        leading: widget.isMain ? null: IconButton(
+            onPressed: (){
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back,color: Colors.white,)
+        ),
+      ),
+      drawer: widget.isMain ? Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            Container(
+              color:Color(0xFF025595),
+              height:150,
+              child: DrawerHeader(
+                child: Row(
+                  children: [
+                    Expanded(
+                        flex:2,
+                        child: Image.asset("assets/arlim2.png",width:70,height:70)),
+                    SizedBox(width:10),
+                    Expanded(
+                      flex:4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('인테리어 작업대',
+                            style:TextStyle(
+                              fontSize:15,
+                              color:Colors.white,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          SizedBox(height:5),
+                          Row(
+                            children: [
+                              Text('i_desk123@naver.com',
+                                  style:TextStyle(
+                                    color:Colors.white,
+                                    fontSize: 12,
+                                    fontFamily: 'NanumSquareR',
+                                  )
+                              ),
+                              SizedBox(width:7),
+                              Image.asset("assets/i_partner.png", width:13,height:13),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        flex:1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            InkWell(
+                                onTap:(){
+                                  Navigator.pop(context);
+                                  print('ss');
+                                },
+                                child: Container(child: Image.asset("assets/close.png"))),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.to(Request_Received());
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/list_g.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('받은 요청서',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.to(P_Chat(isMain: false,));
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/chat_g.png",width:18,height:18),
+                    // Icon(Icons.speaker_notes_rounded,
+                    //   color: Color(0xFf444444),
+                    // ),
+                    SizedBox(width:15),
+                    Text('채팅',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                    SizedBox(width:5),
+                    Container(
+                      width:20,
+                      height:15,
+                      decoration:BoxDecoration(
+                        color:Color(0xFF025595),
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Center(
+                        child: Text('5',
+                          style: TextStyle(
+                            color:Colors.white,
+                            fontSize:12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.to(P_Mypage());
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/user_g.png",width:18,height:18),
+                    SizedBox(width:14),
+                    Text('마이페이지',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 10,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide( // POINT
+                    color: Color(0xFFf1f1f1),
+                    width: 3.0,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height:5),
+            InkWell(
+              onTap: (){
+                print('ss');
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/setting_g.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('설정',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                print('ss');
+              },
+              child: Container(
+                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                child: Row(
+                  children: [
+                    Image.asset("assets/logout-(1)_g@2x.png",width:18,height:18),
+                    SizedBox(width:15),
+                    Text('로그아웃',
+                        style:TextStyle(
+                          fontFamily: 'NanumSquareB',
+                          fontSize:14,
+                        )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ):null,
       body: SingleChildScrollView(
         child: Column(
           children: [
