@@ -95,6 +95,9 @@ class _Interior_PageState extends State<Interior_Page>
         children: [
           Image.asset('assets/chat_banner.png'),
           TabBar(
+              onTap: (index) {
+                VerticalScrollableTabBarStatus.setIndex(index);
+              },
               controller: _tabController,
               labelPadding:
               EdgeInsets.only(left: 11, right: 11, top: 3, bottom: 0),
