@@ -12,6 +12,7 @@ class P_Detail_Estimate extends StatefulWidget {
 }
 
 class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
+  TextEditingController downController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +34,10 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
             icon: Icon(Icons.arrow_back,color: Colors.white,)
         ),
       ),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
               width:Get.width,
               padding: EdgeInsets.only(left:15, right:15),
               child: Column(
@@ -105,20 +106,17 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                   Expanded(
                                     flex:3,
                                     child: Container(
-                                      margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
                                         decoration: InputDecoration(
-                                          labelText: '인테리어 시공 | 올 인테리어',
-                                          labelStyle: TextStyle(
+                                          hintText: '인테리어 시공 | 올 인테리어',
+                                          hintStyle: TextStyle(
                                             fontSize:12,
                                             color:Colors.black,
                                             fontFamily: 'NanumSquareB',
@@ -144,25 +142,36 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                   Expanded(
                                     flex:3,
                                     child: Container(
-                                      margin: EdgeInsets.only(right:30),
-                                      padding: EdgeInsets.only(right:10, left:10),
-                                      height:30,
+                                      margin: EdgeInsets.only(right:70),
+                                      padding: EdgeInsets.only(bottom:1),
+                                      height:27,
                                       decoration:BoxDecoration(
                                         color: Color(0xFFeeeeee),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       child: TextField(
-                                        keyboardType: TextInputType.text,
-                                        onChanged: (text){
-                                        },
+
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
-                                          labelText: '52,700,000원',
-                                          labelStyle: TextStyle(
-                                            fontSize:12,
-                                            color:Color(0xFF025595),
-                                            fontFamily: 'NanumSquareB',
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Color(0xFF025595)),
                                           ),
-                                          border: InputBorder.none,
+
+                                          suffixText: '원  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                          hintText: '최종 금액을 입력해주세요',
+                                          hintStyle: TextStyle(
+                                            fontSize: 12.0,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -186,11 +195,8 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -198,7 +204,7 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                           labelText: '5,270,000원',
                                           labelStyle: TextStyle(
                                             fontSize:12,
-                                            color:Color(0xFF025595),
+                                            color:Colors.black,
                                             fontFamily: 'NanumSquareB',
                                           ),
                                           border: InputBorder.none,
@@ -225,11 +231,8 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -264,11 +267,9 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -303,11 +304,8 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -342,11 +340,9 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -381,11 +377,9 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                       margin: EdgeInsets.only(right:30),
                                       padding: EdgeInsets.only(right:10, left:10),
                                       height:30,
-                                      decoration:BoxDecoration(
-                                        color: Color(0xFFeeeeee),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+
                                       child: TextField(
+                                        enabled: false,
                                         keyboardType: TextInputType.text,
                                         onChanged: (text){
                                         },
@@ -448,8 +442,8 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

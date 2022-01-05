@@ -14,6 +14,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('포트폴리오',
           style: TextStyle(
             color:Colors.white,
@@ -329,8 +330,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: 80.0,
-                            padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(width: 0.5, color: Color(0xffd4d4d4)),
@@ -340,7 +340,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                               child: Text('올 인테리어', style:
                               TextStyle(
                                 color:Colors.black87,
-                                fontSize:15,
+                                fontSize:14,
                               ),
                                 softWrap: false,
                                 overflow: TextOverflow.ellipsis,
@@ -351,8 +351,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                           SizedBox(width: 10.0,),
 
                           Container(
-                            width: 80.0,
-                            padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(width: 0.5, color: Color(0xffd4d4d4)),
@@ -362,7 +361,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                               child: Text('필름시공', style:
                               TextStyle(
                                 color:Colors.black87,
-                                fontSize:15,
+                                fontSize:14,
                               ),
                                 softWrap: false,
                                 overflow: TextOverflow.ellipsis,
@@ -373,8 +372,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                           SizedBox(width: 10.0,),
 
                           Container(
-                            width: 80.0,
-                            padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(width: 0.5, color: Color(0xffd4d4d4)),
@@ -384,7 +382,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                               child: Text('탄성코트', style:
                               TextStyle(
                                 color:Colors.black87,
-                                fontSize:15,
+                                fontSize:14,
                               ),
                                 softWrap: false,
                                 overflow: TextOverflow.ellipsis,
@@ -395,8 +393,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                           SizedBox(width: 10.0,),
 
                           Container(
-                            width: 80.0,
-                            padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(width: 0.5, color: Color(0xffd4d4d4)),
@@ -406,7 +403,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                               child: Text('타일교체', style:
                               TextStyle(
                                 color:Colors.black87,
-                                fontSize:15,
+                                fontSize:14,
                               ),
                                 softWrap: false,
                                 overflow: TextOverflow.ellipsis,

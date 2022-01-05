@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/estimate_page.dart';
+import 'package:moving_plus/pages/p_chat.dart';
 
 import 'p_detail_estimate.dart';
+import 'p_portfolio_edit_page.dart';
 import 'p_portfolio_page.dart';
 import 'p_profile_edit_page.dart';
 

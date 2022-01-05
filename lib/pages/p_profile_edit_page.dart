@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PortfolioEdit_Page extends StatefulWidget{
+class ProfileEdit_Page extends StatefulWidget{
   @override
-  _PortfolioEdit_PageState createState() => _PortfolioEdit_PageState();
+  _ProfileEdit_PageState createState() => _ProfileEdit_PageState();
 }
 
-class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
+class _ProfileEdit_PageState extends State<ProfileEdit_Page>{
   bool _isBtn = true;  //파트너 정보
 
 

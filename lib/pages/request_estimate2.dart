@@ -123,7 +123,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                         flex:2,
                         child: TextField(
                           decoration: InputDecoration(
-                            labelText: '0 원',
+                            hintText: '0 원',
                           ),
                         ),
                       ),
@@ -437,6 +437,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
+                    padding: EdgeInsets.only(right:10),
                     width:MediaQuery.of(context).size.width,
                     height:80,
                     decoration:BoxDecoration(

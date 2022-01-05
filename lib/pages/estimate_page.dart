@@ -15,12 +15,12 @@ class _Estimate_PageState extends State<Estimate_Page>{
     return Scaffold(
         appBar: AppBar(
           elevation:0,
-          title: Text('견적서 작성', style:
-          TextStyle(
-            color:Colors.white,
-            fontSize:17,
-            fontFamily: 'NanumSquareB',
-          ),
+          title: Text('견적서 작성',
+            style: TextStyle(
+              color:Colors.white,
+              fontSize:17,
+              fontFamily: 'NanumSquareB',
+            ),
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF025595),
@@ -38,7 +38,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
           child: SingleChildScrollView(
             child: Container(
               width: Get.width,
-              height: Get.height*0.97-AppBar().preferredSize.height,
+              height: Get.height*0.973-AppBar().preferredSize.height,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 70.0,),
@@ -109,9 +109,9 @@ class _Estimate_PageState extends State<Estimate_Page>{
                   ),
                   SizedBox(height: 40.0,),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 7.0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
                     width: Get.width*0.71,
-                    height: 90.0,
+                    height: 105.0,
                     decoration: BoxDecoration(
                         color: Color(0xFFe6e6e6),
                         borderRadius: BorderRadius.circular(5.0)

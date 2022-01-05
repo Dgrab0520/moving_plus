@@ -169,7 +169,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         flex:3,
                         child: TextField(
                           decoration: InputDecoration(
-                            labelText: '0 평',
+                            hintText: '0 평',
                           ),
                         ),
                       ),
