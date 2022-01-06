@@ -16,20 +16,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Color(0xFFcccccc),
       child: ListView(
         children: [
           Container(
             width: double.infinity,
-            height: 190,
+            height: 200,
             decoration: const BoxDecoration(
+                color:Colors.white,
                 image: DecorationImage(
-                  fit: BoxFit.fitWidth,
-                  image: AssetImage("assets/main_banner.png"),
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/main_banner.png",),
                 )
             ),
             child: Container(
-              padding: EdgeInsets.only(top:75.0,),
+              padding: EdgeInsets.only(top:95.0,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [
@@ -59,10 +60,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left:10.0,right:10),
+            color:Colors.white,
+            padding: EdgeInsets.only(top:50,left:10.0,right:10),
             child: Column(
               children: [
-                SizedBox(height:30),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -306,8 +308,9 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width:25),
                   ],
                 ),
-                SizedBox(height:30),
+                SizedBox(height:50),
                 Container(
+
                   padding: EdgeInsets.only(left:10.0,right:10),
                   child: Column(
                     children:  [
@@ -319,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize:15,
                               )
                           ),
-                          SizedBox(height:10),
+                          SizedBox(height:30),
                         ],
                       ),
                       Row(
@@ -705,7 +708,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height:30),
+                SizedBox(height:50),
               ],
             ),
           ),
@@ -713,6 +716,7 @@ class _HomePageState extends State<HomePage> {
             width: double.infinity,
             height: 95,
             decoration: const BoxDecoration(
+                color:Colors.white,
                 image: DecorationImage(
                   fit: BoxFit.fitWidth,
                   image: AssetImage("assets/sub_banner.jpg"),
@@ -720,10 +724,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          SizedBox(height:30),
 
           Container(
-            padding: EdgeInsets.only(left:20.0,right:20),
+            color:Colors.white,
+            padding: EdgeInsets.only(top:50,left:20.0,right:20),
             child: Column(
               children: [
                 Row(
@@ -749,19 +753,25 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(height:10),
+                SizedBox(height:15),
                 Partner_Sub(),
-                SizedBox(height:10),
+                SizedBox(height:15),
                 Partner_Sub(),
-                SizedBox(height:10),
+                SizedBox(height:15),
                 Partner_Sub2(),
-                SizedBox(height:10),
+                SizedBox(height:15),
                 Partner_Sub2(),
-                SizedBox(height:10),
+                SizedBox(height:15),
                 Partner_Sub2(),
-                SizedBox(height:30),
+                SizedBox(height:50),
               ],
             ),
+          ),
+          Container(
+            width:Get.width,
+            height:150,
+            color:Color(0xFFcccccc),
+            child: Text(''),
           ),
         ],
       ),

@@ -68,12 +68,15 @@ class _Main_PageState extends State<Main_Page> {
               child: Text('파트너 로그인',
                 style: TextStyle(
                   color:Colors.white,
-                  fontSize:12,
+                  fontSize:11,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
+
+          SizedBox(width:8),
+
           Container(
             padding: EdgeInsets.only(right:15),
             child: InkWell(

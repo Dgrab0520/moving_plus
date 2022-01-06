@@ -14,6 +14,18 @@ class Request_Estimate extends StatefulWidget {
 }
 
 class _Request_EstimateState extends State<Request_Estimate> {
+  bool _gongan5 = false;
+  bool _gongan6 = false;
+
+  bool _gongan10 = false;
+  bool _gongan11 = false;
+  bool _gongan12 = false;
+  bool _gongan13 = false;
+  bool _gongan14 = false;
+  bool _gongan15 = false;
+
+  bool _buttonPressed = false;
+  bool _buttonPressed2 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,52 +106,44 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   Row(
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan5 = !_gongan5;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFF025595),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('거주',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('거주'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan5 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan6 = !_gongan6;
+                            })
                           },
-                          child: Container(
-                            height:50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border:Border.all(
-                                color:Color(0xFFCCCCCC),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text('상업',
-                                style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize:16,
-                                ),
-                              ),
-                            ),
+                          child: Text('상업'),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan6 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                     ],
@@ -167,26 +171,26 @@ class _Request_EstimateState extends State<Request_Estimate> {
                     children: [
                       Expanded(
                         flex:3,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: '0 평',
-                          ),
-                        ),
-                      ),
-                      SizedBox(width:10),
-                      Expanded(
                         child: Container(
-                          height:35,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color:Color(0xFF025595),
-                          ),
-                          child: Center(
-                            child: Text('평',
-                              style: TextStyle(
-                                fontFamily: 'NanumSquareB',
-                                fontSize:16,
-                                color:Colors.white,
+                          width: Get.width*0.4,
+                          child: TextField(
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF025595)),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF025595)),
+                              ),
+                              hintText: '공급 면적을 입력 해주세요',
+                              hintStyle: TextStyle(
+                                color:Color(0xFF777777),
+                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -194,22 +198,45 @@ class _Request_EstimateState extends State<Request_Estimate> {
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: Container(
-                          height:35,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color:Color(0xFFCCCCCC),
-                          ),
-                          child: Center(
-                            child: Text('㎡',
-                              style: TextStyle(
+                          child: RaisedButton(
+                            child: new Text('평',
+                              style:TextStyle(
                                 fontFamily: 'NanumSquareB',
-                                fontSize:16,
-                                color:Colors.black,
                               ),
                             ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            textColor: Colors.white,
+                            // 2
+                            color: _buttonPressed2 ? Color(0xFF025595) : Color(0xFF777777),
+                            // 3
+                            onPressed: () => {
+                              setState(() {
+                                _buttonPressed2 = !_buttonPressed2;
+                              })
+                            },
+                          )
+                      ),
+                      SizedBox(width:10),
+                      Expanded(
+                        child: RaisedButton(
+                          child: new Text('㎡',
+                            style:TextStyle(
+                              fontFamily: 'NanumSquareB',
+                            ),
                           ),
-                        ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          textColor: Colors.white,
+                          // 2
+                          color: _buttonPressed ? Color(0xFF025595) : Color(0xFF777777),
+                          // 3
+                          onPressed: () => {
+                            setState(() {
+                              _buttonPressed = !_buttonPressed;
+                            })
+                          },
+                        )
                       ),
                     ],
                   ),
@@ -235,101 +262,104 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   Row(
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan10 = !_gongan10;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFFcccccc),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_1.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('주방',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_1.png", width:45 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('주방',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan10 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan11 = !_gongan11;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFF025595),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_2.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('욕실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_2.png", width:45 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('욕실',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan11 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan12 = !_gongan12;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFFcccccc),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_3.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('거실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_3.png", width:45 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('거실',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan12 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                     ],
@@ -338,101 +368,104 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   Row(
                     children: [
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan13 = !_gongan13;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFFcccccc),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_4.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('현관',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_4.png", width:45 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('현관',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan13 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan14 = !_gongan14;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFF025595),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_5.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('벽 / 도배',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_5.png", width:60 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('도배',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan14 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                       SizedBox(width:10),
                       Expanded(
-                        child: InkWell(
-                          onTap: (){
-
+                        child: RaisedButton(
+                          onPressed: () => {
+                            setState(() {
+                              _gongan15 = !_gongan15;
+                            })
                           },
-                          child: Container(
-                            height:90,
-                            decoration:BoxDecoration(
-                              color:Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border:Border.all(
-                                width:1,
-                                color:Color(0xFFcccccc),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_6.png", width:45 ,height:45),
-                                const SizedBox(height:10),
-                                const Text('바닥',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/gong_6.png", width:45 ,height:35),
+                              const SizedBox(height:10),
+                              const Text('바닥',
+                                style: TextStyle(
+                                  fontFamily: 'NanumSquareB',
+                                  fontSize:12,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                          color: Colors.white,
+                          textColor: Colors.black,
+                          shape: _gongan15 ? RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFF025595), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ) : RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xFFcccccc), width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                         ),
                       ),
                     ],

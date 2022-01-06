@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:moving_plus/pages/partner_search.dart';
 
 class Partner_Sub extends StatefulWidget {
   const Partner_Sub({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class _Partner_SubState extends State<Partner_Sub> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        print('success');
+        Get.to(Partner_Search());
       },
       child: Container(
         padding: EdgeInsets.only(left:10,right:10),

@@ -20,7 +20,35 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   bool _gongan3 = false;
   bool _gongan4 = false;
 
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
+  _selectDate2(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate2, // Refer step 1
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate2)
+      setState(() {
+        selectedDate2 = picked;
+      });
+  }
+
   int _selectedIndex = 1;
+  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate2 = DateTime.now();
   DateTime currentBackPressTime = DateTime.now();
   @override
   void initState() {
@@ -121,7 +149,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       fontFamily: 'NanumSquareB',
                     ),
                   ),
-                  SizedBox(height:10),
+                  SizedBox(height:5),
                   Row(
                     children: [
                       Container(
@@ -169,7 +197,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               ),
             ),
 
-            SizedBox(height:30),
+            SizedBox(height:40),
             Container(
               width: Get.width,
               padding: EdgeInsets.only(left:15,right:15),
@@ -183,56 +211,57 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       fontFamily: 'NanumSquareB',
                     ),
                   ),
-                  SizedBox(height:10),
+                  SizedBox(height:15),
                   Row(
                     children: [
                       Expanded(
-                        flex:3,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: '',
-                              icon: InkWell(
-                                  onTap:(){
-                                    Future<DateTime?> d = showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2021),
-                                        lastDate: DateTime(2023));
-                                    d.then((value) {
-                                      setState(() {
-                                        var selectDate = value!;
-                                      });
-                                    });
-                                  },
-                                  child: Icon(Icons.calendar_today, color:Color(0xFF025595), size:17,))
+                        child: InkWell(
+                          onTap: () => _selectDate(context),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              InkWell(
+
+                                child: Container(
+                                  child: Icon(Icons.calendar_today, color:Color(0xFF025595), size:17,),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              Text(
+                                "${selectedDate.toLocal()}".split(' ')[0],
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ),
                       ),
 
                       Expanded(
-                        flex:1,
                         child:Center(child: Text('~')),
                       ),
 
                       Expanded(
-                        flex:3,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: '',
-                              icon: InkWell(
-                                  onTap:(){
-                                    Future<DateTime?> d = showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2021),
-                                        lastDate: DateTime(2023));
-                                    d.then((value) {
-                                      setState(() {
-                                        var selectDate = value!;
-                                      });
-                                    });
-                                  },
-                                  child: Icon(Icons.calendar_today, color:Color(0xFF025595), size:17,))
+                        child: InkWell(
+                          onTap: () => _selectDate2(context),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              InkWell(
+
+                                child: Container(
+                                  child: Icon(Icons.calendar_today, color:Color(0xFF025595), size:17,),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              Text(
+                                "${selectedDate2.toLocal()}".split(' ')[0],
+                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -242,7 +271,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               ),
             ),
 
-            SizedBox(height:30),
+            SizedBox(height:40),
             Container(
               width: Get.width,
               padding: EdgeInsets.only(left:15,right:15),
@@ -256,7 +285,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       fontFamily: 'NanumSquareB',
                     ),
                   ),
-                  SizedBox(height:10),
+                  SizedBox(height:15),
                   Row(
                     children: [
                       Expanded(
@@ -352,7 +381,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               ),
             ),
 
-            SizedBox(height:30),
+            SizedBox(height:40),
             Container(
               width: Get.width,
               padding: EdgeInsets.only(left:15,right:15),
@@ -368,6 +397,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
+                    padding: EdgeInsets.only(left:15,right:15,bottom:11),
                     width:MediaQuery.of(context).size.width,
                     height:45,
                     decoration:BoxDecoration(
@@ -384,8 +414,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          icon: Padding(
-                              padding: EdgeInsets.only(left: 13),
+                          icon: Container(
+                              padding: EdgeInsets.only(top:10),
                               child: Icon(Icons.search))),
                     ),
                   ),
@@ -393,7 +423,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               ),
             ),
 
-            SizedBox(height:30),
+            SizedBox(height:40),
             Container(
               width: Get.width,
               padding: EdgeInsets.only(left:15,right:15),
@@ -409,6 +439,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
+                    padding: EdgeInsets.only(left:15,right:15,bottom:11),
                     width:MediaQuery.of(context).size.width,
                     height:45,
                     decoration:BoxDecoration(
@@ -432,7 +463,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               ),
             ),
 
-            SizedBox(height:30),
+            SizedBox(height:40),
             Container(
               width: Get.width,
               padding: EdgeInsets.only(left:15,right:15),
@@ -448,7 +479,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
-                    padding: EdgeInsets.only(right:10),
+                    padding: EdgeInsets.only(left:15, right:15),
                     width:MediaQuery.of(context).size.width,
                     height:80,
                     decoration:BoxDecoration(
@@ -460,11 +491,14 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
-                      keyboardType: TextInputType.text,
+                      textAlign: TextAlign.start,
+                      keyboardType: TextInputType.multiline,
                       maxLength: 150,
+                      maxLines: null,
                       onChanged: (text){
                       },
                       decoration: InputDecoration(
+
                           border: InputBorder.none,
                           ),
                     ),
@@ -472,8 +506,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                 ],
               ),
             ),
-            
-            SizedBox(height:30),
+
+            SizedBox(height:40),
             InkWell(
               onTap: (){
                 Get.off(Main_Page(index: 1,));

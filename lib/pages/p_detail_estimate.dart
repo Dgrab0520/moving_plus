@@ -142,8 +142,8 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                   Expanded(
                                     flex:3,
                                     child: Container(
-                                      margin: EdgeInsets.only(right:70),
-                                      padding: EdgeInsets.only(bottom:1),
+                                      margin: EdgeInsets.only(right:50,left:10),
+                                      padding: EdgeInsets.only(top:10),
                                       height:27,
                                       decoration:BoxDecoration(
                                         color: Color(0xFFeeeeee),

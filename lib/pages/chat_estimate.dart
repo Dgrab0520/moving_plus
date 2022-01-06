@@ -222,7 +222,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                   child: Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left:10,bottom:7),
+                        padding: EdgeInsets.only(left:15,bottom:10),
                         height:42,
                         decoration:BoxDecoration(
                           color: Color(0xFFF9F9F9),
