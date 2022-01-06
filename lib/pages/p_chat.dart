@@ -8,8 +8,7 @@ import 'main_arlim.dart';
 import 'p_mypage.dart';
 
 class P_Chat extends StatefulWidget {
-  const P_Chat({Key? key,required this.isMain}) : super(key: key);
-  final bool isMain;
+  const P_Chat({Key? key,}) : super(key: key);
   @override
   _P_ChatState createState() => _P_ChatState();
 }
@@ -29,14 +28,14 @@ class _P_ChatState extends State<P_Chat> {
         ),
         centerTitle: true,
         backgroundColor: Color(0xFF025595),
-        leading: widget.isMain ? null: IconButton(
+        leading: IconButton(
             onPressed: (){
               Get.back();
             },
             icon: Icon(Icons.arrow_back,color: Colors.white,)
         ),
       ),
-      drawer: widget.isMain ? Drawer(
+      drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -120,7 +119,7 @@ class _P_ChatState extends State<P_Chat> {
             ),
             InkWell(
               onTap: (){
-                Get.to(P_Chat(isMain: false,));
+                Get.to(P_Chat());
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
@@ -233,7 +232,7 @@ class _P_ChatState extends State<P_Chat> {
             ),
           ],
         ),
-      ):null,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -41,7 +41,7 @@ class _Main_PageState extends State<Main_Page> {
     _widgetOptions = [
       Request_Estimate(),
       HomePage(),
-      P_Chat(isMain: true,),
+      Receive_Estimate(isMain: true,),
     ];
     super.initState();
   }
@@ -102,6 +102,7 @@ class _Main_PageState extends State<Main_Page> {
         ),
         centerTitle: true,
         backgroundColor: Color(0xFF025595),
+        leading: Icon(Icons.menu,color:Color(0xFF)),
         // leading: IconButton(
         //     onPressed: (){
         //       Get.back();
@@ -195,7 +196,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.to(Receive_Estimate());
+                Get.to(Receive_Estimate(isMain: false,));
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),

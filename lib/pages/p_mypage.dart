@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moving_plus/pages/p_account_set.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_transcation_breakdown.dart';
+import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/transaction_breakdown.dart';
 
 import 'client/account_set.dart';
@@ -151,7 +152,7 @@ class _P_MypageState extends State<P_Mypage> {
                       ),
                       InkWell(
                         onTap:(){
-                          Get.to(P_Chat(isMain: false,));
+                          Get.to(Receive_Estimate(isMain: false,));
                         },
                         child: Container(
                           padding: EdgeInsets.only(top:10,bottom:10),

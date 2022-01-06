@@ -4,6 +4,7 @@ import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search.dart';
 import 'package:moving_plus/pages/partner_sub.dart';
 import 'package:moving_plus/pages/partner_sub2.dart';
+import 'package:moving_plus/pages/subpage_ex.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

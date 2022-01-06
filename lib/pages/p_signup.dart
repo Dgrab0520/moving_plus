@@ -117,7 +117,6 @@ class _P_SignupState extends State<P_Signup> {
                         ),
                         SizedBox(height:7),
                         Container(
-
                             width:double.infinity,
                             height:45,
                             child: TextField(

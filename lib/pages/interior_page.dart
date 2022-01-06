@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/p_chat.dart';
+import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
@@ -19,6 +20,7 @@ class Interior_Page extends StatefulWidget {
 
 class _Interior_PageState extends State<Interior_Page>
     with SingleTickerProviderStateMixin {
+
   final Api api = Api();
   List<Category> categories = [];
 
@@ -49,12 +51,15 @@ class _Interior_PageState extends State<Interior_Page>
 
   List<Widget> _widgetOptions = [];
 
+
+
+
   @override
   void initState() {
     _widgetOptions = [
       Request_Estimate(),
       HomePage(),
-      P_Chat(isMain: true,),
+      Receive_Estimate(isMain: true,),
     ];
     fetchAllCategories();
     super.initState();
@@ -102,7 +107,6 @@ class _Interior_PageState extends State<Interior_Page>
                 VerticalScrollableTabBarStatus.setIndex(index);
               },
               controller: _tabController,
-
               labelPadding:
               EdgeInsets.only(left: 11, right: 11, top: 3, bottom: 0),
               isScrollable: true,
@@ -123,12 +127,12 @@ class _Interior_PageState extends State<Interior_Page>
                 : VerticalScrollableTabView(
                 tabController: _tabController,
                 listItemData: categories,
-                verticalScrollPosition: VerticalScrollPosition.middle,
+                verticalScrollPosition: VerticalScrollPosition.begin,
                 //Change this to your preferred scroll direction
                 scrollDirection: Axis.vertical,
-                eachItemChild: (object, index) =>
+                eachItemChild: (object, Category) =>
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 60.0),
+                      padding: const EdgeInsets.only(top: 10.0,),
                       child: TabView(
                         category: object,
                       ),
@@ -222,46 +226,21 @@ class TabView extends StatefulWidget {
 }
 
 class _TabViewState extends State<TabView> {
-  final Api api = Api();
-  final List<CategorySub> _category = [];
-  ScrollController scrollController = ScrollController();
-  bool isend = false;
-
-  fetchProducts(String category) {
-    api.getProductsByCategory(category).then((value) {
-      setState(() {
-        _category.addAll(value);
-      });
-    });
-  }
-
   @override
   void initState() {
-    fetchProducts(widget.category.name);
-    scrollController.addListener(() {
-      if (scrollController.offset ==
-          scrollController.position.maxScrollExtent) {
-        setState(() {
-          isend = true;
-        });
-      }
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      controller: scrollController,
-      shrinkWrap: true,
-      physics: isend ? NeverScrollableScrollPhysics() : ClampingScrollPhysics(),
+    return Column(
       children: [
         SizedBox(height: 30),
         Container(
           child: Column(
             children: [
               Text(
-                widget.category.name+" 서비스",
+                widget.category.name + " 서비스",
                 style: TextStyle(
                   fontSize: 23,
                   fontFamily: 'NanumSquareB',
@@ -279,7 +258,7 @@ class _TabViewState extends State<TabView> {
           ),
         ),
         SizedBox(height: 25),
-        for (CategorySub category in _category)
+        for (CategorySub category in widget.category.sub)
           Padding(
             padding: const EdgeInsets.only(bottom: 25.0),
             child: Container(
@@ -316,7 +295,7 @@ class _TabViewState extends State<TabView> {
                     category.content,
                     style: TextStyle(
                       fontSize: 11,
-                      height:1.4,
+                      height: 1.4,
                     ),
                     textAlign: TextAlign.center,
                   ),

@@ -100,6 +100,7 @@ class _C_LoginState extends State<C_Login> {
               child:
                   InkWell(
                     onTap:(){
+                      Get.back();
                       Get.dialog(P_Signup());
                     },
                     child: Container(
