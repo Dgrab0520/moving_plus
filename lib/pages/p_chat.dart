@@ -284,6 +284,7 @@ class _P_ChatState extends State<P_Chat> {
             ),
             SizedBox(height:20),
             Container(
+              padding: EdgeInsets.only(bottom:11),
               margin: EdgeInsets.only(left:15,right:15),
               width:MediaQuery.of(context).size.width,
               height:45,
@@ -302,7 +303,7 @@ class _P_ChatState extends State<P_Chat> {
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     icon: Padding(
-                        padding: EdgeInsets.only(left: 13),
+                        padding: EdgeInsets.only(top:10, left: 13),
                         child: Icon(Icons.search))),
               ),
             ),

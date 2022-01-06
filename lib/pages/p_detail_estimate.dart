@@ -142,20 +142,17 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                   Expanded(
                                     flex:3,
                                     child: Container(
-                                      margin: EdgeInsets.only(right:50,left:10),
-                                      padding: EdgeInsets.only(top:10),
+                                      padding: EdgeInsets.only(top:10,left:10,right:10),
                                       height:27,
                                       decoration:BoxDecoration(
                                         color: Color(0xFFeeeeee),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       child: TextField(
-
                                         style: TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.bold
                                         ),
-                                        textAlign: TextAlign.center,
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
                                           enabledBorder: UnderlineInputBorder(

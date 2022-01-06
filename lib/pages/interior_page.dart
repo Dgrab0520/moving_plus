@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/p_chat.dart';
+import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 
 import 'api.dart';
 import 'homepage.dart';
 import 'main_arlim.dart';
+import 'main_page.dart';
 
 class Interior_Page extends StatefulWidget {
   const Interior_Page({Key? key}) : super(key: key);
@@ -49,9 +52,9 @@ class _Interior_PageState extends State<Interior_Page>
   @override
   void initState() {
     _widgetOptions = [
-      Container(),
+      Request_Estimate(),
       HomePage(),
-      Container(),
+      P_Chat(isMain: true,),
     ];
     fetchAllCategories();
     super.initState();
@@ -78,7 +81,7 @@ class _Interior_PageState extends State<Interior_Page>
             padding: EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () {
-                Get.dialog(Main_Arlim());
+                Get.to(Main_Arlim());
               },
               child: Align(
                 alignment: Alignment.centerRight,
@@ -143,9 +146,7 @@ class _Interior_PageState extends State<Interior_Page>
           unselectedFontSize: 12,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            Get.off(Main_Page(index: index,));
           },
           items: [
             BottomNavigationBarItem(
@@ -262,15 +263,15 @@ class _TabViewState extends State<TabView> {
               Text(
                 widget.category.name+" 서비스",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 23,
                   fontFamily: 'NanumSquareB',
                 ),
               ),
-              SizedBox(height: 7),
+              SizedBox(height: 10),
               Text(
                 widget.category.description,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 12,
                   fontFamily: 'NanumSquareR',
                 ),
               ),
