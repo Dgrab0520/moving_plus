@@ -397,7 +397,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
-                    padding: EdgeInsets.only(left:15,right:15,bottom:11),
+                    padding: EdgeInsets.only(left:15,right:15,bottom:8),
                     width:MediaQuery.of(context).size.width,
                     height:45,
                     decoration:BoxDecoration(
@@ -415,7 +415,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           icon: Container(
-                              padding: EdgeInsets.only(top:10),
+                              padding: EdgeInsets.only(top:8),
                               child: Icon(Icons.search))),
                     ),
                   ),
@@ -439,7 +439,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ),
                   SizedBox(height:10),
                   Container(
-                    padding: EdgeInsets.only(left:15,right:15,bottom:11),
+                    padding: EdgeInsets.only(left:15,right:15,bottom:8),
                     width:MediaQuery.of(context).size.width,
                     height:45,
                     decoration:BoxDecoration(

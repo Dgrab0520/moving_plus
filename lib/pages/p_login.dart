@@ -63,7 +63,7 @@ class _P_LoginState extends State<P_Login> {
               ),
               SizedBox(height:28),
               Container(
-                padding: EdgeInsets.only(left:8,right:8),
+                padding: EdgeInsets.only(left:8,right:8,),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +77,8 @@ class _P_LoginState extends State<P_Login> {
                     ),
                     SizedBox(height:7),
                     Container(
-                        width:double.infinity,
+                        padding: EdgeInsets.only(),
+                        width:Get.width,
                         height:45,
                         child: TextField(
                           decoration: InputDecoration(
@@ -118,7 +119,7 @@ class _P_LoginState extends State<P_Login> {
                         ),
                         SizedBox(height:7),
                         Container(
-                            width:double.infinity,
+                            width:Get.width,
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(

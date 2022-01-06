@@ -284,7 +284,7 @@ class _P_ChatState extends State<P_Chat> {
             ),
             SizedBox(height:20),
             Container(
-              padding: EdgeInsets.only(bottom:11),
+              padding: EdgeInsets.only(bottom:10),
               margin: EdgeInsets.only(left:15,right:15),
               width:MediaQuery.of(context).size.width,
               height:45,

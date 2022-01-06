@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/client/c_chatlist.dart';
 import 'package:moving_plus/pages/client/c_mypage.dart';
+import 'package:moving_plus/pages/client/c_partner_info.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
@@ -192,7 +195,7 @@ class _Main_PageState extends State<Main_Page> {
             ),
             InkWell(
               onTap: (){
-                Get.to(P_Chat(isMain: false,));
+                Get.to(Receive_Estimate());
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
