@@ -79,6 +79,7 @@ class _P_SignupState extends State<P_Signup> {
                         height:45,
                         child: TextField(
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                             counterStyle: TextStyle(
                               fontSize:10,
                             ),
@@ -116,10 +117,12 @@ class _P_SignupState extends State<P_Signup> {
                         ),
                         SizedBox(height:7),
                         Container(
+
                             width:double.infinity,
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
                                   fontSize:10,
                                 ),
@@ -159,10 +162,12 @@ class _P_SignupState extends State<P_Signup> {
                         ),
                         SizedBox(height:7),
                         Container(
+
                             width:double.infinity,
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
                                   fontSize:10,
                                 ),
@@ -206,6 +211,7 @@ class _P_SignupState extends State<P_Signup> {
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
                                   fontSize:10,
                                 ),

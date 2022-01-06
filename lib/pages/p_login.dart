@@ -77,18 +77,18 @@ class _P_LoginState extends State<P_Login> {
                     ),
                     SizedBox(height:7),
                     Container(
-                        padding: EdgeInsets.only(),
                         width:Get.width,
                         height:45,
                         child: TextField(
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                             counterStyle: TextStyle(
                               fontSize:10,
                             ),
                             hintStyle: TextStyle(
                               fontSize:10,
                             ),
-                            hintText: '아이디 이메일을 입력해주세요.',
+                            hintText: '이메일을 입력해주세요.',
                             labelStyle: TextStyle(color: Color(0xFFACACAC)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -119,10 +119,12 @@ class _P_LoginState extends State<P_Login> {
                         ),
                         SizedBox(height:7),
                         Container(
+
                             width:Get.width,
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
                                   fontSize:10,
                                 ),
@@ -166,6 +168,7 @@ class _P_LoginState extends State<P_Login> {
                             height:45,
                             child: TextField(
                               decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
                                   fontSize:10,
                                 ),

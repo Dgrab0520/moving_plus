@@ -234,7 +234,7 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                         onChanged: (text){
                                         },
                                         decoration: InputDecoration(
-                                          labelText: '2021.12.25~2022.2월 중순 (예정)',
+                                          labelText: '2021.12.25~2022.2월 (예정)',
                                           labelStyle: TextStyle(
                                             fontSize:12,
                                             color:Colors.black,
