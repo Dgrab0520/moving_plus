@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:core';
 
+import 'package:moving_plus/datas/banner_data.dart';
+import 'package:moving_plus/models/banner_model.dart';
+
 final List<String> imgList = [
   "assets/main_banner.png",
   "assets/main_banner.png",
   "assets/main_banner.png",
 ];
 
+
+//375*162
 class Carousel_Main extends StatefulWidget{
   @override
   _Carousel_MainState createState() => _Carousel_MainState();
@@ -17,7 +22,31 @@ class Carousel_Main extends StatefulWidget{
 
 class _Carousel_MainState extends State<Carousel_Main>{
 
+  List<Banners> _banner = [];
   int _current = 0;
+  bool _isLoading = false;
+
+  getBanner(){
+    Banner_Data.getBanner().then((value){
+      setState(() {
+        _banner = value;
+      });
+      if(value.isEmpty){
+        _isLoading = false;
+      }else{
+        _isLoading = true;
+      }
+    });
+  }
+
+  void initState(){
+    super.initState();
+    getBanner();
+  }
+
+
+
+
   final CarouselController _controller = CarouselController();
 
 
@@ -37,23 +66,24 @@ class _Carousel_MainState extends State<Carousel_Main>{
                   _current = index;
                 });
               }),
-          items: imgList?.map((item) {
+          items: _banner?.map((item) {
             return Container(
                 child: Column(
                   children: <Widget>[
                     Container(
                       child: Center(
-                          child: Image.asset(
-                            item, //
+                          child: Image.network(
+                            'http://211.110.44.91/plus/banner/${item.banner_img}',
                             fit: BoxFit.fitWidth,
                             width: Get.width,
+
                           )),
                     ),
                     const SizedBox(
                       height: 20.0,
                     ),
-                    const Text(
-                      'main Banner',
+                    Text(
+                      item.banner_title,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFF0e0e0e),
@@ -70,7 +100,7 @@ class _Carousel_MainState extends State<Carousel_Main>{
         SizedBox(height: 10.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: imgList?.asMap()?.entries?.map((entry) {
+          children: _banner?.asMap()?.entries?.map((entry) {
             return Expanded(
               flex: 1,
               child: GestureDetector(
@@ -93,12 +123,12 @@ class _Carousel_MainState extends State<Carousel_Main>{
         ),
       ],
     );
-    return Container(
+    return _isLoading ? Container(
         child: Column(
           children: <Widget>[
             imageSliders,
           ],
         )
-    );
+    ) : Center(child: CircularProgressIndicator(),);
   }
 }
