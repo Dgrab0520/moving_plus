@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/pro_data.dart';
+import 'package:moving_plus/models/pro_model.dart';
 import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search.dart';
 import 'package:moving_plus/pages/partner_sub.dart';
 import 'package:moving_plus/pages/partner_sub2.dart';
 import 'package:moving_plus/pages/subpage_ex.dart';
+import 'package:moving_plus/widgets/carousel_main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,51 +17,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<Pro> _pro = [];
+
+  getPro(){
+    Pro_Data.getPro('pro_id').then((value){
+      setState(() {
+        _pro = value;
+      });
+    });
+  }
+
+
+  void initState(){
+    super.initState();
+    getPro();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFcccccc),
+      color: Colors.white,
       child: ListView(
         children: [
+          SizedBox(height: 10.0,),
           Container(
             width: double.infinity,
-            height: 200,
-            decoration: const BoxDecoration(
-                color:Colors.white,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/main_banner.png",),
-                )
-            ),
-            child: Container(
-              padding: EdgeInsets.only(top:95.0,),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text("쾌적하고 아름다운 공간을 만드는",
-                    style:TextStyle(
-                      fontFamily: 'NanumSquareR',
-                      fontSize:12,
-                    ),
-                  ),
-                  SizedBox(height:5),
-                  Text("토탈 홈케어 올인원 서비스",
-                    style:TextStyle(
-                      fontFamily: 'NanumSquareR',
-                      fontSize:12,
-                    ),
-                  ),
-                  SizedBox(height:15),
-                  Text("입주 플러스 +",
-                    style:TextStyle(
-                      fontFamily: 'Jalnan',
-                      fontSize:21,
-                      color:Color(0xFF025595),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            color: Colors.white,
+            child: Carousel_Main(),
           ),
           Container(
             color:Colors.white,
@@ -75,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
+                          Get.to(Interior_Page());
                         },
                         child: Container(
                           width:70,
@@ -97,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset("assets/main_icon1-1.png", width:40 ,height:40),
                               const SizedBox(height:10),
-                              const Text('클린',
+                              Text('클린',
                                 style: TextStyle(
                                   fontFamily: 'NanumSquareB',
                                   fontSize:12,
@@ -112,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-                          Get.to(Interior_Page());
+
                         },
                         child: Container(
                           width:70,
@@ -768,12 +755,18 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Container(
-            width:Get.width,
-            height:150,
-            color:Color(0xFFcccccc),
-            child: Text(''),
-          ),
+          SizedBox(height: 20.0,),
+          // Container(
+          //   margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          //   padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          //   width:Get.width,
+          //   height:250.0,
+          //   decoration: BoxDecoration(
+          //     border: Border.all(width: 1.0, color: Color(0xFFe6e6e6))
+          //   ),
+          //
+          //   child: Text('사업자 정보'),
+          // ),
         ],
       ),
     );

@@ -261,47 +261,54 @@ class _TabViewState extends State<TabView> {
         for (CategorySub category in widget.category.sub)
           Padding(
             padding: const EdgeInsets.only(bottom: 25.0),
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 15,
-                right: 15,
-              ),
-              padding: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 0.5,
-                  color: Color(0xFFcccccc),
+            child:
+            GestureDetector(
+              onTap: (){
+                Get.to(Main_Page(index: 0));
+              },
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                ),
+                padding: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 0.5,
+                    color: Color(0xFFcccccc),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 120,
+                        child: Image.asset(
+                          category.image,
+                          fit: BoxFit.cover,
+                        )),
+                    SizedBox(height: 10),
+                    Text(
+                      category.title,
+                      style: TextStyle(
+                        fontFamily: 'NanumSquareB',
+                        fontSize: 13,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      category.content,
+                      style: TextStyle(
+                        fontSize: 11,
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
-              child: Column(
-                children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 120,
-                      child: Image.asset(
-                        category.image,
-                        fit: BoxFit.cover,
-                      )),
-                  SizedBox(height: 10),
-                  Text(
-                    category.title,
-                    style: TextStyle(
-                      fontFamily: 'NanumSquareB',
-                      fontSize: 13,
-                    ),
-                  ),
-                  SizedBox(height: 3),
-                  Text(
-                    category.content,
-                    style: TextStyle(
-                      fontSize: 11,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+            )
+
           ),
         // for (int i = 0; i < 20; i++)
         //   ListTile(
