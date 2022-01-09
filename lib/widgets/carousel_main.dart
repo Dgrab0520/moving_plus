@@ -7,12 +7,6 @@ import 'dart:core';
 import 'package:moving_plus/datas/banner_data.dart';
 import 'package:moving_plus/models/banner_model.dart';
 
-final List<String> imgList = [
-  "assets/main_banner.png",
-  "assets/main_banner.png",
-  "assets/main_banner.png",
-];
-
 
 //375*162
 class Carousel_Main extends StatefulWidget{
@@ -22,19 +16,25 @@ class Carousel_Main extends StatefulWidget{
 
 class _Carousel_MainState extends State<Carousel_Main>{
 
-  List<Banners> _banner = [];
+  List<Banners> banner = [];
   int _current = 0;
   bool _isLoading = false;
 
   getBanner(){
-    Banner_Data.getBanner().then((value){
+    Banner_Data.getBanner_Main().then((value){
       setState(() {
-        _banner = value;
+        banner = value;
       });
+      print('www$banner');
       if(value.isEmpty){
-        _isLoading = false;
+        setState(() {
+          _isLoading = false;
+        });
+
       }else{
-        _isLoading = true;
+        setState(() {
+          _isLoading = true;
+        });
       }
     });
   }
@@ -66,7 +66,7 @@ class _Carousel_MainState extends State<Carousel_Main>{
                   _current = index;
                 });
               }),
-          items: _banner?.map((item) {
+          items: banner?.map((item) {
             return Container(
                 child: Column(
                   children: <Widget>[
@@ -100,7 +100,7 @@ class _Carousel_MainState extends State<Carousel_Main>{
         SizedBox(height: 10.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: _banner?.asMap()?.entries?.map((entry) {
+          children: banner?.asMap()?.entries?.map((entry) {
             return Expanded(
               flex: 1,
               child: GestureDetector(

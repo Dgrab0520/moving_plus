@@ -8,6 +8,7 @@ import 'package:moving_plus/pages/partner_sub.dart';
 import 'package:moving_plus/pages/partner_sub2.dart';
 import 'package:moving_plus/pages/subpage_ex.dart';
 import 'package:moving_plus/widgets/carousel_main.dart';
+import 'package:moving_plus/widgets/carousel_sub.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -702,14 +703,8 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             width: double.infinity,
-            height: 95,
-            decoration: const BoxDecoration(
-                color:Colors.white,
-                image: DecorationImage(
-                  fit: BoxFit.fitWidth,
-                  image: AssetImage("assets/sub_banner.jpg"),
-                )
-            ),
+            color: Colors.white,
+            child: Carousel_Sub(),
           ),
 
 

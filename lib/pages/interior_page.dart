@@ -136,7 +136,9 @@ class _Interior_PageState extends State<Interior_Page>
                       child: TabView(
                         category: object,
                       ),
-                    )),
+                    ),
+
+            ),
           ),
         ],
       ),
@@ -215,8 +217,7 @@ class _Interior_PageState extends State<Interior_Page>
 
 class TabView extends StatefulWidget {
   const TabView({
-    Key? key,
-    required this.category,
+    Key? key, required this.category,
   }) : super(key: key);
 
   final Category category;
@@ -228,6 +229,7 @@ class TabView extends StatefulWidget {
 class _TabViewState extends State<TabView> {
   @override
   void initState() {
+    print('dsa${widget.category.name}');
     super.initState();
   }
 
