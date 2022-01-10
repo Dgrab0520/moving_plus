@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:moving_plus/pages/partner_sub.dart';
-import 'package:moving_plus/pages/partner_sub2.dart';
+import 'package:moving_plus/widgets/partner_sub.dart';
+import 'package:moving_plus/widgets/partner_sub2.dart';
 
 import 'main_arlim.dart';
 

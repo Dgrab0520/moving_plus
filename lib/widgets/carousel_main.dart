@@ -66,7 +66,7 @@ class _Carousel_MainState extends State<Carousel_Main>{
                   _current = index;
                 });
               }),
-          items: banner?.map((item) {
+          items: banner.map((item) {
             return Container(
                 child: Column(
                   children: <Widget>[
@@ -76,7 +76,6 @@ class _Carousel_MainState extends State<Carousel_Main>{
                             'http://211.110.44.91/plus/banner/${item.banner_img}',
                             fit: BoxFit.fitWidth,
                             width: Get.width,
-
                           )),
                     ),
                     const SizedBox(
@@ -94,13 +93,12 @@ class _Carousel_MainState extends State<Carousel_Main>{
                     ),
                   ],
                 ));
-          })?.toList() ??
-              [],
+          }).toList(),
         ),
         SizedBox(height: 10.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: banner?.asMap()?.entries?.map((entry) {
+          children: banner.asMap().entries.map((entry) {
             return Expanded(
               flex: 1,
               child: GestureDetector(
@@ -118,8 +116,7 @@ class _Carousel_MainState extends State<Carousel_Main>{
                 ),
               ),
             );
-          })?.toList() ??
-              [],
+          }).toList(),
         ),
       ],
     );

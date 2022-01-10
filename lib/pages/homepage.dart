@@ -4,8 +4,8 @@ import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/models/pro_model.dart';
 import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search.dart';
-import 'package:moving_plus/pages/partner_sub.dart';
-import 'package:moving_plus/pages/partner_sub2.dart';
+import 'package:moving_plus/widgets/partner_sub.dart';
+import 'package:moving_plus/widgets/partner_sub2.dart';
 import 'package:moving_plus/pages/subpage_ex.dart';
 import 'package:moving_plus/widgets/carousel_main.dart';
 import 'package:moving_plus/widgets/carousel_sub.dart';
@@ -19,20 +19,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<Pro> _pro = [];
-
-  getPro(){
-    Pro_Data.getPro('pro_id').then((value){
-      setState(() {
-        _pro = value;
-      });
-    });
-  }
 
 
   void initState(){
     super.initState();
-    getPro();
   }
 
   @override
@@ -743,15 +733,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height:15),
                 Partner_Sub(),
-                SizedBox(height:15),
-                Partner_Sub(),
-                SizedBox(height:15),
                 Partner_Sub2(),
-                SizedBox(height:15),
-                Partner_Sub2(),
-                SizedBox(height:15),
-                Partner_Sub2(),
-                SizedBox(height:50),
               ],
             ),
           ),

@@ -54,65 +54,30 @@ class _Carousel_SubState extends State<Carousel_Sub>{
         CarouselSlider(
           carouselController: _controller,
           options: CarouselOptions(
-              autoPlay: true,
-              viewportFraction: 2.0,
-              enlargeCenterPage: false,
+            height: 96.0,
+            autoPlay: true,
+            viewportFraction: 2.0,
+            enlargeCenterPage: false,
           ),
-          items: banner?.map((item) {
+          items: banner.map((item) {
             return Container(
+                height: 96.0,
                 child: Column(
                   children: <Widget>[
                     Container(
+                      height: 96.0,
                       child: Center(
                           child: Image.network(
                             'http://211.110.44.91/plus/banner/${item.banner_img}',
-                            fit: BoxFit.fitWidth,
+                            fit: BoxFit.fill,
                             width: Get.width,
-
+                            height: 96.0,
                           )),
                     ),
-                    // const SizedBox(
-                    //   height: 20.0,
-                    // ),
-                    // Text(
-                    //   item.banner_title,
-                    //   textAlign: TextAlign.center,
-                    //   style: TextStyle(
-                    //     color: Color(0xFF0e0e0e),
-                    //     fontSize: 15.0,
-                    //     fontFamily: 'Gmarket_Medium',
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
                   ],
                 ));
-          })?.toList() ??
-              [],
+          }).toList(),
         ),
-        SizedBox(height: 10.0,),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: banner?.asMap()?.entries?.map((entry) {
-        //     return Expanded(
-        //       flex: 1,
-        //       child: GestureDetector(
-        //         onTap: () => _controller.animateToPage(entry.key),
-        //         child: Container(
-        //           //margin: EdgeInsets.symmetric(horizontal: 3.0),
-        //           height: 5.0,
-        //           //margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-        //           decoration: BoxDecoration(
-        //               color: (Theme.of(context).brightness ==
-        //                   Brightness.dark
-        //                   ? Colors.white
-        //                   : Colors.black)
-        //                   .withOpacity(_current == entry.key ? 0.9 : 0.1)),
-        //         ),
-        //       ),
-        //     );
-        //   })?.toList() ??
-        //       [],
-        // ),
       ],
     );
     return _isLoading ? Container(
