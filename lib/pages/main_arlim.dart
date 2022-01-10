@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'p_login.dart';
+import '../widgets/p_login.dart';
 
 class Main_Arlim extends StatefulWidget {
   const Main_Arlim({Key? key}) : super(key: key);

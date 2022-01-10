@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'main_page.dart';
-import 'p_login.dart';
+import '../widgets/p_login.dart';
 
 class P_Signup extends StatefulWidget {
   const P_Signup({Key? key}) : super(key: key);

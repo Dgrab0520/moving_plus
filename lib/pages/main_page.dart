@@ -1,18 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/pages/client/c_chatlist.dart';
 import 'package:moving_plus/pages/client/c_mypage.dart';
 import 'package:moving_plus/pages/client/c_partner_info.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
-import 'package:moving_plus/pages/p_login.dart';
+import 'package:moving_plus/widgets/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/partner_search.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
+
+
+final controller = Get.put(ReactiveController());
 
 class Main_Page extends StatefulWidget {
   const Main_Page({Key? key, required this.index}) : super(key: key);
@@ -123,7 +127,7 @@ class _Main_PageState extends State<Main_Page> {
                   children: [
                     Expanded(
                         flex:2,
-                        child: Image.asset("assets/arlim2.png",width:70,height:70)),
+                        child: Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",width:70,height:70)),
                     SizedBox(width:10),
                     Expanded(
                       flex:5,
@@ -131,9 +135,9 @@ class _Main_PageState extends State<Main_Page> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('인테리어 작업대',
+                          Text(controller.pro.value.com_name,
                             style:TextStyle(
-                              fontSize:15,
+                              fontSize:14,
                               color:Colors.white,
                               fontFamily: 'NanumSquareB',
                             ),
@@ -142,7 +146,7 @@ class _Main_PageState extends State<Main_Page> {
 
                           Row(
                             children: [
-                              Text('i_desk123@naver.com',
+                              Text(controller.pro.value.pro_id,
                                   style:TextStyle(
                                     color:Colors.white,
                                     fontSize: 12,

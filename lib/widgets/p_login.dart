@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/pro_login_data.dart';
+import 'package:moving_plus/models/pro_login_model.dart';
 import 'package:moving_plus/pages/client/c_login.dart';
 import 'package:moving_plus/pages/p_signup.dart';
 
-import 'arlim_checkbox.dart';
-import 'main_page.dart';
+import '../pages/arlim_checkbox.dart';
+import '../pages/main_page.dart';
+
+
+final controller = Get.put(ReactiveController());
 
 class P_Login extends StatefulWidget {
   const P_Login({Key? key}) : super(key: key);
@@ -14,6 +20,58 @@ class P_Login extends StatefulWidget {
 }
 
 class _P_LoginState extends State<P_Login> {
+
+  List<Pro_Info> pro_info = [];
+  bool _isLoading = false;
+
+  TextEditingController idController = TextEditingController();
+  TextEditingController pwController = TextEditingController();
+
+
+  Pro_Login(){
+    Pro_Login_Data.getPro_Login(idController.text.trim(), pwController.text.trim()).then((value){
+      setState(() {
+        pro_info = value;
+      });
+      if(value.length == 1){
+        setState(() {
+          _isLoading = true;
+        });
+        controller.change(
+            type: 'pro',
+            pro_id: pro_info[0].pro_id,
+            pro_name: pro_info[0].pro_name,
+            pro_phone: pro_info[0].pro_phone,
+            pro_email: pro_info[0].pro_email,
+            com_name: pro_info[0].com_name,
+            profile_img: pro_info[0].profile_img,
+            pro_token: pro_info[0].pro_token
+        );
+        Get.offAll(Main_Page(index: 1));
+      }else{
+        setState(() {
+          _isLoading = false;
+        });
+        Get.snackbar("로그인 실패", "아이디 또는 비밀번호가 틀렸습니다", backgroundColor: Colors.white, colorText: Colors.black);
+
+      }
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    idController;
+    pwController;
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -29,24 +87,18 @@ class _P_LoginState extends State<P_Login> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                      onTap:(){
-                        Get.back();
-                        Get.dialog(C_Login());
-                      },
-                      child: Container(child: Icon(Icons.arrow_back))),
-                  InkWell(
-                      onTap:(){
-                        Get.back();
-                      },
-                      child: Container(child: Icon(Icons.close))),
-                ],
+              Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    onTap:(){
+                      Get.back();
+                    },
+                    child: Container(child: Icon(Icons.close))
+                ),
               ),
+
               SizedBox(height:10),
-              Text('파트너 로그인',
+              const Text('파트너 로그인',
                 style:TextStyle(
                   color:Color(0xFF444444),
                   fontSize:23,
@@ -54,7 +106,7 @@ class _P_LoginState extends State<P_Login> {
                 ),
               ),
               SizedBox(height:7),
-              Text('로그인 후 입주 플러스를 이용해 주세요.',
+              const Text('로그인 후 입주 플러스를 이용해 주세요.',
                 style:TextStyle(
                   color:Color(0xFF444444),
                   fontSize:12,
@@ -68,7 +120,7 @@ class _P_LoginState extends State<P_Login> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('아이디',
+                    const Text('아이디',
                       style:TextStyle(
                         color:Color(0xFF444444),
                         fontSize:12,
@@ -80,6 +132,7 @@ class _P_LoginState extends State<P_Login> {
                         width:Get.width,
                         height:45,
                         child: TextField(
+                          controller: idController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                             counterStyle: TextStyle(
@@ -105,12 +158,12 @@ class _P_LoginState extends State<P_Login> {
                           keyboardType: TextInputType.emailAddress,
                         )
                     ),
-                    SizedBox(height:20),
+                    SizedBox(height:15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('비밀번호',
+                        const Text('비밀번호',
                           style:TextStyle(
                             color:Color(0xFF444444),
                             fontSize:12,
@@ -119,10 +172,13 @@ class _P_LoginState extends State<P_Login> {
                         ),
                         SizedBox(height:7),
                         Container(
-
                             width:Get.width,
                             height:45,
                             child: TextField(
+                              controller: pwController,
+                              obscureText: true,
+                              obscuringCharacter: "*",
+                              keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
@@ -145,55 +201,56 @@ class _P_LoginState extends State<P_Login> {
                                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                 ),
                               ),
-                              keyboardType: TextInputType.visiblePassword,
+
                             )
                         ),
                       ],
                     ),
+
                     SizedBox(height:20),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('업체명',
-                          style:TextStyle(
-                            color:Color(0xFF444444),
-                            fontSize:12,
-                            fontFamily: 'NanumSquareR',
-                          ),
-                        ),
-                        SizedBox(height:7),
-                        Container(
-                            width:double.infinity,
-                            height:45,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
-                                counterStyle: TextStyle(
-                                  fontSize:10,
-                                ),
-                                hintStyle: TextStyle(
-                                  fontSize:10,
-                                ),
-                                hintText: '업체명을 입력해주세요.',
-                                labelStyle: TextStyle(color: Color(0xFFACACAC)),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                  borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                  borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                ),
-                              ),
-                              keyboardType: TextInputType.visiblePassword,
-                            )
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text('업체명',
+                    //       style:TextStyle(
+                    //         color:Color(0xFF444444),
+                    //         fontSize:12,
+                    //         fontFamily: 'NanumSquareR',
+                    //       ),
+                    //     ),
+                    //     SizedBox(height:7),
+                    //     Container(
+                    //         width:double.infinity,
+                    //         height:45,
+                    //         child: TextField(
+                    //           decoration: InputDecoration(
+                    //             contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
+                    //             counterStyle: TextStyle(
+                    //               fontSize:10,
+                    //             ),
+                    //             hintStyle: TextStyle(
+                    //               fontSize:10,
+                    //             ),
+                    //             hintText: '업체명을 입력해주세요.',
+                    //             labelStyle: TextStyle(color: Color(0xFFACACAC)),
+                    //             focusedBorder: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    //               borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
+                    //             ),
+                    //             enabledBorder: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    //               borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
+                    //             ),
+                    //             border: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    //             ),
+                    //           ),
+                    //           keyboardType: TextInputType.visiblePassword,
+                    //         )
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -254,10 +311,12 @@ class _P_LoginState extends State<P_Login> {
               SizedBox(height:20),
               InkWell(
                 onTap:(){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Main_Page(index: 1,)),
-                  );
+                  if(idController.text != "" && pwController.text != ""){
+                    Pro_Login();
+                  }else{
+                    Get.snackbar("로그인 실패", "아이디 또는 비밀번호를 입력해주세요", colorText: Colors.black, backgroundColor: Colors.white);
+                  }
+
                 },
                 child: Container(
                   margin: EdgeInsets.only(left:8,right:8),
