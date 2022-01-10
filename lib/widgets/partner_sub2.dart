@@ -14,12 +14,22 @@ class Partner_Sub2 extends StatefulWidget {
 class _Partner_Sub2State extends State<Partner_Sub2> {
 
   List<Pro> _pro = [];
+  bool _isLoading = false;
 
   getPro(){
     Pro_Data.getPro_Best().then((value){
       setState(() {
         _pro = value;
       });
+      if(_pro.isEmpty){
+        setState(() {
+          _isLoading = false;
+        });
+      }else{
+        setState(() {
+          _isLoading = true;
+        });
+      }
     });
   }
 
@@ -34,7 +44,7 @@ class _Partner_Sub2State extends State<Partner_Sub2> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return _isLoading ? Container(
       width: Get.width,
       height: 330,
       child: ListView.builder(
@@ -257,6 +267,6 @@ class _Partner_Sub2State extends State<Partner_Sub2> {
           );
         },
       ),
-    );
+    ) : Center(child: CircularProgressIndicator(),);
   }
 }
