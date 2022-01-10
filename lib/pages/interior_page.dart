@@ -53,6 +53,7 @@ class _Interior_PageState extends State<Interior_Page>
 
   List<Widget> _widgetOptions = [];
 
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -61,9 +62,22 @@ class _Interior_PageState extends State<Interior_Page>
       HomePage(),
       Receive_Estimate(isMain: true,),
     ];
-    fetchAllCategories();
+    api.getCategories().then((value) {
+      categories.addAll(value);
+      _tabController = TabController(
+        length: value.length,
+        vsync: this,
+      );
+      isLoading = true;
+      setState(() {
+        VerticalScrollableTabBarStatus.setIndex(widget.Categorytitle);
+        _tabController.animateTo(widget.Categorytitle);
+      });
+    });
+
     super.initState();
   }
+
 
   @override
   void dispose() {
