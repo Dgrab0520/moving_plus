@@ -54,8 +54,6 @@ class _Interior_PageState extends State<Interior_Page>
   List<Widget> _widgetOptions = [];
 
 
-
-
   @override
   void initState() {
     _widgetOptions = [
@@ -274,7 +272,7 @@ class _TabViewState extends State<TabView> {
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:180,
+                      height:175,
                       child: Container(
                         margin: EdgeInsets.only(
                           left: 15,
@@ -326,7 +324,7 @@ class _TabViewState extends State<TabView> {
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:180,
+                      height:175,
                       child: category.image2 == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 5,

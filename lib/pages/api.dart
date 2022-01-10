@@ -121,12 +121,12 @@ const List<CategorySub> interiorList = [
   CategorySub(
       image: 'assets/img1.jpg',
       title: '올 인테리어',
-      content: "가정이나 환경의 모든 환경을 변경하는 서비스",
+      content: "가정이나 환경의 모든 환경을 \n 변경하는 서비스",
       category: '인테리어',
       image2: 'assets/img2.jpg',
       title2: '필름 인테리어',
       content2:
-      "문이나 창틀등의 노후되고 벗겨진 면을 필름 시트지로 변경하여 깔끔하고 \n 세련된 인테리어 변경이 가능하고 유지관리가 용이, 비용이 경제적인 서비스",
+      "문이나 창틀등의 노후되고 벗겨진 면을 필름 시트지로 변경하여 깔끔하고 \n 세련된 인테리어 변경이 가능하고 \n 유지관리가 용이, 비용이 \n 경제적인 서비스",
       category2: '인테리어'
   ),
 
@@ -134,11 +134,11 @@ const List<CategorySub> interiorList = [
       image: 'assets/img3.jpg',
       title: '탄성 코트',
       content:
-      "수성 페인트의 단점을 보완한 고무의 아크릴 성분의 특수도료 페인트로 \n 벽 곰팡이 제거와 단열에 효고적인 서비스",
+      "수성 페인트의 단점을 보완한 고무의 \n 아크릴 성분의 특수도료 페인트로 \n 벽 곰팡이 제거와 단열에 효고적인 \n 서비스",
       category: '인테리어',
       image2: 'assets/img4.jpg',
       title2: '도배',
-      content2: "종이 (실크종이, 합지 바염 등) 에 질감과 색감을 입혀 \n 벽이나 천장에 바르는 서비스",
+      content2: "종이 (실크종이, 합지 바염 등) 에 \n 질감과 색감을 입혀 벽이나 천장에 \n 바르는 서비스",
       category2: '인테리어'
 
   ),
@@ -150,7 +150,7 @@ const List<CategorySub> interiorList = [
       category: '인테리어',
       image2: 'assets/img6.jpg',
       title2: '페인트',
-      content2: "액상 또는 분말 형태의 벽면에 도장하여 겉모양 장식이나 \n 바탕 보호, 특수한 기능을 가지게 하는 서비스",
+      content2: "액상 또는 분말 형태의 벽면에 도장하여 겉모양 장식이나 바탕 보호,\n 특수한 기능을 가지게 하는 서비스",
       category2: '인테리어'
   ),
 
@@ -158,11 +158,11 @@ const List<CategorySub> interiorList = [
       image: 'assets/img7.jpg',
       title: '방충망 교체',
       content:
-      "공기의 흐름을 방해하지 않으며, 곤충이나 벌레의 출입을 \n 막는 촘촘한 그물이며, 찢어지거나 노후로 인해 교체해 주는 서비스",
+      "공기의 흐름을 방해하지 않으며,\n 곤충이나 벌레의 출입을 막는\n 촘촘한 그물이며, 찢어지거나 노후로 인해 교체해 주는 서비스",
       category: '인테리어',
       image2: 'assets/img8.jpg',
       title2: '욕실 인테리어',
-      content2: "기존 욕실의 노후나 망가짐으로 인해 욕실 바닥이나 \n 세면대, 욕조, 변기 등을 교체하는 서비스",
+      content2: "기존 욕실의 노후나 망가짐으로 인해\n 욕실 바닥이나 세면대, 욕조, 변기 등을 교체하는 서비스",
       category2: '인테리어'
   ),
 
@@ -182,7 +182,7 @@ const List<CategorySub> interiorList = [
       image: 'assets/img11.jpg',
       title: '커튼 & 블라인드',
       content:
-      "건물의 창이나 출입구에 설치라거나 칸막이로 사용되는 천으로 이루어진 \n 막이나 아크릴, 나무 등으로 분위기 연출이 가능한 설치 서비스",
+      "건물의 창이나 출입구에 설치라거나\n 칸막이로 사용되는 천으로 이루어진 \n 막이나 아크릴, 나무 등으로 분위기 연출이 가능한 설치 서비스",
       category: '인테리어',
       image2: 'assets/img12.jpg',
       title2: '기타 인테리어',
@@ -208,12 +208,12 @@ const List<CategorySub> homeList = [
       image: 'assets/h_3.jpg',
       title: '욕실 나노 코팅',
       content:
-      "욕실의 세면대, 변기, 거울등의 물때 방지와 곰팡이등의 \n 오명 방지하고 쾌적한 환경 관리를 위한 특수 약품 코팅 서비스 ",
+      "욕실의 세면대, 변기, 거울등의 물때\n 방지와 곰팡이등의 오명 방지하고\n 쾌적한 환경 관리를 위한 특수\n 약품 코팅 서비스 ",
       category: '홈 스타일링',
       image2: 'assets/h_4.jpg',
       title2: '상판 연마 코팅',
       content2:
-      " 싱크대 또는 가구 등의 상판에 오염 및 스크래치등을 \n 제거하고 유지 관리 할수 있도록 특수 약품 코팅 서비스",
+      " 싱크대 또는 가구 등의 상판에 오염 및 스크래치등을 \n 제거하고 유지 관리 할수 있도록\n 특수 약품 코팅 서비스",
       category2: '홈 스타일링'),
 
   CategorySub(
@@ -223,30 +223,30 @@ const List<CategorySub> homeList = [
       category: '홈 스타일링',
       image2: 'assets/h_6.jpg',
       title2: '바닥 왁싱',
-      content2: "장판이나 마루의 오염 및 스크래치 발등을 \n 예방하고 관리하기 위하 특수 약품 코팅 서비스",
+      content2: "장판이나 마루의 오염 및 스크래치\n 발등을 예방하고 관리하기 위한\n 특수 약품 코팅 서비스",
       category2: '홈 스타일링'
   ),
 
   CategorySub(
       image: 'assets/h_7.jpg',
       title: '단열 차단 필름',
-      content: " 단열 및 유해광선 차단을 위해 특수 제조 된 필름지를 창에 시공하는 서비스",
+      content: " 단열 및 유해광선 차단을 위해 특수\n 제조 된 필름지를 창에 시공하는\n 서비스",
       category: '홈 스타일링',
       image2: 'assets/h_8.jpg',
       title2: '정리정돈',
-      content2: " 불필요한 물건을 정리하고 품목이나 사용 빈도 별로 구하여 \n 고객의 편리를 극대화 하는 서비스",
+      content2: " 불필요한 물건을 정리하고 품목이나\n 사용 빈도 별로 구하여 고객의\n 편리를 극대화 하는 서비스",
       category2: '홈 스타일링'
   ),
 
   CategorySub(
       image: 'assets/h_9.jpg',
       title: '새집 증후군',
-      content: " 내부에 생성된 유해물질 또는 오염물질을 친환경소재를 \n 사용하거나 환기등을 통해 제거하여 주는 서비스",
+      content: " 내부에 생성된 유해물질 또는\n 오염물질을 친환경소재를 사용하거나 환기등을\n 통해 제거하여 주는 서비스",
       category: '홈 스타일링',
       image2: 'assets/h_10.jpg',
       title2: '곰팡이 제거',
       content2:
-      " 바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 \n 등에 습기로 인해 발생한 곰팡이를 제거하는 서비스",
+      " 바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 등에 습기로\n 인해 발생한 곰팡이를 제거하는 서비스",
       category2: '홈 스타일링'
   ),
 
@@ -281,26 +281,26 @@ const List<CategorySub> careList = [
       category: '가전/가구 케어',
       image2: 'assets/g_6.jpg',
       title2: '맞춤 가구 제작',
-      content2: "내부의 공간이나 분위기 연출을 위한 맞춤 가구 제작 서비스",
+      content2: "내부의 공간이나 분위기 연출을 위한\n 맞춤 가구 제작 서비스",
       category2: '가전/가구 케어'
   ),
 
   CategorySub(
       image: 'assets/g_7.jpg',
       title: '붙박이장 설치',
-      content: "벽이나 벽안쪽에 수납공간을 만들어 움직일수 없게 옷장을 설치하는 서비스",
+      content: "벽이나 벽안쪽에 수납공간을 만들어\n 움직일수 없게 옷장을 설치하는 서비스",
       category: '가전/가구 케어',
       image2: 'assets/g_8.jpg',
       title2: '시스템 행거',
       content2:
-      "벽앞에 별로도 설치하는 헹거로 개인의 취향에 맞는 설계가 가능하고 \n 이사 등 이동시의 편리함이 장점인 설치 서비스",
+      "벽앞에 별로도 설치하는 헹거로 개인의 취향에 맞는 설계가 가능하고 \n 이사 등 이동시의 편리함이 장점인\n 설치 서비스",
       category2: '가전/가구 케어'
   ),
 
   CategorySub(
       image: 'assets/g_9.jpg',
       title: '펜트리 선반 설치',
-      content: "주방이나 세탁실 등 펜트리에 설치함으로 \n 정리에 도움을 주는 선반 설치 서비스",
+      content: "주방이나 세탁실 등 펜트리에\n 설치함으로 정리에 도움을 주는 선반\n설치 서비스",
       category: '가전/가구 케어',
       image2: 'assets/g_10.jpg',
       title2: '매트리스 케어',
@@ -311,11 +311,11 @@ const List<CategorySub> careList = [
   CategorySub(
       image: 'assets/g_11.jpg',
       title: '쇼파 천갈이',
-      content: " 노후나 스크래치 등으로 손상된 천이나 가죽 등을 \n 교체 / 보건 해 주는 케어 서비스",
+      content: " 노후나 스크래치 등으로 손상된 천이나\n가죽 등을 교체 / 보건 해 주는\n케어 서비스",
       category: '가전/가구 케어',
       image2: 'assets/g_12.jpg',
       title2: '기타 가전/가구',
-      content2: "식탁 상판 코팅, 벽걸이 TV 설치, 벽 시계 설치 등의 \n 가전 / 가구 클린 및 케어 서비스",
+      content2: "식탁 상판 코팅, 벽걸이 TV 설치,\n 벽 시계 설치 등의 가전 / 가구\n 클린 및 케어 서비스",
       category2: '가전/가구 케어'
   ),
 
@@ -403,15 +403,14 @@ const List<CategorySub> etcList = [
       image: 'assets/e_1.jpg',
       title: '사전점검',
       content:
-      " 신축이나 구축 등 새로운 장소에 입주 전 하자나 개/보수가 \n 필요한 부분을 사전에 점검하여 주는 대행 서비스",
+      " 신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
       category: '기타',
       image2: 'assets/e_2.jpg',
       title2: '소독 / 방역',
       content2:
-      " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해 \n 쾌적한 환경을 유지하고 내부 오염을방지하기 위한 케어 서비스",
+      " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'
   ),
-
 ];
 
 class CategorySub {
