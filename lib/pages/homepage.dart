@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
-                          Get.to(Interior_Page());
+                          Get.to(Interior_Page(Categorytitle: 0,));
                         },
                         child: Container(
                           width:70,
@@ -100,7 +100,8 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-
+                          print('success');
+                          Get.to(Interior_Page(Categorytitle: 1,));
                         },
                         child: Container(
                           width:70,
@@ -139,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
+                          Get.to(Interior_Page(Categorytitle: 2,));
                         },
                         child: Container(
                           width:70,
@@ -185,6 +187,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
+                          Get.to(Interior_Page(Categorytitle: 3,));
                         },
                         child: Container(
                           width:70,
@@ -223,6 +226,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
+                          Get.to(Interior_Page(Categorytitle: 4,));
                         },
                         child: Container(
                           width:70,
@@ -261,6 +265,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: (){
                           print('success');
+                          Get.to(Interior_Page(Categorytitle: 5,));
                         },
                         child: Container(
                           width:70,

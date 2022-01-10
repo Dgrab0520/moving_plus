@@ -12,13 +12,15 @@ import 'main_arlim.dart';
 import 'main_page.dart';
 
 class Interior_Page extends StatefulWidget {
-  const Interior_Page({Key? key}) : super(key: key);
+  const Interior_Page({Key? key, required this.Categorytitle}) : super(key: key);
+  final int Categorytitle;
 
   @override
   _Interior_PageState createState() => _Interior_PageState();
 }
 
 class _Interior_PageState extends State<Interior_Page>
+
     with SingleTickerProviderStateMixin {
 
   final Api api = Api();
@@ -31,7 +33,7 @@ class _Interior_PageState extends State<Interior_Page>
     api.getCategories().then((value) {
       setState(() {
         categories.addAll(value);
-        _tabController = TabController(length: value.length, vsync: this);
+        _tabController = TabController(length: value.length, vsync: this, initialIndex:widget.Categorytitle);
       });
     });
   }
@@ -264,53 +266,116 @@ class _TabViewState extends State<TabView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 25.0),
             child:
-            GestureDetector(
-              onTap: (){
-                Get.to(Main_Page(index: 0));
-              },
-              child: Container(
-                margin: EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                ),
-                padding: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 0.5,
-                    color: Color(0xFFcccccc),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(Main_Page(index: 0));
+                    },
+                    child: SizedBox(
+                      height:180,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left: 15,
+                          right: 5,
+                        ),
+                        padding: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 0.5,
+                            color: Color(0xFFcccccc),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+
+                                child: Image.asset(
+                                  category.image,
+                                  fit: BoxFit.cover,
+                                )),
+                            SizedBox(height: 10),
+                            Text(
+                              category.title,
+                              style: TextStyle(
+                                fontFamily: 'NanumSquareB',
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              category.content,
+                              style: TextStyle(
+                                fontSize: 11,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 120,
-                        child: Image.asset(
-                          category.image,
-                          fit: BoxFit.cover,
-                        )),
-                    SizedBox(height: 10),
-                    Text(
-                      category.title,
-                      style: TextStyle(
-                        fontFamily: 'NanumSquareB',
-                        fontSize: 13,
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      category.content,
-                      style: TextStyle(
-                        fontSize: 11,
-                        height: 1.4,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            )
 
+                 Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.to(Main_Page(index: 0));
+                    },
+                    child: SizedBox(
+                      height:180,
+                      child: category.image2 == ''? Container():Container(
+                        margin: EdgeInsets.only(
+                          left: 5,
+                          right: 15,
+                        ),
+                        padding: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 0.5,
+                            color: Color(0xFFcccccc),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Image.asset(
+                                  category.image2,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (BuildContext context, Object exception,
+                                      StackTrace? stackTrace) {
+                                    return Container();
+                                  },
+                                )),
+                            SizedBox(height: 10),
+                            Text(
+                              category.title2,
+                              style: TextStyle(
+                                fontFamily: 'NanumSquareB',
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              category.content2,
+                              style: TextStyle(
+                                fontSize: 11,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ),
         // for (int i = 0; i < 20; i++)
         //   ListTile(
