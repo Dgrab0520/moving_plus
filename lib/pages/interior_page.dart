@@ -287,7 +287,7 @@ class _TabViewState extends State<TabView> {
                     },
                     child: SizedBox(
                       height:175,
-                      child: Container(
+                      child: category.image == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 15,
                           right: 5,
@@ -320,7 +320,7 @@ class _TabViewState extends State<TabView> {
                             Text(
                               category.content,
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 10,
                                 height: 1.4,
                               ),
                               textAlign: TextAlign.center,
@@ -375,7 +375,7 @@ class _TabViewState extends State<TabView> {
                             Text(
                               category.content2,
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 10,
                                 height: 1.4,
                               ),
                               textAlign: TextAlign.center,

@@ -64,7 +64,7 @@ const List<CategorySub> cleanList = [
       category: '클린',
       image2: 'assets/c_2.jpg',
       title2: '이사 청소',
-      content2: "이전 거주자의 생활 오염, 묵은때, 찌든때 등 흔적을 제거하기 위한 \n 클린 서비스",
+      content2: "이전 거주자의 생활 오염, 묵은때, 찌든때 등\n흔적을 제거하기 위한 클린 서비스",
       category2: '클린'),
   CategorySub(
       image: 'assets/c_3.jpg',
@@ -410,6 +410,17 @@ const List<CategorySub> etcList = [
       content2:
       " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'
+  ), CategorySub(
+      image: '',
+      title: '',
+      content:
+      "",
+      category: '',
+      image2: '',
+      title2: '',
+      content2:
+      "",
+      category2: ''
   ),
 ];
 
