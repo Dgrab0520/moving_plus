@@ -286,7 +286,7 @@ class _TabViewState extends State<TabView> {
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:175,
+                      height:180,
                       child: category.image == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 15,
@@ -338,7 +338,7 @@ class _TabViewState extends State<TabView> {
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:175,
+                      height:180,
                       child: category.image2 == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 5,
