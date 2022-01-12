@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/models/pro_model.dart';
-import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/partner_search_page.dart';
 
 import '../pages/p_portfolio_edit_page.dart';
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/main_page.dart';
 
-import 'main_page.dart';
+
 import '../widgets/p_login.dart';
 
 class P_Signup extends StatefulWidget {
@@ -27,22 +28,19 @@ class _P_SignupState extends State<P_Signup> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                      onTap:(){
-                        Get.back();
-                        Get.dialog(P_Login());
-                      },
-                      child: Container(child: Icon(Icons.arrow_back))),
-                  InkWell(
-                      onTap:(){
-                        Get.back();
-                      },
-                      child: Container(child: Icon(Icons.close))),
-                ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                    onTap:(){
+                      Get.back();
+                      Get.dialog(P_Login());
+                    },
+                    child: Container(
+                        child: Icon(Icons.close)
+                    )
+                ),
               ),
+
               SizedBox(height:10),
               Text('파트너 회원가입',
                 style:TextStyle(

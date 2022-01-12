@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/models/pro_model.dart';
 import 'package:moving_plus/pages/interior_page.dart';
-import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/partner_search_page.dart';
 import 'package:moving_plus/widgets/partner_sub.dart';
 import 'package:moving_plus/widgets/partner_sub2.dart';
 import 'package:moving_plus/pages/subpage_ex.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../main_arlim.dart';
+import 'main_arlim.dart';
 
 class C_ChatList extends StatefulWidget {
   const C_ChatList({Key? key}) : super(key: key);

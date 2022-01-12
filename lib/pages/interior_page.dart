@@ -286,7 +286,7 @@ class _TabViewState extends State<TabView> {
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:180,
+                      height:160,
                       child: category.image == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 15,
@@ -303,7 +303,7 @@ class _TabViewState extends State<TabView> {
                           children: [
                             Container(
                                 width: MediaQuery.of(context).size.width,
-
+                                height: 70.0,
                                 child: Image.asset(
                                   category.image,
                                   fit: BoxFit.cover,
@@ -320,10 +320,13 @@ class _TabViewState extends State<TabView> {
                             Text(
                               category.content,
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 11,
                                 height: 1.4,
                               ),
                               textAlign: TextAlign.center,
+                              maxLines: 3,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
@@ -331,14 +334,13 @@ class _TabViewState extends State<TabView> {
                     ),
                   ),
                 ),
-
-                 Expanded(
+                Expanded(
                   child: GestureDetector(
                     onTap: (){
                       Get.to(Main_Page(index: 0));
                     },
                     child: SizedBox(
-                      height:180,
+                      height:160,
                       child: category.image2 == ''? Container():Container(
                         margin: EdgeInsets.only(
                           left: 5,
@@ -355,6 +357,7 @@ class _TabViewState extends State<TabView> {
                           children: [
                             Container(
                                 width: MediaQuery.of(context).size.width,
+                                height: 70.0,
                                 child: Image.asset(
                                   category.image2,
                                   fit: BoxFit.cover,
@@ -375,10 +378,13 @@ class _TabViewState extends State<TabView> {
                             Text(
                               category.content2,
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 11,
                                 height: 1.4,
                               ),
+                              maxLines: 3,
                               textAlign: TextAlign.center,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/pages/client/account_set.dart';
-import 'package:moving_plus/pages/client/c_chatlist.dart';
-import 'package:moving_plus/pages/client/c_review.dart';
+import 'package:moving_plus/pages/account_set.dart';
+import 'package:moving_plus/pages/c_chatlist.dart';
+import 'package:moving_plus/pages/c_review.dart';
 import 'package:moving_plus/pages/mypage_arlim.dart';
 import 'package:moving_plus/pages/notice.dart';
 import 'package:moving_plus/pages/transaction_breakdown.dart';
 
-import '../main_arlim.dart';
+import 'main_arlim.dart';
 
 class C_Mypage extends StatefulWidget {
   const C_Mypage({Key? key}) : super(key: key);

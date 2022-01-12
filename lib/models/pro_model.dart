@@ -16,6 +16,7 @@ class Pro{
   String pro_area2;
   String pro_area3;
   String pro_token;
+  String index;
 
 
 
@@ -37,6 +38,7 @@ class Pro{
     required this.pro_area2,
     required this.pro_area3,
     required this.pro_token,
+    required this.index,
   });
 
   factory Pro.fromJson(Map<String, dynamic> json){
@@ -58,6 +60,7 @@ class Pro{
       pro_area2: json['pro_area2'] == null ? "" : json['pro_area2'] as String,
       pro_area3: json['pro_area3'] == null ? "" : json['pro_area3'] as String,
       pro_token: json['pro_token'] == null ? "" : json['pro_token'] as String,
+      index: json['index'] == null ? "" : json['index'] as String,
     );
   }
 }

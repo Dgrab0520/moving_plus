@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/pages/client/c_chatlist.dart';
-import 'package:moving_plus/pages/client/c_mypage.dart';
-import 'package:moving_plus/pages/client/c_partner_info.dart';
+import 'package:moving_plus/pages/c_chatlist.dart';
+import 'package:moving_plus/pages/c_mypage.dart';
+import 'package:moving_plus/pages/c_partner_info.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
-import 'package:moving_plus/pages/partner_search.dart';
+import 'package:moving_plus/pages/partner_search_page.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
@@ -67,12 +67,12 @@ class _Main_PageState extends State<Main_Page> {
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.only(top:15.0,bottom:15,left:2,right:5),
-              padding: EdgeInsets.only(left:10.0,right:10),
+              padding: EdgeInsets.only(left:20.0,right:20.0),
               decoration: BoxDecoration(
                 color:Color(0xFF025595),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text('파트너 로그인',
+              child: Text('로그인',
                 style: TextStyle(
                   color:Colors.white,
                   fontSize:11,
@@ -123,7 +123,20 @@ class _Main_PageState extends State<Main_Page> {
               color:Color(0xFF025595),
               height:150,
               child: DrawerHeader(
-                child: Row(
+                child: controller.pro.value.type == 'None'
+                    ?
+                Container(
+                  child: Center(
+                    child: Text('로그인 후 이용해주세요', style:
+                      TextStyle(
+                        color:Colors.white,
+                        fontFamily: 'NanumSquareB',
+                      ),
+                    ),
+                  ),
+                )
+                    :
+                Row(
                   children: [
                     Expanded(
                         flex:2,
@@ -175,125 +188,152 @@ class _Main_PageState extends State<Main_Page> {
                           ],
                         )),
                   ],
-                ),
+                )
               ),
             ),
-            InkWell(
+
+
+            controller.pro.value.type == 'None'
+                ?
+            GestureDetector(
               onTap: (){
-                Get.to(Request_Received());
+                print('로그인');
+                Get.dialog(P_Login());
+
               },
               child: Container(
-                padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
-                child: Row(
-                  children: [
-                    Image.asset("assets/list_g.png",width:18,height:18),
-                    SizedBox(width:15),
-                    Text('받은 요청서',
-                        style:TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize:14,
-                        )
-                    ),
-                  ],
+                margin: EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0),
+                height: 30.0,
+                width: 30.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    border: Border.all(width: 1.0, color: Color(0xFF025595))
                 ),
-              ),
-            ),
-            InkWell(
-              onTap: (){
-                Get.to(Receive_Estimate(isMain: false,));
-              },
-              child: Container(
-                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
-                child: Row(
-                  children: [
-                    Image.asset("assets/chat_g.png",width:18,height:18),
-                    // Icon(Icons.speaker_notes_rounded,
-                    //   color: Color(0xFf444444),
-                    // ),
-                    SizedBox(width:15),
-                    Text('채팅',
-                        style:TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize:14,
-                        )
-                    ),
-                    SizedBox(width:5),
-                    Container(
-                      width:20,
-                      height:15,
-                      decoration:BoxDecoration(
-                        color:Color(0xFF025595),
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                      child: Center(
-                        child: Text('5',
-                          style: TextStyle(
-                            color:Colors.white,
-                            fontSize:12,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: (){
-                Get.to(P_Mypage());
-              },
-              child: Container(
-                padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
-                child: Row(
-                  children: [
-                    Image.asset("assets/user_g.png",width:18,height:18),
-                    SizedBox(width:14),
-                    Text('마이페이지',
-                        style:TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize:14,
-                        )
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 10,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide( // POINT
-                    color: Color(0xFFf1f1f1),
-                    width: 3.0,
+                child: Center(
+                  child: Text('로그인', style:
+                  TextStyle(
+                    color:Colors.black,
+                    fontFamily: 'NanumSquareB',
+                  ),
                   ),
                 ),
               ),
+            )
+                :
+            Column(
+              children: <Widget>[
+                InkWell(
+                  onTap: (){
+                    Get.to(Request_Received());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(top:25,left:25.0,bottom:15),
+                    child: Row(
+                      children: [
+                        Image.asset("assets/list_g.png",width:18,height:18),
+                        SizedBox(width:15),
+                        Text('받은 요청서',
+                            style:TextStyle(
+                              fontFamily: 'NanumSquareB',
+                              fontSize:14,
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    Get.to(Receive_Estimate(isMain: false,));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                    child: Row(
+                      children: [
+                        Image.asset("assets/chat_g.png",width:18,height:18),
+                        // Icon(Icons.speaker_notes_rounded,
+                        //   color: Color(0xFf444444),
+                        // ),
+                        SizedBox(width:15),
+                        Text('채팅',
+                            style:TextStyle(
+                              fontFamily: 'NanumSquareB',
+                              fontSize:14,
+                            )
+                        ),
+                        SizedBox(width:5),
+                        Container(
+                          width:20,
+                          height:15,
+                          decoration:BoxDecoration(
+                            color:Color(0xFF025595),
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          child: Center(
+                            child: Text('5',
+                              style: TextStyle(
+                                color:Colors.white,
+                                fontSize:12,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    Get.to(P_Mypage());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
+                    child: Row(
+                      children: [
+                        Image.asset("assets/user_g.png",width:18,height:18),
+                        SizedBox(width:14),
+                        Text('마이페이지',
+                            style:TextStyle(
+                              fontFamily: 'NanumSquareB',
+                              fontSize:14,
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height:5),
-            // InkWell(
-            //   onTap: (){
-            //     print('ss');
-            //   },
-            //   child: Container(
-            //     padding: EdgeInsets.only(top:10,left:25.0,bottom:15),
-            //     child: Row(
-            //       children: [
-            //         Image.asset("assets/setting_g.png",width:18,height:18),
-            //         SizedBox(width:15),
-            //         Text('설정',
-            //             style:TextStyle(
-            //               fontFamily: 'NanumSquareB',
-            //               fontSize:14,
-            //             )
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+
+
+
+            Divider(
+              thickness: 3.0,
+              height: 1.0,
+              color: Color(0xFFf1f1f1),
+            ),
+            SizedBox(height:10.0),
+
+
+            controller.pro.value.type == 'None'
+                ?
+            Container()
+                :
             InkWell(
               onTap: (){
-                print('ss');
+                print('로그아웃');
+                setState(() {
+                  controller.change(
+                    type: 'None',
+                    pro_id: 'None',
+                    pro_name: 'None',
+                    pro_phone: 'None',
+                    pro_email: 'None',
+                    com_name: 'None',
+                    profile_img: 'None',
+                    pro_token: 'None',
+                  );
+                });
               },
               child: Container(
                 padding: EdgeInsets.only(top:10,left:25.0,bottom:15),

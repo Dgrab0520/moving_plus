@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/widgets/p_login.dart';
+import 'package:moving_plus/pages/p_signup.dart';
 
-import '../arlim_checkbox.dart';
-import '../main_page.dart';
-import '../p_signup.dart';
+import '../pages/arlim_checkbox.dart';
+import '../pages/main_page.dart';
+
 
 class C_Login extends StatefulWidget {
   const C_Login({Key? key}) : super(key: key);
@@ -71,7 +73,8 @@ class _C_LoginState extends State<C_Login> {
                      children: [
                        SizedBox(width:15),
                        Container(
-                           child: Image.asset("assets/kakao_b.png", width:17, height:17)),
+                         child: Image.asset("assets/kakao_b.png", width:17, height:17)
+                       ),
                        SizedBox(width:10),
                        Row(
                          mainAxisAlignment: MainAxisAlignment.center,
@@ -90,11 +93,27 @@ class _C_LoginState extends State<C_Login> {
                      ],
                    ),
                  ),
+                  SizedBox(height: 5.0,),
+                  TextButton(
+                    onPressed: (){
+                      print('파트너 로그인');
+                      Get.back();
+                      Get.dialog(P_Login());
+                    },
+                    child: Center(
+                      child: Text('파트너 로그인', style:
+                        TextStyle(
+                          color: Color(0xFF025595),
+                          fontFamily: 'NanumSquareB',
+                        ),
+                      ),
+                    )
+                  )
                 ],
               ),
             ),
 
-            SizedBox(height:50),
+            SizedBox(height:40),
 
             Container(
               child:

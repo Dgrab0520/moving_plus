@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'client/account_set.dart';
+import 'account_set.dart';
 import 'main_arlim.dart';
 
 class Transaction_Breakdown extends StatefulWidget {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
+
+
+
 
 class Account_Set extends StatefulWidget {
   const Account_Set({Key? key}) : super(key: key);
@@ -72,7 +76,7 @@ class _Account_SetState extends State<Account_Set> {
                         children: [
                           Stack(
                             children: [
-                              Image.asset("assets/avatar_cs.png",width:90,height:90),
+                              Image.network("assets/avatar_cs.png",width:90,height:90),
                               Positioned(
                                   right:0,
                                   bottom:0,

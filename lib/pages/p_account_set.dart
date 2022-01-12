@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 
 import 'main_arlim.dart';
+
+
+
+final controller = Get.put(ReactiveController());
 
 class P_Account_Set extends StatefulWidget {
   const P_Account_Set({Key? key}) : super(key: key);
@@ -47,7 +52,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                 children: [
                   Stack(
                     children: [
-                      Image.asset("assets/arlim2.png",width:90,height:90),
+                      Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",width:90,height:90),
                       Positioned(
                           right:0,
                           bottom:0,
@@ -66,7 +71,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('이름',
+                    Text('회사명',
                       style:TextStyle(
                         fontSize:12,
                         fontFamily: 'NanumSquareR',
@@ -74,15 +79,14 @@ class _P_Account_SetState extends State<P_Account_Set> {
                     ),
                     SizedBox(height:7),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('인테리어 작업대',
+                        Text('${controller.pro.value.com_name}',
                           style:TextStyle(
                             fontSize:14,
                             fontFamily: 'NanumSquareB',
                           ),
                         ),
-                        Icon(Icons.arrow_forward_ios,size:18)
                       ],
                     ),
                   ],
@@ -98,7 +102,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('이메일',
+                    Text('아이디',
                       style:TextStyle(
                         fontSize:12,
                         fontFamily: 'NanumSquareR',
@@ -106,15 +110,14 @@ class _P_Account_SetState extends State<P_Account_Set> {
                     ),
                     SizedBox(height:7),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('i_desk123@naver.com',
+                        Text(controller.pro.value.pro_id,
                           style:TextStyle(
                             fontSize:14,
                             fontFamily: 'NanumSquareB',
                           ),
                         ),
-                        Icon(Icons.arrow_forward_ios,size:18)
                       ],
                     ),
                   ],
@@ -172,7 +175,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('010-5555-4444',
+                        Text(controller.pro.value.pro_phone,
                           style:TextStyle(
                             fontSize:14,
                             fontFamily: 'NanumSquareB',
@@ -185,7 +188,16 @@ class _P_Account_SetState extends State<P_Account_Set> {
                 ),
               ),
             ),
-            SizedBox(height:40),
+            SizedBox(height:70),
+
+            Divider(
+              thickness: 0.6,
+              height: 1.0,
+              color: Color(0xFFcccccc),
+            ),
+
+            SizedBox(height:10),
+
             InkWell(
               onTap:(){},
               child: Container(

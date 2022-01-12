@@ -4,9 +4,34 @@ import 'package:moving_plus/models/pro_model.dart';
 
 class Pro_Data{
   static const ROOT = "http://211.110.44.91/plus/plus_pro.php";
+  static const PRO_SELECT_ACTION = "PRO_SELECT";
   static const PRO_ALLIANCE_ACTION = "PRO_ALLIANCE";
   static const PRO_BEST_ACTION = "PRO_ACTION";
 
+
+  //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
+  static Future<List<Pro>> get_Pro(String condition) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = PRO_SELECT_ACTION;
+      map['condition'] = condition;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Pro Select Response : ${response.body}');
+
+      if(response.statusCode == 200){
+        List<Pro> list = parseResponse(response.body);
+        return list;
+      }else{
+        return [];
+      }
+    }catch(e){
+      return [];
+    }
+  }
+
+
+
+  //제휴 파트너(인기 Badge) 추천
   static Future<List<Pro>> getPro_Alli() async {
     try{
       var map = Map<String, dynamic>();
@@ -25,6 +50,8 @@ class Pro_Data{
     }
   }
 
+
+  //일반 전문가 추천
   static Future<List<Pro>> getPro_Best() async {
     try{
       var map = Map<String, dynamic>();

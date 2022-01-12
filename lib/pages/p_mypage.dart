@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/pages/p_account_set.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_transcation_breakdown.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/transaction_breakdown.dart';
 
-import 'client/account_set.dart';
-import 'client/c_chatlist.dart';
-import 'client/c_review.dart';
+import 'account_set.dart';
+import 'c_chatlist.dart';
+import 'c_review.dart';
 import 'main_arlim.dart';
 import 'mypage_arlim.dart';
 import 'notice.dart';
 import 'p_portfolio_edit_page.dart';
 import 'p_portfolio_page.dart';
+
+
+final controller = Get.put(ReactiveController());
 
 class P_Mypage extends StatefulWidget {
   const P_Mypage({Key? key}) : super(key: key);
@@ -28,7 +32,7 @@ class _P_MypageState extends State<P_Mypage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('마이 페이지',
+        title: Text('마이페이지',
           style: TextStyle(
             color:Colors.white,
             fontSize:17,
@@ -64,7 +68,7 @@ class _P_MypageState extends State<P_Mypage> {
                       children: [
                         Expanded(
                             flex:2,
-                            child: Image.asset("assets/arlim2.png",width:60,height:60)),
+                            child: Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",width:60,height:60)),
                         SizedBox(width:10),
                         Expanded(
                           flex:8,
@@ -72,27 +76,25 @@ class _P_MypageState extends State<P_Mypage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Text('인테리어 작업대',
-                                    style:TextStyle(
-                                      fontSize:15,
-                                      fontFamily: 'NanumSquareEB',
-                                    ),
-                                  ),
-                                  SizedBox(width:7),
-                                  Image.asset('assets/i_partner2.png',width:20,height:15),
-                                ],
+                              Text(controller.pro.value.com_name,
+                                style:TextStyle(
+                                  fontSize:14,
+                                  fontFamily: 'NanumSquareEB',
+                                ),
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               SizedBox(height:5),
                               Row(
                                 children: [
-                                  Text('i_desk123@naver.com',
+                                  Text(controller.pro.value.pro_id,
                                       style:TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 13,
                                         fontFamily: 'NanumSquareR',
                                       )
                                   ),
+                                  SizedBox(width:7),
+                                  Image.asset("assets/i_partner2.png", width:15,height:15),
                                 ],
                               ),
                             ],
@@ -112,18 +114,15 @@ class _P_MypageState extends State<P_Mypage> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left:10,right:10,top:30),
+                  padding: EdgeInsets.only(left:17,right:17,top:30),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text('활동',
-                            style:TextStyle(
-                              fontSize:15,
-                              fontFamily: 'NanumSquareEB',
-                            ),
-                          ),
-                        ],
+                      Text('활동',
+                        style:TextStyle(
+                          fontSize:15,
+                          fontFamily: 'NanumSquareEB',
+                        ),
                       ),
                       InkWell(
                         onTap:(){

@@ -1,10 +1,14 @@
+import 'dart:convert';
+
+import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/pro_login_data.dart';
 import 'package:moving_plus/models/pro_login_model.dart';
-import 'package:moving_plus/pages/client/c_login.dart';
+import 'package:moving_plus/widgets/c_login.dart';
 import 'package:moving_plus/pages/p_signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/arlim_checkbox.dart';
 import '../pages/main_page.dart';
@@ -23,12 +27,17 @@ class _P_LoginState extends State<P_Login> {
 
   List<Pro_Info> pro_info = [];
   bool _isLoading = false;
+  bool shouldCheck = false;
 
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
 
 
   Pro_Login(){
+    if (shouldCheck) {
+      print(shouldCheck);
+      _setAutoLogin(idController.text, pwController.text);
+    }
     Pro_Login_Data.getPro_Login(idController.text.trim(), pwController.text.trim()).then((value){
       setState(() {
         pro_info = value;
@@ -141,7 +150,7 @@ class _P_LoginState extends State<P_Login> {
                             hintStyle: TextStyle(
                               fontSize:10,
                             ),
-                            hintText: '이메일을 입력해주세요.',
+                            hintText: '아이디를 입력해주세요.',
                             labelStyle: TextStyle(color: Color(0xFFACACAC)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -179,6 +188,9 @@ class _P_LoginState extends State<P_Login> {
                               obscureText: true,
                               obscuringCharacter: "*",
                               keyboardType: TextInputType.visiblePassword,
+                              onSubmitted: (String value) async {
+                                await Pro_Login();
+                              },
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
                                 counterStyle: TextStyle(
@@ -201,56 +213,12 @@ class _P_LoginState extends State<P_Login> {
                                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                 ),
                               ),
-
                             )
                         ),
                       ],
                     ),
 
                     SizedBox(height:20),
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text('업체명',
-                    //       style:TextStyle(
-                    //         color:Color(0xFF444444),
-                    //         fontSize:12,
-                    //         fontFamily: 'NanumSquareR',
-                    //       ),
-                    //     ),
-                    //     SizedBox(height:7),
-                    //     Container(
-                    //         width:double.infinity,
-                    //         height:45,
-                    //         child: TextField(
-                    //           decoration: InputDecoration(
-                    //             contentPadding: EdgeInsets.only(top:10.0,bottom:10,left:15),
-                    //             counterStyle: TextStyle(
-                    //               fontSize:10,
-                    //             ),
-                    //             hintStyle: TextStyle(
-                    //               fontSize:10,
-                    //             ),
-                    //             hintText: '업체명을 입력해주세요.',
-                    //             labelStyle: TextStyle(color: Color(0xFFACACAC)),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    //               borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    //               borderSide: BorderSide(width: 1, color:  Color(0xFFACACAC)),
-                    //             ),
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    //             ),
-                    //           ),
-                    //           keyboardType: TextInputType.visiblePassword,
-                    //         )
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -259,7 +227,25 @@ class _P_LoginState extends State<P_Login> {
                 children: [
                   Row(
                     children: [
-                      Arlim_checkbox(),
+                      Container(
+                        width:30,
+                        height:30,
+                        child: CustomCheckBox(
+                          value: shouldCheck,
+                          shouldShowBorder: true,
+                          borderColor: Color(0xFF025595),
+                          checkedFillColor: Color(0xFF025595),
+                          borderRadius: 4,
+                          borderWidth: 2,
+                          checkBoxSize: 10,
+                          onChanged: (val) {
+                            //do your stuff here
+                            setState(() {
+                              shouldCheck = val;
+                            });
+                          },
+                        ),
+                      ),
                       InkWell(
                         onTap:(){},
                         child: Container(
@@ -309,6 +295,20 @@ class _P_LoginState extends State<P_Login> {
                 ],
               ),
               SizedBox(height:20),
+              TextButton(
+                  onPressed: (){
+                    print('고객 로그인');
+                    Get.back();
+                    Get.dialog(C_Login());
+                  },
+                  child: Text('고객 로그인하기', style:
+                    TextStyle(
+                      fontSize: 13.0,
+                      fontFamily: 'NanumSquareB',
+                      color: Colors.black87
+                    ),
+                  )
+              ),
               InkWell(
                 onTap:(){
                   if(idController.text != "" && pwController.text != ""){
@@ -373,5 +373,15 @@ class _P_LoginState extends State<P_Login> {
         ),
       ),
     );
+  }
+
+  _setAutoLogin(String pro_id, String pro_pw) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final proData = json.encode({
+      'pro_id': pro_id,
+      'pro_pw': pro_pw,
+    });
+    print('$pro_id&$pro_pw');
+    await prefs.setString("autoLogin", proData).then((value) => print(value));
   }
 }
