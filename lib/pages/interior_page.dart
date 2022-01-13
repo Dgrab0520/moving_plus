@@ -113,7 +113,7 @@ class _Interior_PageState extends State<Interior_Page>
         ],
       ),
       backgroundColor: Colors.white,
-      body: Column(
+      body: isLoading ? Column(
         children: [
           Image.asset('assets/chat_banner.png'),
           TabBar(
@@ -155,7 +155,7 @@ class _Interior_PageState extends State<Interior_Page>
             ),
           ),
         ],
-      ),
+      ) : CircularProgressIndicator(),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(

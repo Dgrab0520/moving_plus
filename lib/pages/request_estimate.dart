@@ -101,6 +101,46 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      width: Get.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('주소',
+                            style:TextStyle(
+                              fontSize:14,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          SizedBox(height:10),
+                          Container(
+                            padding: EdgeInsets.only(left:15,right:15,bottom:8),
+                            width:MediaQuery.of(context).size.width,
+                            height:45,
+                            decoration:BoxDecoration(
+                              color: Color(0xFFF9F9F9),
+                              border: Border.all(
+                                width: 1.0,
+                                color: Color(0xFFcccccc),
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              onChanged: (text){
+                              },
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  icon: Container(
+                                      padding: EdgeInsets.only(top:8),
+                                      child: Icon(Icons.search))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height:30),
                     Text('공간 유형',
                       style:TextStyle(
                         fontSize:14,
@@ -251,233 +291,315 @@ class _Request_EstimateState extends State<Request_Estimate> {
 
               SizedBox(height:30),
               Container(
-                width: Get.width,
                 padding: EdgeInsets.only(left:15,right:15),
+                width: Get.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('공간 선택',
+                    Text('성함',
                       style:TextStyle(
                         fontSize:14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
                     SizedBox(height:10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan10 = !_gongan10;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_1.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('주방',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan10 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
+                    Container(
+                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
+                      width:MediaQuery.of(context).size.width,
+                      height:45,
+                      decoration:BoxDecoration(
+                        color: Color(0xFFF9F9F9),
+                        border: Border.all(
+                          width: 1.0,
+                          color: Color(0xFFcccccc),
                         ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan11 = !_gongan11;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_2.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('욕실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (text){
+                        },
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
                             ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan11 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan12 = !_gongan12;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_3.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('거실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan12 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height:10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan13 = !_gongan13;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_4.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('현관',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan13 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan14 = !_gongan14;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_5.png", width:60 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('도배',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan14 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan15 = !_gongan15;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_6.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('바닥',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan15 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
               ),
+
+              SizedBox(height:30),
+              Container(
+                padding: EdgeInsets.only(left:15,right:15),
+                width: Get.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('연락처',
+                      style:TextStyle(
+                        fontSize:14,
+                        fontFamily: 'NanumSquareB',
+                      ),
+                    ),
+                    SizedBox(height:10),
+                    Container(
+                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
+                      width:MediaQuery.of(context).size.width,
+                      height:45,
+                      decoration:BoxDecoration(
+                        color: Color(0xFFF9F9F9),
+                        border: Border.all(
+                          width: 1.0,
+                          color: Color(0xFFcccccc),
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (text){
+                        },
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              //공간선택
+              //
+              // SizedBox(height:30),
+              // Container(
+              //   width: Get.width,
+              //   padding: EdgeInsets.only(left:15,right:15),
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text('공간 선택',
+              //         style:TextStyle(
+              //           fontSize:14,
+              //           fontFamily: 'NanumSquareB',
+              //         ),
+              //       ),
+              //       SizedBox(height:10),
+              //       Row(
+              //         children: [
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan10 = !_gongan10;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_1.png", width:45 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('주방',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan10 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //           SizedBox(width:10),
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan11 = !_gongan11;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_2.png", width:45 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('욕실',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan11 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //           SizedBox(width:10),
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan12 = !_gongan12;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_3.png", width:45 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('거실',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan12 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       SizedBox(height:10),
+              //       Row(
+              //         children: [
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan13 = !_gongan13;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_4.png", width:45 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('현관',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan13 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //           SizedBox(width:10),
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan14 = !_gongan14;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_5.png", width:60 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('도배',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan14 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //           SizedBox(width:10),
+              //           Expanded(
+              //             child: RaisedButton(
+              //               onPressed: () => {
+              //                 setState(() {
+              //                   _gongan15 = !_gongan15;
+              //                 })
+              //               },
+              //               child: Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 crossAxisAlignment: CrossAxisAlignment.center,
+              //                 children: [
+              //                   Image.asset("assets/gong_6.png", width:45 ,height:35),
+              //                   const SizedBox(height:10),
+              //                   const Text('바닥',
+              //                     style: TextStyle(
+              //                       fontFamily: 'NanumSquareB',
+              //                       fontSize:12,
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //               color: Colors.white,
+              //               textColor: Colors.black,
+              //               shape: _gongan15 ? RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFF025595), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ) : RoundedRectangleBorder(
+              //                 side: BorderSide(color: Color(0xFFcccccc), width: 1),
+              //                 borderRadius: BorderRadius.circular(10),
+              //               ),
+              //               padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
               SizedBox(height:40),
               InkWell(
