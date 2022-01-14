@@ -3221,52 +3221,54 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('방충망 개수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('방충망\n개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '방충망 개수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '방충망 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -3283,52 +3285,54 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('화장실 수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('화장실\n개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '화장실 수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '화장실 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -3454,52 +3458,54 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     SizedBox(height:40),
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('방 개수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('방 개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '방 개수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '방 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -3508,52 +3514,54 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     SizedBox(height:40),
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('베란다 수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('베란다\n개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '베란다 수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '베란다 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -3570,106 +3578,109 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('화장실 수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('화장실\n개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '화장실 수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '화장실 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-
                     SizedBox(height:40),
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('베란다 수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('베란다\n개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '베란다 수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '베란다 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -3920,52 +3931,54 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('방 개수',
-                            style:TextStyle(
-                              fontSize:14,
-                              fontFamily: 'NanumSquareB',
+                          Expanded(
+                            flex: 1,
+                            child: Text('방 개수',
+                              textAlign: TextAlign.center,
+                              style:TextStyle(
+                                fontSize:14,
+                                fontFamily: 'NanumSquareB',
+                              ),
                             ),
                           ),
-                          SizedBox(height:5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Get.width*0.7,
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'NanumSquareB',
+                          SizedBox(width:20),
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              width: Get.width*0.5,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NanumSquareB',
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
                                   ),
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Color(0xFF025595)),
-                                    ),
-                                    suffixText: '개  ',
-                                    suffixStyle: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54
-                                    ),
-                                    hintText: '방 개수를 입력 해주세요.',
-                                    hintStyle: TextStyle(
-                                      color:Color(0xFF777777),
-                                      fontSize: 13,
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Color(0xFF025595)),
+                                  ),
+                                  suffixText: '개  ',
+                                  suffixStyle: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black54
+                                  ),
+                                  hintText: '방 개수를 입력 해주세요.',
+                                  hintStyle: TextStyle(
+                                    color:Color(0xFF777777),
+                                    fontSize: 13,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

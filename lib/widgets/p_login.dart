@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:custom_check_box/custom_check_box.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,7 @@ import 'package:moving_plus/datas/pro_login_data.dart';
 import 'package:moving_plus/models/pro_login_model.dart';
 import 'package:moving_plus/widgets/c_login.dart';
 import 'package:moving_plus/pages/p_signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../pages/arlim_checkbox.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../pages/main_page.dart';
 
 
@@ -31,13 +30,35 @@ class _P_LoginState extends State<P_Login> {
 
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
+  String proInfo = ""; //자동 로그인시 로그인 정보 저장
+
+  static final storage = new FlutterSecureStorage();  //flutter_secure_storage 사용을 위한 초기화 작업
+
+  @override
+  void initState(){
+    //비동기로 flutter secure storage 정보를 불러오는 작업.
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+    super.initState();
+  }
+
+  _asyncMethod() async {
+    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
+    //(데이터가 없을때는 null을 반환을 합니다.)
+    proInfo = (await storage.read(key: "login"))!;
+    print('proInfo?? $proInfo');
+
+    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
+    if (proInfo != null) {
+      print('Success & return ${proInfo.split(" ")[1]}');
+    }else{
+      print('false & Again');
+    }
+  }
 
 
   Pro_Login(){
-    if (shouldCheck) {
-      print(shouldCheck);
-      _setAutoLogin(idController.text, pwController.text);
-    }
     Pro_Login_Data.getPro_Login(idController.text.trim(), pwController.text.trim()).then((value){
       setState(() {
         pro_info = value;
@@ -45,6 +66,14 @@ class _P_LoginState extends State<P_Login> {
       if(value.length == 1){
         setState(() {
           _isLoading = true;
+          storage.write(
+              key: "login",
+              value: "id " +
+                  idController.text.toString() +
+                  " " +
+                  "password " +
+                  pwController.text.toString()
+          );
         });
         controller.change(
             type: 'pro',
@@ -67,10 +96,7 @@ class _P_LoginState extends State<P_Login> {
     });
   }
 
-  @override
-  void initState(){
-    super.initState();
-  }
+
 
   @override
   void dispose(){
@@ -375,13 +401,4 @@ class _P_LoginState extends State<P_Login> {
     );
   }
 
-  _setAutoLogin(String pro_id, String pro_pw) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final proData = json.encode({
-      'pro_id': pro_id,
-      'pro_pw': pro_pw,
-    });
-    print('$pro_id&$pro_pw');
-    await prefs.setString("autoLogin", proData).then((value) => print(value));
-  }
 }

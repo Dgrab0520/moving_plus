@@ -2,6 +2,7 @@ import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/request_estimate2.dart';
 import 'package:progress_indicator/progress_indicator.dart';
@@ -28,21 +29,55 @@ class Request_Estimate extends StatefulWidget {
 }
 
 class _Request_EstimateState extends State<Request_Estimate> {
-  bool _gongan5 = false;
+  bool _gongan5 = true;
   bool _gongan6 = false;
 
-  bool _gongan10 = false;
-  bool _gongan11 = false;
-  bool _gongan12 = false;
-  bool _gongan13 = false;
-  bool _gongan14 = false;
-  bool _gongan15 = false;
+  TextEditingController addressController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
+  TextEditingController? nameController = TextEditingController();
+  TextEditingController phController = TextEditingController();
 
   bool _buttonPressed = false;
   bool _buttonPressed2 = false;
 
   String addressJSON = '';
   String? _serviceType = '';
+  String orderInfo = "";  //자동 로그인시 로그인 정보 저장
+  String? name = '';
+
+  static final storage = new FlutterSecureStorage();  //flutter_secure_storage 사용을 위한 초기화 작업
+
+
+  @override
+  void initState(){
+    //비동기로 flutter secure storage 정보를 불러오는 작업.
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+    _serviceType = Get.parameters['serviceType'];
+    print('name : $name');
+    nameController!.text = name!;
+    super.initState();
+  }
+
+  _asyncMethod() async {
+    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
+    //(데이터가 없을때는 null을 반환을 합니다.)
+    orderInfo = (await storage.read(key: "order"))!;
+    print('proInfo?? $orderInfo');
+
+    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
+    if (orderInfo != null) {
+      setState(() {
+        name = '${orderInfo.split("/")[1]}${orderInfo.split("/")[3]}${orderInfo.split("/")[2]}';
+      });
+      print('Success & return ${orderInfo.split("/")[1]} ${orderInfo.split("/")[2]} ${orderInfo.split("/")[3]}');
+      nameController!.text = name!;
+    }else{
+      print('false & Again');
+    }
+  }
+
 
   Color getColor(int index) {
     if (index == 2) {
@@ -50,13 +85,6 @@ class _Request_EstimateState extends State<Request_Estimate> {
     } else{
       return completeColor;
     }
-  }
-
-  @override
-  void initState(){
-    _serviceType = Get.parameters['serviceType'];
-    print('ppap$_serviceType');
-    super.initState();
   }
 
   @override
@@ -281,6 +309,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextField(
+                              controller: addressController,
                               keyboardType: TextInputType.text,
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 13.0, color: Colors.black87),
@@ -310,7 +339,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           child: RaisedButton(
                             onPressed: () => {
                               setState(() {
-                                _gongan5 = !_gongan5;
+                                _gongan5 = true;
+                                _gongan6 = false;
                               })
                             },
                             child: Text('거주'),
@@ -331,7 +361,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           child: RaisedButton(
                             onPressed: () => {
                               setState(() {
-                                _gongan6 = !_gongan6;
+                                _gongan6 = true;
+                                _gongan5 = false;
                               })
                             },
                             child: Text('상업'),
@@ -375,6 +406,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           child: Container(
                             width: Get.width*0.4,
                             child: TextField(
+                              controller: areaController,
                               style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold
@@ -413,7 +445,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               // 3
                               onPressed: () => {
                                 setState(() {
-                                  _buttonPressed2 = !_buttonPressed2;
+                                  _buttonPressed2 = true;
+                                  _buttonPressed = false;
                                 })
                               },
                             )
@@ -434,7 +467,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               // 3
                               onPressed: () => {
                                 setState(() {
-                                  _buttonPressed = !_buttonPressed;
+                                  _buttonPressed = true;
+                                  _buttonPressed2 = false;
                                 })
                               },
                             )
@@ -473,6 +507,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextField(
+                        controller: nameController,
                         keyboardType: TextInputType.text,
                         onChanged: (text){
                         },
@@ -513,6 +548,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextField(
+                        controller: phController,
                         keyboardType: TextInputType.text,
                         onChanged: (text){
                         },
@@ -528,6 +564,23 @@ class _Request_EstimateState extends State<Request_Estimate> {
               SizedBox(height:40),
               InkWell(
                 onTap: (){
+                  storage.write(
+                      key: "order",
+                      value: "address/" +
+                          addressJSON +
+                          "/" +
+                          "addressDetail/" +
+                          addressController.text.toString() +
+                          "/" +
+                          "area/" +
+                          areaController.text.toString() +
+                          "/" +
+                          "name/" +
+                          nameController!.text.toString() +
+                          "/" +
+                          "ph/" +
+                          phController.text.toString()
+                  );
                   Get.toNamed('/request_estimate2/true?serviceType=$_serviceType');
                 },
                 child: Align(

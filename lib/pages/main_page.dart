@@ -72,7 +72,7 @@ class _Main_PageState extends State<Main_Page> {
                 color:Color(0xFF025595),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text('로그인',
+              child: Text(controller.pro.value.type == 'None' ? '로그인' : '로그아웃',
                 style: TextStyle(
                   color:Colors.white,
                   fontSize:11,
