@@ -106,13 +106,12 @@ class _Main_PageState extends State<Main_Page> {
         ),
         centerTitle: true,
         backgroundColor: Color(0xFF025595),
-        leading: Icon(Icons.menu,color:Color(0xFF)),
-        // leading: IconButton(
-        //     onPressed: (){
-        //       Get.back();
-        //     },
-        //     icon: Icon(Icons.arrow_back,color: Colors.white,)
-        // ),
+        leading: IconButton(
+            onPressed: (){
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back,color: Colors.white,)
+        ),
       ):null,
       drawer: Drawer(
         child: ListView(

@@ -1,13 +1,27 @@
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/request_estimate2.dart';
 import 'package:progress_indicator/progress_indicator.dart';
+import 'package:timelines/timelines.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
+import 'package:flutter/cupertino.dart';
 
+
+final _processes = [
+  '필수정보',
+  '선택정보',
+  '완료',
+];
+
+const completeColor = Color(0xff5e6172);
+const inProgressColor = Color(0xff5ec792);
 
 class Request_Estimate extends StatefulWidget {
-  const Request_Estimate({Key? key}) : super(key: key);
+
+  const Request_Estimate({Key? key,}) : super(key: key);
 
   @override
   _Request_EstimateState createState() => _Request_EstimateState();
@@ -26,10 +40,47 @@ class _Request_EstimateState extends State<Request_Estimate> {
 
   bool _buttonPressed = false;
   bool _buttonPressed2 = false;
+
+  String addressJSON = '';
+  String? _serviceType = '';
+
+  Color getColor(int index) {
+    if (index == 2) {
+      return inProgressColor;
+    } else{
+      return completeColor;
+    }
+  }
+
+  @override
+  void initState(){
+    _serviceType = Get.parameters['serviceType'];
+    print('ppap$_serviceType');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('견적 신청',
+          style: TextStyle(
+            color:Colors.white,
+            fontSize:17,
+            fontFamily: 'NanumSquareB',
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF025595),
+        leading: IconButton(
+            onPressed: (){
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back,color: Colors.white,)
+        ),
+      ),
       body: GestureDetector(
         onTap: (){
           FocusScope.of(context).unfocus();
@@ -51,44 +102,106 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('100% 완료 시 최소 4명 이상의 파트너를 추천 해드립니다.',
-                      style:TextStyle(
-                        fontFamily: 'NanumSquareR',
-                        fontSize: 12,
-                      ),
-                    ),
-                    SizedBox(height:5),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex:9,
-                          child: Container(
-                            height: 20,
-                            decoration:BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: BarProgress(
-                              percentage: 50.0,
-                              backColor: Color(0xFFCCCCCC),
-                              gradient: LinearGradient(colors: [ Color(0xFF5D91B9), Color(0xFF025595)]),
-                              showPercentage: false,
-                              stroke: 10,
-                              round: true,
-                            ),
-                          ),
+                    SizedBox(
+                      height: 100.0,
+                      width: Get.width,
+                      child: Timeline.tileBuilder(
+                        theme: TimelineThemeData(
+                            direction: Axis.horizontal,
+                            connectorTheme: ConnectorThemeData(
+                                space: 15.0,
+                                thickness: 3.0
+                            )
                         ),
-                        Expanded(
-                          flex:1,
-                          child: Container(
-                            child: Text('50%',
-                              style: TextStyle(
-                                color:Color(0xFF025595),
-                                fontFamily: 'NanumSquareB',
+                        builder: TimelineTileBuilder.connected(
+                          connectionDirection: ConnectionDirection.before,
+                          itemExtentBuilder: (_, __) =>
+                          MediaQuery.of(context).size.width / _processes.length,
+
+                          contentsBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                _processes[index],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11.0,
+                                  color: index == 0 ? inProgressColor : completeColor,
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
+                          indicatorBuilder: (_, index) {
+                            var color;
+                            var child;
+                            if (index == 0) {
+                              color = Color(0xff5ec792);
+                              child = Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(width: 2.5, color: Colors.white),
+                                      color: Color(0xff5ec792),
+                                    ),
+                                  )
+                              );
+                            } else if (index < 2) {
+                              color = completeColor;
+                            } else {
+                              color = completeColor;
+                            }
+
+                            if (index <= 2) {
+                              return Stack(
+                                children: [
+                                  CustomPaint(
+                                    size: Size(30.0, 30.0),
+                                  ),
+                                  DotIndicator(
+                                    size: 30.0,
+                                    color: color,
+                                    child: child,
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return Stack(
+                                children: [
+                                  CustomPaint(
+                                    size: Size(15.0, 15.0),
+                                  ),
+                                  OutlinedDotIndicator(
+                                    borderWidth: 4.0,
+                                    color: Colors.pink,
+                                  ),
+                                ],
+                              );
+                            }
+                          },
+                          connectorBuilder: (_, index, type) {
+                            if (index > 0) {
+                              if (index == 2) {
+                                final prevColor = getColor(index - 1);
+                                final color = getColor(index);
+
+                                return DecoratedLineConnector(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xff071039)
+                                  ),
+                                );
+                              } else {
+                                return SolidLineConnector(
+                                  color: Color(0xff071039),
+                                );
+                              }
+                            } else {
+                              return null;
+                            }
+                          },
+                          itemCount: _processes.length,
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -101,6 +214,89 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Container(
+                      width: Get.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('주소',
+                            style:TextStyle(
+                              fontSize:14,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          SizedBox(height:10),
+                          GestureDetector(
+                            onTap: () async {
+                              KopoModel model = await Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => RemediKopo(),
+                                ),
+                              );
+                              print(model.toJson());
+                              setState(() {
+                                addressJSON =
+                                '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
+                              });
+                            },
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                width:MediaQuery.of(context).size.width,
+                                height:45,
+                                decoration:BoxDecoration(
+                                  color: Color(0xFFF9F9F9),
+                                  border: Border.all(
+                                    width: 1.0,
+                                    color: Color(0xFFcccccc),
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(addressJSON == '' ? '주소를 입력해주세요' : '$addressJSON', style:
+                                    TextStyle(
+                                      fontSize: 13.0,
+                                      color: Colors.black54
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: false,
+                                  ),
+                                )
+                              ),
+                            )
+                          ),
+                          SizedBox(height: 5.0,),
+                          Container(
+                            padding: EdgeInsets.only(left:10,right:10,),
+                            width:MediaQuery.of(context).size.width,
+                            height:45,
+                            decoration:BoxDecoration(
+                              color: Color(0xFFF9F9F9),
+                              border: Border.all(
+                                width: 1.0,
+                                color: Color(0xFFcccccc),
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13.0, color: Colors.black87),
+                              onChanged: (text){
+                              },
+                              decoration: InputDecoration(
+                                hintText: '상세 주소를 입력해주세요',
+                                hintStyle: TextStyle(fontSize: 13.0, color: Colors.black54),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height:30),
                     Text('공간 유형',
                       style:TextStyle(
                         fontSize:14,
@@ -251,229 +447,79 @@ class _Request_EstimateState extends State<Request_Estimate> {
 
               SizedBox(height:30),
               Container(
-                width: Get.width,
                 padding: EdgeInsets.only(left:15,right:15),
+                width: Get.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('공간 선택',
+                    Text('성함',
                       style:TextStyle(
                         fontSize:14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
                     SizedBox(height:10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan10 = !_gongan10;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_1.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('주방',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan10 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
+                    Container(
+                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
+                      width:MediaQuery.of(context).size.width,
+                      height:45,
+                      decoration:BoxDecoration(
+                        color: Color(0xFFF9F9F9),
+                        border: Border.all(
+                          width: 1.0,
+                          color: Color(0xFFcccccc),
                         ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan11 = !_gongan11;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_2.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('욕실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan11 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (text){
+                        },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
                         ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan12 = !_gongan12;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_3.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('거실',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan12 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                      ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height:30),
+              Container(
+                padding: EdgeInsets.only(left:15,right:15),
+                width: Get.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('연락처',
+                      style:TextStyle(
+                        fontSize:14,
+                        fontFamily: 'NanumSquareB',
+                      ),
                     ),
                     SizedBox(height:10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan13 = !_gongan13;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_4.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('현관',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan13 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
+                    Container(
+                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
+                      width:MediaQuery.of(context).size.width,
+                      height:45,
+                      decoration:BoxDecoration(
+                        color: Color(0xFFF9F9F9),
+                        border: Border.all(
+                          width: 1.0,
+                          color: Color(0xFFcccccc),
                         ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan14 = !_gongan14;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_5.png", width:60 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('도배',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan14 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: TextField(
+                        keyboardType: TextInputType.text,
+                        onChanged: (text){
+                        },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
                         ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: RaisedButton(
-                            onPressed: () => {
-                              setState(() {
-                                _gongan15 = !_gongan15;
-                              })
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset("assets/gong_6.png", width:45 ,height:35),
-                                const SizedBox(height:10),
-                                const Text('바닥',
-                                  style: TextStyle(
-                                    fontFamily: 'NanumSquareB',
-                                    fontSize:12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            color: Colors.white,
-                            textColor: Colors.black,
-                            shape: _gongan15 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -482,7 +528,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
               SizedBox(height:40),
               InkWell(
                 onTap: (){
-                  Get.to(Request_Estimate2());
+                  Get.toNamed('/request_estimate2/true?serviceType=$_serviceType');
                 },
                 child: Align(
                   alignment: Alignment.center,

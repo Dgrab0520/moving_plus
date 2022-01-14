@@ -113,7 +113,7 @@ class _Interior_PageState extends State<Interior_Page>
         ],
       ),
       backgroundColor: Colors.white,
-      body: Column(
+      body: isLoading ? Column(
         children: [
           Image.asset('assets/chat_banner.png'),
           TabBar(
@@ -139,23 +139,23 @@ class _Interior_PageState extends State<Interior_Page>
             child: _tabController == null
                 ? const Center(child: CircularProgressIndicator())
                 : VerticalScrollableTabView(
-                tabController: _tabController,
-                listItemData: categories,
-                verticalScrollPosition: VerticalScrollPosition.begin,
-                //Change this to your preferred scroll direction
-                scrollDirection: Axis.vertical,
-                eachItemChild: (object, Category) =>
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0,),
-                      child: TabView(
-                        category: object,
-                      ),
+              tabController: _tabController,
+              listItemData: categories,
+              verticalScrollPosition: VerticalScrollPosition.begin,
+              //Change this to your preferred scroll direction
+              scrollDirection: Axis.vertical,
+              eachItemChild: (object, Category) =>
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0,),
+                    child: TabView(
+                      category: object,
                     ),
+                  ),
 
             ),
           ),
         ],
-      ),
+      ) : CircularProgressIndicator(),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -276,213 +276,85 @@ class _TabViewState extends State<TabView> {
         SizedBox(height: 25),
         for (CategorySub category in widget.category.sub)
           Padding(
-            padding: const EdgeInsets.only(bottom: 25.0),
-            child:
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                      onTap: (){
-                        Get.to(Main_Page(index: 0));
-                      },
-                      child: category.image == '' ? Container() : Container(
-                        margin: EdgeInsets.only(left: 5.0, right: 15.0),
-                        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 25.0),
-                        height: 120.0,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                category.image,
-                              ),
-                              fit: BoxFit.fill,
-                            )
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.all(3.0),
-                          height: 50.0,
-                          color: Colors.black87.withOpacity(0.5),
-                          child: Center(
-                            child: Text(
-                              category.title,
-                              style: TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                  fontSize: 15,
-                                  color: Colors.white
+              padding: const EdgeInsets.only(bottom: 25.0),
+              child:
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                        onTap: (){
+                          Get.toNamed('/request_estimage/true?serviceType=${category.title}');
+                        },
+                        child: category.image == '' ? Container() : Container(
+                          margin: EdgeInsets.only(left: 5.0, right: 15.0),
+                          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 25.0),
+                          height: 120.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  category.image,
+                                ),
+                                fit: BoxFit.fill,
+                              )
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(3.0),
+                            height: 50.0,
+                            color: Colors.black87.withOpacity(0.5),
+                            child: Center(
+                              child: Text(
+                                category.title,
+                                style: TextStyle(
+                                    fontFamily: 'NanumSquareB',
+                                    fontSize: 15,
+                                    color: Colors.white
+                                ),
                               ),
                             ),
-                          ),
 
-                          // Column(
-                          //   children: <Widget>[
-                          //     Text(
-                          //       category.title2,
-                          //       style: TextStyle(
-                          //         fontFamily: 'NanumSquareB',
-                          //         fontSize: 15,
-                          //         color: Colors.white
-                          //       ),
-                          //     ),
-                          //     SizedBox(height: 3),
-                          //     // Text(
-                          //     //   category.content2,
-                          //     //   style: TextStyle(
-                          //     //     fontSize: 11,
-                          //     //     height: 1.4,
-                          //     //     color: Colors.white
-                          //     //   ),
-                          //     //   maxLines: 3,
-                          //     //   textAlign: TextAlign.center,
-                          //     //   softWrap: false,
-                          //     //   overflow: TextOverflow.ellipsis,
-                          //     // ),
-                          //   ],
-                          // ),
-                        ),
-                      )
-                    // SizedBox(
-                    //   height:160,
-                    //   child: category.image2 == ''? Container():Container(
-                    //     margin: EdgeInsets.only(
-                    //       left: 5,
-                    //       right: 15,
-                    //     ),
-                    //     padding: EdgeInsets.only(bottom: 10),
-                    //     decoration: BoxDecoration(
-                    //       border: Border.all(
-                    //         width: 0.5,
-                    //         color: Color(0xFFcccccc),
-                    //       ),
-                    //     ),
-                    //     child: Column(
-                    //       children: [
-                    //         Container(
-                    //             width: MediaQuery.of(context).size.width,
-                    //             height: 140.0,
-                    //             child: Image.asset(
-                    //               category.image2,
-                    //               fit: BoxFit.cover,
-                    //               errorBuilder: (BuildContext context, Object exception,
-                    //                   StackTrace? stackTrace) {
-                    //                 return Container();
-                    //               },
-                    //             )),
-                    //         // SizedBox(height: 10),
-                    //         // Text(
-                    //         //   category.title2,
-                    //         //   style: TextStyle(
-                    //         //     fontFamily: 'NanumSquareB',
-                    //         //     fontSize: 15,
-                    //         //   ),
-                    //         // ),
-                    //         // SizedBox(height: 3),
-                    //         // Text(
-                    //         //   category.content2,
-                    //         //   style: TextStyle(
-                    //         //     fontSize: 11,
-                    //         //     height: 1.4,
-                    //         //   ),
-                    //         //   maxLines: 3,
-                    //         //   textAlign: TextAlign.center,
-                    //         //   softWrap: false,
-                    //         //   overflow: TextOverflow.ellipsis,
-                    //         // ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                  ),
-                ),
-                // Expanded(
-                //   child: GestureDetector(
-                //     onTap: (){
-                //       Get.to(Main_Page(index: 0));
-                //     },
-                //     child: SizedBox(
-                //       height:160,
-                //       child: category.image == ''? Container():Container(
-                //         margin: EdgeInsets.only(
-                //           left: 15,
-                //           right: 5,
-                //         ),
-                //         padding: EdgeInsets.only(bottom: 10),
-                //         decoration: BoxDecoration(
-                //           border: Border.all(
-                //             width: 0.5,
-                //             color: Color(0xFFcccccc),
-                //           ),
-                //         ),
-                //         child: Column(
-                //           children: [
-                //             Container(
-                //                 width: MediaQuery.of(context).size.width,
-                //                 height: 70.0,
-                //                 child: Image.asset(
-                //                   category.image,
-                //                   fit: BoxFit.cover,
-                //                 )),
-                //             SizedBox(height: 10),
-                //             Text(
-                //               category.title,
-                //               style: TextStyle(
-                //                 fontFamily: 'NanumSquareB',
-                //                 fontSize: 15,
-                //               ),
-                //             ),
-                //             SizedBox(height: 3),
-                //             Text(
-                //               category.content,
-                //               style: TextStyle(
-                //                 fontSize: 11,
-                //                 height: 1.4,
-                //               ),
-                //               textAlign: TextAlign.center,
-                //               maxLines: 3,
-                //               softWrap: false,
-                //               overflow: TextOverflow.ellipsis,
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      Get.to(Main_Page(index: 0));
-                    },
-                    child: category.image2 == '' ? Container() : Container(
-                      margin: EdgeInsets.only(left: 5.0, right: 15.0),
-                      padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 25.0),
-                      height: 120.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            category.image2,
+
                           ),
-                          fit: BoxFit.fill,
                         )
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(3.0),
-                        height: 50.0,
-                        color: Colors.black87.withOpacity(0.5),
-                        child: Center(
-                          child: Text(
-                            category.title2,
-                            style: TextStyle(
-                                fontFamily: 'NanumSquareB',
-                                fontSize: 15,
-                                color: Colors.white
+
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                        onTap: (){
+                          Get.toNamed('/request_estimage/true?serviceType=${category.title2}');
+                        },
+                        child: category.image2 == '' ? Container() : Container(
+                          margin: EdgeInsets.only(left: 5.0, right: 15.0),
+                          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 25.0),
+                          height: 120.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  category.image2,
+                                ),
+                                fit: BoxFit.fill,
+                              )
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(3.0),
+                            height: 50.0,
+                            color: Colors.black87.withOpacity(0.5),
+                            child: Center(
+                              child: Text(
+                                category.title2,
+                                style: TextStyle(
+                                    fontFamily: 'NanumSquareB',
+                                    fontSize: 15,
+                                    color: Colors.white
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    )
+                        )
+                    ),
                   ),
-                ),
-              ],
-            )
+                ],
+              )
           ),
         // for (int i = 0; i < 20; i++)
         //   ListTile(
