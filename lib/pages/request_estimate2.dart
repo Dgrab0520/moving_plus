@@ -52,6 +52,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   int stage = 1;
   String? _serviceType = Get.parameters['serviceType'];
   String? _serviceForm;
+  String? orderId = Get.parameters['orderId'];
 
 
   _selectDate(BuildContext context) async {

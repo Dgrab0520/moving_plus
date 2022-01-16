@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/pages/request_estimate2.dart';
 import 'package:progress_indicator/progress_indicator.dart';
 import 'package:timelines/timelines.dart';
@@ -16,6 +20,8 @@ final _processes = [
   '선택정보',
   '완료',
 ];
+
+final controller = Get.put(ReactiveController());
 
 const completeColor = Color(0xff5e6172);
 const inProgressColor = Color(0xff5ec792);
@@ -38,15 +44,28 @@ class _Request_EstimateState extends State<Request_Estimate> {
   TextEditingController phController = TextEditingController();
 
   bool _buttonPressed = false;
-  bool _buttonPressed2 = false;
+  bool _buttonPressed2 = true;
 
   String addressJSON = '';
   String? _serviceType = '';
   String orderInfo = "";  //자동 로그인시 로그인 정보 저장
   String? name = '';
+  String? orderId = '';
+  String? space_type = '';
+  String? size_unit = '';
 
   static final storage = new FlutterSecureStorage();  //flutter_secure_storage 사용을 위한 초기화 작업
 
+  updateOrder(){
+    OrderData.updateOrder(controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!).then((value){  //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
+      if(value == "success"){
+        print('Insert Success');
+        Get.toNamed('/request_estimate2/true?serviceType=$_serviceType&order=$orderId');
+      }else{
+        print('$value : Insert Fails');
+      }
+    });
+  }
 
   @override
   void initState(){
@@ -54,11 +73,31 @@ class _Request_EstimateState extends State<Request_Estimate> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _asyncMethod();
     });
+    orderId = generateRandomString(6);
     _serviceType = Get.parameters['serviceType'];
-    print('name : $name');
+    print('orderId : $orderId');
     nameController!.text = name!;
+    if(_gongan5){
+      setState(() {
+        space_type = '거주';
+      });
+    }else if(_gongan6){
+      setState(() {
+        space_type = '상업';
+      });
+    }
+    if(_buttonPressed2){
+      setState(() {
+        size_unit = '평형';
+      });
+    }else if(_buttonPressed){
+      setState(() {
+        size_unit = '㎡';
+      });
+    }
     super.initState();
   }
+
 
   _asyncMethod() async {
     //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
@@ -69,16 +108,33 @@ class _Request_EstimateState extends State<Request_Estimate> {
     //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
     if (orderInfo != null) {
       setState(() {
-        name = '${orderInfo.split("/")[1]}${orderInfo.split("/")[3]}${orderInfo.split("/")[2]}';
+        addressJSON = '${orderInfo.split("/")[1]}';
+        addressController!.text = '${orderInfo.split("/")[3]}';
+        areaController!.text = '${orderInfo.split("/")[5]}';
+        _gongan5 =  '${orderInfo.split("/")[7]}' == 'true';
+        _gongan6 =  '${orderInfo.split("/")[9]}' == 'true';
+        _buttonPressed =  '${orderInfo.split("/")[11]}' == 'true';
+        _buttonPressed2 =  '${orderInfo.split("/")[13]}' == 'true';
+        nameController!.text = '${orderInfo.split("/")[15]}';
+        phController!.text = '${orderInfo.split("/")[17]}';
       });
-      print('Success & return ${orderInfo.split("/")[1]} ${orderInfo.split("/")[2]} ${orderInfo.split("/")[3]}');
-      nameController!.text = name!;
+      // print('Success & return ${orderInfo.split("/")[7]} ${orderInfo.split("/")[9]}');
+      // print("gong5 : ${orderInfo.split("/")[7]}\ngong6 : ${orderInfo.split("/")[9]}\n_buttonPressed : ${orderInfo.split("/")[11]}\n_buttonPressed2 : ${orderInfo.split("/")[13]}");
+
     }else{
       print('false & Again');
     }
   }
 
+  //OrderId Random 생성
+  String generateRandomString(int len) {
+    var r = Random();
+    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
 
+
+  //TimeLine 색상 변경
   Color getColor(int index) {
     if (index == 2) {
       return inProgressColor;
@@ -341,6 +397,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               setState(() {
                                 _gongan5 = true;
                                 _gongan6 = false;
+                                space_type = '거주';
                               })
                             },
                             child: Text('거주'),
@@ -363,6 +420,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               setState(() {
                                 _gongan6 = true;
                                 _gongan5 = false;
+                                space_type = '상업';
                               })
                             },
                             child: Text('상업'),
@@ -447,6 +505,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                                 setState(() {
                                   _buttonPressed2 = true;
                                   _buttonPressed = false;
+                                  size_unit = '평';
                                 })
                               },
                             )
@@ -469,6 +528,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                                 setState(() {
                                   _buttonPressed = true;
                                   _buttonPressed2 = false;
+                                  size_unit = '㎡';
                                 })
                               },
                             )
@@ -575,13 +635,26 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           "area/" +
                           areaController.text.toString() +
                           "/" +
+                          "_gongan5/" +
+                          _gongan5.toString() +
+                          "/" +
+                          "_gongan6/" +
+                          _gongan6.toString() +
+                          "/" +
+                          "_buttonPressed/" +
+                          _buttonPressed.toString() +
+                          "/" +
+                          "_buttonPressed2/" +
+                          _buttonPressed2.toString() +
+                          "/" +
                           "name/" +
                           nameController!.text.toString() +
                           "/" +
                           "ph/" +
                           phController.text.toString()
                   );
-                  Get.toNamed('/request_estimate2/true?serviceType=$_serviceType');
+                  updateOrder();
+
                 },
                 child: Align(
                   alignment: Alignment.center,
