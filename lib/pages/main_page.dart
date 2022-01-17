@@ -14,6 +14,7 @@ import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
 import 'homepage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 
 final controller = Get.put(ReactiveController());
@@ -29,6 +30,7 @@ class Main_Page extends StatefulWidget {
 class _Main_PageState extends State<Main_Page> {
   bool _isChecked = false;
   int _selectedIndex = 1;
+  static final storage = FlutterSecureStorage();
   DateTime currentBackPressTime = DateTime.now();
 
   void moveIndex(int index) {
@@ -59,6 +61,7 @@ class _Main_PageState extends State<Main_Page> {
         title: Image.asset("assets/logo_3.jpg",width:65,height:35),
         centerTitle: true,
         actions: [
+          controller.pro.value.type == 'None' ?
           InkWell(
             onTap: (){
               Get.dialog(P_Login()
@@ -72,7 +75,41 @@ class _Main_PageState extends State<Main_Page> {
                 color:Color(0xFF025595),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(controller.pro.value.type == 'None' ? '로그인' : '로그아웃',
+              child: Text('로그인',
+                style: TextStyle(
+                  color:Colors.white,
+                  fontSize:11,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+              :
+          InkWell(
+            onTap: (){
+              storage.delete(key: "login");
+              setState(() {
+                controller.change(
+                  type: 'None',
+                  pro_id: 'None',
+                  pro_name: 'None',
+                  pro_phone: 'None',
+                  pro_email: 'None',
+                  com_name: 'None',
+                  profile_img: 'None',
+                  pro_token: 'None',
+                );
+              });
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top:15.0,bottom:15,left:2,right:5),
+              padding: EdgeInsets.only(left:20.0,right:20.0),
+              decoration: BoxDecoration(
+                color:Color(0xFF025595),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text('로그아웃',
                 style: TextStyle(
                   color:Colors.white,
                   fontSize:11,
@@ -81,6 +118,7 @@ class _Main_PageState extends State<Main_Page> {
               ),
             ),
           ),
+
 
           SizedBox(width:8),
 
@@ -139,7 +177,26 @@ class _Main_PageState extends State<Main_Page> {
                   children: [
                     Expanded(
                         flex:2,
-                        child: Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",width:70,height:70)),
+                        child: controller.pro.value.type == 'cus'
+                            ?
+                        controller.pro.value.profile_img == 'default_image'
+                            ?
+                        Image.asset('assets/defaultImage.png', width:70,height:70)
+                            :
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(controller.pro.value.profile_img,),
+                              fit: BoxFit.fill,
+                            )
+                          ),
+                        )
+                        // Image.network(controller.pro.value.profile_img, width:70,height:70)
+                            :
+                        Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",width:70,height:70)),
+
+
                     SizedBox(width:10),
                     Expanded(
                       flex:5,
@@ -147,7 +204,7 @@ class _Main_PageState extends State<Main_Page> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(controller.pro.value.com_name,
+                          Text(controller.pro.value.type == 'cus' ? controller.pro.value.pro_name : controller.pro.value.com_name,
                             style:TextStyle(
                               fontSize:14,
                               color:Colors.white,

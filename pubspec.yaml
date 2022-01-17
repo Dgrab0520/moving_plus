@@ -55,7 +55,8 @@ dependencies:
   shared_preferences: ^2.0.9
   timelines: ^0.1.0
   remedi_kopo: ^0.0.1
-  flutter_secure_storage: ^5.0.2 #자동 로그인
+  flutter_secure_storage: ^5.0.2
+  kakao_flutter_sdk: ^0.8.1
 
 
 
