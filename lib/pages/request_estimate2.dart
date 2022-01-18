@@ -54,6 +54,24 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   String? _serviceForm;
   String? orderId = Get.parameters['orderId'];
 
+  String? final_Selected1 = '';
+  String? final_Selected2 = '';
+
+  String? value1 = '';
+  String? value2 = '';
+  String? value3 = '';
+  String? value4 = '';
+  String? value5 = '';
+  String? value6 = '';
+  String? value7 = '';
+
+  TextEditingController? idController = TextEditingController();
+  TextEditingController? a_Controller = TextEditingController();
+  TextEditingController? b_Controller = TextEditingController();
+  TextEditingController? c_Controller = TextEditingController();
+  TextEditingController? d_Controller = TextEditingController();
+  TextEditingController? detail_Controller = TextEditingController();
+
 
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -93,6 +111,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   DateTime selectedDate = DateTime.now();
   DateTime selectedDate2 = DateTime.now();
   DateTime currentBackPressTime = DateTime.now();
+
+
   @override
   void initState() {
     print('pop$_serviceType');
@@ -193,6 +213,10 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
 
     super.initState();
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -530,7 +554,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      final_Selected1 = '아파트';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -551,7 +580,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      final_Selected1 = '오피스텔';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -576,7 +610,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      final_Selected1 = '빌라';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -597,7 +636,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      final_Selected1 = '주택';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -641,6 +685,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             fontSize:14,
                                             fontFamily: 'NanumSquareB',
                                           ),
+                                          textAlign: TextAlign.center,
                                         ),
                                         SizedBox(width: 15.0,),
                                         Container(
@@ -653,7 +698,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: a_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -663,7 +709,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              suffixText: '개',
+                                              suffixText: '개  ',
                                               suffixStyle: TextStyle(
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.bold,
@@ -700,7 +746,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: b_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -710,7 +757,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              suffixText: '개',
+                                              suffixText: '개  ',
                                               suffixStyle: TextStyle(
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.bold,
@@ -753,7 +800,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: c_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -792,7 +840,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '2'
                   ?
 
-              //준공청소
+              //준공청소  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -815,7 +863,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      final_Selected1 = '아파트';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -836,7 +889,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      final_Selected1 = '오피스텔';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -861,7 +919,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      final_Selected1 = '빌라';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -882,7 +945,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      final_Selected1 = '주택';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -927,6 +995,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                                 width: Get.width*0.5,
                                 child: TextField(
+                                  controller: a_Controller!,
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
@@ -1032,7 +1101,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '3'
                   ?
 
-              //정기청소
+              //정기청소  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -1055,7 +1124,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      final_Selected1 = '아파트';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -1076,7 +1150,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      final_Selected1 = '오피스텔';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -1101,7 +1180,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      final_Selected1 = '빌라';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -1122,7 +1206,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      final_Selected1 = '주택';
+                                      print(final_Selected1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -1277,6 +1366,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller!,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -1318,7 +1408,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '4'
                   ?
 
-              //화재청소 && 쓰레기집 청소
+              //화재청소 && 쓰레기집 청소  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -1463,7 +1553,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: a_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1510,7 +1601,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: b_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1563,7 +1655,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: c_Controller!,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1781,111 +1874,108 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             flex: 1,
-                            child: Text('층 수',
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
+                            child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('층 수',
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: a_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '층  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
-                          SizedBox(width:10),
                           Expanded(
-                            flex: 5,
+                            flex: 1,
                             child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '층  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '층 수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('사이즈',
+                                      textAlign: TextAlign.center,
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: b_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '㎡  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ],
                       ),
                     ),
 
-                    SizedBox(height:40),
-                    Container(
-                      padding: EdgeInsets.only(left:15,right:15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text('사이즈',
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                            ),
-                          ),
-                          SizedBox(width:10),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '㎡  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '사이즈를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+
                   ]
               )
 
@@ -1893,7 +1983,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '6'
                   ?
 
-              //외벽청소
+              //외벽청소  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -2000,61 +2090,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 ),
                               ),
                             ],
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height:40),
-                    Container(
-                      padding: EdgeInsets.only(left:15,right:15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text('총 층 수',
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                            ),
-                          ),
-                          SizedBox(width:10),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '층  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '층 수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -2169,71 +2204,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                         ],
                       ),
                     ),
-                  ]
-              )
-
-                  :
-              _serviceForm == '7'
-                  ?
-
-              //학교/관공서청소
-              Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(left:15,right:15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text('사무실\n개수',
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          SizedBox(width:10),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '개  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '사무실 개수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     SizedBox(height:40),
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
@@ -2256,6 +2226,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -2290,11 +2261,126 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     ),
                   ]
               )
+
+                  :
+              _serviceForm == '7'
+                  ?
+
+              //학교/관공서청소
+              Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(left:15,right:15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('사무실\n개수',
+                                      textAlign: TextAlign.center,
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: a_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '개  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('총 층 수',
+                                      textAlign: TextAlign.center,
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: b_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '층  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  ]
+              )
                   :
               _serviceForm == '8'
                   ?
 
-              //상가청소
+              //상가청소  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -2611,6 +2697,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -2781,7 +2868,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Text('  준공 \n  년도 ',
+                                        Text('  준공  \n  년도  ',
                                           textAlign: TextAlign.center,
                                           style:TextStyle(
                                             fontSize:14,
@@ -2799,7 +2886,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: a_Controller,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2846,7 +2934,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: b_Controller,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2899,7 +2988,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: c_Controller,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2946,7 +3036,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                               ),
                                               borderRadius: BorderRadius.circular(10.0)
                                           ),
-                                          child: const TextField(
+                                          child: TextField(
+                                            controller: d_Controller,
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2969,7 +3060,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                     )
                                 ),
                               ),
-
                             ],
                           ),
 
@@ -3013,7 +3103,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           borderRadius: BorderRadius.circular(10.0)
                                       ),
-                                      child: const TextField(
+                                      child: TextField(
+                                        controller: a_Controller,
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3060,7 +3151,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           borderRadius: BorderRadius.circular(10.0)
                                       ),
-                                      child: const TextField(
+                                      child: TextField(
+                                        controller: b_Controller,
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3117,6 +3209,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                                 width: Get.width*0.5,
                                 child: TextField(
+                                  controller: a_Controller,
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
@@ -3179,6 +3272,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3242,6 +3336,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3306,6 +3401,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3460,114 +3556,107 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             flex: 1,
-                            child: Text('방 개수',
-                              textAlign: TextAlign.center,
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
+                            child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('방 개수',
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: a_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '개  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
-                          SizedBox(width:20),
                           Expanded(
-                            flex: 5,
+                            flex: 1,
                             child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '개  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '방 개수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('베란다\n개수',
+                                      textAlign: TextAlign.center,
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: b_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '개  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ],
                       ),
                     ),
-
-                    SizedBox(height:40),
-                    Container(
-                      padding: EdgeInsets.only(left:15,right:15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text('베란다\n개수',
-                              textAlign: TextAlign.center,
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                            ),
-                          ),
-                          SizedBox(width:20),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '개  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '베란다 개수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
                   ]
               )
                   :
@@ -3580,107 +3669,102 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     Container(
                       padding: EdgeInsets.only(left:15,right:15),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             flex: 1,
-                            child: Text('화장실\n개수',
-                              textAlign: TextAlign.center,
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                            ),
-                          ),
-                          SizedBox(width:20),
-                          Expanded(
-                            flex: 5,
                             child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '개  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '화장실 개수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('화장실\n개수',
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: a_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '개  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height:40),
-                    Container(
-                      padding: EdgeInsets.only(left:15,right:15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
                           Expanded(
                             flex: 1,
-                            child: Text('베란다\n개수',
-                              textAlign: TextAlign.center,
-                              style:TextStyle(
-                                fontSize:14,
-                                fontFamily: 'NanumSquareB',
-                              ),
-                            ),
-                          ),
-                          SizedBox(width:20),
-                          Expanded(
-                            flex: 5,
                             child: Container(
-                              width: Get.width*0.5,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: Color(0xFF025595)),
-                                  ),
-                                  suffixText: '개  ',
-                                  suffixStyle: TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54
-                                  ),
-                                  hintText: '베란다 개수를 입력 해주세요.',
-                                  hintStyle: TextStyle(
-                                    color:Color(0xFF777777),
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text('베란다\n개수',
+                                      textAlign: TextAlign.center,
+                                      style:TextStyle(
+                                        fontSize:14,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                    SizedBox(width: 15.0,),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10.0, right: 25.0),
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
+                                            color: Color(0xFFcccccc),
+                                          ),
+                                          borderRadius: BorderRadius.circular(10.0)
+                                      ),
+                                      child: TextField(
+                                        controller: b_Controller!,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixText: '개  ',
+                                          suffixStyle: TextStyle(
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black54
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ],
@@ -3693,7 +3777,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '21'
                   ?
 
-              //상판연마코팅/엔지니어스톤 코팅
+              //상판연마코팅/엔지니어스톤 코팅  //controller edit
               Column(
                   children: <Widget>[
                     Container(
@@ -3810,7 +3894,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '22'
                   ?
 
-              //바닥왁싱
+              //바닥왁싱  //controller edit  //list edit
               Column(
                   children: <Widget>[
                     Container(
@@ -3952,6 +4036,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             child: Container(
                               width: Get.width*0.5,
                               child: TextField(
+                                controller: a_Controller,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -4021,6 +4106,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextField(
+                        controller: detail_Controller,
                         textAlign: TextAlign.start,
                         style: TextStyle(fontSize: 14.0),
                         keyboardType: TextInputType.multiline,
@@ -4029,7 +4115,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                         onChanged: (text){
                         },
                         decoration: InputDecoration(
-
                           border: InputBorder.none,
                         ),
                       ),
@@ -4121,8 +4206,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               //확인 BTN
               InkWell(
                 onTap: (){
+                  if(_serviceForm == '1'){
+                    setState(() {
+
+                    });
+                  }
                   Get.dialog(
-                      AlertDialog(
+                    AlertDialog(
                           insetPadding: EdgeInsets.symmetric(horizontal: 20),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(5.0))
@@ -4251,7 +4341,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               SizedBox(height:120),
 
 
-              ////////////////////////////////////////////////////////////////////////
+
 
             ],
           ),
