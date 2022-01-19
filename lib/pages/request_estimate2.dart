@@ -558,8 +558,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      final_Selected1 = '아파트';
-                                      print(final_Selected1);
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -584,8 +584,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      final_Selected1 = '오피스텔';
-                                      print(final_Selected1);
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -614,8 +614,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      final_Selected1 = '빌라';
-                                      print(final_Selected1);
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -640,8 +640,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      final_Selected1 = '주택';
-                                      print(final_Selected1);
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -700,6 +700,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: a_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value2 = '방 개수 |  $text 개';
+                                              });
+                                              print(value2);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -748,6 +754,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: b_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value3 = value2 = '화장실 개수 |  $text 개';
+                                              });
+                                              print(value3);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -802,6 +814,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: c_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value4 = value2 = '베란다 |  $text 개';
+                                              });
+                                              print(value4);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -811,7 +829,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              suffixText: '개',
+                                              suffixText: '개  ',
                                               suffixStyle: TextStyle(
                                                   fontSize: 15.0,
                                                   fontWeight: FontWeight.bold,
@@ -867,8 +885,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      final_Selected1 = '아파트';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -893,8 +911,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      final_Selected1 = '오피스텔';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -923,8 +941,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      final_Selected1 = '빌라';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -949,8 +967,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      final_Selected1 = '주택';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -982,7 +1000,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                         children: [
                           Expanded(
                             flex: 1,
-                            child: Text('총 층수',
+                            child: Text('총 층 수',
                               style:TextStyle(
                                 fontSize:14,
                                 fontFamily: 'NanumSquareB',
@@ -996,6 +1014,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 width: Get.width*0.5,
                                 child: TextField(
                                   controller: a_Controller!,
+                                  onChanged: (text){
+                                    setState(() {
+                                      value2 = '총 층 수 |  $text 층';
+                                    });
+                                    print(value2);
+                                  },
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
@@ -1051,7 +1075,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _yes = !_yes;
+                                      _yes = true;
+                                      _no = !_yes;
+                                      value3 = "폐기물 여부 |  있음";
                                     })
                                   },
                                   child: Text('있다'),
@@ -1072,7 +1098,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _no = !_no;
+                                      _yes = !_no;
+                                      _no = true;
+                                      value3 = "폐기물 여부 |  없음";
                                     })
                                   },
                                   child: Text('없다'),
@@ -1128,8 +1156,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      final_Selected1 = '아파트';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -1154,8 +1182,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      final_Selected1 = '오피스텔';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -1184,8 +1212,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      final_Selected1 = '빌라';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -1210,8 +1238,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      final_Selected1 = '주택';
-                                      print(final_Selected1);
+                                      value1 = '건물형태 |  주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -1254,7 +1282,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype1 = !_Businesstype1;
+                                      _Businesstype1 = true;
+                                      _Businesstype2 = !_Businesstype1;
+                                      _Businesstype3 = !_Businesstype1;
+                                      _Businesstype4 = !_Businesstype1;
+                                      value2 = '업종 |  사무실';
+                                      print(value2);
                                     })
                                   },
                                   child: Text('사무실'),
@@ -1275,7 +1308,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype2 = !_Businesstype2;
+                                      _Businesstype2 = true;
+                                      _Businesstype1 = !_Businesstype2;
+                                      _Businesstype3 = !_Businesstype2;
+                                      _Businesstype4 = !_Businesstype2;
+                                      value2 = '업종 |  병원';
+                                      print(value2);
                                     })
                                   },
                                   child: Text('병원'),
@@ -1301,7 +1339,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype3 = !_Businesstype3;
+                                      _Businesstype3 = true;
+                                      _Businesstype1 = !_Businesstype3;
+                                      _Businesstype2 = !_Businesstype3;
+                                      _Businesstype4 = !_Businesstype3;
+                                      value2 = '업종 |  일반가정';
+                                      print(value2);
                                     })
                                   },
                                   child: Text('일반가정'),
@@ -1323,6 +1366,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                   onPressed: () => {
                                     setState(() {
                                       _Businesstype4 = !_Businesstype4;
+
+                                      _Businesstype4 = true;
+                                      _Businesstype1 = !_Businesstype4;
+                                      _Businesstype2 = !_Businesstype4;
+                                      _Businesstype3 = !_Businesstype4;
+                                      value2 = '업종 |  미용실';
+                                      print(value2);
                                     })
                                   },
                                   child: Text('미용실'),
@@ -1367,6 +1417,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller!,
+                                onChanged: (text){
+                                  setState(() {
+                                    value3 = '방문 횟수 |  $text 회';
+                                  });
+                                  print(value3);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -1431,7 +1487,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -1452,7 +1513,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -1477,7 +1543,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -1498,7 +1569,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -1555,6 +1631,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: a_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value2 = '방 개수 |  $text 개';
+                                              });
+                                              print(value2);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1603,6 +1685,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: b_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value3 = '화장실 개수 |  $text 개';
+                                              });
+                                              print(value3);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1657,6 +1745,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: c_Controller!,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value4 = '베란다 개수 |  $text 개';
+                                              });
+                                              print(value4);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -1709,8 +1803,11 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _yes = !_yes;
-                                    })
+                                      _yes = true;
+                                      _no = !_yes;
+                                      value5 = '폐기물 여부 |  있음';
+                                    }),
+                                    print(value5),
                                   },
                                   child: Text('있다'),
                                   color: Colors.white,
@@ -1730,8 +1827,11 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _no = !_no;
-                                    })
+                                      _no = true;
+                                      _yes = !_no;
+                                      value5 = '폐기물 여부 |  없음';
+                                    }),
+                                    print(value5),
                                   },
                                   child: Text('없다'),
                                   color: Colors.white,
@@ -1781,7 +1881,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -1802,7 +1907,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -1827,7 +1937,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -1848,7 +1963,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -1901,6 +2021,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: a_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value2 = '층 수 |  $text 층';
+                                          });
+                                          print(value2);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -1949,6 +2075,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: b_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value3 = '사이즈 |  $text ㎡';
+                                          });
+                                          print(value3);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -2006,7 +2138,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -2027,7 +2164,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -2052,7 +2194,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -2073,7 +2220,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -2116,8 +2268,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall1 = !_wall1;
-                                    })
+                                      _wall1 = true;
+                                      _wall2 = !_wall1;
+                                      _wall3 = !_wall1;
+                                      _wall4 = !_wall1;
+                                      value2 = '벽면 형태 |  유리';
+                                    }),
+                                    print(value2),
                                   },
                                   child: Text('유리'),
                                   color: Colors.white,
@@ -2137,10 +2294,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall2 = !_wall2;
-                                    })
+                                      _wall2 = true;
+                                      _wall1 = !_wall2;
+                                      _wall3 = !_wall2;
+                                      _wall4 = !_wall2;
+                                      value2 = '벽면 형태 |  합판';
+                                    }),
+                                    print(value2),
                                   },
-                                  child: Text('오피스텔'),
+                                  child: Text('합판'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _wall2 ? RoundedRectangleBorder(
@@ -2162,8 +2324,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall3 = !_wall3;
-                                    })
+                                      _wall3 = true;
+                                      _wall1 = !_wall3;
+                                      _wall2 = !_wall3;
+                                      _wall4 = !_wall3;
+                                      value2 = '벽면 형태 |  타일';
+                                    }),
+                                    print(value2),
                                   },
                                   child: Text('타일'),
                                   color: Colors.white,
@@ -2183,7 +2350,11 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall4 = !_wall4;
+                                      _wall4 = true;
+                                      _wall1 = !_wall4;
+                                      _wall2 = !_wall4;
+                                      _wall3 = !_wall4;
+                                      value2 = '벽면 형태 |  벽돌';
                                     })
                                   },
                                   child: Text('벽돌'),
@@ -2227,6 +2398,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value3 = '총 층 수 |  $text 층';
+                                  });
+                                  print(value3);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -2300,6 +2477,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: a_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value1 = '사무실 개수 |  $text 개';
+                                          });
+                                          print(value1);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -2348,6 +2531,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: b_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value2 = '총 층 수 |  $text 층';
+                                          });
+                                          print(value2);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -2403,10 +2592,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype1 = !_Businesstype1;
+                                      _Businesstype1 = true;
+                                      _Businesstype2 = !_Businesstype1;
+                                      _Businesstype3 = !_Businesstype1;
+                                      _Businesstype4 = !_Businesstype1;
+                                      value1 = '업종 |  사무실';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('음식점'),
+                                  child: Text('사무실'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype1 ? RoundedRectangleBorder(
@@ -2424,10 +2618,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype2 = !_Businesstype2;
+                                      _Businesstype2 = true;
+                                      _Businesstype1 = !_Businesstype2;
+                                      _Businesstype3 = !_Businesstype2;
+                                      _Businesstype4 = !_Businesstype2;
+                                      value1 = '업종 |  병원';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('꽃집'),
+                                  child: Text('병원'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype2 ? RoundedRectangleBorder(
@@ -2450,10 +2649,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype3 = !_Businesstype3;
+                                      _Businesstype3 = true;
+                                      _Businesstype1 = !_Businesstype3;
+                                      _Businesstype2 = !_Businesstype3;
+                                      _Businesstype4 = !_Businesstype3;
+                                      value1 = '업종 |  일반가정';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('커피숍'),
+                                  child: Text('일반가정'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype3 ? RoundedRectangleBorder(
@@ -2472,6 +2676,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                   onPressed: () => {
                                     setState(() {
                                       _Businesstype4 = !_Businesstype4;
+
+                                      _Businesstype4 = true;
+                                      _Businesstype1 = !_Businesstype4;
+                                      _Businesstype2 = !_Businesstype4;
+                                      _Businesstype3 = !_Businesstype4;
+                                      value1 = '업종 |  미용실';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('미용실'),
@@ -2514,7 +2725,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _yes = !_yes;
+                                      _yes = true;
+                                      _no = !_yes;
+                                      value2 = '복층 여부 |  예';
                                     })
                                   },
                                   child: Text('있다'),
@@ -2535,7 +2748,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _no = !_no;
+                                      _yes = !_no;
+                                      _no = true;
+                                      value2 = '복층 여부 |  아니오';
                                     })
                                   },
                                   child: Text('없다'),
@@ -2585,10 +2800,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype1 = !_Businesstype1;
+                                      _Businesstype1 = true;
+                                      _Businesstype2 = !_Businesstype1;
+                                      _Businesstype3 = !_Businesstype1;
+                                      _Businesstype4 = !_Businesstype1;
+                                      value1 = '업종 |  사무실';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('음식점'),
+                                  child: Text('사무실'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype1 ? RoundedRectangleBorder(
@@ -2606,10 +2826,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype2 = !_Businesstype2;
+                                      _Businesstype2 = true;
+                                      _Businesstype1 = !_Businesstype2;
+                                      _Businesstype3 = !_Businesstype2;
+                                      _Businesstype4 = !_Businesstype2;
+                                      value1 = '업종 |  병원';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('꽃집'),
+                                  child: Text('병원'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype2 ? RoundedRectangleBorder(
@@ -2632,10 +2857,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _Businesstype3 = !_Businesstype3;
+                                      _Businesstype3 = true;
+                                      _Businesstype1 = !_Businesstype3;
+                                      _Businesstype2 = !_Businesstype3;
+                                      _Businesstype4 = !_Businesstype3;
+                                      value1 = '업종 |  일반가정';
+                                      print(value1);
                                     })
                                   },
-                                  child: Text('커피숍'),
+                                  child: Text('일반가정'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _Businesstype3 ? RoundedRectangleBorder(
@@ -2654,6 +2884,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                   onPressed: () => {
                                     setState(() {
                                       _Businesstype4 = !_Businesstype4;
+
+                                      _Businesstype4 = true;
+                                      _Businesstype1 = !_Businesstype4;
+                                      _Businesstype2 = !_Businesstype4;
+                                      _Businesstype3 = !_Businesstype4;
+                                      value1 = '업종 |  미용실';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('미용실'),
@@ -2698,6 +2935,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value2 = '사이즈 |  $text ㎡';
+                                  });
+                                  print(value2);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -2763,7 +3006,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -2784,7 +3032,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -2809,7 +3062,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -2830,7 +3088,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -2888,6 +3151,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: a_Controller,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value2 = '준공 년도 |  $text 년';
+                                              });
+                                              print(value2);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2936,6 +3205,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: b_Controller,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value3 = '방 개수 |  $text 개';
+                                              });
+                                              print(value3);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -2990,6 +3265,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: c_Controller,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value4 = '화장실 개수 |  $text 개';
+                                              });
+                                              print(value4);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -3038,6 +3319,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                           ),
                                           child: TextField(
                                             controller: d_Controller,
+                                            onChanged: (text){
+                                              setState(() {
+                                                value5 = '베란다 개수 |  $text 개';
+                                              });
+                                              print(value5);
+                                            },
                                             style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
@@ -3105,6 +3392,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: a_Controller,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value1 = '방 개수 |  $text 개';
+                                          });
+                                          print(value1);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3153,6 +3446,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: b_Controller,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value2 = '화장실 개수 |  $text 개';
+                                          });
+                                          print(value2);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3210,6 +3509,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 width: Get.width*0.5,
                                 child: TextField(
                                   controller: a_Controller,
+                                  onChanged: (text){
+                                    setState(() {
+                                      value1 = '베란다 개수 |  $text 개';
+                                    });
+                                    print(value1);
+                                  },
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
@@ -3273,6 +3578,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value1 = '방 개수 |  $text 개';
+                                  });
+                                  print(value1);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3337,6 +3648,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value1 = '방충망 개수 |  $text 개';
+                                  });
+                                  print(value1);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3402,6 +3719,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value1 = '화장실 개수 |  $text 개';
+                                  });
+                                  print(value1);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -3463,7 +3786,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan1 = !_gongan1;
+                                      _gongan1 = true;
+                                      _gongan2 = !_gongan1;
+                                      _gongan3 = !_gongan1;
+                                      _gongan4 = !_gongan1;
+                                      value1 = '아파트';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('아파트'),
@@ -3484,7 +3812,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan2 = !_gongan2;
+                                      _gongan2 = true;
+                                      _gongan1 = !_gongan2;
+                                      _gongan3 = !_gongan2;
+                                      _gongan4 = !_gongan2;
+                                      value1 = '오피스텔';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('오피스텔'),
@@ -3509,7 +3842,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan3 = !_gongan3;
+                                      _gongan3 = true;
+                                      _gongan1 = !_gongan3;
+                                      _gongan2 = !_gongan3;
+                                      _gongan4 = !_gongan3;
+                                      value1 = '빌라';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('빌라'),
@@ -3530,7 +3868,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _gongan4 = !_gongan4;
+                                      _gongan4 = true;
+                                      _gongan1 = !_gongan4;
+                                      _gongan2 = !_gongan4;
+                                      _gongan3 = !_gongan4;
+                                      value1 = '주택';
+                                      print(value1);
                                     })
                                   },
                                   child: Text('주택'),
@@ -3584,6 +3927,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: a_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value2 = '방 개수 |  $text 개';
+                                          });
+                                          print(value2);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3632,6 +3981,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: b_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value3 = '베란다 개수 |  $text 개';
+                                          });
+                                          print(value3);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3697,6 +4052,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: a_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value1 = '화장실 개수 |  $text 개';
+                                          });
+                                          print(value1);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3745,6 +4106,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       ),
                                       child: TextField(
                                         controller: b_Controller!,
+                                        onChanged: (text){
+                                          setState(() {
+                                            value2 = '베란다 개수 |  $text 개';
+                                          });
+                                          print(value2);
+                                        },
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -3800,8 +4167,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall1 = !_wall1;
-                                    })
+                                      _wall1 = true;
+                                      _wall2 = !_wall1;
+                                      _wall3 = !_wall1;
+                                      _wall4 = !_wall1;
+                                      value1 = '싱크대 형태 |  ㅡ자';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('ㅡ자'),
                                   color: Colors.white,
@@ -3821,8 +4193,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall2 = !_wall2;
-                                    })
+                                      _wall2 = true;
+                                      _wall1 = !_wall2;
+                                      _wall3 = !_wall2;
+                                      _wall4 = !_wall2;
+                                      value1 = '싱크대 형태 |  ㄱ자';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('ㄱ자'),
                                   color: Colors.white,
@@ -3846,8 +4223,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall3 = !_wall3;
-                                    })
+                                      _wall3 = true;
+                                      _wall1 = !_wall3;
+                                      _wall2 = !_wall3;
+                                      _wall4 = !_wall3;
+                                      value1 = '싱크대 형태 |  ㄷ자';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('ㄷ자'),
                                   color: Colors.white,
@@ -3867,8 +4249,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall4 = !_wall4;
-                                    })
+                                      _wall4 = true;
+                                      _wall1 = !_wall4;
+                                      _wall2 = !_wall4;
+                                      _wall3 = !_wall4;
+                                      value1 = '싱크대 형태 |  ㄹ자';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('ㄹ자'),
                                   color: Colors.white,
@@ -3917,8 +4304,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall1 = !_wall1;
-                                    })
+                                      _wall1 = true;
+                                      _wall2 = !_wall1;
+                                      _wall3 = !_wall1;
+                                      _wall4 = !_wall1;
+                                      value1 = '바닥 형태 |  유리';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('유리'),
                                   color: Colors.white,
@@ -3938,10 +4330,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall2 = !_wall2;
-                                    })
+                                      _wall2 = true;
+                                      _wall1 = !_wall2;
+                                      _wall3 = !_wall2;
+                                      _wall4 = !_wall2;
+                                      value1 = '바닥 형태 |  장판';
+                                    }),
+                                    print(value1),
                                   },
-                                  child: Text('오피스텔'),
+                                  child: Text('장판'),
                                   color: Colors.white,
                                   textColor: Colors.black,
                                   shape: _wall2 ? RoundedRectangleBorder(
@@ -3963,8 +4360,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall3 = !_wall3;
-                                    })
+                                      _wall3 = true;
+                                      _wall1 = !_wall3;
+                                      _wall2 = !_wall3;
+                                      _wall4 = !_wall3;
+                                      value1 = '바닥 형태 |  타일';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('타일'),
                                   color: Colors.white,
@@ -3984,8 +4386,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                 child: RaisedButton(
                                   onPressed: () => {
                                     setState(() {
-                                      _wall4 = !_wall4;
-                                    })
+                                      _wall4 = true;
+                                      _wall1 = !_wall4;
+                                      _wall2 = !_wall4;
+                                      _wall3 = !_wall4;
+                                      value1 = '바닥 형태 |  벽돌';
+                                    }),
+                                    print(value1),
                                   },
                                   child: Text('벽돌'),
                                   color: Colors.white,
@@ -4037,6 +4444,12 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                               width: Get.width*0.5,
                               child: TextField(
                                 controller: a_Controller,
+                                onChanged: (text){
+                                  setState(() {
+                                    value1 = '방 개수 |  $text 개';
+                                  });
+                                  print(value1);
+                                },
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
