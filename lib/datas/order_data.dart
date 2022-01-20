@@ -33,7 +33,7 @@ class OrderData {
   }
 
 
-  static Future<String> updateDetail(String order_id, String date_start, String date_end, String time, String building_type, String item1, String item2, String item3, String item4, String item5, String item6, String item7, String item8, String request_detail) async {
+  static Future<String> updateDetail(String order_id, String date_start, String date_end, String time, String item1, String item2, String item3, String item4, String item5, String request_detail) async {
     try{
       var map = Map<String, dynamic>();
       map['action'] = UPDATE_DETAIL_ACTION;
@@ -41,15 +41,12 @@ class OrderData {
       map['date_start'] = date_start;
       map['date_end'] = date_end;
       map['time'] = time;
-      map['building_type'] = building_type;
       map['item1'] = item1;
       map['item2'] = item2;
       map['item3'] = item3;
       map['item4'] = item4;
       map['item5'] = item5;
-      map['item6'] = item6;
-      map['item7'] = item7;
-      map['item8'] = item8;
+
       map['request_detail'] = request_detail;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Order Detail Update : ${response.body}');

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:progress_indicator/progress_indicator.dart';
@@ -57,20 +58,31 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   String? final_Selected1 = '';
   String? final_Selected2 = '';
 
+  String? time = '';
+
   String? value1 = '';
   String? value2 = '';
   String? value3 = '';
   String? value4 = '';
   String? value5 = '';
-  String? value6 = '';
-  String? value7 = '';
 
-  TextEditingController? idController = TextEditingController();
+
   TextEditingController? a_Controller = TextEditingController();
   TextEditingController? b_Controller = TextEditingController();
   TextEditingController? c_Controller = TextEditingController();
   TextEditingController? d_Controller = TextEditingController();
   TextEditingController? detail_Controller = TextEditingController();
+
+
+  updateOrder(){
+    OrderData.updateDetail(orderId.toString(), selectedDate.toString(), selectedDate2.toString(), time!, value1! == '' ? '' : value1!, value2! == '' ? '' : value2!, value3! == '' ? '' : value3!, value4! == '' ? '' : value4!!, value5! == '' ? '' : value5!, detail_Controller!.text).then((value){
+      if(value == "success"){
+        print('Update Success');
+      }else{
+        print('$value : Update Fails');
+      }
+    });
+  }
 
 
   _selectDate(BuildContext context) async {
@@ -115,7 +127,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
 
   @override
   void initState() {
-    print('pop$_serviceType');
+    print('pop$orderId');
     if(_serviceType == "입주 청소" || _serviceType == "이사 청소" || _serviceType == "인테리어 청소" || _serviceType == "거주 청소"){
       setState(() {
         _serviceForm = '1';
@@ -458,7 +470,10 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                           child: RaisedButton(
                             onPressed: () => {
                               setState(() {
-                                _time = !_time;
+                                _time = true;
+                                _time2 = !_time;
+                                _time3 = !_time;
+                                time = '무관';
                               })
                             },
                             child: Text('무관'),
@@ -479,7 +494,10 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                           child: RaisedButton(
                             onPressed: () => {
                               setState(() {
-                                _time2 = !_time2;
+                                _time2 = true;
+                                _time = !_time2;
+                                _time3 = !_time2;
+                                time = '오전';
                               })
                             },
                             child: Text('오전'),
@@ -501,6 +519,11 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                             onPressed: () => {
                               setState(() {
                                 _time3 = !_time3;
+
+                                _time3 = true;
+                                _time = !_time3;
+                                _time2 = !_time3;
+                                time = '오후';
                               })
                             },
                             child: Text('오후'),
@@ -558,7 +581,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -584,7 +607,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -614,7 +637,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -640,7 +663,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -756,7 +779,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             controller: b_Controller!,
                                             onChanged: (text){
                                               setState(() {
-                                                value3 = value2 = '화장실 개수 |  $text 개';
+                                                value3 = '화장실 개수 |  $text 개';
                                               });
                                               print(value3);
                                             },
@@ -816,7 +839,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                             controller: c_Controller!,
                                             onChanged: (text){
                                               setState(() {
-                                                value4 = value2 = '베란다 |  $text 개';
+                                                value4 = '베란다 |  $text 개';
                                               });
                                               print(value4);
                                             },
@@ -885,7 +908,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '건물형태 |  아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -911,7 +934,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '건물형태 |  오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -941,7 +964,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '건물형태 |  빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -967,7 +990,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '건물형태 |  주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -1156,7 +1179,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '건물형태 |  아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -1182,7 +1205,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '건물형태 |  오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -1212,7 +1235,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '건물형태 |  빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -1238,7 +1261,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '건물형태 |  주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -1491,7 +1514,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -1517,7 +1540,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -1547,7 +1570,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -1573,7 +1596,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -1885,7 +1908,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -1911,7 +1934,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -1941,7 +1964,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -1967,7 +1990,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -2142,7 +2165,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -2168,7 +2191,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -2198,7 +2221,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -2224,7 +2247,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -3010,7 +3033,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -3036,7 +3059,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -3066,7 +3089,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -3092,7 +3115,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -3692,7 +3715,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               _serviceForm == '18'
                   ?
 
-
               //욕실인테리어/실리콘 오염 방지/욕실 나노 코팅
               Column(
                   children: <Widget>[
@@ -3790,7 +3812,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan2 = !_gongan1;
                                       _gongan3 = !_gongan1;
                                       _gongan4 = !_gongan1;
-                                      value1 = '아파트';
+                                      value1 = '건물 형태 |  아파트';
                                       print(value1);
                                     })
                                   },
@@ -3816,7 +3838,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan2;
                                       _gongan3 = !_gongan2;
                                       _gongan4 = !_gongan2;
-                                      value1 = '오피스텔';
+                                      value1 = '건물 형태 |  오피스텔';
                                       print(value1);
                                     })
                                   },
@@ -3846,7 +3868,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan3;
                                       _gongan2 = !_gongan3;
                                       _gongan4 = !_gongan3;
-                                      value1 = '빌라';
+                                      value1 = '건물 형태 |  빌라';
                                       print(value1);
                                     })
                                   },
@@ -3872,7 +3894,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                       _gongan1 = !_gongan4;
                                       _gongan2 = !_gongan4;
                                       _gongan3 = !_gongan4;
-                                      value1 = '주택';
+                                      value1 = '건물 형태 |  주택';
                                       print(value1);
                                     })
                                   },
@@ -4535,9 +4557,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ],
                 ),
               ),
-              SizedBox(height:40),
 
               //사진첨부
+              SizedBox(height:40),
               Container(
                 width: Get.width,
                 padding: EdgeInsets.only(left:15,right:15),
@@ -4614,16 +4636,13 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ],
                 ),
               ),
+
               SizedBox(height:60.0),
 
               //확인 BTN
               InkWell(
                 onTap: (){
-                  if(_serviceForm == '1'){
-                    setState(() {
-
-                    });
-                  }
+                  updateOrder();
                   Get.dialog(
                     AlertDialog(
                           insetPadding: EdgeInsets.symmetric(horizontal: 20),

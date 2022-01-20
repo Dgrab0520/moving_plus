@@ -325,7 +325,7 @@ class _P_LoginState extends State<P_Login> {
                   onPressed: (){
                     print('고객 로그인');
                     Get.back();
-                    Get.dialog(C_Login());
+                    Get.dialog(C_Login(index: 0,));
                   },
                   child: Text('고객 로그인하기', style:
                     TextStyle(

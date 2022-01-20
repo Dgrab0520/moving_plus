@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/pro_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/models/pro_model.dart';
 import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search_page.dart';
@@ -18,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
 
   void initState(){
     super.initState();

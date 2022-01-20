@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
+import 'package:moving_plus/widgets/c_login.dart';
 import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 
@@ -10,6 +14,9 @@ import 'api.dart';
 import 'homepage.dart';
 import 'main_arlim.dart';
 import 'main_page.dart';
+
+
+final controller = Get.put(ReactiveController());
 
 class Interior_Page extends StatefulWidget {
   const Interior_Page({Key? key, required this.Categorytitle}) : super(key: key);
@@ -55,6 +62,8 @@ class _Interior_PageState extends State<Interior_Page>
 
   bool isLoading = false;
 
+
+
   @override
   void initState() {
     _widgetOptions = [
@@ -74,7 +83,6 @@ class _Interior_PageState extends State<Interior_Page>
         _tabController.animateTo(widget.Categorytitle);
       });
     });
-
     super.initState();
   }
 
@@ -95,6 +103,10 @@ class _Interior_PageState extends State<Interior_Page>
         backgroundColor: Colors.white,
         title: Image.asset("assets/logo_3.jpg", width: 65, height: 35),
         centerTitle: true,
+        leading: IconButton(
+            onPressed: (){Get.offAll(Main_Page(index: 1));},
+            icon: Icon(Icons.arrow_back,color: Color(0xFF025595),)
+        ),
         actions: [
           Container(
             padding: EdgeInsets.only(left: 15, right: 15),
@@ -283,7 +295,14 @@ class _TabViewState extends State<TabView> {
                   Expanded(
                     child: GestureDetector(
                         onTap: (){
-                          Get.toNamed('/request_estimage/true?serviceType=${category.title}');
+                          if(controller.pro.value.type == 'cus'){
+                            Get.toNamed('/request_estimage/true?serviceType=${category.title}');
+                          }else if(controller.pro.value.type == 'None'){
+                            Get.dialog(C_Login(index: 1,));
+                          }else{
+                            Get.snackbar('견적신청 실패', '고객으로 로그인 후 이용해주세요', backgroundColor: Colors.white);
+                          }
+
                         },
                         child: category.image == '' ? Container() : Container(
                           margin: EdgeInsets.only(left: 5.0, right: 15.0),
@@ -321,7 +340,14 @@ class _TabViewState extends State<TabView> {
                   Expanded(
                     child: GestureDetector(
                         onTap: (){
-                          Get.toNamed('/request_estimage/true?serviceType=${category.title2}');
+                          if(controller.pro.value.type == 'cus'){
+                            Get.toNamed('/request_estimage/true?serviceType=${category.title2}');
+                          }else if(controller.pro.value.type == 'None'){
+                            Get.dialog(C_Login(index: 1,));
+                          }else{
+                            Get.snackbar('견적신청 실패', '고객으로 로그인 후 이용해주세요', backgroundColor: Colors.white);
+                          }
+
                         },
                         child: category.image2 == '' ? Container() : Container(
                           margin: EdgeInsets.only(left: 5.0, right: 15.0),

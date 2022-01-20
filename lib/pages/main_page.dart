@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/c_chatlist.dart';
 import 'package:moving_plus/pages/c_mypage.dart';
 import 'package:moving_plus/pages/c_partner_info.dart';
@@ -30,6 +32,10 @@ class Main_Page extends StatefulWidget {
 class _Main_PageState extends State<Main_Page> {
   bool _isChecked = false;
   int _selectedIndex = 1;
+  String? user_id;
+
+
+
   static final storage = FlutterSecureStorage();
   DateTime currentBackPressTime = DateTime.now();
 
@@ -41,9 +47,15 @@ class _Main_PageState extends State<Main_Page> {
 
   List<Widget> _widgetOptions = [];
 
+
+
+
+
   @override
   void initState() {
     _selectedIndex = widget.index;
+    user_id = controller.pro.value.pro_id;
+    print('user_idd : ${user_id}');
     _widgetOptions = [
       Request_Estimate(),
       HomePage(),
@@ -255,7 +267,6 @@ class _Main_PageState extends State<Main_Page> {
               onTap: (){
                 print('로그인');
                 Get.dialog(P_Login());
-
               },
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 100.0, horizontal: 80.0),

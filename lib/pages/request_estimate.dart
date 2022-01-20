@@ -60,7 +60,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
     OrderData.updateOrder(controller.pro.value.pro_id.split("@")[0]+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!).then((value){  //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
       if(value == "success"){
         print('Insert Success');
-        Get.toNamed('/request_estimate2/true?serviceType=$_serviceType&order=$orderId');
+        Get.toNamed("/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId");
       }else{
         print('$value : Insert Fails');
       }

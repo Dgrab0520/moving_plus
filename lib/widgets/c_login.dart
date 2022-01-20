@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
+import 'package:moving_plus/pages/new_page.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 import 'package:moving_plus/pages/p_signup.dart';
 import 'package:kakao_flutter_sdk/all.dart';
@@ -13,7 +18,8 @@ import '../pages/main_page.dart';
 final controller = Get.put(ReactiveController());
 
 class C_Login extends StatefulWidget {
-  const C_Login({Key? key}) : super(key: key);
+  const C_Login({Key? key, required this.index}) : super(key: key);
+  final int index;
 
   @override
   _C_LoginState createState() => _C_LoginState();
@@ -26,15 +32,54 @@ class _C_LoginState extends State<C_Login> {
   String user_id = 'None';
   String user_name = 'None';
   String profile_image = 'None';
+  String? user_recom;
   bool _default_Image = true;
+  String loginRoot = '';
+  List<Customer> customer = [];
+
+  getCus(){
+    Customer_Data.get_Customer(user_id!).then((value){
+      customer = value;
+    });
+    if(customer.length == 0){
+      print('customers length : ${customer.length}');
+    }else{
+      print('customer length : ${customer.length}');
+    }
+  }
+  
+  insertCus(){
+    Customer_Data.insertCustomer(user_id!, user_recom!).then((value){
+      if(value == "success"){
+        print('Insert Success');
+        Get.offAll(Main_Page(index: 1));
+      }else{
+        print('$value : Insert Fails');
+      }
+    });
+  }
 
 
+  //OrderId Random 생성
+  String generateRandomString(int len) {
+    var r = Random();
+    const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
 
   @override
   void initState(){
     _initTexts();
     _initKakaoTalkInstalled();
     print('_default_Image: $_default_Image');
+    user_id = controller.pro.value.pro_id;
+    loginRoot = widget.index == 1 ? 'interior_page' : 'main_page';
+    user_recom = generateRandomString(8);
+    Future.delayed(const Duration(seconds: 2), (){
+      setState(() {
+        getCus();
+      });
+    });
     super.initState();
   }
 
@@ -94,13 +139,24 @@ class _C_LoginState extends State<C_Login> {
           profile_img: _default_Image ? "default_image" : profile_image,
           pro_token: 'None',
       );
-      Get.offAll(Main_Page(index: 1));
+      // Customer_Data.get_Customer(user_id!).then((value){
+      //   customer = value;
+      // });
+      print('customer.length ${customer.length}');
+      if(customer.length == 0){
+        insertCus();
+        print('asddsa');
+      }else{
+        if(loginRoot == 'main_page'){
+          Get.offAll(Main_Page(index: 1));
+        }else{
+          Get.back();
+        }
+      }
     }catch(e){
       print("Error on issuing access token: $e");
     }
   }
-
-
 
 
   @override
