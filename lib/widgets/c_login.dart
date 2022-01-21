@@ -147,9 +147,12 @@ class _C_LoginState extends State<C_Login> {
         insertCus();
         print('asddsa');
       }else{
+        print('asddsa2');
         if(loginRoot == 'main_page'){
+          print('asddsa3');
           Get.offAll(Main_Page(index: 1));
         }else{
+          print('asddsa4');
           Get.back();
         }
       }
