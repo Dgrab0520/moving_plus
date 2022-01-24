@@ -57,7 +57,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
   static final storage = new FlutterSecureStorage();  //flutter_secure_storage 사용을 위한 초기화 작업
 
   updateOrder(){
-    OrderData.updateOrder(controller.pro.value.pro_id.split("@")[0]+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!).then((value){  //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
+    OrderData.updateOrder(controller.pro.value.pro_id.split("@")[0]+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!, _serviceType!).then((value){  //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
       if(value == "success"){
         print('Insert Success');
         Get.toNamed("/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId");
