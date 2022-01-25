@@ -377,81 +377,89 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           ],
                         ),
                       ),
-                      InkWell(
-                        onTap: () async {
-                          var result = await Get.to(P_Detail_Estimate());
-                          print(result);
-                          setState(() {
-                            isSelect = false;
-
-                            Chat chat = Chat(
-                                id: 0,
-                                estimateId: 0,
-                                customerId: 0,
-                                proId: 0,
-                                text: "",
-                                image: "",
-                                estimatePrice: 0,
-                                finalPrice: result,
-                                isPro: isPro,
-                                createAt: "");
-                            ChatData.putChat(chat).then((value) async {
-                              if (value.isNotEmpty) {
-                                print(value);
-                                chat.createAt = value[0];
-
+                      isPro == 0
+                          ? Container()
+                          : InkWell(
+                              onTap: () async {
+                                var result = await Get.to(P_Detail_Estimate());
+                                print(result);
                                 setState(() {
-                                  chatting.insert(0, chat);
                                   isSelect = false;
+
+                                  Chat chat = Chat(
+                                      id: 0,
+                                      estimateId: 0,
+                                      customerId: 0,
+                                      proId: 0,
+                                      text: "",
+                                      image: "",
+                                      estimatePrice: 0,
+                                      finalPrice: result,
+                                      isPro: isPro,
+                                      createAt: "");
+                                  ChatData.putChat(chat).then((value) async {
+                                    if (value.isNotEmpty) {
+                                      print(value);
+                                      chat.createAt = value[0];
+
+                                      setState(() {
+                                        chatting.insert(0, chat);
+                                        isSelect = false;
+                                        Timer(
+                                            Duration(milliseconds: 200),
+                                            () => scrollController.animateTo(
+                                                0.0,
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                curve: Curves.easeInOut));
+                                      });
+                                      final HttpsCallableResult result =
+                                          await callable.call(
+                                        <String, dynamic>{
+                                          "token": token,
+                                          "title": "title",
+                                          "body": "body",
+                                        },
+                                      );
+                                    }
+                                  });
                                   Timer(
                                       Duration(milliseconds: 200),
                                       () => scrollController.animateTo(0.0,
                                           duration: Duration(milliseconds: 300),
                                           curve: Curves.easeInOut));
                                 });
-                                final HttpsCallableResult result =
-                                    await callable.call(
-                                  <String, dynamic>{
-                                    "token": token,
-                                    "title": "title",
-                                    "body": "body",
-                                  },
-                                );
-                              }
-                            });
-                            Timer(
-                                Duration(milliseconds: 200),
-                                () => scrollController.animateTo(0.0,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut));
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: 10, left: 10, right: 10, bottom: 3),
-                              padding: EdgeInsets.all(8),
-                              width: 45,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color(0xFFcccccc),
-                                ),
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: 10,
+                                        left: 10,
+                                        right: 10,
+                                        bottom: 3),
+                                    padding: EdgeInsets.all(8),
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(
+                                        width: 1,
+                                        color: Color(0xFFcccccc),
+                                      ),
+                                    ),
+                                    child: Image.asset('assets/list.png'),
+                                  ),
+                                  Text(
+                                    '최종 견적',
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: 'NanumSquareB'),
+                                  ),
+                                ],
                               ),
-                              child: Image.asset('assets/list.png'),
                             ),
-                            Text(
-                              '최종 견적',
-                              style: TextStyle(
-                                  fontSize: 11, fontFamily: 'NanumSquareB'),
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   )
                 : null,
