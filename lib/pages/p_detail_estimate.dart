@@ -12,6 +12,8 @@ class P_Detail_Estimate extends StatefulWidget {
 class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
   var finalPriceController = MoneyMaskedTextController(
       decimalSeparator: '', thousandSeparator: ',', precision: 0);
+  var finalDownPriceController = MoneyMaskedTextController(
+      decimalSeparator: '', thousandSeparator: ',', precision: 0);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -163,6 +165,13 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                           style: TextStyle(
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.bold),
+                                          onChanged: (value) {
+                                            finalDownPriceController
+                                                .updateValue(
+                                                    finalPriceController
+                                                            .numberValue /
+                                                        10);
+                                          },
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
                                             enabledBorder: UnderlineInputBorder(
@@ -203,17 +212,22 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                                             right: 10, left: 10),
                                         height: 30,
                                         child: TextField(
+                                          controller: finalDownPriceController,
                                           enabled: false,
                                           keyboardType: TextInputType.text,
                                           onChanged: (text) {},
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontFamily: 'NanumSquareB',
+                                          ),
                                           decoration: InputDecoration(
-                                            labelText: '5,270,000원',
-                                            labelStyle: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.black,
-                                              fontFamily: 'NanumSquareB',
-                                            ),
                                             border: InputBorder.none,
+                                            suffixText: '원  ',
+                                            suffixStyle: TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black54),
                                           ),
                                         ),
                                       ),
@@ -421,8 +435,12 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                     SizedBox(height: 20),
                     InkWell(
                       onTap: () {
-                        Get.back(
-                            result: finalPriceController.numberValue.toInt());
+                        if (finalPriceController.numberValue != 0) {
+                          Get.back(
+                              result: finalPriceController.numberValue.toInt());
+                        } else {
+                          Get.snackbar("오류", "최종 금액을 입력해주세요");
+                        }
                       },
                       child: Container(
                         margin: EdgeInsets.only(left: 35, right: 35),

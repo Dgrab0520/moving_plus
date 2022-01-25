@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -13,6 +14,11 @@ import 'package:moving_plus/widgets/p_login.dart';
 import 'homepage.dart';
 
 final controller = Get.put(ReactiveController());
+
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification?.title);
+}
 
 class Main_Page extends StatefulWidget {
   const Main_Page({Key? key, required this.index}) : super(key: key);
@@ -40,6 +46,20 @@ class _Main_PageState extends State<Main_Page> {
 
   @override
   void initState() {
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.instance.getToken().then((value) => print(value));
+//firebase message 초기화
+
+    FirebaseMessaging.onMessage.listen((message) {});
+//앱 실행중일때
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {});
+//알람을 클릭했을때
+
+    FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+//앱이 백그라운드에서 실행중일때
+    /////////firebase
+
     _selectedIndex = widget.index;
     user_id = controller.pro.value.pro_id;
     print('user_idd : ${user_id}');

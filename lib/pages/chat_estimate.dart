@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui' as ui;
 
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -26,20 +29,73 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   bool isSelect = false;
   bool isTextChange = false;
 
+  int isPro = 1;
   int textLines = 1;
 
   List<Chat> chatting = [];
 
+  String token =
+      "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
+
   TextEditingController chatTextController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
+  HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendFCM',
+      options: HttpsCallableOptions(timeout: const Duration(seconds: 5)));
+
   @override
   void initState() {
+    FirebaseMessaging.onMessage.listen((message) {
+      ChatData.getChat(0).then((value) {
+        print(value);
+        setState(() {
+          chatting = value;
+        });
+      });
+      Timer(
+          Duration(milliseconds: 300),
+          () => scrollController.animateTo(0,
+              duration: Duration(milliseconds: 300), curve: Curves.easeInOut));
+    });
+//앱 실행중일때
+    if (controller.pro.value.proPrimaryId != 0) {
+      isPro = 1;
+    } else {
+      isPro = 0;
+    }
+
+    print(isPro);
     ChatData.getChat(0).then((value) {
       print(value);
       setState(() {
         chatting = value;
       });
+      for (int index = 0; index < chatting.length; index++) {
+        DateTime currentDate = DateTime(1);
+        DateTime pastDate = DateTime(1);
+        if (index != 0) {
+          currentDate = DateTime.parse(chatting[index - 1].createAt);
+          pastDate = DateTime.parse(chatting[index].createAt);
+        }
+
+        if ((currentDate.difference(pastDate).inHours / 24).round() > 0) {
+          print(currentDate);
+          print(pastDate);
+          chatting.insert(
+              index,
+              Chat(
+                  id: 0,
+                  estimateId: 0,
+                  customerId: 0,
+                  proId: 0,
+                  text: "",
+                  image: "",
+                  estimatePrice: 0,
+                  finalPrice: 0,
+                  isPro: 3,
+                  createAt: chatting[index].createAt));
+        }
+      }
     });
     Timer(
         Duration(milliseconds: 300),
@@ -98,33 +154,46 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       reverse: true,
                       itemCount: chatting.length,
                       itemBuilder: (BuildContext context, int index) {
-                        if (chatting[index].finalPrice != 0) {
-                          return FinalPrice(
-                            price: chatting[index].finalPrice,
-                            createAt: chatting[index].createAt,
-                          );
-                        } else if (chatting[index].image != "") {
-                          return ImageChat(
-                            image:
-                                "$homeURL/plus/chat_image/${chatting[index].image}",
-                            createAt: chatting[index].createAt,
-                          );
-                        } else if (chatting[index].estimatePrice != 0) {
-                          return EstimatePrice(
-                            price: chatting[index].estimatePrice,
-                            createAt: chatting[index].createAt,
+                        if (chatting[index].isPro == 3) {
+                          return CenterDate(
+                            currentDate:
+                                DateTime.parse(chatting[index - 1].createAt),
                           );
                         } else {
-                          if (chatting[index].isPro == 1) {
-                            return MyChat(
-                              text: chatting[index].text,
+                          if (chatting[index].finalPrice != 0) {
+                            return FinalPrice(
+                              price: chatting[index].finalPrice,
                               createAt: chatting[index].createAt,
+                              isPro: isPro == 1 ? true : false,
+                            );
+                          } else if (chatting[index].image != "") {
+                            return ImageChat(
+                              image:
+                                  "$homeURL/plus/chat_image/${chatting[index].image}",
+                              createAt: chatting[index].createAt,
+                              isPro:
+                                  isPro == chatting[index].isPro ? true : false,
+                            );
+                          } else if (chatting[index].estimatePrice != 0) {
+                            return EstimatePrice(
+                              price: chatting[index].estimatePrice,
+                              createAt: chatting[index].createAt,
+                              isPro: isPro == 1 ? true : false,
                             );
                           } else {
-                            return OtherChat(
-                              text: chatting[index].text,
-                              createAt: chatting[index].createAt,
-                            );
+                            if (chatting[index].isPro == 1) {
+                              return MyChat(
+                                text: chatting[index].text,
+                                createAt: chatting[index].createAt,
+                                isPro: isPro == 1 ? true : false,
+                              );
+                            } else {
+                              return OtherChat(
+                                text: chatting[index].text,
+                                createAt: chatting[index].createAt,
+                                isPro: isPro == 1 ? true : false,
+                              );
+                            }
                           }
                         }
                       }),
@@ -220,7 +289,6 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                 InkWell(
                     onTap: () {
                       if (chatTextController.text != "") {
-                        int isPro = 1;
                         Chat chat = Chat(
                             id: 0,
                             estimateId: 0,
@@ -232,10 +300,11 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                             finalPrice: 0,
                             isPro: isPro,
                             createAt: "");
-                        ChatData.putChat(chat).then((value) {
+                        ChatData.putChat(chat).then((value) async {
                           if (value.isNotEmpty) {
                             print(value);
                             chat.createAt = value[0];
+
                             setState(() {
                               chatting.insert(0, chat);
 
@@ -248,6 +317,14 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                       duration: Duration(milliseconds: 300),
                                       curve: Curves.easeInOut));
                             });
+                            final HttpsCallableResult result =
+                                await callable.call(
+                              <String, dynamic>{
+                                "token": token,
+                                "title": "title",
+                                "body": "body",
+                              },
+                            );
                           }
                         });
                       } else {}
@@ -306,7 +383,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           print(result);
                           setState(() {
                             isSelect = false;
-                            int isPro = 1;
+
                             Chat chat = Chat(
                                 id: 0,
                                 estimateId: 0,
@@ -318,12 +395,13 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                 finalPrice: result,
                                 isPro: isPro,
                                 createAt: "");
-                            ChatData.putChat(chat).then((value) {
+                            ChatData.putChat(chat).then((value) async {
                               if (value.isNotEmpty) {
                                 print(value);
                                 chat.createAt = value[0];
+
                                 setState(() {
-                                  chatting.add(chat);
+                                  chatting.insert(0, chat);
                                   isSelect = false;
                                   Timer(
                                       Duration(milliseconds: 200),
@@ -331,6 +409,14 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                           duration: Duration(milliseconds: 300),
                                           curve: Curves.easeInOut));
                                 });
+                                final HttpsCallableResult result =
+                                    await callable.call(
+                                  <String, dynamic>{
+                                    "token": token,
+                                    "title": "title",
+                                    "body": "body",
+                                  },
+                                );
                               }
                             });
                             Timer(
@@ -384,7 +470,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
         });
     if (result != null) {
       File file = File(result.files.single.path!);
-      int isPro = 1;
+
       Chat chat = Chat(
           id: 0,
           estimateId: 0,
@@ -396,13 +482,15 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
           finalPrice: 0,
           isPro: isPro,
           createAt: "");
-      ChatData.putChat(chat, file: file).then((value) {
+      print(isPro);
+      ChatData.putChat(chat, file: file).then((value) async {
         if (value.isNotEmpty) {
           print(value);
           chat.createAt = value[0];
           chat.image = value[1];
+
           setState(() {
-            chatting.add(chat);
+            chatting.insert(0, chat);
             isSelect = false;
             Timer(
                 Duration(milliseconds: 200),
@@ -410,6 +498,13 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                     duration: Duration(milliseconds: 300),
                     curve: Curves.easeInOut));
           });
+          final HttpsCallableResult result = await callable.call(
+            <String, dynamic>{
+              "token": token,
+              "title": "title",
+              "body": "body",
+            },
+          );
         }
       });
     } else {
@@ -418,15 +513,41 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   }
 }
 
+class CenterDate extends StatelessWidget {
+  const CenterDate({
+    Key? key,
+    required this.currentDate,
+  }) : super(key: key);
+  final DateTime currentDate;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> weekDay = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0),
+      child: Text(
+        '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}',
+        style: TextStyle(
+          fontSize: 14,
+          fontFamily: 'NanumSquareB',
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 class ImageChat extends StatelessWidget {
   const ImageChat({
     Key? key,
     required this.image,
     required this.createAt,
+    required this.isPro,
   }) : super(key: key);
 
   final String image;
   final String createAt;
+  final bool isPro;
 
   @override
   Widget build(BuildContext context) {
@@ -435,6 +556,7 @@ class ImageChat extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
+        textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
         children: [
           Expanded(
             child: Container(),
@@ -442,6 +564,7 @@ class ImageChat extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
+            textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
             children: [
               Text(
                 time,
@@ -477,10 +600,12 @@ class MyChat extends StatelessWidget {
     Key? key,
     required this.text,
     required this.createAt,
+    required this.isPro,
   }) : super(key: key);
 
   final String text;
   final String createAt;
+  final bool isPro;
 
   @override
   Widget build(BuildContext context) {
@@ -489,6 +614,7 @@ class MyChat extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
+        textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
         children: [
           Expanded(
             child: Container(),
@@ -496,6 +622,7 @@ class MyChat extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
+            textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
             children: [
               Text(
                 time,
@@ -535,10 +662,12 @@ class OtherChat extends StatelessWidget {
     Key? key,
     required this.text,
     required this.createAt,
+    required this.isPro,
   }) : super(key: key);
 
   final String text;
   final String createAt;
+  final bool isPro;
 
   @override
   Widget build(BuildContext context) {
@@ -547,10 +676,12 @@ class OtherChat extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
+        textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
+            textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: Get.width / 2),
@@ -589,10 +720,15 @@ class OtherChat extends StatelessWidget {
 }
 
 class FinalPrice extends StatelessWidget {
-  const FinalPrice({Key? key, required this.price, required this.createAt})
+  const FinalPrice(
+      {Key? key,
+      required this.price,
+      required this.createAt,
+      required this.isPro})
       : super(key: key);
   final int price;
   final String createAt;
+  final bool isPro;
 
   @override
   Widget build(BuildContext context) {
@@ -607,6 +743,7 @@ class FinalPrice extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
+        textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
         children: [
           Expanded(
             child: Container(),
@@ -616,6 +753,8 @@ class FinalPrice extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
+              textDirection:
+                  isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
               children: [
                 Text(
                   time,
@@ -724,9 +863,7 @@ class FinalPrice extends StatelessWidget {
                         ),
                         SizedBox(height: 13),
                         InkWell(
-                          onTap: () {
-                            Get.to(PortfolioEdit_Page());
-                          },
+                          onTap: () {},
                           child: Container(
                             width: Get.width,
                             height: 28,
@@ -760,10 +897,15 @@ class FinalPrice extends StatelessWidget {
 }
 
 class EstimatePrice extends StatelessWidget {
-  const EstimatePrice({Key? key, required this.price, required this.createAt})
+  const EstimatePrice(
+      {Key? key,
+      required this.price,
+      required this.createAt,
+      required this.isPro})
       : super(key: key);
   final int price;
   final String createAt;
+  final bool isPro;
   @override
   Widget build(BuildContext context) {
     var finalPriceController = MoneyMaskedTextController(
@@ -773,18 +915,12 @@ class EstimatePrice extends StatelessWidget {
     String time = DateFormat("HH:mm").format(createAtTime);
     return Column(
       children: [
-        Text(
-          '2021년 12월 16일 목요일',
-          style: TextStyle(
-            fontSize: 14,
-            fontFamily: 'NanumSquareB',
-          ),
-          textAlign: TextAlign.center,
-        ),
+        CenterDate(currentDate: createAtTime),
         SizedBox(height: 30),
         Padding(
           padding: const EdgeInsets.only(bottom: 30.0),
           child: Row(
+            textDirection: isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
             children: [
               Expanded(
                 child: Container(),
@@ -794,6 +930,8 @@ class EstimatePrice extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
+                  textDirection:
+                      isPro ? ui.TextDirection.ltr : ui.TextDirection.rtl,
                   children: [
                     Text(
                       time,
