@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
+import 'package:moving_plus/models/estimate_model.dart';
 import 'package:moving_plus/models/order_model.dart';
 import 'package:moving_plus/pages/request_form.dart';
 
@@ -38,6 +40,7 @@ class _Request_ReceivedState extends State<Request_Received> {
   }
 
 
+
   @override
   void initState(){
     getOrder();
@@ -70,7 +73,6 @@ class _Request_ReceivedState extends State<Request_Received> {
           children: [
             SizedBox(height:20),
             Container(
-
               height: Get.height*0.89,
               width: Get.width,
               child: _isLoading ? ListView.builder(
@@ -78,9 +80,8 @@ class _Request_ReceivedState extends State<Request_Received> {
                   itemBuilder: (_, int index){
                     return Container(
                       margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15.0),
                       width: Get.width,
-                      height: 165,
                       decoration:BoxDecoration(
                         border: Border.all(
                           width: 1.0,
@@ -89,6 +90,8 @@ class _Request_ReceivedState extends State<Request_Received> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,44 +122,28 @@ class _Request_ReceivedState extends State<Request_Received> {
                               ),
                             ],
                           ),
-                          SizedBox(height:10),
-                          Row(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('${order[index].address}',
-                                    style:TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: 'NanumSquareR',
-                                    ),
-                                    softWrap: false,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                  SizedBox(height:3),
-                                  Row(
-                                    children: [
-                                      Text('${order[index].user_name} | 받은 견적서',
-                                        style:TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: 'NanumSquareR',
-                                        ),
-                                      ),
-                                      Text('4개',
-                                        style:TextStyle(
-                                          fontSize: 11,
-                                          color:Color(0xFF025595),
-                                          fontFamily: 'NanumSquareR',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                          SizedBox(height:5),
+                          Text('${order[index].user_name}',
+                            style:TextStyle(
+                              fontSize: 11,
+                              fontFamily: 'NanumSquareR',
+                            ),
+                            softWrap: false,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
+                          SizedBox(height:5),
+                          Text('${order[index].address}',
+                            style:TextStyle(
+                              fontSize: 11,
+                              fontFamily: 'NanumSquareR',
+                            ),
+                            softWrap: false,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+
+
                           SizedBox(height:15),
                           Row(
                             children: [

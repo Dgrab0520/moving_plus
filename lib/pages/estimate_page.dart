@@ -1,11 +1,16 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
+import 'package:moving_plus/models/estimate_model.dart';
 
 import 'chat_estimate.dart';
+
+
+
+final controller = Get.put(ReactiveController());
 
 class Estimate_Page extends StatefulWidget{
   @override
@@ -16,17 +21,38 @@ class _Estimate_PageState extends State<Estimate_Page>{
 
   String? estimateId = '';
   String? order_id = Get.parameters['order_id'];
+  bool _isSend = false;
+  List<Estimate> estimate = [];
 
   TextEditingController priceController = TextEditingController();
   TextEditingController detailController = TextEditingController();
 
-  UpdateEstimate(){  //DB에 order_id table 만들고 estimate_data 파일 수정 및 UpdateEstimate() 수정하기.
-    EstimateData.insertEstimate(estimateId!, priceController.text, detailController.text).then((value){
+  UpdateEstimate(){
+    EstimateData.insertEstimate(controller.pro.value.pro_id, estimateId!, order_id!, priceController.text, detailController.text).then((value){
       if(value == "success"){
         print('Insert Success');
-        Get.back();
+        Get.offAndToNamed('/request_form/true?order_id=${order_id}');
       }else{
         print('$value : Insert Fails');
+        Get.snackbar('전송 실패', '견적서 전송에 실패하였습니다\n네트워크 상태를 확인해주세요', backgroundColor: Colors.white);
+      }
+    });
+  }
+
+
+  getRecord(){
+    EstimateData.getEstimate_record(order_id!, controller.pro.value.pro_id).then((value){
+      setState(() {
+        estimate = value;
+      });
+      if(value.isEmpty){
+        setState(() {
+          _isSend = true;
+        });
+      }else{
+        setState(() {
+          _isSend = false;
+        });
       }
     });
   }
@@ -35,6 +61,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
   @override
   void initState(){
     estimateId = generateRandomString(10);
+    getRecord();
     super.initState();
   }
 
@@ -195,7 +222,12 @@ class _Estimate_PageState extends State<Estimate_Page>{
                         ),
                         InkWell(
                           onTap:(){
-                            Get.to(Chat_Estimate());
+                            if(_isSend){
+                              UpdateEstimate();
+                            }else{
+                              Get.snackbar('견적서 전송 실패', '이미 보낸 견적서 입니다', backgroundColor: Colors.white);
+                            }
+                            // Get.to(Chat_Estimate());
                           },
                           child: Container(
                             width: 100.0,

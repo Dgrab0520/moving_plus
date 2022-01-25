@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
+import 'package:moving_plus/models/estimate_model.dart';
 import 'package:moving_plus/models/order_model.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
+import 'package:moving_plus/pages/request_received..dart';
 
 import 'estimate_page.dart';
 import 'main_arlim.dart';
@@ -16,8 +19,14 @@ class RequestForm extends StatefulWidget {
 
 class _RequestFormState extends State<RequestForm> {
   List<Order> order = [];
+  List<Estimate> estimate = [];
   bool _isLoading = false;
+  bool _isLoading2 = false;
+  int _countEstimate = 0;
+  int index = 1;
   String? order_id = Get.parameters['order_id'];
+
+
 
   getOrder(){
     OrderList_Data.getEach_Order(order_id!).then((value){
@@ -32,14 +41,39 @@ class _RequestFormState extends State<RequestForm> {
       }else{
         setState(() {
           _isLoading = true;
+          index = int.parse('${order[0].index}');
+        });
+        print('index : ${index}');
+      }
+    });
+  }
+
+
+  getEstimate(){
+    EstimateData.getEstimate(order_id!).then((value){
+      setState(() {
+        estimate = value;
+      });
+      if(value.isEmpty){
+        print('wwweq2 $_countEstimate');
+        setState(() {
+          _isLoading2 = false;
+        });
+      }else{
+        print('wwweq1 $_countEstimate');
+        setState(() {
+          _isLoading2 = true;
+          _countEstimate = value.length;
         });
       }
+      print('wwweq3 $_countEstimate');
     });
   }
 
   @override
   void initState(){
     getOrder();
+    getEstimate();
     super.initState();
   }
 
@@ -107,7 +141,7 @@ class _RequestFormState extends State<RequestForm> {
                                       fontSize:12,
                                     ),
                                   ),
-                                  Text('4개',
+                                  Text(_isLoading2 ? ' $_countEstimate개' : ' 0개',
                                     style:TextStyle(
                                         fontSize:12,
                                         color:Color(0xFF025595)
@@ -428,7 +462,12 @@ class _RequestFormState extends State<RequestForm> {
               flex: 1,
               child: InkWell(
                 onTap:(){
-                  Get.toNamed('/estimate/true?order_id=$order_id');
+                  if(index*10 > _countEstimate){
+                    Get.offNamed('/estimate/true?order_id=$order_id');
+                  }else{
+                    Get.snackbar('견적 만료', '견적 가능 개수가 초과되어 견적을 보낼 수 없습니다', backgroundColor: Colors.white);
+                  }
+
                 },
                 child: Container(
                   width:200,

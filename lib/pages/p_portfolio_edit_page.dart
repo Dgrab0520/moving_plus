@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/pro_intro_data.dart';
+import 'package:moving_plus/models/pro_intro_model.dart';
+
+
+
+final controller = Get.put(ReactiveController());
 
 class PortfolioEdit_Page extends StatefulWidget{
   @override
@@ -8,6 +15,32 @@ class PortfolioEdit_Page extends StatefulWidget{
 
 class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
   bool _isBtn = true;//파트너 정보
+  List<Pro_Intro> pro = [];
+  bool _isLoading = false;
+
+
+  @override
+  void initState(){
+    getPro_Detail();
+    super.initState();
+  }
+
+  getPro_Detail(){
+    ProIntro_Data.getProIntro(controller.pro.value.pro_id).then((value){
+      setState(() {
+        pro = value;
+      });
+      if(value.isEmpty){
+        setState(() {
+          _isLoading = false;
+        });
+      }else{
+        setState(() {
+          _isLoading = true;
+        });
+      }
+    });
+  }
 
 
   @override
@@ -46,7 +79,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                         backgroundImage: AssetImage('assets/img4.png'),
                       ),
                       SizedBox(height: 10.0,),
-                      Text('인테리어 작업대', style:
+                      Text('${pro[0].com_name}', style:
                       TextStyle(
                         fontSize: 18.0,
                         fontFamily: 'NanumSquareEB',
@@ -69,11 +102,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                               borderRadius: BorderRadius.circular(7.0)
                           ),
                           child: Center(
-                            child: Text('문의 하기', style:
+                            child: Text('문의하기', style:
                             TextStyle(
-                                fontSize: 16.0,
+                                fontSize: 14.0,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600
                             ),
                             ),
                           ),
