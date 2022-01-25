@@ -57,7 +57,9 @@ dependencies:
   remedi_kopo: ^0.0.1
   flutter_secure_storage: ^5.0.2
   kakao_flutter_sdk: ^0.8.1
-
+  flutter_masked_text2: ^0.9.1
+  photo_view: ^0.13.0
+  intl: ^0.17.0
 
 
 

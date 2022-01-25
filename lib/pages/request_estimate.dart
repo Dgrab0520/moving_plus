@@ -1,19 +1,15 @@
 import 'dart:math';
 
-import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/order_data.dart';
-import 'package:moving_plus/pages/request_estimate2.dart';
-import 'package:progress_indicator/progress_indicator.dart';
-import 'package:timelines/timelines.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'package:timelines/timelines.dart';
 
 final _processes = [
   '필수정보',
@@ -27,8 +23,9 @@ const completeColor = Color(0xff5e6172);
 const inProgressColor = Color(0xff5ec792);
 
 class Request_Estimate extends StatefulWidget {
-
-  const Request_Estimate({Key? key,}) : super(key: key);
+  const Request_Estimate({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _Request_EstimateState createState() => _Request_EstimateState();
@@ -48,27 +45,39 @@ class _Request_EstimateState extends State<Request_Estimate> {
 
   String addressJSON = '';
   String? _serviceType = '';
-  String orderInfo = "";  //자동 로그인시 로그인 정보 저장
+  String orderInfo = ""; //자동 로그인시 로그인 정보 저장
   String? name = '';
   String? orderId = '';
   String? space_type = '';
   String? size_unit = '';
 
-  static final storage = new FlutterSecureStorage();  //flutter_secure_storage 사용을 위한 초기화 작업
+  static final storage =
+      new FlutterSecureStorage(); //flutter_secure_storage 사용을 위한 초기화 작업
 
-  updateOrder(){
-    OrderData.updateOrder(controller.pro.value.pro_id.split("@")[0]+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!).then((value){  //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
-      if(value == "success"){
+  updateOrder() {
+    OrderData.updateOrder(
+            controller.pro.value.pro_id.split("@")[0] + orderId!,
+            controller.pro.value.pro_id,
+            nameController!.text,
+            phController.text,
+            addressJSON,
+            addressController.text,
+            space_type!,
+            areaController.text + size_unit!)
+        .then((value) {
+      //controller.pro.value.pro_id+orderId!, controller.pro.value.pro_id, nameController!.text, phController!.text, addressJSON, addressController!.text, space_type!, areaController!.text+size_unit!
+      if (value == "success") {
         print('Insert Success');
-        Get.toNamed("/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId");
-      }else{
+        Get.toNamed(
+            "/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId");
+      } else {
         print('$value : Insert Fails');
       }
     });
   }
 
   @override
-  void initState(){
+  void initState() {
     //비동기로 flutter secure storage 정보를 불러오는 작업.
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _asyncMethod();
@@ -77,27 +86,26 @@ class _Request_EstimateState extends State<Request_Estimate> {
     _serviceType = Get.parameters['serviceType'];
     print('orderId : $orderId');
     nameController!.text = name!;
-    if(_gongan5){
+    if (_gongan5) {
       setState(() {
         space_type = '거주';
       });
-    }else if(_gongan6){
+    } else if (_gongan6) {
       setState(() {
         space_type = '상업';
       });
     }
-    if(_buttonPressed2){
+    if (_buttonPressed2) {
       setState(() {
         size_unit = '평형';
       });
-    }else if(_buttonPressed){
+    } else if (_buttonPressed) {
       setState(() {
         size_unit = '㎡';
       });
     }
     super.initState();
   }
-
 
   _asyncMethod() async {
     //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
@@ -109,19 +117,19 @@ class _Request_EstimateState extends State<Request_Estimate> {
     if (orderInfo != null) {
       setState(() {
         addressJSON = '${orderInfo.split("/")[1]}';
-        addressController!.text = '${orderInfo.split("/")[3]}';
-        areaController!.text = '${orderInfo.split("/")[5]}';
-        _gongan5 =  '${orderInfo.split("/")[7]}' == 'true';
-        _gongan6 =  '${orderInfo.split("/")[9]}' == 'true';
-        _buttonPressed =  '${orderInfo.split("/")[11]}' == 'true';
-        _buttonPressed2 =  '${orderInfo.split("/")[13]}' == 'true';
+        addressController.text = '${orderInfo.split("/")[3]}';
+        areaController.text = '${orderInfo.split("/")[5]}';
+        _gongan5 = '${orderInfo.split("/")[7]}' == 'true';
+        _gongan6 = '${orderInfo.split("/")[9]}' == 'true';
+        _buttonPressed = '${orderInfo.split("/")[11]}' == 'true';
+        _buttonPressed2 = '${orderInfo.split("/")[13]}' == 'true';
         nameController!.text = '${orderInfo.split("/")[15]}';
-        phController!.text = '${orderInfo.split("/")[17]}';
+        phController.text = '${orderInfo.split("/")[17]}';
       });
       // print('Success & return ${orderInfo.split("/")[7]} ${orderInfo.split("/")[9]}');
       // print("gong5 : ${orderInfo.split("/")[7]}\ngong6 : ${orderInfo.split("/")[9]}\n_buttonPressed : ${orderInfo.split("/")[11]}\n_buttonPressed2 : ${orderInfo.split("/")[13]}");
 
-    }else{
+    } else {
       print('false & Again');
     }
   }
@@ -129,16 +137,17 @@ class _Request_EstimateState extends State<Request_Estimate> {
   //OrderId Random 생성
   String generateRandomString(int len) {
     var r = Random();
-    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
+        .join();
   }
-
 
   //TimeLine 색상 변경
   Color getColor(int index) {
     if (index == 2) {
       return inProgressColor;
-    } else{
+    } else {
       return completeColor;
     }
   }
@@ -149,24 +158,27 @@ class _Request_EstimateState extends State<Request_Estimate> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        title: Text('견적 신청',
+        title: Text(
+          '견적 신청',
           style: TextStyle(
-            color:Colors.white,
-            fontSize:17,
+            color: Colors.white,
+            fontSize: 17,
             fontFamily: 'NanumSquareB',
           ),
         ),
         centerTitle: true,
         backgroundColor: Color(0xFF025595),
         leading: IconButton(
-            onPressed: (){
+            onPressed: () {
               Get.back();
             },
-            icon: Icon(Icons.arrow_back,color: Colors.white,)
-        ),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
       ),
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -175,11 +187,12 @@ class _Request_EstimateState extends State<Request_Estimate> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.only(left:15,right:15,top:20,bottom:20),
-                width:Get.width,
-                decoration:BoxDecoration(
-                  border:Border(
-                    bottom:BorderSide(width:1, color:Color(0xFFcccccc)),
+                padding:
+                    EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
+                width: Get.width,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: Color(0xFFcccccc)),
                   ),
                 ),
                 child: Column(
@@ -193,15 +206,12 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         theme: TimelineThemeData(
                             direction: Axis.horizontal,
                             connectorTheme: ConnectorThemeData(
-                                space: 15.0,
-                                thickness: 3.0
-                            )
-                        ),
+                                space: 15.0, thickness: 3.0)),
                         builder: TimelineTileBuilder.connected(
                           connectionDirection: ConnectionDirection.before,
                           itemExtentBuilder: (_, __) =>
-                          MediaQuery.of(context).size.width / _processes.length,
-
+                              MediaQuery.of(context).size.width /
+                              _processes.length,
                           contentsBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 8.0),
@@ -210,7 +220,9 @@ class _Request_EstimateState extends State<Request_Estimate> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 11.0,
-                                  color: index == 0 ? inProgressColor : completeColor,
+                                  color: index == 0
+                                      ? inProgressColor
+                                      : completeColor,
                                 ),
                               ),
                             );
@@ -225,11 +237,11 @@ class _Request_EstimateState extends State<Request_Estimate> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      border: Border.all(width: 2.5, color: Colors.white),
+                                      border: Border.all(
+                                          width: 2.5, color: Colors.white),
                                       color: Color(0xff5ec792),
                                     ),
-                                  )
-                              );
+                                  ));
                             } else if (index < 2) {
                               color = completeColor;
                             } else {
@@ -270,9 +282,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
                                 final color = getColor(index);
 
                                 return DecoratedLineConnector(
-                                  decoration: BoxDecoration(
-                                      color: Color(0xff071039)
-                                  ),
+                                  decoration:
+                                      BoxDecoration(color: Color(0xff071039)),
                                 );
                               } else {
                                 return SolidLineConnector(
@@ -290,10 +301,10 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   ],
                 ),
               ),
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Container(
                 width: Get.width,
-                padding: EdgeInsets.only(left:15,right:15),
+                padding: EdgeInsets.only(left: 15, right: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,59 +315,65 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('주소',
-                            style:TextStyle(
-                              fontSize:14,
+                          Text(
+                            '주소',
+                            style: TextStyle(
+                              fontSize: 14,
                               fontFamily: 'NanumSquareB',
                             ),
                           ),
-                          SizedBox(height:10),
+                          SizedBox(height: 10),
                           GestureDetector(
-                            onTap: () async {
-                              KopoModel model = await Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => RemediKopo(),
-                                ),
-                              );
-                              print(model.toJson());
-                              setState(() {
-                                addressJSON =
-                                '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
-                              });
-                            },
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                width:MediaQuery.of(context).size.width,
-                                height:45,
-                                decoration:BoxDecoration(
-                                  color: Color(0xFFF9F9F9),
-                                  border: Border.all(
-                                    width: 1.0,
-                                    color: Color(0xFFcccccc),
+                              onTap: () async {
+                                KopoModel model = await Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => RemediKopo(),
                                   ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: Text(addressJSON == '' ? '주소를 입력해주세요' : '$addressJSON', style:
-                                    TextStyle(
-                                      fontSize: 13.0,
-                                      color: Colors.black54
+                                );
+                                print(model.toJson());
+                                setState(() {
+                                  addressJSON =
+                                      '${model.address} ${model.buildingName}${model.apartment == 'Y' ? '아파트' : ''} ${model.zonecode} ';
+                                });
+                              },
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF9F9F9),
+                                      border: Border.all(
+                                        width: 1.0,
+                                        color: Color(0xFFcccccc),
+                                      ),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: false,
-                                  ),
-                                )
-                              ),
-                            )
+                                    child: Center(
+                                      child: Text(
+                                        addressJSON == ''
+                                            ? '주소를 입력해주세요'
+                                            : '$addressJSON',
+                                        style: TextStyle(
+                                            fontSize: 13.0,
+                                            color: Colors.black54),
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: false,
+                                      ),
+                                    )),
+                              )),
+                          SizedBox(
+                            height: 5.0,
                           ),
-                          SizedBox(height: 5.0,),
                           Container(
-                            padding: EdgeInsets.only(left:10,right:10,),
-                            width:MediaQuery.of(context).size.width,
-                            height:45,
-                            decoration:BoxDecoration(
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            height: 45,
+                            decoration: BoxDecoration(
                               color: Color(0xFFF9F9F9),
                               border: Border.all(
                                 width: 1.0,
@@ -368,12 +385,13 @@ class _Request_EstimateState extends State<Request_Estimate> {
                               controller: addressController,
                               keyboardType: TextInputType.text,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 13.0, color: Colors.black87),
-                              onChanged: (text){
-                              },
+                              style: TextStyle(
+                                  fontSize: 13.0, color: Colors.black87),
+                              onChanged: (text) {},
                               decoration: InputDecoration(
                                 hintText: '상세 주소를 입력해주세요',
-                                hintStyle: TextStyle(fontSize: 13.0, color: Colors.black54),
+                                hintStyle: TextStyle(
+                                    fontSize: 13.0, color: Colors.black54),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -381,14 +399,15 @@ class _Request_EstimateState extends State<Request_Estimate> {
                         ],
                       ),
                     ),
-                    SizedBox(height:30),
-                    Text('공간 유형',
-                      style:TextStyle(
-                        fontSize:14,
+                    SizedBox(height: 30),
+                    Text(
+                      '공간 유형',
+                      style: TextStyle(
+                        fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
@@ -403,17 +422,21 @@ class _Request_EstimateState extends State<Request_Estimate> {
                             child: Text('거주'),
                             color: Colors.white,
                             textColor: Colors.black,
-                            shape: _gongan5 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            shape: _gongan5
+                                ? RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color(0xFF025595), width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  )
+                                : RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color(0xFFcccccc), width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                             padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                           ),
                         ),
-                        SizedBox(width:10),
+                        SizedBox(width: 10),
                         Expanded(
                           child: RaisedButton(
                             onPressed: () => {
@@ -426,13 +449,17 @@ class _Request_EstimateState extends State<Request_Estimate> {
                             child: Text('상업'),
                             color: Colors.white,
                             textColor: Colors.black,
-                            shape: _gongan6 ? RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFF025595), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ) : RoundedRectangleBorder(
-                              side: BorderSide(color: Color(0xFFcccccc), width: 1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            shape: _gongan6
+                                ? RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color(0xFF025595), width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  )
+                                : RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Color(0xFFcccccc), width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                             padding: EdgeInsets.fromLTRB(40, 17, 40, 17),
                           ),
                         ),
@@ -441,124 +468,128 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   ],
                 ),
               ),
-
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Container(
                 width: Get.width,
-                padding: EdgeInsets.only(left:15,right:15),
+                padding: EdgeInsets.only(left: 15, right: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('평수 ( 공급면적 )',
-                      style:TextStyle(
-                        fontSize:14,
+                    Text(
+                      '평수 ( 공급면적 )',
+                      style: TextStyle(
+                        fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
-                          flex:3,
+                          flex: 3,
                           child: Container(
-                            width: Get.width*0.4,
+                            width: Get.width * 0.4,
                             child: TextField(
                               controller: areaController,
                               style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold
-                              ),
+                                  fontSize: 12, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF025595)),
+                                  borderSide:
+                                      BorderSide(color: Color(0xFF025595)),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF025595)),
+                                  borderSide:
+                                      BorderSide(color: Color(0xFF025595)),
                                 ),
                                 hintText: '공급 면적을 입력 해주세요',
                                 hintStyle: TextStyle(
-                                  color:Color(0xFF777777),
+                                  color: Color(0xFF777777),
                                   fontSize: 12,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(width:10),
+                        SizedBox(width: 10),
                         Expanded(
                             child: RaisedButton(
-                              child: new Text('평',
-                                style:TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              textColor: Colors.white,
-                              // 2
-                              color: _buttonPressed2 ? Color(0xFF025595) : Color(0xFF777777),
-                              // 3
-                              onPressed: () => {
-                                setState(() {
-                                  _buttonPressed2 = true;
-                                  _buttonPressed = false;
-                                  size_unit = '평';
-                                })
-                              },
-                            )
-                        ),
-                        SizedBox(width:10),
+                          child: new Text(
+                            '평',
+                            style: TextStyle(
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          textColor: Colors.white,
+                          // 2
+                          color: _buttonPressed2
+                              ? Color(0xFF025595)
+                              : Color(0xFF777777),
+                          // 3
+                          onPressed: () => {
+                            setState(() {
+                              _buttonPressed2 = true;
+                              _buttonPressed = false;
+                              size_unit = '평';
+                            })
+                          },
+                        )),
+                        SizedBox(width: 10),
                         Expanded(
                             child: RaisedButton(
-                              child: new Text('㎡',
-                                style:TextStyle(
-                                  fontFamily: 'NanumSquareB',
-                                ),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              textColor: Colors.white,
-                              // 2
-                              color: _buttonPressed ? Color(0xFF025595) : Color(0xFF777777),
-                              // 3
-                              onPressed: () => {
-                                setState(() {
-                                  _buttonPressed = true;
-                                  _buttonPressed2 = false;
-                                  size_unit = '㎡';
-                                })
-                              },
-                            )
-                        ),
+                          child: new Text(
+                            '㎡',
+                            style: TextStyle(
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          textColor: Colors.white,
+                          // 2
+                          color: _buttonPressed
+                              ? Color(0xFF025595)
+                              : Color(0xFF777777),
+                          // 3
+                          onPressed: () => {
+                            setState(() {
+                              _buttonPressed = true;
+                              _buttonPressed2 = false;
+                              size_unit = '㎡';
+                            })
+                          },
+                        )),
                       ],
                     ),
                   ],
                 ),
               ),
-
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Container(
-                padding: EdgeInsets.only(left:15,right:15),
+                padding: EdgeInsets.only(left: 15, right: 15),
                 width: Get.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('성함',
-                      style:TextStyle(
-                        fontSize:14,
+                    Text(
+                      '성함',
+                      style: TextStyle(
+                        fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Container(
-                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
-                      width:MediaQuery.of(context).size.width,
-                      height:45,
-                      decoration:BoxDecoration(
+                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 8),
+                      width: MediaQuery.of(context).size.width,
+                      height: 45,
+                      decoration: BoxDecoration(
                         color: Color(0xFFF9F9F9),
                         border: Border.all(
                           width: 1.0,
@@ -569,8 +600,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                       child: TextField(
                         controller: nameController,
                         keyboardType: TextInputType.text,
-                        onChanged: (text){
-                        },
+                        onChanged: (text) {},
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
@@ -579,27 +609,27 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   ],
                 ),
               ),
-
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Container(
-                padding: EdgeInsets.only(left:15,right:15),
+                padding: EdgeInsets.only(left: 15, right: 15),
                 width: Get.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('연락처',
-                      style:TextStyle(
-                        fontSize:14,
+                    Text(
+                      '연락처',
+                      style: TextStyle(
+                        fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height: 10),
                     Container(
-                      padding: EdgeInsets.only(left:15,right:15,bottom:8),
-                      width:MediaQuery.of(context).size.width,
-                      height:45,
-                      decoration:BoxDecoration(
+                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 8),
+                      width: MediaQuery.of(context).size.width,
+                      height: 45,
+                      decoration: BoxDecoration(
                         color: Color(0xFFF9F9F9),
                         border: Border.all(
                           width: 1.0,
@@ -610,8 +640,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                       child: TextField(
                         controller: phController,
                         keyboardType: TextInputType.text,
-                        onChanged: (text){
-                        },
+                        onChanged: (text) {},
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
@@ -620,10 +649,9 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   ],
                 ),
               ),
-
-              SizedBox(height:40),
+              SizedBox(height: 40),
               InkWell(
-                onTap: (){
+                onTap: () {
                   storage.write(
                       key: "order",
                       value: "address/" +
@@ -651,26 +679,25 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           nameController!.text.toString() +
                           "/" +
                           "ph/" +
-                          phController.text.toString()
-                  );
+                          phController.text.toString());
                   updateOrder();
-
                 },
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    padding: EdgeInsets.only(left:15,right:15),
+                    padding: EdgeInsets.only(left: 15, right: 15),
                     width: 260,
-                    height:50,
-                    decoration:BoxDecoration(
+                    height: 50,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color:Color(0xFF025595),
+                      color: Color(0xFF025595),
                     ),
                     child: Center(
-                      child: Text('다음 단계',
-                        style:TextStyle(
-                          color:Colors.white,
-                          fontSize:15,
+                      child: Text(
+                        '다음 단계',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
                           fontFamily: 'NanumSquareB',
                         ),
                       ),
@@ -678,7 +705,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
                   ),
                 ),
               ),
-              SizedBox(height:100),
+              SizedBox(height: 100),
             ],
           ),
         ),
