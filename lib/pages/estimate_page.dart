@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/estimate_data.dart';
 
 import 'chat_estimate.dart';
 
@@ -10,6 +13,38 @@ class Estimate_Page extends StatefulWidget{
 }
 
 class _Estimate_PageState extends State<Estimate_Page>{
+
+  String? estimateId = '';
+  String? order_id = Get.parameters['order_id'];
+
+  TextEditingController priceController = TextEditingController();
+  TextEditingController detailController = TextEditingController();
+
+  UpdateEstimate(){  //DB에 order_id table 만들고 estimate_data 파일 수정 및 UpdateEstimate() 수정하기.
+    EstimateData.insertEstimate(estimateId!, priceController.text, detailController.text).then((value){
+      if(value == "success"){
+        print('Insert Success');
+        Get.back();
+      }else{
+        print('$value : Insert Fails');
+      }
+    });
+  }
+
+
+  @override
+  void initState(){
+    estimateId = generateRandomString(10);
+    super.initState();
+  }
+
+  //OrderId Random 생성
+  String generateRandomString(int len) {
+    var r = Random();
+    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,103 +70,112 @@ class _Estimate_PageState extends State<Estimate_Page>{
           onTap: (){
             FocusScope.of(context).unfocus();
           },
-          child: SingleChildScrollView(
-            child: Container(
-              width: Get.width,
-              height: Get.height*0.973-AppBar().preferredSize.height,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 70.0,),
-                  Text('요청서를 보고 예상 견적 비용을 적어주세요', style:
-                  TextStyle(
-                    color:Colors.black87,
-                    fontSize:16,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                  ),
-                  SizedBox(height: 15.0,),
-                  Text('입력하신 견적 비용은\n고객님에게 채팅으로 전달 됩니다', style:
-                  TextStyle(
-                    color:Colors.black87,
-                    fontSize:15,
-                    fontFamily: 'NanumSquareL',
-                  ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 40.0,),
-                  Container(
-                    width: Get.width*0.6,
-                    height: 35.0,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15.0),
-                        border: Border.all(width: 1.5, color: Color(0xFF025595))
-                    ),
-                    child: Center(
-                      child: Text('총 비용', style:
+          child: Container(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 70.0,),
+                      Text('요청서를 보고 예상 견적 비용을 적어주세요', style:
                       TextStyle(
-                        color:Color(0xFF025595),
-                        fontSize:18,
+                        color:Colors.black87,
+                        fontSize:16,
                         fontFamily: 'NanumSquareB',
                       ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 60.0,),
-                  Container(
-                    width: Get.width*0.7,
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.bold
+                      SizedBox(height: 15.0,),
+                      Text('입력하신 견적 비용은\n고객님에게 채팅으로 전달 됩니다', style:
+                      TextStyle(
+                        color:Colors.black87,
+                        fontSize:15,
+                        fontFamily: 'NanumSquareL',
                       ),
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF025595)),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 40.0,),
+                      Container(
+                        width: Get.width*0.6,
+                        height: 35.0,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.0),
+                            border: Border.all(width: 1.5, color: Color(0xFF025595))
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFF025595)),
-                        ),
-                        suffixText: '원  ',
-                        suffixStyle: TextStyle(
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54
-                        ),
-                        hintText: '   견적 금액을 입력해주세요',
-                        hintStyle: TextStyle(
-                          fontSize: 18.0,
+                        child: Center(
+                          child: Text('총 비용', style:
+                          TextStyle(
+                            color:Color(0xFF025595),
+                            fontSize:18,
+                            fontFamily: 'NanumSquareB',
+                          ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 40.0,),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    width: Get.width*0.71,
-                    height: 110.0,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFe6e6e6),
-                        borderRadius: BorderRadius.circular(5.0)
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "견적 정보에 대해 입력해주세요",
-                          hintStyle: TextStyle(
-                              fontSize: 13.0,
-                              color: Colors.black87
-                          )
+                      SizedBox(height: 60.0,),
+                      Container(
+                        width: Get.width*0.7,
+                        child: TextField(
+                          controller: priceController,
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold
+                          ),
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF025595)),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF025595)),
+                            ),
+                            suffixText: '원  ',
+                            suffixStyle: TextStyle(
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54
+                            ),
+                            hintText: '   견적 금액을 입력해주세요',
+                            hintStyle: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
                       ),
-                      maxLines: 3,
-                      maxLength: 150,
-                      textAlign: TextAlign.center,
-                    ),
+                      SizedBox(height: 40.0,),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        width: Get.width*0.71,
+                        height: 110.0,
+                        decoration: BoxDecoration(
+                            color: Color(0xFFe6e6e6),
+                            borderRadius: BorderRadius.circular(5.0)
+                        ),
+                        child: TextField(
+                          controller: detailController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "견적 정보에 대해 입력해주세요",
+                              hintStyle: TextStyle(
+                                  fontSize: 13.0,
+                                  color: Colors.black87
+                              )
+                          ),
+                          maxLines: 3,
+                          maxLength: 300,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      // Spacer(),
+
+                    ],
                   ),
-                  Spacer(),
-                  Container(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     width: Get.width,
                     height: 80.0,
@@ -143,11 +187,11 @@ class _Estimate_PageState extends State<Estimate_Page>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text('견적서 보내기', style:
-                          TextStyle(
-                            color:Colors.white,
-                            fontSize:17,
-                            fontFamily: 'NanumSquareB',
-                          ),
+                        TextStyle(
+                          color:Colors.white,
+                          fontSize:17,
+                          fontFamily: 'NanumSquareB',
+                        ),
                         ),
                         InkWell(
                           onTap:(){
@@ -173,9 +217,9 @@ class _Estimate_PageState extends State<Estimate_Page>{
                         )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         )

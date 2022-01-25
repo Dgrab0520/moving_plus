@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/order_list_data.dart';
+import 'package:moving_plus/models/order_model.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 
 import 'estimate_page.dart';
@@ -13,6 +15,35 @@ class RequestForm extends StatefulWidget {
 }
 
 class _RequestFormState extends State<RequestForm> {
+  List<Order> order = [];
+  bool _isLoading = false;
+  String? order_id = Get.parameters['order_id'];
+
+  getOrder(){
+    OrderList_Data.getEach_Order(order_id!).then((value){
+      setState(() {
+        order = value;
+      });
+      print(order);
+      if(value.isEmpty){
+        setState(() {
+          _isLoading = false;
+        });
+      }else{
+        setState(() {
+          _isLoading = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState(){
+    getOrder();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,241 +65,394 @@ class _RequestFormState extends State<RequestForm> {
             icon: Icon(Icons.arrow_back,color: Colors.white,)
         ),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading ? Container(
         child: Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(top:25.0,bottom:25,left:15,right:15),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset("assets/p_request.png",width:90,height:90),
-                      SizedBox(width:10),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              flex: 15,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(top:25.0,bottom:25,left:15,right:15),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
+                        ),
+                      ),
+                      child: Row(
                         children: [
-                          Text('김이박',
-                            style:TextStyle(
-                              fontFamily: 'NanumSquareEB',
-                              fontSize:15,
-                            ),
-                          ),
-                          SizedBox(height:10),
-                          Text('서울 양천구',
-                            style:TextStyle(
-                              fontSize:12,
-                            ),
-                          ),
-                          SizedBox(height:5),
-                          Row(
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('받은 견적서',
+                              Text('${order[0].user_name}',
+                                style:TextStyle(
+                                  fontFamily: 'NanumSquareEB',
+                                  fontSize:15,
+                                ),
+                              ),
+                              SizedBox(height:10),
+                              Text('${order[0].address}'.split(" ")[0]+' '+'${order[0].address}'.split(" ")[1],
                                 style:TextStyle(
                                   fontSize:12,
                                 ),
                               ),
-                              Text('4개',
-                                style:TextStyle(
-                                  fontSize:12,
-                                  color:Color(0xFF025595)
-                                ),
+                              SizedBox(height:5),
+                              Row(
+                                children: [
+                                  Text('받은 견적서',
+                                    style:TextStyle(
+                                      fontSize:12,
+                                    ),
+                                  ),
+                                  Text('4개',
+                                    style:TextStyle(
+                                        fontSize:12,
+                                        color:Color(0xFF025595)
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                InkWell(
-                  onTap:(){},
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
+                    ),
+
+                    //요청글
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
+                        ),
+                      ),
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:25,bottom:25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('요청글',
+                                style:TextStyle(
+                                  fontSize:13,
+                                  fontFamily: 'NanumSquareEB',
+                                ),
+                              ),
+                              SizedBox(height:7),
+                              Text('${order[0].request_detail}',
+                                style:TextStyle(
+                                  fontSize:12,
+                                  height:1.6,
+                                ),
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 10,
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    width:MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(left:15,right:15,top:25,bottom:25),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('요청글',
-                              style:TextStyle(
-                                fontSize:13,
-                                fontFamily: 'NanumSquareEB',
-                              ),
+
+                    //원하는 서비스
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('원하는 서비스',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
                             ),
-                            SizedBox(height:7),
-                            Text('안녕하세요! \n전체 인테리어 요청 합니다. 깔끔하고 모던한 느낌으로 비용은 5000~6000만원 정도 예상중이고 ~~입니다. 감사합니다 ',
-                              style:TextStyle(
-                                fontSize:12,
-                                height:1.6,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('원하는 서비스',
-                        style:TextStyle(
-                          fontSize:13,
-                          fontFamily: 'NanumSquareEB',
-                        ),
-                      ),
-                      SizedBox(height:7),
-                      Text('인체리어 서비스 | 올 인테리어',
-                        style:TextStyle(
-                          fontSize:12,
-                          height:1.6,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('날짜',
-                        style:TextStyle(
-                          fontSize:13,
-                          fontFamily: 'NanumSquareEB',
-                        ),
-                      ),
-                      SizedBox(height:7),
-                      Text('3개월 이내로 부탁드립니다.',
-                        style:TextStyle(
-                          fontSize:12,
-                          height:1.6,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('공간 유형',
-                        style:TextStyle(
-                          fontSize:13,
-                          fontFamily: 'NanumSquareEB',
-                        ),
-                      ),
-                      SizedBox(height:7),
-                      Text('거주',
-                        style:TextStyle(
-                          fontSize:12,
-                          height:1.6,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('공간 선택',
-                        style:TextStyle(
-                          fontSize:13,
-                          fontFamily: 'NanumSquareEB',
-                        ),
-                      ),
-                      SizedBox(height:7),
-                      Text('전체 공간',
-                        style:TextStyle(
-                          fontSize:12,
-                          height:1.6,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width:MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('지역',
-                        style:TextStyle(
-                          fontSize:13,
-                          fontFamily: 'NanumSquareEB',
-                        ),
-                      ),
-                      SizedBox(height:7),
-                      Text('서울 양천구',
-                        style:TextStyle(
-                          fontSize:12,
-                          height:1.6,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height:30),
-                InkWell(
-                  onTap:(){
-                    Get.to(Estimate_Page());
-                  },
-                  child: Container(
-                    width:200,
-                    height:40,
-                    decoration: BoxDecoration(
-                      color:Color(0xFF025595),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text('견적서 보내기',
-                        style:TextStyle(
-                          color:Colors.white,
-                          fontFamily: 'NanumSquareB',
-                          fontSize:15,
-                        ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].service_type}',
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
+
+                    //날짜
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('날짜',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].date_start}'.substring(0,10) + ' ~ ' + '${order[0].date_end}'.substring(0,10),
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    //방문 가능 시간
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('방문 가능 시간',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].time}',
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    //지역
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('지역',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].address}',
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                            softWrap: false,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          )
+                        ],
+                      ),
+                    ),
+
+                    //공간유형
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('공간 유형',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].space_type}',
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    //공간 크기
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('공간 크기',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                          SizedBox(height:7),
+                          Text('${order[0].space_size}',
+                            style:TextStyle(
+                              fontSize:12,
+                              height:1.6,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10.0,),
+
+                    Divider(
+                      height: 0.1,
+                      thickness: 0.6,
+                      color: Color(0xFFCCCCCC),
+                    ),
+
+                    SizedBox(height: 10.0,),
+
+                    Text('상세정보'),
+
+                    //item1
+                    order[0].item1 != "" ?
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${order[0].item1}',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ) : Container(),
+
+                    //item2
+                    order[0].item2 != "" ?
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${order[0].item2}',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ) : Container(),
+
+                    //item3
+                    order[0].item3 != "" ?
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${order[0].item3}',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ) : Container(),
+
+                    //item4
+                    order[0].item4 != "" ?
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${order[0].item4}',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ) : Container(),
+
+                    //item5
+                    order[0].item5 != "" ?
+                    Container(
+                      width:MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(left:15,right:15,top:15,bottom:10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${order[0].item5}',
+                            style:TextStyle(
+                              fontSize:13,
+                              fontFamily: 'NanumSquareEB',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ) : Container(),
+                  ],
                 ),
-                SizedBox(height:30),
-              ],
+              ),
             ),
+            SizedBox(height:30),
+            Expanded(
+              flex: 1,
+              child: InkWell(
+                onTap:(){
+                  Get.toNamed('/estimate/true?order_id=$order_id');
+                },
+                child: Container(
+                  width:200,
+                  height:40,
+                  decoration: BoxDecoration(
+                    color:Color(0xFF025595),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Text('견적서 보내기',
+                      style:TextStyle(
+                        color:Colors.white,
+                        fontFamily: 'NanumSquareB',
+                        fontSize:15,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height:30),
           ],
         ),
-      ),
+      ) : Center(child: CircularProgressIndicator(),),
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/pages/estimate_page.dart';
 import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_estimate2.dart';
+import 'package:moving_plus/pages/request_form.dart';
 
 const String homeURL = "http://211.110.44.91";
 
@@ -35,6 +37,15 @@ class MyApp extends StatelessWidget {
           name: '/request_estimate2/:param',
           page: () => Request_Estimate2(),
         ),
+        GetPage(
+          name: '/request_form/:param',
+          page: () => RequestForm(),
+        ),
+        GetPage(
+          name: '/estimate/:param',
+          page: () => Estimate_Page(),
+        ),
+
       ],
     );
   }
