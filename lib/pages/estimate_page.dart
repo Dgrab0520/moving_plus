@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/models/estimate_model.dart';
-
 import 'chat_estimate.dart';
 
 
@@ -21,6 +20,7 @@ class _Estimate_PageState extends State<Estimate_Page>{
 
   String? estimateId = '';
   String? order_id = Get.parameters['order_id'];
+  String? customer_id = Get.parameters['customer_id'];
   bool _isSend = false;
   List<Estimate> estimate = [];
 
@@ -31,10 +31,22 @@ class _Estimate_PageState extends State<Estimate_Page>{
     EstimateData.insertEstimate(controller.pro.value.pro_id, estimateId!, order_id!, priceController.text, detailController.text).then((value){
       if(value == "success"){
         print('Insert Success');
-        Get.offAndToNamed('/request_form/true?order_id=${order_id}');
+        insertChat();
       }else{
         print('$value : Insert Fails');
         Get.snackbar('전송 실패', '견적서 전송에 실패하였습니다\n네트워크 상태를 확인해주세요', backgroundColor: Colors.white);
+      }
+    });
+  }
+
+  insertChat(){
+    EstimateData.insertEstimate_Chat(estimateId!, customer_id!, controller.pro.value.id, detailController.text, priceController.text).then((value){
+      if(value == "success"){
+        print('Chat Success');
+        Get.offAndToNamed('/request_form/true?order_id=${order_id}');
+      }else{
+        print('$value : Chat Fails');
+        Get.snackbar('채팅 전송 실패', '견적서 전송에 실패하였습니다\n네트워크 상태를 확인해주세요', backgroundColor: Colors.white);
       }
     });
   }

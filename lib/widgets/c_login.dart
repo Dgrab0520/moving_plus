@@ -131,6 +131,7 @@ class _C_LoginState extends State<C_Login> {
       print('user_name: $user_name');
       controller.change(
           type: 'cus',
+          id: '0',
           pro_id: user_id,
           pro_name: user_name,
           pro_phone: 'None',

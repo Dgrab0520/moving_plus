@@ -76,8 +76,7 @@ class _Main_PageState extends State<Main_Page> {
           controller.pro.value.type == 'None' ?
           InkWell(
             onTap: (){
-              Get.dialog(P_Login()
-              );
+              Get.dialog(P_Login());
             },
             child: Container(
               alignment: Alignment.center,
@@ -103,6 +102,7 @@ class _Main_PageState extends State<Main_Page> {
               setState(() {
                 controller.change(
                   type: 'None',
+                  id: 'None',
                   pro_id: 'None',
                   pro_name: 'None',
                   pro_phone: 'None',
@@ -392,6 +392,7 @@ class _Main_PageState extends State<Main_Page> {
                 setState(() {
                   controller.change(
                     type: 'None',
+                    id: 'None',
                     pro_id: 'None',
                     pro_name: 'None',
                     pro_phone: 'None',

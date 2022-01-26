@@ -1,12 +1,11 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:moving_plus/models/estimate_model.dart';
 
 class EstimateData{
   static const ROOT = "http://211.110.44.91/plus/plus_estimate_insert.php";
   static const INSERT_ESTIMATE_ACTION = "INSERT_ESTIMATE";
+  static const INSERT_CHAT_ACTION = "INSERT_CHAT";
   static const SELECT_ESTIMATE_ACTION = "SELECT_ESTIMATE";
   static const SELECT_RECORD_ACTION = "SELECT_RECORD";
 
@@ -31,6 +30,32 @@ class EstimateData{
       return "error";
     }
   }
+
+
+  //견적서 chat_table에 저장
+  static Future<String> insertEstimate_Chat(String estimateId, String customerId, String proId, String text, String estimatePrice) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = INSERT_CHAT_ACTION;
+      map['estimateId'] = estimateId;
+      map['customerId'] = customerId;
+      map['proId'] = proId;
+      map['text'] = text;
+      map['estimatePrice'] = estimatePrice;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Insert Estimate Chat Response : ${response.body}');
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
+      return "error";
+    }
+  }
+
+
+
 
   //견적서 조회
   static Future<List<Estimate>> getEstimate(String order_id) async {

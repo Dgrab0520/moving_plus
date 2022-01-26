@@ -1,4 +1,5 @@
 class Estimate{
+  String id;
   String pro_id;
   String estimate_id;
   String order_id;
@@ -9,6 +10,7 @@ class Estimate{
   String index;
 
   Estimate({
+    required this.id,
     required this.pro_id,
     required this.estimate_id,
     required this.order_id,
@@ -21,6 +23,7 @@ class Estimate{
 
   factory Estimate.fromJson(Map<String, dynamic> json){
     return Estimate(
+      id: json['id'] == null ? "" : json['id'] as String,
       pro_id: json['pro_id'] == null ? "" : json['pro_id'] as String,
       estimate_id: json['estimate_id'] == null ? "" : json['estimate_id'] as String,
       order_id: json['estimate_id'] == null ? "" : json['estimate_id'] as String,

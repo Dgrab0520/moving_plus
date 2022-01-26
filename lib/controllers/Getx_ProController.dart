@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class Pro_Getx{
   String type;
+  String id;
   String pro_id;
   String pro_name;
   String pro_phone;
@@ -13,6 +14,7 @@ class Pro_Getx{
 
   Pro_Getx({
     required String type,
+    required String id,
     required String pro_id,
     required String pro_name,
     required String pro_phone,
@@ -21,6 +23,7 @@ class Pro_Getx{
     required String profile_img,
     required String pro_token,
   }): this.type = type,
+      this.id = id,
       this.pro_id = pro_id,
       this.pro_name = pro_name,
       this.pro_phone = pro_phone,
@@ -34,6 +37,7 @@ class ReactiveController extends GetxController{
 
   var pro = new Pro_Getx(
       type: 'None',
+      id: 'None',
       pro_id: 'None',
       pro_name: 'None',
       pro_phone: 'None',
@@ -45,6 +49,7 @@ class ReactiveController extends GetxController{
 
   change({
     required String type,
+    required String id,
     required String pro_id,
     required String pro_name,
     required String pro_phone,
@@ -55,6 +60,7 @@ class ReactiveController extends GetxController{
   }){
     pro.update((val) {
       val!.type = type;
+      val!.id = id;
       val!.pro_id = pro_id;
       val!.pro_name = pro_name;
       val!.pro_phone = pro_phone;

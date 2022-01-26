@@ -1,4 +1,5 @@
 class Pro{
+  String id;
   String pro_id;
   String pro_pw;
   String pro_recom;
@@ -21,6 +22,7 @@ class Pro{
 
 
   Pro({
+    required this.id,
     required this.pro_id,
     required this.pro_pw,
     required this.pro_recom,
@@ -43,6 +45,7 @@ class Pro{
 
   factory Pro.fromJson(Map<String, dynamic> json){
     return Pro(
+      id: json['id'] == null ? "" : json['id'] as String,
       pro_id: json['pro_id'] == null ? "" : json['pro_id'] as String,
       pro_pw: json['pro_pw'] == null ? "" : json['pro_pw'] as String,
       pro_recom: json['pro_recom'] == null ? "" : json['pro_recom'] as String,

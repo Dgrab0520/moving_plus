@@ -55,18 +55,15 @@ class _RequestFormState extends State<RequestForm> {
         estimate = value;
       });
       if(value.isEmpty){
-        print('wwweq2 $_countEstimate');
         setState(() {
           _isLoading2 = false;
         });
       }else{
-        print('wwweq1 $_countEstimate');
         setState(() {
           _isLoading2 = true;
           _countEstimate = value.length;
         });
       }
-      print('wwweq3 $_countEstimate');
     });
   }
 
@@ -463,7 +460,7 @@ class _RequestFormState extends State<RequestForm> {
               child: InkWell(
                 onTap:(){
                   if(index*10 > _countEstimate){
-                    Get.offNamed('/estimate/true?order_id=$order_id');
+                    Get.offNamed('/estimate/true?order_id=$order_id&customer_id=${order[0].user_id}');
                   }else{
                     Get.snackbar('견적 만료', '견적 가능 개수가 초과되어 견적을 보낼 수 없습니다', backgroundColor: Colors.white);
                   }
