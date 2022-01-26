@@ -617,7 +617,6 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page>{
                             height: 200.0,
                             child: ListView.builder(
                               itemCount: review.length,
-                              physics: ,
                               itemBuilder: (BuildContext context, int index){
                                 return Container(
                                   width: Get.width,
