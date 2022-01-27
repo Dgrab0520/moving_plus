@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
-import 'package:progress_indicator/progress_indicator.dart';
 import 'package:timelines/timelines.dart';
-
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+import 'package:path/path.dart';
 import 'homepage.dart';
 import 'p_chat.dart';
 
@@ -66,6 +72,10 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   String? value4 = '';
   String? value5 = '';
 
+  String img_no = '0';
+  PickedFile? _image1;
+  PickedFile? _image2;
+  PickedFile? _image3;
 
   TextEditingController? a_Controller = TextEditingController();
   TextEditingController? b_Controller = TextEditingController();
@@ -118,6 +128,52 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       return completeColor;
     }
   }
+
+  Future getImageGallery() async{
+    var imageFile = await ImagePicker.platform.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      if(img_no == '1'){
+        _image1 = imageFile;
+      }else if(img_no == '2'){
+        _image2 = imageFile;
+      }else if(img_no == '3'){
+        _image3 = imageFile;
+      }
+    });
+
+    if(img_no == '1'){
+      upload(File(_image1!.path));
+    }else if(img_no == '2'){
+      upload(File(_image2!.path));
+    }else if(img_no == '3'){
+      upload(File(_image3!.path));
+    }
+
+    print('getImageGallery Success');
+  }
+
+  Future upload(File imageFile) async{
+    var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var uri = Uri.parse("http://211.110.44.91/plus/plus_order_img.php");
+
+    var request = new http.MultipartRequest("POST", uri);
+    var multipartFile = new http.MultipartFile("image", stream, length, filename: basename(imageFile.path));
+
+    request.files.add(multipartFile);
+    request.fields['order_id'] = orderId!;
+    request.fields['img_no'] = img_no;
+
+    var response = await request.send();
+
+    if(response.statusCode == 200){
+      print('Image Uploaded');
+    }else{
+      print('Upload Failed');
+    }
+  }
+
+
 
   int _selectedIndex = 1;
   DateTime selectedDate = DateTime.now();
@@ -4577,62 +4633,84 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                     Row(
                       children: [
                         Expanded(
-                          flex:2,
-                          child: Container(
-                            padding: EdgeInsets.only(left:15, right:15),
-                            width:MediaQuery.of(context).size.width,
-                            height:50,
-                            decoration:BoxDecoration(
-                              color: Color(0xFFF9F9F9),
-                              border: Border.all(
-                                width: 1.0,
-                                color: Color(0xFFcccccc),
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: TextField(
-                              textAlign: TextAlign.start,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              onChanged: (text){
-                              },
-                              decoration: InputDecoration(
-
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width:10),
-                        Expanded(
-                          child: InkWell(
-                            onTap: (){
-                            },
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                padding: EdgeInsets.only(left:15,right:15),
-                                width: 260,
-                                height:50,
-                                decoration:BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color:Color(0xFF025595),
-                                ),
-                                child: Center(
-                                  child: Text('사진',
-                                    style:TextStyle(
-                                      color:Colors.white,
-                                      fontSize:15,
-                                      fontFamily: 'NanumSquareB',
-                                    ),
+                            flex: 1,
+                            child: InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    img_no = '1';
+                                  });
+                                  print(1);
+                                  getImageGallery();
+                                  },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(width: 0.6, color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(10.0)
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
+                                  height: 90.0,
+                                  child: _image1 == null ? Center(
+                                    child: Icon(CupertinoIcons.camera),
+                                  ) : ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.file(File(_image1!.path), fit: BoxFit.fill,),
+                                  ),
+                                )
+                            )
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    img_no = '2';
+                                  });
+                                  print(2);
+                                  getImageGallery();
+                                  },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(width: 0.6, color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(10.0)
+                                  ),
+                                  height: 90.0,
+                                  child: _image2 == null ? Center(
+                                    child: Icon(CupertinoIcons.camera),
+                                  ) : ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.file(File(_image2!.path), fit: BoxFit.fill,),
+                                  ),
+                                )
+                            )
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: (){
+                                setState(() {
+                                  img_no = '3';
+                                });
+                                print(3);
+                                getImageGallery();
+                                },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(width: 0.6, color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(10.0)
+                                  ),
+                                  height: 90.0,
+                                  child: _image3 == null ? Center(
+                                    child: Icon(CupertinoIcons.camera),
+                                  ) : ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: Image.file(File(_image3!.path), fit: BoxFit.fill,),
+                                  ),
+                              )
+                            )
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
@@ -33,7 +34,7 @@ class _Main_PageState extends State<Main_Page> {
   bool _isChecked = false;
   int _selectedIndex = 1;
   String? user_id;
-
+  String? profile_image = 'None';
 
 
   static final storage = FlutterSecureStorage();
@@ -47,7 +48,14 @@ class _Main_PageState extends State<Main_Page> {
 
   List<Widget> _widgetOptions = [];
 
+  _initTexts() async{
+    final User user = await UserApi.instance.me();
+    setState(() {
+      user_id = user.kakaoAccount!.email!;
+      profile_image = user.kakaoAccount!.profile!.profileImageUrl!;
+    });
 
+  }
 
 
 
@@ -55,6 +63,7 @@ class _Main_PageState extends State<Main_Page> {
   void initState() {
     _selectedIndex = widget.index;
     user_id = controller.pro.value.pro_id;
+    _initTexts();
     print('user_idd : ${user_id}');
     _widgetOptions = [
       Request_Estimate(),
@@ -199,7 +208,7 @@ class _Main_PageState extends State<Main_Page> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: NetworkImage(controller.pro.value.profile_img,),
+                              image: NetworkImage(profile_image!),
                               fit: BoxFit.fill,
                             )
                           ),
@@ -242,19 +251,20 @@ class _Main_PageState extends State<Main_Page> {
                       ),
                     ),
                     Expanded(
-                        flex:1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            InkWell(
-                                onTap:(){
-                                  Navigator.pop(context);
-                                  print('ss');
-                                },
-                                child: Container(child: Image.asset("assets/close.png"))),
-                          ],
-                        )),
+                      flex:1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap:(){
+                              Navigator.pop(context);
+                            },
+                            child: Icon(CupertinoIcons.clear, size: 18.0, color: Colors.white,)
+                          ),
+                        ],
+                      )
+                    ),
                   ],
                 )
               ),
@@ -299,7 +309,7 @@ class _Main_PageState extends State<Main_Page> {
                       children: [
                         Image.asset("assets/list_g.png",width:18,height:18),
                         SizedBox(width:15),
-                        Text('받은 요청서',
+                        Text(controller.pro.value.type == 'cus' ? '보낸 요청서' : '받은 요청서',  //
                             style:TextStyle(
                               fontFamily: 'NanumSquareB',
                               fontSize:14,
