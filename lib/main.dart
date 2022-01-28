@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/estimate_page.dart';
@@ -6,7 +7,11 @@ import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_estimate2.dart';
 import 'package:moving_plus/pages/request_form.dart';
 
-void main() {
+const String homeURL = "http://211.110.44.91";
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -23,7 +28,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'NanumSquareR',
       ),
-      home: Main_Page(index: 1,),
+      home: Main_Page(
+        index: 1,
+      ),
       getPages: [
         GetPage(
           name: '/request_estimage/:param',
@@ -41,7 +48,6 @@ class MyApp extends StatelessWidget {
           name: '/estimate/:param',
           page: () => Estimate_Page(),
         ),
-
       ],
     );
   }
@@ -57,8 +63,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container();
