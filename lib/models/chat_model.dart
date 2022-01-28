@@ -1,8 +1,8 @@
 class Chat {
   int id;
-  int estimateId;
-  int customerId;
-  int proId;
+  String estimateId;
+  String customerId;
+  String proId;
   String text;
   String image;
   int estimatePrice;
@@ -26,9 +26,9 @@ class Chat {
   factory Chat.fromJson(Map<String, dynamic> json) {
     return Chat(
       id: int.parse(json['id']),
-      estimateId: int.parse(json['estimateId']),
-      customerId: int.parse(json['customerId']),
-      proId: int.parse(json['proId']),
+      estimateId: json['estimateId'] as String,
+      customerId: json['customerId'] as String,
+      proId: json['proId'] as String,
       text: json['text'] as String,
       image: json['image'] as String,
       estimatePrice: int.parse(json['estimatePrice']),

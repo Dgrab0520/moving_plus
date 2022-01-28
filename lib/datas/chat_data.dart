@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/models/chat_model.dart';
+import 'package:moving_plus/models/chat_room_model.dart';
+import 'package:moving_plus/models/user_chat_room_model.dart';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
@@ -13,19 +15,69 @@ String getRandomString() => String.fromCharCodes(Iterable.generate(
     10, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 final controller = Get.put(ReactiveController());
 
+List<ChatRoom> chatRoom = [];
+List<UserChatRoom> userChatRooms = [];
+
 class ChatData {
   static const ROOT = "http://211.110.44.91/plus/plus_chat.php";
   static const LIST_ACTION = "LIST";
   static const WRITE_ACTION = "WRITE";
+  static const CHAT_LIST_ACTION = "CHAT_LIST";
+  static const USER_CHAT_LIST_ACTION = "USER_CHAT_LIST";
+
+  //전문가일때 채팅목록 불러오기
+  static Future<List<ChatRoom>> getChatList(
+      String proId, String serviceType) async {
+    print(proId);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = CHAT_LIST_ACTION;
+      map['proId'] = proId;
+      map['serviceType'] = serviceType;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Chat List Response : ${response.body}');
+
+      if (response.statusCode == 200) {
+        List<ChatRoom> list = chatRoomParseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  //고객일때 채팅목록 불러오기
+  static Future<List<UserChatRoom>> getUserChatList(String orderId) async {
+    print(orderId);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = USER_CHAT_LIST_ACTION;
+      map['order_id'] = orderId;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('User Chat List Response : ${response.body}');
+
+      if (response.statusCode == 200) {
+        List<UserChatRoom> list = userChatRoomParseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
 
   //채팅 불러오기
-  static Future<List<Chat>> getChat(int estimateId) async {
+  static Future<List<Chat>> getChat(String estimateId) async {
+    print("estimateId : $estimateId");
     try {
       var map = <String, dynamic>{};
       map['action'] = LIST_ACTION;
-      map['estimateId'] = estimateId.toString();
+      map['estimateId'] = estimateId;
       final response = await http.post(Uri.parse(ROOT), body: map);
-      print('Chat List Response : ${response.body}');
+      print('Chat Response : ${response.body}');
 
       if (response.statusCode == 200) {
         List<Chat> list = parseResponse(response.body);
@@ -34,6 +86,7 @@ class ChatData {
         return [];
       }
     } catch (e) {
+      print(e);
       return [];
     }
   }
@@ -56,14 +109,14 @@ class ChatData {
         "  " +
         chat.proId.toString());
     String imageName = getRandomString() + ".gif";
-    print(controller.pro.value.proPrimaryId.toString());
+    print(controller.pro.value.id);
     try {
       var url = Uri.parse(ROOT);
       var request = http.MultipartRequest('POST', url);
       request.fields['action'] = WRITE_ACTION;
       request.fields['estimateId'] = chat.estimateId.toString();
       request.fields['customerId'] = chat.customerId.toString();
-      request.fields['proId'] = controller.pro.value.proPrimaryId.toString();
+      request.fields['proId'] = controller.pro.value.id.toString();
       request.fields['text'] = chat.text;
       request.fields['image'] = chat.image == "true" ? imageName : "";
       request.fields['finalPrice'] = chat.finalPrice.toString();
@@ -91,5 +144,17 @@ class ChatData {
   static List<Chat> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Chat>((json) => Chat.fromJson(json)).toList();
+  }
+
+  static List<ChatRoom> chatRoomParseResponse(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<ChatRoom>((json) => ChatRoom.fromJson(json)).toList();
+  }
+
+  static List<UserChatRoom> userChatRoomParseResponse(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed
+        .map<UserChatRoom>((json) => UserChatRoom.fromJson(json))
+        .toList();
   }
 }

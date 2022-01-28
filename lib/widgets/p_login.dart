@@ -72,7 +72,6 @@ class _P_LoginState extends State<P_Login> {
                   pwController.text.toString());
         });
         controller.change(
-            proPrimaryId: pro_info[0].id,
             type: 'pro',
             id: pro_info[0].id,
             pro_id: pro_info[0].pro_id,

@@ -5,11 +5,11 @@ import 'dart:ui' as ui;
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
@@ -18,8 +18,14 @@ import '../main.dart';
 import 'p_detail_estimate.dart';
 import 'p_portfolio_edit_page.dart';
 
+final controller = Get.put(ReactiveController());
+
 class Chat_Estimate extends StatefulWidget {
-  const Chat_Estimate({Key? key}) : super(key: key);
+  const Chat_Estimate(
+      {Key? key, required this.estimateId, required this.chatRoomIndex})
+      : super(key: key);
+  final String estimateId;
+  final int chatRoomIndex;
 
   @override
   _Chat_EstimateState createState() => _Chat_EstimateState();
@@ -34,8 +40,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
 
   List<Chat> chatting = [];
 
-  String token =
-      "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
+  String token = "";
 
   TextEditingController chatTextController = TextEditingController();
   ScrollController scrollController = ScrollController();
@@ -46,7 +51,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
-      ChatData.getChat(0).then((value) {
+      ChatData.getChat(widget.estimateId).then((value) {
         print(value);
         setState(() {
           chatting = value;
@@ -57,15 +62,19 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
           () => scrollController.animateTo(0,
               duration: Duration(milliseconds: 300), curve: Curves.easeInOut));
     });
-//앱 실행중일때
-    if (controller.pro.value.proPrimaryId != 0) {
+    //firebase 실시간 채팅 받아오기
+    if (controller.pro.value.type == "pro") {
       isPro = 1;
+      token =
+          "e6AAsaANSHqcCDY56SYUCK:APA91bFKmnTIe_2bYVcwEA1QN23DJbHP_GqH23rBgZWrUfqynpAc_FXGo3PJAL2pOsn4PaqQI-sPSHrO3Iz86qCN0slo_-9XAhs4li97DrJNtsBwHmw9w7dv23cWAzDGVVzzhn1SjmGu";
     } else {
       isPro = 0;
+      token =
+          "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
     }
 
     print(isPro);
-    ChatData.getChat(0).then((value) {
+    ChatData.getChat(widget.estimateId).then((value) {
       print(value);
       setState(() {
         chatting = value;
@@ -85,9 +94,9 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               index,
               Chat(
                   id: 0,
-                  estimateId: 0,
-                  customerId: 0,
-                  proId: 0,
+                  estimateId: "0",
+                  customerId: "0",
+                  proId: "0",
                   text: "",
                   image: "",
                   estimatePrice: 0,
@@ -108,6 +117,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   void dispose() {
     chatTextController.dispose();
     scrollController.dispose();
+
     super.dispose();
   }
 
@@ -291,9 +301,9 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       if (chatTextController.text != "") {
                         Chat chat = Chat(
                             id: 0,
-                            estimateId: 0,
-                            customerId: 0,
-                            proId: 0,
+                            estimateId: widget.estimateId,
+                            customerId: "0",
+                            proId: "0",
                             text: chatTextController.text,
                             image: "",
                             estimatePrice: 0,
@@ -304,6 +314,17 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           if (value.isNotEmpty) {
                             print(value);
                             chat.createAt = value[0];
+                            if (isPro == 1) {
+                              chatRoom[widget.chatRoomIndex].lastChat =
+                                  chat.text;
+                              chatRoom[widget.chatRoomIndex].createAt =
+                                  value[0];
+                            } else {
+                              userChatRooms[widget.chatRoomIndex].lastChat =
+                                  chat.text;
+                              userChatRooms[widget.chatRoomIndex].createAt =
+                                  value[0];
+                            }
 
                             setState(() {
                               chatting.insert(0, chat);
@@ -388,9 +409,9 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
 
                                   Chat chat = Chat(
                                       id: 0,
-                                      estimateId: 0,
-                                      customerId: 0,
-                                      proId: 0,
+                                      estimateId: widget.estimateId,
+                                      customerId: "0",
+                                      proId: "0",
                                       text: "",
                                       image: "",
                                       estimatePrice: 0,
@@ -481,9 +502,9 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
 
       Chat chat = Chat(
           id: 0,
-          estimateId: 0,
-          customerId: 0,
-          proId: 0,
+          estimateId: widget.estimateId,
+          customerId: "0",
+          proId: "0",
           text: "",
           image: "true",
           estimatePrice: 0,
