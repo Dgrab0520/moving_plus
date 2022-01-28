@@ -17,7 +17,7 @@ class UserChatRoom {
 
   factory UserChatRoom.fromJson(Map<String, dynamic> json) {
     return UserChatRoom(
-      estimateId: json['estimateId'] as String,
+      estimateId: json['estimate_id'] as String,
       proName: json['pro_name'] as String,
       profileImage: json['profile_img'] as String,
       createAt: json['createAt'] == null ? "" : json['createAt'] as String,

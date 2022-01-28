@@ -47,6 +47,12 @@ class _Carousel_SubState extends State<Carousel_Sub>{
   final CarouselController _controller = CarouselController();
 
   @override
+  void dispose() {
+    _controller.stopAutoPlay();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget imageSliders = Column(
       mainAxisAlignment: MainAxisAlignment.center,

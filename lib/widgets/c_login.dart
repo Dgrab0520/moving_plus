@@ -25,6 +25,7 @@ class _C_LoginState extends State<C_Login> {
   bool _isKakaoTalkInstalled = true;
   String user_id = 'None';
   String user_name = 'None';
+  String user_phone = 'None';
   String profile_image = 'None';
   String? user_recom;
   bool _default_Image = true;
@@ -82,10 +83,12 @@ class _C_LoginState extends State<C_Login> {
     setState(() {
       user_id = user.kakaoAccount!.email!;
       user_name = user.kakaoAccount!.profile!.nickname;
+      user_phone = user.kakaoAccount!.phoneNumber!;
       _default_Image = user.kakaoAccount!.profile!.isDefaultImage!;
       profile_image = user.kakaoAccount!.profile!.profileImageUrl!;
     });
     print('user_name: $user_name');
+    print('user_phone: $user_phone');
   }
 
   //고객 카카오 로그인
@@ -128,7 +131,7 @@ class _C_LoginState extends State<C_Login> {
         id: '0',
         pro_id: user_id,
         pro_name: user_name,
-        pro_phone: 'None',
+        pro_phone: user_phone,
         pro_email: 'None',
         com_name: 'None',
         profile_img: _default_Image ? "default_image" : profile_image,
@@ -254,22 +257,6 @@ class _C_LoginState extends State<C_Login> {
                   SizedBox(
                     height: 5.0,
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        controller.change(
-                          id: "0",
-                          type: 'cus',
-                          pro_id: 'user_id',
-                          pro_name: 'user_name',
-                          pro_phone: 'None',
-                          pro_email: 'None',
-                          com_name: 'None',
-                          profile_img: "default_image",
-                          pro_token: 'None',
-                        );
-                        Get.offAll(Main_Page(index: 1));
-                      },
-                      child: Text("test")),
                   TextButton(
                       onPressed: () {
                         print('파트너 로그인');

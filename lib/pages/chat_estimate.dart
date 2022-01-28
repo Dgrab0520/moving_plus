@@ -51,6 +51,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
+      print(message);
       ChatData.getChat(widget.estimateId).then((value) {
         print(value);
         setState(() {
@@ -189,6 +190,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                               price: chatting[index].estimatePrice,
                               createAt: chatting[index].createAt,
                               isPro: isPro == 1 ? true : false,
+                              detail: chatting[index].text,
                             );
                           } else {
                             if (chatting[index].isPro == 1) {
@@ -302,7 +304,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                         Chat chat = Chat(
                             id: 0,
                             estimateId: widget.estimateId,
-                            customerId: "0",
+                            customerId: controller.pro.value.pro_id,
                             proId: "0",
                             text: chatTextController.text,
                             image: "",
@@ -338,6 +340,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                       duration: Duration(milliseconds: 300),
                                       curve: Curves.easeInOut));
                             });
+                            print(token);
                             final HttpsCallableResult result =
                                 await callable.call(
                               <String, dynamic>{
@@ -346,6 +349,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                 "body": "body",
                               },
                             );
+                            print(result.data);
                           }
                         });
                       } else {}
@@ -930,11 +934,13 @@ class EstimatePrice extends StatelessWidget {
       {Key? key,
       required this.price,
       required this.createAt,
-      required this.isPro})
+      required this.isPro,
+      required this.detail})
       : super(key: key);
   final int price;
   final String createAt;
   final bool isPro;
+  final String detail;
   @override
   Widget build(BuildContext context) {
     var finalPriceController = MoneyMaskedTextController(
@@ -972,7 +978,7 @@ class EstimatePrice extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.all(15),
-                        height: 240,
+                        height: 300,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -1000,14 +1006,14 @@ class EstimatePrice extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              '안녕하세요 \n인테리어 작업대 입니다 \n요청 해주신 견적서 보내드립니다.',
+                              detail,
                               style: TextStyle(
                                 fontSize: 12,
                                 height: 1.5,
                               ),
                             ),
                             SizedBox(height: 10),
-                            Expanded(
+                            Flexible(
                               child: Container(
                                 padding: EdgeInsets.all(10.0),
                                 width: Get.width,
@@ -1017,35 +1023,39 @@ class EstimatePrice extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('서비스',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                            )),
-                                        Text('인테리어 시공',
-                                            style: TextStyle(
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('서비스',
+                                              style: TextStyle(
                                                 fontSize: 13,
-                                                fontFamily: 'NanumSquareB')),
-                                      ],
+                                              )),
+                                          Text('인테리어 시공',
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily: 'NanumSquareB')),
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('예상 금액',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                            )),
-                                        Text('${finalPriceController.text}원~',
-                                            style: TextStyle(
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('예상 금액',
+                                              style: TextStyle(
                                                 fontSize: 13,
-                                                color: Color(0xFF025595),
-                                                fontFamily: 'NanumSquareB')),
-                                      ],
+                                              )),
+                                          Text('${finalPriceController.text}원~',
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Color(0xFF025595),
+                                                  fontFamily: 'NanumSquareB')),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

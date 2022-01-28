@@ -5,6 +5,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/pages/c_mypage.dart';
+import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
@@ -61,7 +63,13 @@ class _Main_PageState extends State<Main_Page> {
     FirebaseMessaging.instance.getToken().then((value) => print(value));
 //firebase message 초기화
 
-    FirebaseMessaging.onMessage.listen((message) {});
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        String? title = message.notification?.title;
+        String? body = message.notification?.body;
+        Get.snackbar(title!, body!);
+      }
+    });
 //앱 실행중일때
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {});
@@ -75,13 +83,21 @@ class _Main_PageState extends State<Main_Page> {
     user_id = controller.pro.value.pro_id;
     _initTexts();
     print('user_idd : ${user_id}');
-    _widgetOptions = [
-      Request_Estimate(),
-      HomePage(),
-      Receive_Estimate(
-        isMain: true,
-      ),
-    ];
+    if (controller.pro.value.type == "pro") {
+      _widgetOptions = [
+        Request_Estimate(),
+        HomePage(),
+        P_Chat(),
+      ];
+    } else {
+      _widgetOptions = [
+        Request_Estimate(),
+        HomePage(),
+        Receive_Estimate(
+          isMain: true,
+        ),
+      ];
+    }
     super.initState();
   }
 
@@ -348,9 +364,13 @@ class _Main_PageState extends State<Main_Page> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(Receive_Estimate(
-                            isMain: false,
-                          ));
+                          if (controller.pro.value.type == "pro") {
+                            Get.to(P_Chat());
+                          } else {
+                            Get.to(Receive_Estimate(
+                              isMain: false,
+                            ));
+                          }
                         },
                         child: Container(
                           padding:
@@ -392,7 +412,11 @@ class _Main_PageState extends State<Main_Page> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(P_Mypage());
+                          if (controller.pro.value.type == "pro") {
+                            Get.to(P_Mypage());
+                          } else {
+                            Get.to(C_Mypage());
+                          }
                         },
                         child: Container(
                           padding:
@@ -469,6 +493,8 @@ class _Main_PageState extends State<Main_Page> {
           onTap: (int index) {
             if (index == 2 && controller.pro.value.pro_id == "None") {
               Get.dialog(P_Login());
+            } else if (index == 0) {
+              Get.to(Interior_Page(Categorytitle: 0));
             } else {
               if (index == 2 && controller.pro.value.type == "pro") {
                 _widgetOptions = [

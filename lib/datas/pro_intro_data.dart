@@ -10,6 +10,7 @@ class ProIntro_Data{
 
   //pro detail 정보 조회
   static Future<List<Pro_Intro>> getProIntro(String pro_id) async {
+    print(pro_id);
     try{
       var map = Map<String, dynamic>();
       map['action'] = SELECT_PRO_ACTION;

@@ -4,6 +4,7 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/widgets/c_login.dart';
+import 'package:moving_plus/widgets/p_login.dart';
 import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 
 import 'api.dart';
@@ -184,9 +185,14 @@ class _Interior_PageState extends State<Interior_Page>
           unselectedFontSize: 12,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
-            Get.off(Main_Page(
-              index: index,
-            ));
+            if (index == 2 && controller.pro.value.pro_id == "None") {
+              Get.dialog(P_Login());
+            } else if (index == 0) {
+            } else {
+              Get.offAll(Main_Page(
+                index: index,
+              ));
+            }
           },
           selectedLabelStyle: TextStyle(
             color: Colors.white,

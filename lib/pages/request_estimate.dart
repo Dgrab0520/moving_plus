@@ -196,110 +196,103 @@ class _Request_EstimateState extends State<Request_Estimate> {
                     bottom: BorderSide(width: 1, color: Color(0xFFcccccc)),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 100.0,
-                      width: Get.width,
-                      child: Timeline.tileBuilder(
-                        theme: TimelineThemeData(
-                            direction: Axis.horizontal,
-                            connectorTheme: ConnectorThemeData(
-                                space: 15.0, thickness: 3.0)),
-                        builder: TimelineTileBuilder.connected(
-                          connectionDirection: ConnectionDirection.before,
-                          itemExtentBuilder: (_, __) =>
-                              MediaQuery.of(context).size.width /
-                              _processes.length,
-                          contentsBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                _processes[index],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 11.0,
-                                  color: index == 0
-                                      ? inProgressColor
-                                      : completeColor,
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 100.0,
+                  width: Get.width,
+                  child: Timeline.tileBuilder(
+                    theme: TimelineThemeData(
+                        direction: Axis.horizontal,
+                        connectorTheme:
+                            ConnectorThemeData(space: 15.0, thickness: 3.0)),
+                    builder: TimelineTileBuilder.connected(
+                      connectionDirection: ConnectionDirection.before,
+                      itemExtentBuilder: (_, __) =>
+                          MediaQuery.of(context).size.width / _processes.length,
+                      contentsBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            _processes[index],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11.0,
+                              color:
+                                  index == 0 ? inProgressColor : completeColor,
+                            ),
+                          ),
+                        );
+                      },
+                      indicatorBuilder: (_, index) {
+                        var color;
+                        var child;
+                        if (index == 0) {
+                          color = Color(0xff5ec792);
+                          child = Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      width: 2.5, color: Colors.white),
+                                  color: Color(0xff5ec792),
                                 ),
+                              ));
+                        } else if (index < 2) {
+                          color = completeColor;
+                        } else {
+                          color = completeColor;
+                        }
+
+                        if (index <= 2) {
+                          return Stack(
+                            children: [
+                              CustomPaint(
+                                size: Size(30.0, 30.0),
                               ),
+                              DotIndicator(
+                                size: 30.0,
+                                color: color,
+                                child: child,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Stack(
+                            children: [
+                              CustomPaint(
+                                size: Size(15.0, 15.0),
+                              ),
+                              OutlinedDotIndicator(
+                                borderWidth: 4.0,
+                                color: Colors.pink,
+                              ),
+                            ],
+                          );
+                        }
+                      },
+                      connectorBuilder: (_, index, type) {
+                        if (index > 0) {
+                          if (index == 2) {
+                            final prevColor = getColor(index - 1);
+                            final color = getColor(index);
+
+                            return DecoratedLineConnector(
+                              decoration:
+                                  BoxDecoration(color: Color(0xff071039)),
                             );
-                          },
-                          indicatorBuilder: (_, index) {
-                            var color;
-                            var child;
-                            if (index == 0) {
-                              color = Color(0xff5ec792);
-                              child = Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          width: 2.5, color: Colors.white),
-                                      color: Color(0xff5ec792),
-                                    ),
-                                  ));
-                            } else if (index < 2) {
-                              color = completeColor;
-                            } else {
-                              color = completeColor;
-                            }
-
-                            if (index <= 2) {
-                              return Stack(
-                                children: [
-                                  CustomPaint(
-                                    size: Size(30.0, 30.0),
-                                  ),
-                                  DotIndicator(
-                                    size: 30.0,
-                                    color: color,
-                                    child: child,
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Stack(
-                                children: [
-                                  CustomPaint(
-                                    size: Size(15.0, 15.0),
-                                  ),
-                                  OutlinedDotIndicator(
-                                    borderWidth: 4.0,
-                                    color: Colors.pink,
-                                  ),
-                                ],
-                              );
-                            }
-                          },
-                          connectorBuilder: (_, index, type) {
-                            if (index > 0) {
-                              if (index == 2) {
-                                final prevColor = getColor(index - 1);
-                                final color = getColor(index);
-
-                                return DecoratedLineConnector(
-                                  decoration:
-                                      BoxDecoration(color: Color(0xff071039)),
-                                );
-                              } else {
-                                return SolidLineConnector(
-                                  color: Color(0xff071039),
-                                );
-                              }
-                            } else {
-                              return null;
-                            }
-                          },
-                          itemCount: _processes.length,
-                        ),
-                      ),
+                          } else {
+                            return SolidLineConnector(
+                              color: Color(0xff071039),
+                            );
+                          }
+                        } else {
+                          return null;
+                        }
+                      },
+                      itemCount: _processes.length,
                     ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(height: 30),

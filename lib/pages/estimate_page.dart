@@ -27,8 +27,12 @@ class _Estimate_PageState extends State<Estimate_Page> {
   TextEditingController detailController = TextEditingController();
 
   UpdateEstimate() {
-    EstimateData.insertEstimate(controller.pro.value.pro_id, estimateId!,
-            order_id!, priceController.text, detailController.text)
+    EstimateData.insertEstimate(
+            controller.pro.value.pro_id,
+            estimateId!,
+            order_id!,
+            priceController.numberValue.toInt().toString(),
+            detailController.text)
         .then((value) {
       if (value == "success") {
         print('Insert Success');
@@ -265,6 +269,8 @@ class _Estimate_PageState extends State<Estimate_Page> {
                         ),
                         InkWell(
                           onTap: () {
+                            print(priceController.numberValue);
+                            print(priceController.numberValue.toInt());
                             if (_isSend) {
                               UpdateEstimate();
                             } else {
