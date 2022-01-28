@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Pro_Getx {
+class Pro_Getx{
   String type;
-  int proPrimaryId; // 0124 pro index id
+  String id;
   String pro_id;
   String pro_name;
   String pro_phone;
@@ -12,8 +13,8 @@ class Pro_Getx {
   String pro_token;
 
   Pro_Getx({
-    required int proPrimaryId,
     required String type,
+    required String id,
     required String pro_id,
     required String pro_name,
     required String pro_phone,
@@ -21,33 +22,34 @@ class Pro_Getx {
     required String com_name,
     required String profile_img,
     required String pro_token,
-  })  : this.proPrimaryId = proPrimaryId,
-        this.type = type,
-        this.pro_id = pro_id,
-        this.pro_name = pro_name,
-        this.pro_phone = pro_phone,
-        this.pro_email = pro_email,
-        this.com_name = com_name,
-        this.profile_img = profile_img,
-        this.pro_token = pro_token;
+  }): this.type = type,
+      this.id = id,
+      this.pro_id = pro_id,
+      this.pro_name = pro_name,
+      this.pro_phone = pro_phone,
+      this.pro_email = pro_email,
+      this.com_name = com_name,
+      this.profile_img = profile_img,
+      this.pro_token = pro_token;
 }
 
-class ReactiveController extends GetxController {
-  var pro = Pro_Getx(
-    proPrimaryId: 0,
-    type: 'None',
-    pro_id: 'None',
-    pro_name: 'None',
-    pro_phone: 'None',
-    pro_email: 'None',
-    com_name: 'None',
-    profile_img: 'None',
-    pro_token: 'None',
+class ReactiveController extends GetxController{
+
+  var pro = new Pro_Getx(
+      type: 'None',
+      id: 'None',
+      pro_id: 'None',
+      pro_name: 'None',
+      pro_phone: 'None',
+      pro_email: 'None',
+      com_name: 'None',
+      profile_img: 'None',
+      pro_token: 'None',
   ).obs;
 
   change({
-    required int proPrimaryId,
     required String type,
+    required String id,
     required String pro_id,
     required String pro_name,
     required String pro_phone,
@@ -55,17 +57,17 @@ class ReactiveController extends GetxController {
     required String com_name,
     required String profile_img,
     required String pro_token,
-  }) {
+  }){
     pro.update((val) {
       val!.type = type;
-      val.proPrimaryId = proPrimaryId;
-      val.pro_id = pro_id;
-      val.pro_name = pro_name;
-      val.pro_phone = pro_phone;
-      val.pro_email = pro_email;
-      val.com_name = com_name;
-      val.profile_img = profile_img;
-      val.pro_token = pro_token;
+      val!.id = id;
+      val!.pro_id = pro_id;
+      val!.pro_name = pro_name;
+      val!.pro_phone = pro_phone;
+      val!.pro_email = pro_email;
+      val!.com_name = com_name;
+      val!.profile_img = profile_img;
+      val!.pro_token = pro_token;
     });
   }
 }

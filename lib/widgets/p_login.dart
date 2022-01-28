@@ -74,6 +74,7 @@ class _P_LoginState extends State<P_Login> {
         controller.change(
             proPrimaryId: pro_info[0].id,
             type: 'pro',
+            id: pro_info[0].id,
             pro_id: pro_info[0].pro_id,
             pro_name: pro_info[0].pro_name,
             pro_phone: pro_info[0].pro_phone,

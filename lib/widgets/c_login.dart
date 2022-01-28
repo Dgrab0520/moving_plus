@@ -2,14 +2,18 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/p_signup.dart';
+import 'package:moving_plus/pages/new_page.dart';
 import 'package:moving_plus/widgets/p_login.dart';
+import 'package:moving_plus/pages/p_signup.dart';
+import 'package:kakao_flutter_sdk/all.dart';
 
+import '../pages/arlim_checkbox.dart';
 import '../pages/main_page.dart';
+
+
 
 final controller = Get.put(ReactiveController());
 
@@ -22,6 +26,8 @@ class C_Login extends StatefulWidget {
 }
 
 class _C_LoginState extends State<C_Login> {
+
+
   bool _isKakaoTalkInstalled = true;
   String user_id = 'None';
   String user_name = 'None';
@@ -31,45 +37,45 @@ class _C_LoginState extends State<C_Login> {
   String loginRoot = '';
   List<Customer> customer = [];
 
-  getCus() {
-    Customer_Data.get_Customer(user_id).then((value) {
+  getCus(){
+    Customer_Data.get_Customer(user_id!).then((value){
       customer = value;
     });
-    if (customer.length == 0) {
+    if(customer.length == 0){
       print('customers length : ${customer.length}');
-    } else {
+    }else{
       print('customer length : ${customer.length}');
     }
   }
-
-  insertCus() {
-    Customer_Data.insertCustomer(user_id, user_recom!).then((value) {
-      if (value == "success") {
+  
+  insertCus(){
+    Customer_Data.insertCustomer(user_id!, user_recom!).then((value){
+      if(value == "success"){
         print('Insert Success');
         Get.offAll(Main_Page(index: 1));
-      } else {
+      }else{
         print('$value : Insert Fails');
       }
     });
   }
 
+
   //OrderId Random 생성
   String generateRandomString(int len) {
     var r = Random();
     const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)])
-        .join();
+    return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
   }
 
   @override
-  void initState() {
+  void initState(){
     _initTexts();
     _initKakaoTalkInstalled();
     print('_default_Image: $_default_Image');
     user_id = controller.pro.value.pro_id;
     loginRoot = widget.index == 1 ? 'interior_page' : 'main_page';
     user_recom = generateRandomString(8);
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), (){
       setState(() {
         getCus();
       });
@@ -77,7 +83,7 @@ class _C_LoginState extends State<C_Login> {
     super.initState();
   }
 
-  _initTexts() async {
+  _initTexts() async{
     final User user = await UserApi.instance.me();
     setState(() {
       user_id = user.kakaoAccount!.email!;
@@ -106,74 +112,76 @@ class _C_LoginState extends State<C_Login> {
     }
   }
 
-  _loginWithTalk() async {
-    try {
+  _loginWithTalk() async{
+    try{
       var code = await AuthCodeClient.instance.requestWithTalk();
       await _issueAccessToken(code);
-    } catch (e) {
+      // await _issueAccessToken(code);
+    }catch(e){
       print(e.toString());
     }
   }
 
   _issueAccessToken(String authCode) async {
-    try {
+    try{
       var token = await AuthApi.instance.issueAccessToken(authCode);
       // AccesstokenStore.instance.toStore(token);
       TokenManager.instance.setToken(token);
       print('token success');
       print('user_name: $user_name');
       controller.change(
-        proPrimaryId: 0,
-        type: 'cus',
-        pro_id: user_id,
-        pro_name: user_name,
-        pro_phone: 'None',
-        pro_email: 'None',
-        com_name: 'None',
-        profile_img: _default_Image ? "default_image" : profile_image,
-        pro_token: 'None',
+          type: 'cus',
+          id: '0',
+          pro_id: user_id,
+          pro_name: user_name,
+          pro_phone: 'None',
+          pro_email: 'None',
+          com_name: 'None',
+          profile_img: _default_Image ? "default_image" : profile_image,
+          pro_token: 'None',
       );
       // Customer_Data.get_Customer(user_id!).then((value){
       //   customer = value;
       // });
       print('customer.length ${customer.length}');
-      if (customer.length == 0) {
+      if(customer.length == 0){
         insertCus();
         print('asddsa');
-      } else {
+      }else{
         print('asddsa2');
-        if (loginRoot == 'main_page') {
+        if(loginRoot == 'main_page'){
           print('asddsa3');
           Get.offAll(Main_Page(index: 1));
-        } else {
+        }else{
           print('asddsa4');
           Get.back();
         }
       }
-    } catch (e) {
+    }catch(e){
       print("Error on issuing access token: $e");
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     // KaKao native app key
-    KakaoContext.clientId =
-        "5ea560970fe7158c7724fd4140be4fab"; //Native Key  //오류 발생 시 initState() 밑에 넣어보기
+    KakaoContext.clientId = "5ea560970fe7158c7724fd4140be4fab";  //Native Key  //오류 발생 시 initState() 밑에 넣어보기
     // KaKao javascript key
-    KakaoContext.javascriptClientId =
-        "31d2a1f88363431e27c4d4fdec296a5e"; //JavaScript Key
+    KakaoContext.javascriptClientId = "31d2a1f88363431e27c4d4fdec296a5e";  //JavaScript Key
 
     isKakaoTalkInstalled();
 
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
+    return  AlertDialog(
+      shape:RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-        Radius.circular(32),
-      )),
+            Radius.circular(32),
+          )
+      ),
       backgroundColor: Colors.white,
-      content: Container(
-        width: MediaQuery.of(context).size.width,
+      content:Container(
+        width:MediaQuery.of(context).size.width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -182,64 +190,61 @@ class _C_LoginState extends State<C_Login> {
               children: [
                 Container(),
                 InkWell(
-                    onTap: () {
+                    onTap:(){
                       Get.back();
                     },
                     child: Container(child: Icon(Icons.close))),
               ],
             ),
-            SizedBox(height: 10),
-            Text(
-              '로그인',
-              style: TextStyle(
-                color: Color(0xFF444444),
-                fontSize: 23,
+            SizedBox(height:10),
+            Text('로그인',
+              style:TextStyle(
+                color:Color(0xFF444444),
+                fontSize:23,
                 fontFamily: 'NanumSquareB',
               ),
             ),
-            SizedBox(height: 7),
-            Text(
-              '로그인 후 입주 플러스를 이용해 주세요.',
-              style: TextStyle(
-                color: Color(0xFF444444),
-                fontSize: 12,
+            SizedBox(height:7),
+            Text('로그인 후 입주 플러스를 이용해 주세요.',
+              style:TextStyle(
+                color:Color(0xFF444444),
+                fontSize:12,
                 fontFamily: 'NanumSquareR',
               ),
             ),
-            SizedBox(height: 28),
+            SizedBox(height:28),
             Container(
-              padding: EdgeInsets.only(left: 8, right: 8),
+              padding: EdgeInsets.only(left:8,right:8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {
+                    onTap: (){
                       print('고객 로그인');
                       _loginWithKakao();
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFD800),
+                      width:MediaQuery.of(context).size.width,
+                      height:40,
+                      decoration:BoxDecoration(
+                        color:Color(0xFFFFD800),
                       ),
                       child: Row(
                         children: [
-                          SizedBox(width: 15),
+                          SizedBox(width:15),
                           Container(
-                              child: Image.asset("assets/kakao_b.png",
-                                  width: 17, height: 17)),
-                          SizedBox(width: 10),
+                              child: Image.asset("assets/kakao_b.png", width:17, height:17)
+                          ),
+                          SizedBox(width:10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(width: 30),
-                              Text(
-                                '카카오로 시작하기',
-                                style: TextStyle(
-                                  color: Color(0xFF3E2723),
+                              SizedBox(width:30),
+                              Text('카카오로 시작하기',
+                                style:TextStyle(
+                                  color:Color(0xFF3E2723),
                                   fontSize: 14,
                                   fontFamily: 'NanumSquareR',
                                 ),
@@ -250,48 +255,49 @@ class _C_LoginState extends State<C_Login> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
+
+                  SizedBox(height: 5.0,),
                   TextButton(
-                      onPressed: () {
-                        print('파트너 로그인');
-                        Get.back();
-                        Get.dialog(P_Login());
-                      },
-                      child: Center(
-                        child: Text(
-                          '파트너 로그인',
-                          style: TextStyle(
-                            color: Color(0xFF025595),
-                            fontFamily: 'NanumSquareB',
-                          ),
+                    onPressed: (){
+                      print('파트너 로그인');
+                      Get.back();
+                      Get.dialog(P_Login());
+                    },
+                    child: Center(
+                      child: Text('파트너 로그인', style:
+                        TextStyle(
+                          color: Color(0xFF025595),
+                          fontFamily: 'NanumSquareB',
                         ),
-                      ))
+                      ),
+                    )
+                  )
                 ],
               ),
             ),
-            SizedBox(height: 40),
+
+            SizedBox(height:40),
+
             Container(
-              child: InkWell(
-                onTap: () {
-                  Get.back();
-                  Get.dialog(P_Signup());
-                },
-                child: Container(
-                  child: Center(
-                    child: Text(
-                      '파트너로 회원가입하기',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'NanumSquareB',
+              child:
+                  InkWell(
+                    onTap:(){
+                      Get.back();
+                      Get.dialog(P_Signup());
+                    },
+                    child: Container(
+                      child: Center(
+                        child: Text('파트너로 회원가입하기',
+                          style: TextStyle(
+                            fontSize:11,
+                            fontFamily:'NanumSquareB',
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height:20),
           ],
         ),
       ),
