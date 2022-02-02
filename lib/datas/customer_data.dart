@@ -6,6 +6,8 @@ class Customer_Data{
   static const ROOT = "http://211.110.44.91/plus/plus_customer.php";
   static const CUSTOMER_SELECT_ACTION = "CUSTOMER_SELECT";
   static const CUSTOMER_INSERT_ACTION = "CUSTOMER_INSERT";
+  static const CUSTOMER_TOKEN_ACTION = "CUSTOMER_TOKEN";
+
 
 
   //고객 정보 조회
@@ -46,6 +48,27 @@ class Customer_Data{
       return "error";
     }
   }
+
+  //고객 토큰 저장
+  static Future<String> updateToken(String cus_id, String token) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = CUSTOMER_TOKEN_ACTION;
+      map['cus_id'] = cus_id;
+      map['token'] = token;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Customer Token Update : ${response.body}");
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
+      return "error";
+    }
+  }
+
+
 
 
   static List<Customer> parseResponse(String responseBody){

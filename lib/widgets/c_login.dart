@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
@@ -47,11 +48,34 @@ class _C_LoginState extends State<C_Login> {
     Customer_Data.insertCustomer(user_id, user_recom!).then((value) {
       if (value == "success") {
         print('Insert Success');
+        FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
+          print("user_id1: $user_id");
+          if(value == 'success'){
+            print("user_id2: $user_id");
+            print('update token success');
+          }else{
+            print("user_id3: $user_id");
+            print('update token fail');
+          }
+        }));
         Get.offAll(Main_Page(index: 1));
       } else {
         print('$value : Insert Fails');
       }
     });
+  }
+
+
+
+
+  setToken(String token) async {
+    var url = Uri.parse('http://211.110.44.91/plus/plus_customer_token.php');
+    var result = await http.post(url, body: {
+      "action": "CUSTOMER_TOKEN",
+      "token": token,
+      "user_id": user_id,
+    });
+    print("result : $token");
   }
 
   //OrderId Random 생성
@@ -137,20 +161,34 @@ class _C_LoginState extends State<C_Login> {
         profile_img: _default_Image ? "default_image" : profile_image,
         pro_token: 'None',
       );
-      // Customer_Data.get_Customer(user_id!).then((value){
-      //   customer = value;
-      // });
       print('customer.length ${customer.length}');
       if (customer.length == 0) {
         insertCus();
-        print('asddsa');
       } else {
-        print('asddsa2');
         if (loginRoot == 'main_page') {
-          print('asddsa3');
+          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
+              print("user_id1: $user_id");
+             if(value == 'success'){
+               print("user_id2: $user_id");
+               print('update token success');
+              }else{
+               print("user_id3: $user_id");
+                 print('update token fail');
+              }
+            })
+          );
           Get.offAll(Main_Page(index: 1));
         } else {
-          print('asddsa4');
+          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
+            print("user_id1: $user_id");
+            if(value == 'success'){
+              print("user_id2: $user_id");
+              print('update token success');
+            }else{
+              print("user_id3: $user_id");
+              print('update token fail');
+            }
+          }));
           Get.back();
         }
       }

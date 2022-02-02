@@ -1,8 +1,11 @@
 import 'package:custom_check_box/custom_check_box.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/datas/pro_login_data.dart';
 import 'package:moving_plus/models/pro_login_model.dart';
 import 'package:moving_plus/pages/main_page.dart';
@@ -63,6 +66,17 @@ class _P_LoginState extends State<P_Login> {
       if (value.length == 1) {
         setState(() {
           _isLoading = true;
+          FirebaseMessaging.instance.getToken().then((value) => Pro_Data.updateToken_Pro('${pro_info[0].pro_id}', value!).then((value){
+            print("user_id1: ${pro_info[0].pro_id}");
+            print('value : $value');
+            if(value == 'success'){
+              print("user_id2: ${pro_info[0].pro_id}");
+              print('update token success');
+            }else{
+              print("user_id3: ${pro_info[0].pro_id}");
+              print('update token fail');
+            }
+          }));
           storage.write(
               key: "login",
               value: "id " +

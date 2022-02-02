@@ -66,12 +66,10 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
     //firebase 실시간 채팅 받아오기
     if (controller.pro.value.type == "pro") {
       isPro = 1;
-      token =
-          "e6AAsaANSHqcCDY56SYUCK:APA91bFKmnTIe_2bYVcwEA1QN23DJbHP_GqH23rBgZWrUfqynpAc_FXGo3PJAL2pOsn4PaqQI-sPSHrO3Iz86qCN0slo_-9XAhs4li97DrJNtsBwHmw9w7dv23cWAzDGVVzzhn1SjmGu";
+      token = "e6AAsaANSHqcCDY56SYUCK:APA91bFKmnTIe_2bYVcwEA1QN23DJbHP_GqH23rBgZWrUfqynpAc_FXGo3PJAL2pOsn4PaqQI-sPSHrO3Iz86qCN0slo_-9XAhs4li97DrJNtsBwHmw9w7dv23cWAzDGVVzzhn1SjmGu";
     } else {
       isPro = 0;
-      token =
-          "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
+      token = "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
     }
 
     print(isPro);

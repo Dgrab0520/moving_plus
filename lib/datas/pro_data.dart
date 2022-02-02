@@ -7,6 +7,7 @@ class Pro_Data{
   static const PRO_SELECT_ACTION = "PRO_SELECT";
   static const PRO_ALLIANCE_ACTION = "PRO_ALLIANCE";
   static const PRO_BEST_ACTION = "PRO_ACTION";
+  static const PRO_TOKEN_ACTION = "PRO_TOKEN";
 
 
   //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
@@ -67,6 +68,26 @@ class Pro_Data{
       }
     }catch(e){
       return [];
+    }
+  }
+
+
+  //전문가 토큰 저장
+  static Future<String> updateToken_Pro(String pro_id, String token) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = PRO_TOKEN_ACTION;
+      map['pro_id'] = pro_id;
+      map['token'] = token;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Pro Token Update : ${response.body}");
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
+      return "error";
     }
   }
 
