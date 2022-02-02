@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,17 @@ const String homeURL = "http://211.110.44.91";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyBoZtVOfbB3tr26NL_CKne4zGexOwpLYaE",
+          appId: "1:120006776704:ios:0e2bf2dbca3db9f86c5365",
+          messagingSenderId: "120006776704",
+          projectId: "moving-plus-8223e"), //DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 
