@@ -11,7 +11,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
+import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/chat_model.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
 
 import '../main.dart';
@@ -34,11 +36,14 @@ class Chat_Estimate extends StatefulWidget {
 class _Chat_EstimateState extends State<Chat_Estimate> {
   bool isSelect = false;
   bool isTextChange = false;
+  bool isLoading = false;
 
   int isPro = 1;
   int textLines = 1;
+  String? customer_Token;
 
   List<Chat> chatting = [];
+
 
   String token = "";
 
@@ -47,13 +52,19 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
 
   HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendFCM',
       options: HttpsCallableOptions(timeout: const Duration(seconds: 5)));
+  
+  
+
+
+  
+  
+  
 
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
       print(message);
       ChatData.getChat(widget.estimateId).then((value) {
-        print(value);
         setState(() {
           chatting = value;
         });
@@ -66,10 +77,11 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
     //firebase 실시간 채팅 받아오기
     if (controller.pro.value.type == "pro") {
       isPro = 1;
-      token = "e6AAsaANSHqcCDY56SYUCK:APA91bFKmnTIe_2bYVcwEA1QN23DJbHP_GqH23rBgZWrUfqynpAc_FXGo3PJAL2pOsn4PaqQI-sPSHrO3Iz86qCN0slo_-9XAhs4li97DrJNtsBwHmw9w7dv23cWAzDGVVzzhn1SjmGu";
+      token = controller.pro.value.pro_token;
+      print('token: $token');
     } else {
       isPro = 0;
-      token = "fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV";
+      token = controller.pro.value.pro_token;
     }
 
     print(isPro);
@@ -126,7 +138,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          '김이박',
+          '${chatting[0].customerId}',
           style: TextStyle(
             color: Colors.white,
             fontSize: 17,
@@ -298,59 +310,64 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                 SizedBox(width: 10),
                 InkWell(
                     onTap: () {
-                      if (chatTextController.text != "") {
-                        Chat chat = Chat(
-                            id: 0,
-                            estimateId: widget.estimateId,
-                            customerId: controller.pro.value.pro_id,
-                            proId: "0",
-                            text: chatTextController.text,
-                            image: "",
-                            estimatePrice: 0,
-                            finalPrice: 0,
-                            isPro: isPro,
-                            createAt: "");
-                        ChatData.putChat(chat).then((value) async {
-                          if (value.isNotEmpty) {
-                            print(value);
-                            chat.createAt = value[0];
-                            if (isPro == 1) {
-                              chatRoom[widget.chatRoomIndex].lastChat =
-                                  chat.text;
-                              chatRoom[widget.chatRoomIndex].createAt =
-                                  value[0];
-                            } else {
-                              userChatRooms[widget.chatRoomIndex].lastChat =
-                                  chat.text;
-                              userChatRooms[widget.chatRoomIndex].createAt =
-                                  value[0];
+                      if(chatting.length == 1 && controller.pro.value.type == 'pro'){
+                        Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다', backgroundColor: Colors.white);
+                      }else{
+                        if (chatTextController.text != "") {
+                          Chat chat = Chat(
+                              id: 0,
+                              estimateId: widget.estimateId,
+                              customerId: controller.pro.value.pro_id,
+                              proId: "0",
+                              text: chatTextController.text,
+                              image: "",
+                              estimatePrice: 0,
+                              finalPrice: 0,
+                              isPro: isPro,
+                              createAt: "");
+                          ChatData.putChat(chat).then((value) async {
+                            if (value.isNotEmpty) {
+                              print(value);
+                              chat.createAt = value[0];
+                              if (isPro == 1) {
+                                chatRoom[widget.chatRoomIndex].lastChat =
+                                    chat.text;
+                                chatRoom[widget.chatRoomIndex].createAt =
+                                value[0];
+                              } else {
+                                userChatRooms[widget.chatRoomIndex].lastChat =
+                                    chat.text;
+                                userChatRooms[widget.chatRoomIndex].createAt =
+                                value[0];
+                              }
+
+                              setState(() {
+                                chatting.insert(0, chat);
+
+                                chatTextController.text = "";
+                                isTextChange = false;
+                                isSelect = false;
+                                Timer(
+                                    Duration(milliseconds: 200),
+                                        () => scrollController.animateTo(0.0,
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.easeInOut));
+                              });
+                              print(token);
+                              final HttpsCallableResult result =
+                              await callable.call(
+                                <String, dynamic>{
+                                  "token": token,
+                                  "title": "title",
+                                  "body": "body",
+                                },
+                              );
+                              print(result.data);
                             }
+                          });
+                        } else {}
+                      }
 
-                            setState(() {
-                              chatting.insert(0, chat);
-
-                              chatTextController.text = "";
-                              isTextChange = false;
-                              isSelect = false;
-                              Timer(
-                                  Duration(milliseconds: 200),
-                                  () => scrollController.animateTo(0.0,
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut));
-                            });
-                            print(token);
-                            final HttpsCallableResult result =
-                                await callable.call(
-                              <String, dynamic>{
-                                "token": token,
-                                "title": "title",
-                                "body": "body",
-                              },
-                            );
-                            print(result.data);
-                          }
-                        });
-                      } else {}
                     },
                     child: Image.asset(
                         isTextChange
@@ -976,7 +993,7 @@ class EstimatePrice extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.all(15),
-                        height: 300,
+                        height: 260,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -1005,6 +1022,9 @@ class EstimatePrice extends StatelessWidget {
                             SizedBox(height: 10),
                             Text(
                               detail,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               style: TextStyle(
                                 fontSize: 12,
                                 height: 1.5,

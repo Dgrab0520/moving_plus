@@ -7,6 +7,7 @@ import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
+import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/p_signup.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
@@ -28,6 +29,7 @@ class _C_LoginState extends State<C_Login> {
   String user_name = 'None';
   String user_phone = 'None';
   String profile_image = 'None';
+  String? FCM_token = '';
   String? user_recom;
   bool _default_Image = true;
   String loginRoot = '';
@@ -48,13 +50,10 @@ class _C_LoginState extends State<C_Login> {
     Customer_Data.insertCustomer(user_id, user_recom!).then((value) {
       if (value == "success") {
         print('Insert Success');
-        FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
-          print("user_id1: $user_id");
-          if(value == 'success'){
-            print("user_id2: $user_id");
+        FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value2){
+          if(value2 == 'success'){
             print('update token success');
           }else{
-            print("user_id3: $user_id");
             print('update token fail');
           }
         }));
@@ -65,18 +64,6 @@ class _C_LoginState extends State<C_Login> {
     });
   }
 
-
-
-
-  setToken(String token) async {
-    var url = Uri.parse('http://211.110.44.91/plus/plus_customer_token.php');
-    var result = await http.post(url, body: {
-      "action": "CUSTOMER_TOKEN",
-      "token": token,
-      "user_id": user_id,
-    });
-    print("result : $token");
-  }
 
   //OrderId Random 생성
   String generateRandomString(int len) {
@@ -146,10 +133,8 @@ class _C_LoginState extends State<C_Login> {
   _issueAccessToken(String authCode) async {
     try {
       var token = await AuthApi.instance.issueAccessToken(authCode);
-      // AccesstokenStore.instance.toStore(token);
       TokenManager.instance.setToken(token);
       print('token success');
-      print('user_name: $user_name');
       controller.change(
         type: 'cus',
         id: '0',
@@ -161,37 +146,36 @@ class _C_LoginState extends State<C_Login> {
         profile_img: _default_Image ? "default_image" : profile_image,
         pro_token: 'None',
       );
-      print('customer.length ${customer.length}');
       if (customer.length == 0) {
         insertCus();
       } else {
         if (loginRoot == 'main_page') {
           FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
-              print("user_id1: $user_id");
-             if(value == 'success'){
-               print("user_id2: $user_id");
+            if(value == 'success'){
                print('update token success');
-              }else{
-               print("user_id3: $user_id");
+
+            }else{
                  print('update token fail');
               }
             })
           );
           Get.offAll(Main_Page(index: 1));
         } else {
-          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
-            print("user_id1: $user_id");
-            if(value == 'success'){
-              print("user_id2: $user_id");
+          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value2){
+            if(value2 == 'success'){
               print('update token success');
+              setState(() {
+                FCM_token = value;
+              });
             }else{
-              print("user_id3: $user_id");
               print('update token fail');
             }
           }));
-          Get.back();
+          Get.back(result: FCM_token);
         }
       }
+      print('fcm tokensd : $FCM_token');
+
     } catch (e) {
       print("Error on issuing access token: $e");
     }

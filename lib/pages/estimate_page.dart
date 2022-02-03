@@ -29,6 +29,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
   UpdateEstimate() {
     EstimateData.insertEstimate(
             controller.pro.value.pro_id,
+            customer_id!,
             estimateId!,
             order_id!,
             priceController.numberValue.toInt().toString(),
@@ -49,7 +50,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
     EstimateData.insertEstimate_Chat(
             estimateId!,
             customer_id!,
-            controller.pro.value.id,
+            controller.pro.value.pro_id,
             detailController.text,
             priceController.numberValue.toInt().toString())
         .then((value) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/widgets/c_login.dart';
@@ -49,6 +51,8 @@ class _Interior_PageState extends State<Interior_Page>
   List<String> img = [];
   List<String> title = [];
   List<String> content = [];
+  List<Customer> customer = [];
+  bool isLoading2 = false;
 
   void moveIndex(int index) {
     setState(() {
@@ -69,6 +73,7 @@ class _Interior_PageState extends State<Interior_Page>
         isMain: true,
       ),
     ];
+    print('controller ${controller.pro.value.type}');
     api.getCategories().then((value) {
       categories.addAll(value);
       _tabController = TabController(

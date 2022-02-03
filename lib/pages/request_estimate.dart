@@ -7,7 +7,9 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:timelines/timelines.dart';
 
@@ -50,6 +52,8 @@ class _Request_EstimateState extends State<Request_Estimate> {
   String? orderId = '';
   String? space_type = '';
   String? size_unit = '';
+  List<Customer> customer = [];
+  bool isLoading = false;
 
   static final storage =
       new FlutterSecureStorage(); //flutter_secure_storage 사용을 위한 초기화 작업
@@ -83,6 +87,33 @@ class _Request_EstimateState extends State<Request_Estimate> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _asyncMethod();
     });
+
+    if(controller.pro.value.type == 'cus'){
+      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value){
+        print('token11: ${controller.pro.value.pro_id}');
+        setState(() {
+          customer = value;
+        });
+        print({'customer : ${customer[0].cus_token}'});
+        if(value.length == 0){
+          isLoading = false;
+        }else{
+          isLoading = true;
+          controller.change(
+            type: 'cus',
+            id: '0',
+            pro_id: controller.pro.value.pro_id,
+            pro_name: controller.pro.value.pro_name,
+            pro_phone: controller.pro.value.pro_phone,
+            pro_email: 'None',
+            com_name: 'None',
+            profile_img: controller.pro.value.profile_img,
+            pro_token: customer[0].cus_token,
+          );
+        }
+      });
+    }
+
     orderId = generateRandomString(6);
     _serviceType = Get.parameters['serviceType'];
     print('orderId : $orderId');

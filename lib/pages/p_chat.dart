@@ -74,7 +74,7 @@ class _P_ChatState extends State<P_Chat> {
               )),
               alignment: Alignment.centerLeft,
               child: Text(
-                '김성수',
+                '${controller.pro.value.com_name}',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

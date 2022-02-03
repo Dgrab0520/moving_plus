@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
 import 'package:moving_plus/models/estimate_model.dart';
@@ -9,6 +10,12 @@ import 'package:moving_plus/pages/request_received..dart';
 
 import 'estimate_page.dart';
 import 'main_arlim.dart';
+
+
+
+
+
+final controller = Get.put(ReactiveController());
 
 class RequestForm extends StatefulWidget {
   const RequestForm({Key? key}) : super(key: key);
@@ -455,6 +462,10 @@ class _RequestFormState extends State<RequestForm> {
               ),
             ),
             SizedBox(height:30),
+            controller.pro.value.type == 'cus'
+            ?
+            Container()
+            :
             Expanded(
               flex: 1,
               child: InkWell(

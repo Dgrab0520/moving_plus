@@ -24,6 +24,7 @@ class ChatData {
   static const WRITE_ACTION = "WRITE";
   static const CHAT_LIST_ACTION = "CHAT_LIST";
   static const USER_CHAT_LIST_ACTION = "USER_CHAT_LIST";
+  static const CUS_CHECK_ACTION = 'CUS_CHECK';
 
   //전문가일때 채팅목록 불러오기
   static Future<List<ChatRoom>> getChatList(
@@ -89,6 +90,26 @@ class ChatData {
       print(e);
       return [];
     }
+  }
+
+  //고객 채팅 여부 확인
+  static Future<List<Chat>> check_Cus(String estimateId) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = CUS_CHECK_ACTION;
+      map['estimateId'] = estimateId;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Customer Chat Response : ${response.body}");
+      if(response.statusCode == 200){
+        List<Chat> list = parseResponse(response.body);
+        return list;
+      }else{
+        return [];
+      }
+    }catch(e){
+      return [];
+    }
+
   }
 
   //채팅쓰기

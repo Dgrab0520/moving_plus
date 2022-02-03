@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/customer_data.dart';
+import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search_page.dart';
 import 'package:moving_plus/widgets/carousel_main.dart';
 import 'package:moving_plus/widgets/carousel_sub.dart';
 import 'package:moving_plus/widgets/partner_sub.dart';
 import 'package:moving_plus/widgets/partner_sub2.dart';
+
+
+final controller = Get.put(ReactiveController());
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,9 +21,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<Customer> customer = [];
+  bool isLoading = false;
+
+
+
   void initState() {
     super.initState();
+    if(controller.pro.value.type == 'cus'){
+      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value){
+        print('token11: ${controller.pro.value.pro_id}');
+        setState(() {
+          customer = value;
+        });
+        print({'customer : $customer'});
+        if(value.length == 0){
+          isLoading = false;
+        }else{
+          isLoading = true;
+          controller.change(
+            type: 'cus',
+            id: '0',
+            pro_id: controller.pro.value.pro_id,
+            pro_name: controller.pro.value.pro_name,
+            pro_phone: controller.pro.value.pro_phone,
+            pro_email: 'None',
+            com_name: 'None',
+            profile_img: controller.pro.value.profile_img,
+            pro_token: customer[0].cus_token,
+          );
+        }
+      });
+    }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                               Image.asset("assets/main_icon6-1.png",
                                   width: 40, height: 40),
                               const SizedBox(height: 10),
-                              const Text(
+                              Text(
                                 '기타',
                                 style: TextStyle(
                                   fontSize: 12,

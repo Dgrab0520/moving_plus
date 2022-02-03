@@ -11,12 +11,13 @@ class EstimateData {
   static const SELECT_RECORD_ACTION = "SELECT_RECORD";
 
   //견적서 보내기
-  static Future<String> insertEstimate(String pro_id, String estimate_id,
+  static Future<String> insertEstimate(String pro_id, String customer_id, String estimate_id,
       String order_id, String estimate_price, String estimate_detail) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = INSERT_ESTIMATE_ACTION;
       map['pro_id'] = pro_id;
+      map['customer_id'] = customer_id;
       map['estimate_id'] = estimate_id;
       map['order_id'] = order_id;
       map['estimate_price'] = estimate_price;

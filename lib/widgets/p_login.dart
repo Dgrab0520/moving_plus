@@ -67,13 +67,9 @@ class _P_LoginState extends State<P_Login> {
         setState(() {
           _isLoading = true;
           FirebaseMessaging.instance.getToken().then((value) => Pro_Data.updateToken_Pro('${pro_info[0].pro_id}', value!).then((value){
-            print("user_id1: ${pro_info[0].pro_id}");
-            print('value : $value');
             if(value == 'success'){
-              print("user_id2: ${pro_info[0].pro_id}");
               print('update token success');
             }else{
-              print("user_id3: ${pro_info[0].pro_id}");
               print('update token fail');
             }
           }));

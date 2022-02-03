@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
@@ -8,6 +9,10 @@ import 'package:moving_plus/models/order_model.dart';
 import 'package:moving_plus/pages/request_form.dart';
 
 import 'main_arlim.dart';
+
+
+
+final controller = Get.put(ReactiveController());
 
 class Request_Received extends StatefulWidget {
   const Request_Received({Key? key}) : super(key: key);
@@ -40,7 +45,6 @@ class _Request_ReceivedState extends State<Request_Received> {
   }
 
 
-
   @override
   void initState(){
     getOrder();
@@ -52,7 +56,16 @@ class _Request_ReceivedState extends State<Request_Received> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('받은 요청서',
+        title: controller.pro.value.type == 'cus' ?
+        Text('보낸 요청서',
+          style: TextStyle(
+            color:Colors.white,
+            fontSize:17,
+            fontFamily: 'NanumSquareB',
+          ),
+        )
+        :
+        Text('받은 요청서',
           style: TextStyle(
             color:Colors.white,
             fontSize:17,
@@ -288,7 +301,12 @@ class _Request_ReceivedState extends State<Request_Received> {
                       ),
                     );
                   }
-              ) : Center(child: CircularProgressIndicator(),),
+              ) : Container(
+                margin: EdgeInsets.only(bottom: 200.0),
+                child: Center(
+                  child: Text('받은 요청서가 없습니다'),
+                ),
+              )
             )
 
 
