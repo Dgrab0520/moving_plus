@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/datas/pro_login_data.dart';
 import 'package:moving_plus/models/pro_login_model.dart';
@@ -66,13 +65,15 @@ class _P_LoginState extends State<P_Login> {
       if (value.length == 1) {
         setState(() {
           _isLoading = true;
-          FirebaseMessaging.instance.getToken().then((value) => Pro_Data.updateToken_Pro('${pro_info[0].pro_id}', value!).then((value){
-            if(value == 'success'){
-              print('update token success');
-            }else{
-              print('update token fail');
-            }
-          }));
+          FirebaseMessaging.instance.getToken().then((value) =>
+              Pro_Data.updateToken_Pro('${pro_info[0].pro_id}', value!)
+                  .then((value) {
+                if (value == 'success') {
+                  print('update token success');
+                } else {
+                  print('update token fail');
+                }
+              }));
           storage.write(
               key: "login",
               value: "id " +
@@ -335,21 +336,6 @@ class _P_LoginState extends State<P_Login> {
                 ],
               ),
               SizedBox(height: 20),
-              TextButton(
-                  onPressed: () {
-                    print('고객 로그인');
-                    Get.back();
-                    Get.dialog(C_Login(
-                      index: 0,
-                    ));
-                  },
-                  child: Text(
-                    '고객 로그인하기',
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        fontFamily: 'NanumSquareB',
-                        color: Colors.black87),
-                  )),
               InkWell(
                 onTap: () {
                   if (idController.text != "" && pwController.text != "") {
@@ -379,6 +365,21 @@ class _P_LoginState extends State<P_Login> {
                   ),
                 ),
               ),
+              TextButton(
+                  onPressed: () {
+                    print('고객 로그인');
+                    Get.back();
+                    Get.dialog(C_Login(
+                      index: 0,
+                    ));
+                  },
+                  child: Text(
+                    '고객 로그인하기',
+                    style: TextStyle(
+                        fontSize: 13.0,
+                        fontFamily: 'NanumSquareB',
+                        color: Colors.black87),
+                  )),
               SizedBox(height: 25),
               Container(
                 child: Row(

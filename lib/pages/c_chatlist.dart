@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,14 @@ class C_ChatList extends StatefulWidget {
 class _C_ChatListState extends State<C_ChatList> {
   @override
   void initState() {
+    FirebaseMessaging.onMessage.listen((message) {
+      ChatData.getUserChatList(widget.orderChat.order_id).then((value) {
+        print(value);
+        setState(() {
+          userChatRooms = value;
+        });
+      });
+    });
     ChatData.getUserChatList(widget.orderChat.order_id).then((value) {
       print(value);
       setState(() {
@@ -171,9 +180,9 @@ class ChatRoomBox extends StatelessWidget {
     DateTime createAt = chatRoom.createAt == ""
         ? DateTime.now()
         : DateTime.parse(chatRoom.createAt);
-    DateTime now = DateTime.now().toUtc().add(Duration(hours: 9));
+    DateTime now = DateTime.now();
     print(chatRoom.estimateId);
-    print(DateTime.now().toUtc().add(Duration(hours: 9)));
+    print(now);
     print(createAt);
     print(now.difference(createAt).inMinutes);
     int timeDifference = now.difference(createAt).inMinutes;
@@ -199,7 +208,13 @@ class ChatRoomBox extends StatelessWidget {
     }
 
     String lasChat = chatRoom.lastChat;
-    if (chatRoom.lastChat.lastIndexOf(".gif") != -1) lasChat = "사진을 보냈습니다";
+    if (chatRoom.chatType == "image") {
+      lasChat = "사진을 보냈습니다";
+    } else if (chatRoom.chatType == "estimate") {
+      lasChat = "견적을 보냈습니다";
+    } else if (chatRoom.chatType == "final") {
+      lasChat = "최종 견적을 보냈습니다";
+    }
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
@@ -208,6 +223,10 @@ class ChatRoomBox extends StatelessWidget {
           var result = await Get.to(Chat_Estimate(
             estimateId: chatRoom.estimateId,
             chatRoomIndex: chatRoomIndex,
+            serviceType: serviceType,
+            token: chatRoom.token,
+            otherName: chatRoom.proName,
+            proId: chatRoom.proId,
           ));
           print(result);
         },

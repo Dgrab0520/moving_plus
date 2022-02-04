@@ -172,13 +172,13 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
                       height: 16,
                       decoration: BoxDecoration(
                         color: orderChat.order_status == "finish"
-                            ? Colors.red
+                            ? Colors.green
                             : Color(0xFF025595),
                         borderRadius: BorderRadius.circular(2),
                       ),
                       child: Center(
                         child: Text(
-                          orderChat.order_status == "finish" ? "종료" : '진행중',
+                          orderChat.order_status == "finish" ? "요청됨" : '진행중',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,

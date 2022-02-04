@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
@@ -20,6 +21,16 @@ class _P_ChatState extends State<P_Chat> {
 
   @override
   void initState() {
+    FirebaseMessaging.onMessage.listen((message) {
+      ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
+        // controller.pro.value.pro_id
+        print(value);
+        setState(() {
+          chatRoom = value;
+          isLoading = true;
+        });
+      });
+    });
     ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
       // controller.pro.value.pro_id
       print(value);
@@ -83,101 +94,6 @@ class _P_ChatState extends State<P_Chat> {
               ),
             ),
             SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15),
-              child: SizedBox(
-                height: 30,
-                child: ListView.builder(
-                    itemCount: category.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (index == 0) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                isLoading = false;
-                              });
-                              ChatData.getChatList(
-                                      controller.pro.value.pro_id, "")
-                                  .then((value) {
-                                // controller.pro.value.pro_id
-                                print(value);
-                                setState(() {
-                                  chatRoom = value;
-                                  isLoading = true;
-                                });
-                              });
-                            },
-                            child: Container(
-                              height: 30,
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xFFF9F9F9),
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color(0xFFcccccc),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  category[index],
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                isLoading = false;
-                              });
-                              ChatData.getChatList(controller.pro.value.pro_id,
-                                      "AND b.service_type = '${category[index]}'")
-                                  .then((value) {
-                                // controller.pro.value.pro_id
-                                print(value);
-                                setState(() {
-                                  chatRoom = value;
-                                  isLoading = true;
-                                });
-                              });
-                            },
-                            child: Container(
-                              height: 30,
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xFFF9F9F9),
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color(0xFFcccccc),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  category[index],
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                    }),
-              ),
-            ),
-            SizedBox(height: 10),
             Container(
               padding: EdgeInsets.only(bottom: 10),
               margin: EdgeInsets.only(left: 15, right: 15),
@@ -212,6 +128,7 @@ class _P_ChatState extends State<P_Chat> {
                       ? Text("채팅이 없습니다.")
                       : ListView.builder(
                           itemCount: chatRoom.length,
+                          physics: BouncingScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             return ChatRoomBox(
                               chatRoom: chatRoom[index],
@@ -242,9 +159,9 @@ class ChatRoomBox extends StatelessWidget {
     String area =
         chatRoom.area.split(" ")[0] + " " + chatRoom.area.split(" ")[1];
     DateTime createAt = DateTime.parse(chatRoom.createAt);
-    DateTime now = DateTime.now().toUtc().add(Duration(hours: 9));
+    DateTime now = DateTime.now();
     print(chatRoom.estimateId);
-    print(DateTime.now().toUtc().add(Duration(hours: 9)));
+    print(now);
     print(createAt);
     print(now.difference(createAt).inMinutes);
     int timeDifference = now.difference(createAt).inMinutes;
@@ -264,7 +181,13 @@ class ChatRoomBox extends StatelessWidget {
     }
 
     String lasChat = chatRoom.lastChat;
-    if (chatRoom.lastChat.lastIndexOf(".gif") != -1) lasChat = "사진을 보냈습니다";
+    if (chatRoom.chatType == "image") {
+      lasChat = "사진을 보냈습니다";
+    } else if (chatRoom.chatType == "estimate") {
+      lasChat = "견적을 보냈습니다";
+    } else if (chatRoom.chatType == "final") {
+      lasChat = "최종 견적을 보냈습니다";
+    }
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
@@ -273,6 +196,10 @@ class ChatRoomBox extends StatelessWidget {
           var result = await Get.to(Chat_Estimate(
             estimateId: chatRoom.estimateId,
             chatRoomIndex: chatRoomIndex,
+            serviceType: chatRoom.serviceType,
+            token: chatRoom.token,
+            otherName: chatRoom.userName,
+            proId: chatRoom.proId,
           ));
           print(result);
         },

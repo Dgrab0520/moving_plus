@@ -1,13 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:vertical_tab_bar_view/vertical_tab_bar_view.dart';
 
 import 'api.dart';
 import 'main_arlim.dart';
-
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -52,48 +48,48 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: IconThemeData(color: Color(0xFF025595)),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Image.asset("assets/logo_3.jpg", width: 65, height: 35),
-          centerTitle: true,
-          actions: [
-            Container(
-              padding: EdgeInsets.only(left: 15, right: 15),
-              child: InkWell(
-                onTap: () {
-                  Get.to(Main_Arlim());
-                },
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                      child: Icon(Icons.notifications,
-                          color: Color(0xFF025595), size: 22)),
-                ),
+        iconTheme: IconThemeData(color: Color(0xFF025595)),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Image.asset("assets/logo_3.jpg", width: 65, height: 35),
+        centerTitle: true,
+        actions: [
+          Container(
+            padding: EdgeInsets.only(left: 15, right: 15),
+            child: InkWell(
+              onTap: () {
+                Get.to(Main_Arlim());
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                    child: Icon(Icons.notifications,
+                        color: Color(0xFF025595), size: 22)),
               ),
             ),
-          ],
+          ),
+        ],
         bottom: _tabController == null
             ? null
             : TabBar(
-          controller: _tabController,
-          labelColor: Colors.redAccent,
-          unselectedLabelColor: Colors.black,
-          isScrollable: true,
-          tabs: [
-            for (Category category in categories) Tab(text: category.name)
-          ],
-        ),
+                controller: _tabController,
+                labelColor: Colors.redAccent,
+                unselectedLabelColor: Colors.black,
+                isScrollable: true,
+                tabs: [
+                  for (Category category in categories) Tab(text: category.name)
+                ],
+              ),
       ),
       body: _tabController == null
           ? Center(child: CircularProgressIndicator())
           : VerticalTabBarView(
-        controller: _tabController,
-        children: [
-          for (Category category in categories)
-            TabView(category: category)
-        ],
-      ),
+              controller: _tabController,
+              children: [
+                for (Category category in categories)
+                  TabView(category: category)
+              ],
+            ),
     );
   }
 }
@@ -116,9 +112,7 @@ class _TabViewState extends State<TabView> {
   ScrollController scrollController = ScrollController();
   bool isend = false;
 
-  fetchProducts(String category) {
-
-  }
+  fetchProducts(String category) {}
 
   @override
   void initState() {
@@ -181,7 +175,7 @@ class _TabViewState extends State<TabView> {
                       category.content,
                       style: TextStyle(
                         fontSize: 11,
-                        height:1.4,
+                        height: 1.4,
                       ),
                       textAlign: TextAlign.center,
                     ),

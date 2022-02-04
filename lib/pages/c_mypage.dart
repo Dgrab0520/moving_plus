@@ -9,20 +9,15 @@ import 'package:moving_plus/pages/transaction_breakdown.dart';
 
 import 'main_page.dart';
 
-class C_Mypage extends StatefulWidget {
+class C_Mypage extends StatelessWidget {
   const C_Mypage({Key? key}) : super(key: key);
 
-  @override
-  _C_MypageState createState() => _C_MypageState();
-}
-
-class _C_MypageState extends State<C_Mypage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           '마이페이지',
           style: TextStyle(
             color: Colors.white,
@@ -31,12 +26,12 @@ class _C_MypageState extends State<C_Mypage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -48,12 +43,12 @@ class _C_MypageState extends State<C_Mypage> {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(Account_Set());
+                  Get.to(const Account_Set());
                 },
                 child: Container(
-                  padding:
-                      EdgeInsets.only(left: 10, right: 10, bottom: 25, top: 25),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: 25, top: 25),
+                  decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
                     ),
@@ -72,7 +67,7 @@ class _C_MypageState extends State<C_Mypage> {
                               fit: BoxFit.cover,
                             )),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         flex: 8,
                         child: Column(
@@ -81,22 +76,22 @@ class _C_MypageState extends State<C_Mypage> {
                           children: [
                             Text(
                               controller.pro.value.pro_name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontFamily: 'NanumSquareEB',
                               ),
                               softWrap: false,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
                                 Text(controller.pro.value.pro_id,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 13,
                                       fontFamily: 'NanumSquareR',
                                     )),
-                                SizedBox(width: 7),
+                                const SizedBox(width: 7),
                                 Image.asset("assets/i_partner2.png",
                                     width: 15, height: 15),
                               ],
@@ -109,7 +104,7 @@ class _C_MypageState extends State<C_Mypage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.arrow_forward_ios,
                                 color: Colors.black,
@@ -122,26 +117,23 @@ class _C_MypageState extends State<C_Mypage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10, top: 30),
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          '활동',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'NanumSquareEB',
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      '활동',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'NanumSquareEB',
+                      ),
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(Transaction_Breakdown());
+                        Get.to(const Transaction_Breakdown());
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 15, bottom: 10),
+                        padding: const EdgeInsets.only(top: 15, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -149,18 +141,14 @@ class _C_MypageState extends State<C_Mypage> {
                               children: [
                                 Image.asset("assets/shield-(1).png",
                                     width: 17, height: 17),
-                                SizedBox(width: 10),
-                                Text('거래내역'),
+                                const SizedBox(width: 10),
+                                const Text('거래내역'),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 18,
                             ),
                           ],
                         ),
@@ -168,10 +156,10 @@ class _C_MypageState extends State<C_Mypage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(Receive_Estimate(isMain: false));
+                        Get.to(const Receive_Estimate(isMain: false));
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -179,18 +167,14 @@ class _C_MypageState extends State<C_Mypage> {
                               children: [
                                 Image.asset("assets/chat-(2)_gg.png",
                                     width: 17, height: 17),
-                                SizedBox(width: 10),
-                                Text('채팅'),
+                                const SizedBox(width: 10),
+                                const Text('채팅'),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 18,
                             ),
                           ],
                         ),
@@ -198,10 +182,10 @@ class _C_MypageState extends State<C_Mypage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(C_Review());
+                        Get.to(const C_Review());
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -209,43 +193,35 @@ class _C_MypageState extends State<C_Mypage> {
                               children: [
                                 Image.asset("assets/notes-(1).png",
                                     width: 17, height: 17),
-                                SizedBox(width: 10),
-                                Text('작성한 후기'),
+                                const SizedBox(width: 10),
+                                const Text('작성한 후기'),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 18,
                             ),
                           ],
                         ),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            '설정',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'NanumSquareEB',
-                            ),
-                          ),
-                        ],
+                      padding: const EdgeInsets.only(top: 20),
+                      child: const Text(
+                        '설정',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'NanumSquareEB',
+                        ),
                       ),
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(MyPage_Arlim());
+                        Get.to(const MyPage_Arlim());
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 15, bottom: 10),
+                        padding: const EdgeInsets.only(top: 15, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -253,18 +229,14 @@ class _C_MypageState extends State<C_Mypage> {
                               children: [
                                 Image.asset("assets/notification-(2).png",
                                     width: 17, height: 17),
-                                SizedBox(width: 10),
-                                Text('알림'),
+                                const SizedBox(width: 10),
+                                const Text('알림'),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 18,
                             ),
                           ],
                         ),
@@ -272,10 +244,10 @@ class _C_MypageState extends State<C_Mypage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(Notice());
+                        Get.to(const Notice());
                       },
                       child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -283,18 +255,14 @@ class _C_MypageState extends State<C_Mypage> {
                               children: [
                                 Image.asset("assets/sound.png",
                                     width: 17, height: 17),
-                                SizedBox(width: 10),
-                                Text('공지사항'),
+                                const SizedBox(width: 10),
+                                const Text('공지사항'),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.black,
+                              size: 18,
                             ),
                           ],
                         ),

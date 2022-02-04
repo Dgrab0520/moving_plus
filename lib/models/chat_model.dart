@@ -1,8 +1,6 @@
 class Chat {
   int id;
   String estimateId;
-  String customerId;
-  String proId;
   String text;
   String image;
   int estimatePrice;
@@ -13,8 +11,6 @@ class Chat {
   Chat({
     required this.id,
     required this.estimateId,
-    required this.customerId,
-    required this.proId,
     required this.text,
     required this.image,
     required this.estimatePrice,
@@ -27,8 +23,6 @@ class Chat {
     return Chat(
       id: int.parse(json['id']),
       estimateId: json['estimateId'] as String,
-      customerId: json['customerId'] as String,
-      proId: json['proId'] as String,
       text: json['text'] as String,
       image: json['image'] as String,
       estimatePrice: int.parse(json['estimatePrice']),

@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/receive_estimate.dart';
-import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/widgets/c_login.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 import 'package:vertical_scrollable_tabview/vertical_scrollable_tabview.dart';
 
 import 'api.dart';
-import 'homepage.dart';
 import 'main_arlim.dart';
 import 'main_page.dart';
 
 final controller = Get.put(ReactiveController());
 
 class Interior_Page extends StatefulWidget {
-  const Interior_Page({Key? key, required this.Categorytitle})
+  const Interior_Page({Key? key, required this.categoryTitle})
       : super(key: key);
-  final int Categorytitle;
+  final int categoryTitle;
 
   @override
   _Interior_PageState createState() => _Interior_PageState();
@@ -40,12 +36,11 @@ class _Interior_PageState extends State<Interior_Page>
         _tabController = TabController(
             length: value.length,
             vsync: this,
-            initialIndex: widget.Categorytitle);
+            initialIndex: widget.categoryTitle);
       });
     });
   }
 
-  int _selectedIndex = 1;
   DateTime currentBackPressTime = DateTime.now();
 
   List<String> img = [];
@@ -54,26 +49,10 @@ class _Interior_PageState extends State<Interior_Page>
   List<Customer> customer = [];
   bool isLoading2 = false;
 
-  void moveIndex(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  List<Widget> _widgetOptions = [];
-
   bool isLoading = false;
 
   @override
   void initState() {
-    _widgetOptions = [
-      Request_Estimate(),
-      HomePage(),
-      Receive_Estimate(
-        isMain: true,
-      ),
-    ];
-    print('controller ${controller.pro.value.type}');
     api.getCategories().then((value) {
       categories.addAll(value);
       _tabController = TabController(
@@ -82,9 +61,9 @@ class _Interior_PageState extends State<Interior_Page>
       );
       isLoading = true;
       setState(() {
-        if (widget.Categorytitle != 0) {
-          VerticalScrollableTabBarStatus.setIndex(widget.Categorytitle);
-          _tabController.animateTo(widget.Categorytitle);
+        if (widget.categoryTitle != 0) {
+          VerticalScrollableTabBarStatus.setIndex(widget.categoryTitle);
+          _tabController.animateTo(widget.categoryTitle);
         }
       });
     });
@@ -94,8 +73,7 @@ class _Interior_PageState extends State<Interior_Page>
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    _tabController.dispose();
+    //_tabController.dispose();
     super.dispose();
   }
 
@@ -188,7 +166,7 @@ class _Interior_PageState extends State<Interior_Page>
           type: BottomNavigationBarType.fixed,
           backgroundColor: Color(0xFF025595),
           unselectedFontSize: 12,
-          currentIndex: _selectedIndex, //현재 선택된 Index
+          currentIndex: 1, //현재 선택된 Index
           onTap: (int index) {
             if (index == 2 && controller.pro.value.pro_id == "None") {
               Get.dialog(P_Login());

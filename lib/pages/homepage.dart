@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/partner_search_page.dart';
 import 'package:moving_plus/widgets/carousel_main.dart';
 import 'package:moving_plus/widgets/carousel_sub.dart';
 import 'package:moving_plus/widgets/partner_sub.dart';
 import 'package:moving_plus/widgets/partner_sub2.dart';
 
+import 'interior_page.dart';
 
 final controller = Get.put(ReactiveController());
 
@@ -21,24 +21,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<Customer> customer = [];
   bool isLoading = false;
-
-
-
+  @override
   void initState() {
     super.initState();
-    if(controller.pro.value.type == 'cus'){
-      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value){
+    if (controller.pro.value.type == 'cus') {
+      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value) {
         print('token11: ${controller.pro.value.pro_id}');
         setState(() {
           customer = value;
         });
         print({'customer : $customer'});
-        if(value.length == 0){
+        if (value.isEmpty) {
           isLoading = false;
-        }else{
+        } else {
           isLoading = true;
           controller.change(
             type: 'cus',
@@ -56,13 +53,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           SizedBox(
             height: 10.0,
@@ -87,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 0,
+                            categoryTitle: 0,
                           ));
                         },
                         child: Container(
@@ -131,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 1,
+                            categoryTitle: 1,
                           ));
                         },
                         child: Container(
@@ -175,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 2,
+                            categoryTitle: 2,
                           ));
                         },
                         child: Container(
@@ -227,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 3,
+                            categoryTitle: 3,
                           ));
                         },
                         child: Container(
@@ -271,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 4,
+                            categoryTitle: 4,
                           ));
                         },
                         child: Container(
@@ -315,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           print('success');
                           Get.to(Interior_Page(
-                            Categorytitle: 5,
+                            categoryTitle: 5,
                           ));
                         },
                         child: Container(
@@ -341,7 +337,7 @@ class _HomePageState extends State<HomePage> {
                               Image.asset("assets/main_icon6-1.png",
                                   width: 40, height: 40),
                               const SizedBox(height: 10),
-                              Text(
+                              const Text(
                                 '기타',
                                 style: TextStyle(
                                   fontSize: 12,

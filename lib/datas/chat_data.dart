@@ -94,26 +94,26 @@ class ChatData {
 
   //고객 채팅 여부 확인
   static Future<List<Chat>> check_Cus(String estimateId) async {
-    try{
+    try {
       var map = Map<String, dynamic>();
       map['action'] = CUS_CHECK_ACTION;
       map['estimateId'] = estimateId;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print("Customer Chat Response : ${response.body}");
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         List<Chat> list = parseResponse(response.body);
         return list;
-      }else{
+      } else {
         return [];
       }
-    }catch(e){
+    } catch (e) {
       return [];
     }
-
   }
 
   //채팅쓰기
-  static Future<List<String>> putChat(Chat chat, {File? file}) async {
+  static Future<List<String>> putChat(Chat chat, String type,
+      {File? file}) async {
     print(chat.text +
         "  " +
         chat.image +
@@ -122,13 +122,9 @@ class ChatData {
         "  " +
         chat.finalPrice.toString() +
         "  " +
-        chat.customerId.toString() +
-        "  " +
         chat.id.toString() +
         "  " +
-        chat.estimateId.toString() +
-        "  " +
-        chat.proId.toString());
+        chat.estimateId.toString());
     String imageName = getRandomString() + ".gif";
     print(controller.pro.value.id);
     try {
@@ -136,11 +132,10 @@ class ChatData {
       var request = http.MultipartRequest('POST', url);
       request.fields['action'] = WRITE_ACTION;
       request.fields['estimateId'] = chat.estimateId.toString();
-      request.fields['customerId'] = chat.customerId.toString();
-      request.fields['proId'] = controller.pro.value.id.toString();
       request.fields['text'] = chat.text;
       request.fields['image'] = chat.image == "true" ? imageName : "";
       request.fields['finalPrice'] = chat.finalPrice.toString();
+      request.fields['chatType'] = type;
       request.fields['isPro'] = chat.isPro.toString();
       if (file != null) {
         request.files

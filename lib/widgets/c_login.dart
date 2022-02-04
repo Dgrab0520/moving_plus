@@ -1,13 +1,12 @@
 import 'dart:math';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/interior_page.dart';
 import 'package:moving_plus/pages/p_signup.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
@@ -50,20 +49,20 @@ class _C_LoginState extends State<C_Login> {
     Customer_Data.insertCustomer(user_id, user_recom!).then((value) {
       if (value == "success") {
         print('Insert Success');
-        FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value2){
-          if(value2 == 'success'){
-            print('update token success');
-          }else{
-            print('update token fail');
-          }
-        }));
+        FirebaseMessaging.instance.getToken().then((value) =>
+            Customer_Data.updateToken(user_id, value!).then((value2) {
+              if (value2 == 'success') {
+                print('update token success');
+              } else {
+                print('update token fail');
+              }
+            }));
         Get.offAll(Main_Page(index: 1));
       } else {
         print('$value : Insert Fails');
       }
     });
   }
-
 
   //OrderId Random 생성
   String generateRandomString(int len) {
@@ -146,36 +145,35 @@ class _C_LoginState extends State<C_Login> {
         profile_img: _default_Image ? "default_image" : profile_image,
         pro_token: 'None',
       );
-      if (customer.length == 0) {
+      if (customer.isEmpty) {
         insertCus();
       } else {
         if (loginRoot == 'main_page') {
-          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value){
-            if(value == 'success'){
-               print('update token success');
-
-            }else{
-                 print('update token fail');
-              }
-            })
-          );
+          FirebaseMessaging.instance.getToken().then((value) =>
+              Customer_Data.updateToken(user_id, value!).then((value) {
+                if (value == 'success') {
+                  print('update token success');
+                } else {
+                  print('update token fail');
+                }
+              }));
           Get.offAll(Main_Page(index: 1));
         } else {
-          FirebaseMessaging.instance.getToken().then((value) => Customer_Data.updateToken(user_id, value!).then((value2){
-            if(value2 == 'success'){
-              print('update token success');
-              setState(() {
-                FCM_token = value;
-              });
-            }else{
-              print('update token fail');
-            }
-          }));
+          FirebaseMessaging.instance.getToken().then((value) =>
+              Customer_Data.updateToken(user_id, value!).then((value2) {
+                if (value2 == 'success') {
+                  print('update token success');
+                  setState(() {
+                    FCM_token = value;
+                  });
+                } else {
+                  print('update token fail');
+                }
+              }));
           Get.back(result: FCM_token);
         }
       }
       print('fcm tokensd : $FCM_token');
-
     } catch (e) {
       print("Error on issuing access token: $e");
     }

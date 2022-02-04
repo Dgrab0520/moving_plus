@@ -5,6 +5,9 @@ class ChatRoom {
   String area;
   String createAt;
   String lastChat;
+  String chatType;
+  String token;
+  String proId;
 
   ChatRoom({
     required this.estimateId,
@@ -13,6 +16,9 @@ class ChatRoom {
     required this.area,
     required this.createAt,
     required this.lastChat,
+    required this.chatType,
+    required this.token,
+    required this.proId,
   });
 
   factory ChatRoom.fromJson(Map<String, dynamic> json) {
@@ -23,6 +29,9 @@ class ChatRoom {
       area: json['address'] as String,
       createAt: json['createAt'] == null ? "" : json['createAt'] as String,
       lastChat: json['lastChat'] == null ? "" : json['lastChat'] as String,
+      chatType: json['chatType'] == null ? "" : json['chatType'] as String,
+      token: json['token'] == null ? "" : json['token'] as String,
+      proId: json['pro_id'] == null ? "" : json['pro_id'] as String,
     );
   }
 }
