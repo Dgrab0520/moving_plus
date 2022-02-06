@@ -399,20 +399,25 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item1 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      left: 15, right: 15, top: 15, bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        order[0].item1,
+                                        order[0].item1.split(" |  ")[0],
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareEB',
                                         ),
                                       ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        order[0].item1.split(" |  ")[1],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
@@ -422,20 +427,26 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item2 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      left: 15, right: 15, top: 15, bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        order[0].item2,
+                                        order[0].item2.split(" |  ")[0],
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareEB',
                                         ),
                                       ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        order[0].item2.split(" |  ")[1],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
@@ -445,20 +456,26 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item3 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      left: 15, right: 15, top: 15, bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        order[0].item3,
+                                        order[0].item3.split(" |  ")[0],
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareEB',
                                         ),
                                       ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        order[0].item3.split(" |  ")[1],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
@@ -468,20 +485,26 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item4 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      left: 15, right: 15, top: 15, bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        order[0].item4,
+                                        order[0].item4.split(" |  ")[0],
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareEB',
                                         ),
                                       ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        order[0].item4.split(" |  ")[1],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
@@ -491,72 +514,97 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item5 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      left: 15, right: 15, top: 15, bottom: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        order[0].item5,
+                                        order[0].item5.split(" |  ")[0],
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareEB',
                                         ),
                                       ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        order[0].item5.split(" |  ")[1],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )
                               : Container(),
-                          //img1
-                          order[0].request_img1 != ""
-                              ? InkWell(
-                                  onTap: () {
-                                    Get.to(DetailScreen(
-                                        path:
-                                            "$homeURL/plus/order_image/${order[0].request_img1}"));
-                                  },
-                                  child: Image.network(
-                                    "$homeURL/plus/order_image/${order[0].request_img1}",
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Container(),
-                          //img2
-                          order[0].request_img2 != ""
-                              ? InkWell(
-                                  onTap: () {
-                                    Get.to(DetailScreen(
-                                        path:
-                                            "$homeURL/plus/order_image/${order[0].request_img2}"));
-                                  },
-                                  child: Image.network(
-                                    "$homeURL/plus/order_image/${order[0].request_img2}",
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Container(),
-                          //img3
-                          order[0].request_img3 != ""
-                              ? InkWell(
-                                  onTap: () {
-                                    Get.to(DetailScreen(
-                                        path:
-                                            "$homeURL/plus/order_image/${order[0].request_img3}"));
-                                  },
-                                  child: Image.network(
-                                    "$homeURL/plus/order_image/${order[0].request_img3}",
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : Container(),
+
+                          SizedBox(height: 20.0,),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            width: Get.width,
+                            height: 80.0,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: order[0].request_img1 != ""
+                                      ? InkWell(
+                                    onTap: () {
+                                      Get.to(DetailScreen(
+                                          path:
+                                          "$homeURL/plus/order_image/${order[0].request_img1}"));
+                                    },
+                                    child: Image.network(
+                                      "$homeURL/plus/order_image/${order[0].request_img1}",
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                      : Container(),
+                                ),
+                                SizedBox(width: 10.0,),
+                                Expanded(
+                                  flex: 1,
+                                  child: order[0].request_img2 != ""
+                                      ? InkWell(
+                                    onTap: () {
+                                      Get.to(DetailScreen(
+                                          path:
+                                          "$homeURL/plus/order_image/${order[0].request_img2}"));
+                                    },
+                                    child: Image.network(
+                                      "$homeURL/plus/order_image/${order[0].request_img2}",
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                      : Container(),
+                                ),
+                                SizedBox(width: 10.0,),
+                                Expanded(
+                                  flex: 1,
+                                  child: order[0].request_img3 != ""
+                                      ? InkWell(
+                                    onTap: () {
+                                      Get.to(DetailScreen(
+                                          path:
+                                          "$homeURL/plus/order_image/${order[0].request_img3}"));
+                                    },
+                                    child: Image.network(
+                                      "$homeURL/plus/order_image/${order[0].request_img3}",
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                      : Container(),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),

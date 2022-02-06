@@ -9,10 +9,11 @@ import '../main.dart';
 class OrderList_Data {
   static const ROOT = "http://211.110.44.91/plus/select_order.php";
   static const GET_ORDER_ACTION = "GET_ORDER";
+  static const GET_CUS_ACTION = "GET_CUS";
   static const GET_EACH_ORDER = "EACH_ORDER";
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
 
-  //order_list 불러오기
+  //Pro order_list 불러오기
   static Future<List<Order>> getOrder() async {
     try {
       var map = Map<String, dynamic>();
@@ -29,6 +30,27 @@ class OrderList_Data {
       return [];
     }
   }
+
+
+  //Customer order_list 불러오기
+  static Future<List<Order>> get_CusOrder(String customer_id) async {
+    try {
+      var map = Map<String, dynamic>();
+      map['action'] = GET_CUS_ACTION;
+      map['customer_id'] = customer_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Order Customer List Response : ${response.body}');
+      if (response.statusCode == 200) {
+        List<Order> list = parseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
 
   //request_form 특정 order 정보 불러오기
   static Future<List<Order>> getEach_Order(String order_id) async {
@@ -82,6 +104,7 @@ class OrderList_Data {
     List<dynamic> profile = body['profile'];
     return profile;
   }
+
 
   static List<OrderChat> parseChatResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();

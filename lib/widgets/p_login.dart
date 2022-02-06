@@ -9,6 +9,7 @@ import 'package:moving_plus/datas/pro_login_data.dart';
 import 'package:moving_plus/models/pro_login_model.dart';
 import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/p_signup.dart';
+import 'package:moving_plus/pages/signup_pro_page.dart';
 import 'package:moving_plus/widgets/c_login.dart';
 
 final controller = Get.put(ReactiveController());
@@ -397,7 +398,8 @@ class _P_LoginState extends State<P_Login> {
                     InkWell(
                       onTap: () {
                         Get.back();
-                        Get.dialog(P_Signup());
+                        Get.to(SignUpPage());
+                        //Get.dialog(P_Signup());
                       },
                       child: Container(
                         child: Text(

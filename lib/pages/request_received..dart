@@ -26,13 +26,33 @@ class _Request_ReceivedState extends State<Request_Received> {
   List<Order> order = [];
   bool _isLoading = false;
 
+
+  //Pro Order List 불러오기
   getOrder(){
     OrderList_Data.getOrder().then((value){
       setState(() {
         order = value;
       });
       print(order);
-      if(value.isEmpty){
+      if(value.length == 0){
+        setState(() {
+          _isLoading = false;
+        });
+      }else{
+        setState(() {
+          _isLoading = true;
+        });
+      }
+    });
+  }
+
+  //Customer Order List 불러오기
+  getCusOrder(){
+    OrderList_Data.get_CusOrder(controller.pro.value.pro_id).then((value){
+      setState(() {
+        order = value;
+      });
+      if(value.length == 0){
         setState(() {
           _isLoading = false;
         });
@@ -45,9 +65,27 @@ class _Request_ReceivedState extends State<Request_Received> {
   }
 
 
+  //Customer OrderList Delete
+  deleteOrder(String orderId){
+    OrderData.deleteOrder(orderId).then((value){
+      if(value == "success"){
+        print("Delete Success");
+      }else{
+        print("Delete Fail");
+      }
+    });
+  }
+
+
+
+
   @override
   void initState(){
-    getOrder();
+    if(controller.pro.value.type == 'cus'){
+      getCusOrder();
+    }else{
+      getOrder();
+    }
     super.initState();
   }
 
@@ -243,11 +281,16 @@ class _Request_ReceivedState extends State<Request_Received> {
                           ),
                           SizedBox(height:20),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              controller.pro.value.type == 'cus' ?
                               Expanded(
                                 flex: 1,
                                 child: InkWell(
                                   onTap:(){
+                                    print(order[index].order_id);
+                                    deleteOrder(order[index].order_id);
+                                    getCusOrder();
                                   },
                                   child: Container(
                                     width:165,
@@ -269,8 +312,9 @@ class _Request_ReceivedState extends State<Request_Received> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(width:10),
+                              ) : Container(),
+                              controller.pro.value.type == 'cus' ?
+                              SizedBox(width:10) : SizedBox(width:0),
                               Expanded(
                                 flex: 1,
                                 child:InkWell(
@@ -307,7 +351,7 @@ class _Request_ReceivedState extends State<Request_Received> {
                   child: Text('받은 요청서가 없습니다'),
                 ),
               )
-            )
+            ),
 
 
           ],
