@@ -14,10 +14,11 @@ class OrderList_Data {
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
 
   //Pro order_list 불러오기
-  static Future<List<Order>> getOrder() async {
+  static Future<List<Order>> getOrder(String pro_id) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = GET_ORDER_ACTION;
+      map['pro_id'] = pro_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Order List Get Response : ${response.body}');
       if (response.statusCode == 200) {

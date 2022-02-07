@@ -29,7 +29,7 @@ class _Request_ReceivedState extends State<Request_Received> {
 
   //Pro Order List 불러오기
   getOrder(){
-    OrderList_Data.getOrder().then((value){
+    OrderList_Data.getOrder(controller.pro.value.pro_id).then((value){
       setState(() {
         order = value;
       });

@@ -10,6 +10,7 @@ class Pro_Data extends GetxController {
   static const PRO_ALLIANCE_ACTION = "PRO_ALLIANCE";
   static const PRO_BEST_ACTION = "PRO_ACTION";
   static const PRO_TOKEN_ACTION = "PRO_TOKEN";
+  static const PRO_CHECK_ACTION = "PRO_CHECK";
 
   List<Pro> proAlli = [];
   var isAlliLoading = false.obs;
@@ -91,6 +92,24 @@ class Pro_Data extends GetxController {
         return "error";
       }
     } catch (e) {
+      return "error";
+    }
+  }
+
+  //전문가 회원가입 중복확인
+  static Future<String> CheckPro(String pro_id) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = PRO_CHECK_ACTION;
+      map['pro_id'] = pro_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Pro Check Response : ${response.body}');
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
       return "error";
     }
   }
