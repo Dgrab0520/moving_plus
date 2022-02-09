@@ -32,7 +32,6 @@ class OrderList_Data {
     }
   }
 
-
   //Customer order_list 불러오기
   static Future<List<Order>> get_CusOrder(String customer_id) async {
     try {
@@ -51,7 +50,6 @@ class OrderList_Data {
       return [];
     }
   }
-
 
   //request_form 특정 order 정보 불러오기
   static Future<List<Order>> getEach_Order(String order_id) async {
