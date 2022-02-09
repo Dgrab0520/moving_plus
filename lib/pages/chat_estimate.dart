@@ -13,6 +13,7 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import 'p_detail_estimate.dart';
@@ -94,6 +95,11 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
         Duration(milliseconds: 300),
         () => scrollController.animateTo(0,
             duration: Duration(milliseconds: 300), curve: Curves.easeInOut));
+  }
+
+  setCheckedChatNumber(int i) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt("checkedChatNumber", i);
   }
 
   @override

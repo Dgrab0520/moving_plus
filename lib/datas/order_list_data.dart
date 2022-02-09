@@ -9,16 +9,37 @@ import '../main.dart';
 class OrderList_Data {
   static const ROOT = "http://211.110.44.91/plus/select_order.php";
   static const GET_ORDER_ACTION = "GET_ORDER";
+  static const GET_CUS_ACTION = "GET_CUS";
   static const GET_EACH_ORDER = "EACH_ORDER";
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
 
   //order_list 불러오기
-  static Future<List<Order>> getOrder() async {
+  static Future<List<Order>> getOrder(String pro_id) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = GET_ORDER_ACTION;
+      map['pro_id'] = pro_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Order List Get Response : ${response.body}');
+      if (response.statusCode == 200) {
+        List<Order> list = parseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  //order_list 불러오기 고객
+  static Future<List<Order>> getCusOrder(String user_id) async {
+    try {
+      var map = Map<String, dynamic>();
+      map['action'] = GET_CUS_ACTION;
+      map['customer_id'] = user_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Customer Order List Get Response : ${response.body}');
       if (response.statusCode == 200) {
         List<Order> list = parseResponse(response.body);
         return list;

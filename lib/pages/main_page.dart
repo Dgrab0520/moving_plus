@@ -91,7 +91,7 @@ class _Main_PageState extends State<Main_Page> {
     _selectedIndex = widget.index;
     user_id = controller.pro.value.pro_id;
     _initTexts();
-    print('user_idd : ${user_id}');
+    print('user_idd : $user_id');
     if (controller.pro.value.type == "pro") {
       _widgetOptions = [
         Request_Estimate(),
@@ -418,23 +418,23 @@ class _Main_PageState extends State<Main_Page> {
                                           fontSize: 14,
                                         )),
                                     SizedBox(width: 5),
-                                    Container(
-                                      width: 20,
-                                      height: 15,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF025595),
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '5',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Container(
+                                    //   width: 20,
+                                    //   height: 15,
+                                    //   decoration: BoxDecoration(
+                                    //     color: Color(0xFF025595),
+                                    //     borderRadius: BorderRadius.circular(3),
+                                    //   ),
+                                    //   child: Center(
+                                    //     child: Text(
+                                    //       'N',
+                                    //       style: TextStyle(
+                                    //         color: Colors.white,
+                                    //         fontSize: 12,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),

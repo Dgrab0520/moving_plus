@@ -51,7 +51,7 @@ class _P_ChatState extends State<P_Chat> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text(
+          title: const Text(
             '채팅',
             style: TextStyle(
               color: Colors.white,
@@ -60,14 +60,14 @@ class _P_ChatState extends State<P_Chat> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color(0xFF025595),
+          backgroundColor: const Color(0xFF025595),
           leading: controller.pro.value.type == "pro"
               ? null
               : IconButton(
                   onPressed: () {
                     Get.back();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   )),
@@ -75,35 +75,35 @@ class _P_ChatState extends State<P_Chat> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               width: MediaQuery.of(context).size.width,
               height: 60,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/chat_banner.png"),
               )),
               alignment: Alignment.centerLeft,
               child: Text(
-                '${controller.pro.value.com_name}',
-                style: TextStyle(
+                controller.pro.value.com_name,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'NanumSquareB',
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              padding: EdgeInsets.only(bottom: 10),
-              margin: EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(left: 15, right: 15),
               width: MediaQuery.of(context).size.width,
               height: 45,
               decoration: BoxDecoration(
-                color: Color(0xFFF9F9F9),
+                color: const Color(0xFFF9F9F9),
                 border: Border.all(
                   width: 1.0,
-                  color: Color(0xFFcccccc),
+                  color: const Color(0xFFcccccc),
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -114,21 +114,21 @@ class _P_ChatState extends State<P_Chat> {
                 onSubmitted: (text) {
                   searchController.text = "";
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     icon: Padding(
                         padding: EdgeInsets.only(top: 10, left: 13),
                         child: Icon(Icons.search))),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: isLoading
                   ? chatRoom.isEmpty
-                      ? Text("채팅이 없습니다.")
+                      ? const Text("채팅이 없습니다.")
                       : ListView.builder(
                           itemCount: chatRoom.length,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             return ChatRoomBox(
                               chatRoom: chatRoom[index],
@@ -156,6 +156,7 @@ class ChatRoomBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(chatRoom.area);
     String area =
         chatRoom.area.split(" ")[0] + " " + chatRoom.area.split(" ")[1];
     DateTime createAt = DateTime.parse(chatRoom.createAt);
@@ -204,14 +205,15 @@ class ChatRoomBox extends StatelessWidget {
           print(result);
         },
         child: Container(
-          margin: EdgeInsets.only(left: 15, right: 15),
-          padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 15, right: 15),
+          padding:
+              const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
           width: MediaQuery.of(context).size.width,
           height: 120,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.0,
-              color: Color(0xFFcccccc),
+              color: const Color(0xFFcccccc),
             ),
             borderRadius: BorderRadius.circular(5),
           ),
@@ -222,29 +224,29 @@ class ChatRoomBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           chatRoom.userName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                             fontFamily: 'NanumSquareB',
                           ),
                         ),
                         Text(
                           time,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       '${chatRoom.serviceType} | $area',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'NanumSquareR',
                       ),
@@ -252,14 +254,13 @@ class ChatRoomBox extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(),
                 child: Text(
                   lasChat,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                   ),
                   maxLines: 1,

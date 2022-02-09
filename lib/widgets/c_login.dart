@@ -115,7 +115,7 @@ class _C_LoginState extends State<C_Login> {
       await _issueAccessToken(code);
       // await _issueAccessToken(code);
     } catch (e) {
-      print(e);
+      print("error : $e");
     }
   }
 
@@ -277,6 +277,23 @@ class _C_LoginState extends State<C_Login> {
                   SizedBox(
                     height: 5.0,
                   ),
+                  ElevatedButton(
+                      onPressed: () {
+                        controller.change(
+                          id: "0",
+                          type: 'cus',
+                          pro_id: 'skstjdtndi12@naver.com',
+                          pro_name: 'user_name',
+                          pro_phone: 'None',
+                          pro_email: 'None',
+                          com_name: 'None',
+                          profile_img: "default_image",
+                          pro_token:
+                              'cqIz-tfDSV-BZrr6xIhdCy:APA91bF-ZPNg8CcmIw3lKD3hlTOHQwIfl8lbzVWp_SlBN-jbfjtW4QbkfIJJub08jDJl6XBRbAZIhrrQHurFLyvBBw6jjFav2wvG6QRs73TP5q1fGtHFHy_evZnzQ861pwk9-pT_SsM7',
+                        );
+                        Get.offAll(Main_Page(index: 1));
+                      },
+                      child: Text("test")),
                   TextButton(
                       onPressed: () {
                         print('파트너 로그인');

@@ -56,7 +56,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
         .then((value) {
       if (value == "success") {
         print('Chat Success');
-        Get.offAndToNamed('/request_form/true?order_id=${order_id}');
+        Get.offAndToNamed('/request_form/true?order_id=$order_id');
         Get.snackbar('성공', '견적 보내기에 성공했습니다!', backgroundColor: Colors.white);
       } else {
         print('$value : Chat Fails');
