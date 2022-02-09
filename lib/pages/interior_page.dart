@@ -377,10 +377,7 @@ class _TabViewState extends State<TabView> {
                   ),
                 ],
               )),
-        // for (int i = 0; i < 20; i++)
-        //   ListTile(
-        //     title: Text('Product title $i'),
-        //   )
+
       ],
     );
   }

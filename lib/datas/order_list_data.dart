@@ -13,7 +13,7 @@ class OrderList_Data {
   static const GET_EACH_ORDER = "EACH_ORDER";
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
 
-  //order_list 불러오기
+  //Pro order_list 불러오기
   static Future<List<Order>> getOrder(String pro_id) async {
     try {
       var map = Map<String, dynamic>();
@@ -32,14 +32,15 @@ class OrderList_Data {
     }
   }
 
-  //order_list 불러오기 고객
-  static Future<List<Order>> getCusOrder(String user_id) async {
+
+  //Customer order_list 불러오기
+  static Future<List<Order>> get_CusOrder(String customer_id) async {
     try {
       var map = Map<String, dynamic>();
       map['action'] = GET_CUS_ACTION;
-      map['customer_id'] = user_id;
+      map['customer_id'] = customer_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
-      print('Customer Order List Get Response : ${response.body}');
+      print('Order Customer List Response : ${response.body}');
       if (response.statusCode == 200) {
         List<Order> list = parseResponse(response.body);
         return list;
@@ -50,6 +51,7 @@ class OrderList_Data {
       return [];
     }
   }
+
 
   //request_form 특정 order 정보 불러오기
   static Future<List<Order>> getEach_Order(String order_id) async {

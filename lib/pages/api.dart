@@ -21,7 +21,10 @@ class Api {
       "쓰레기집 청소",
       '간판 청소',
       '외벽 청소',
-      "학교/관공서 청소"
+      "학교/관공서 청소",
+      "상가 청소",
+      "주방후드 청소",
+      "기타 청소",
     ],
     "인테리어": [
       "올 인테리어",
@@ -35,6 +38,7 @@ class Api {
       "타일 교체",
       "중문",
       "커튼 & 블라인드",
+      "바닥 매트",
       "기타 인테리어"
     ],
     "홈 스타일링": [
@@ -47,7 +51,8 @@ class Api {
       "단열 차단 필름",
       "정리정돈",
       "새집 증후군",
-      "곰팡이 제거"
+      "곰팡이 제거",
+      "기타 홈스타일링"
     ],
     "가전/가구 케어": [
       "조명 설치",
@@ -61,6 +66,8 @@ class Api {
       "펜트리 선반 설치",
       "매트리스 케어",
       "쇼파 천갈이",
+      "보일러 설치",
+      "배관수리 및 청소",
       "기타 가전/가구"
     ],
     "렌탈": [
@@ -76,9 +83,10 @@ class Api {
       "식기 세척기 렌탈",
       "음식물 분쇄기 렌탈",
       "청소기 렌탈",
-      "공기 청정기 렌탈"
+      "공기 청정기 렌탈",
+      "기타 렌탈"
     ],
-    "기타": ["사전점검", "소독 / 방역"],
+    "기타": ["사전점검", "소독 / 방역", "기타 서비스"],
   };
 
   String findMainCategory(String category) {
@@ -182,10 +190,19 @@ const List<CategorySub> cleanList = [
       title: '학교/관공서 청소',
       content: " 다중 이용 시설 오염 및 먼지 제거를 위한 대청소 클린 서비스",
       category: '클린',
-      image2: '',
-      title2: '',
-      content2: "",
-      category2: ''),
+      image2: 'assets/building.jpg',
+      title2: '상가 청소',
+      content2: "-",
+      category2: '클린'),
+  CategorySub(
+      image: 'assets/hood.jpg',
+      title: '주방후드 청소',
+      content: "-",
+      category: '클린',
+      image2: 'assets/toilet.jpg',
+      title2: '기타 청소',
+      content2: "-",
+      category2: '클린'),
 ];
 const List<CategorySub> interiorList = [
   CategorySub(
@@ -244,10 +261,19 @@ const List<CategorySub> interiorList = [
       content:
           "건물의 창이나 출입구에 설치라거나\n 칸막이로 사용되는 천으로 이루어진 \n 막이나 아크릴, 나무 등으로 분위기 연출이 가능한 설치 서비스",
       category: '인테리어',
-      image2: 'assets/img12.jpg',
-      title2: '기타 인테리어',
-      content2: "빌트인 등 기타 인테리어 서비스",
+      image2: 'assets/mat.jpg',
+      title2: '바닥 매트',
+      content2: "-",
       category2: '인테리어'),
+  CategorySub(
+      image: 'assets/img12.jpg',
+      title: '기타 인테리어',
+      content: "빌트인 등 기타 인테리어 서비스",
+      category: '인테리어',
+      image2: '',
+      title2: '',
+      content2: "",
+      category2: ''),
 ];
 const List<CategorySub> homeList = [
   CategorySub(
@@ -296,9 +322,17 @@ const List<CategorySub> homeList = [
       category: '홈 스타일링',
       image2: 'assets/h_10.jpg',
       title2: '곰팡이 제거',
-      content2:
-          " 바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 등에 습기로\n 인해 발생한 곰팡이를 제거하는 서비스",
+      content2: "바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 등에 습기로\n 인해 발생한 곰팡이를 제거하는 서비스",
       category2: '홈 스타일링'),
+  CategorySub(
+      image: 'assets/kitchen.jpg',
+      title: '기타 홈스타일링',
+      content: "-",
+      category: '홈 스타일링',
+      image2: '',
+      title2: '',
+      content2: "",
+      category2: ''),
 ];
 const List<CategorySub> careList = [
   CategorySub(
@@ -352,8 +386,17 @@ const List<CategorySub> careList = [
       title: '쇼파 천갈이',
       content: " 노후나 스크래치 등으로 손상된 천이나\n가죽 등을 교체 / 보건 해 주는\n케어 서비스",
       category: '가전/가구 케어',
+      image2: 'assets/heater.jpg',
+      title2: '보일러 설치',
+      content2: "-",
+      category2: '가전/가구 케어'),
+  CategorySub(
+      image: 'assets/plumbing.jpg',
+      title: '배관수리 및 청소',
+      content: "-",
+      category: '가전/가구 케어',
       image2: 'assets/g_12.jpg',
-      title2: '기타 가전/가구',
+      title2: '기타 가전 & 가구',
       content2: "식탁 상판 코팅, 벽걸이 TV 설치,\n 벽 시계 설치 등의 가전 / 가구\n 클린 및 케어 서비스",
       category2: '가전/가구 케어'),
 ];
@@ -417,28 +460,27 @@ const List<CategorySub> rentalList = [
       title: '공기 청정기 렌탈',
       content: "공기 청정기 렌탈 서비스",
       category: '렌탈',
-      image2: '',
-      title2: '',
-      content2: "",
-      category2: ''),
+      image2: 'assets/rental.jpg',
+      title2: '기타 렌탈',
+      content2: "-",
+      category2: '렌탈'),
 ];
 const List<CategorySub> etcList = [
   CategorySub(
       image: 'assets/e_1.jpg',
       title: '사전점검',
-      content:
-          " 신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
+      content: "신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
       category: '기타',
       image2: 'assets/e_2.jpg',
-      title2: '소독 / 방역',
+      title2: '소독 & 방역',
       content2:
           " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'),
   CategorySub(
-      image: '',
-      title: '',
-      content: "",
-      category: '',
+      image: 'assets/etc.jpg',
+      title: '기타 서비스',
+      content: "-",
+      category: '기타',
       image2: '',
       title2: '',
       content2: "",
