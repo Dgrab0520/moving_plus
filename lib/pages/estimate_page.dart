@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/alarm_data.dart';
+import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/models/estimate_model.dart';
 
@@ -19,6 +22,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
   String? estimateId = '';
   String? order_id = Get.parameters['order_id'];
   String? customer_id = Get.parameters['customer_id'];
+  String? service_type = Get.parameters['service_type'];
   bool _isSend = false;
   List<Estimate> estimate = [];
 
@@ -46,6 +50,33 @@ class _Estimate_PageState extends State<Estimate_Page> {
     });
   }
 
+  HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendFCM',
+      options: HttpsCallableOptions(timeout: const Duration(seconds: 5)));
+
+  sendAlarm() async {
+    String token = "";
+
+    await Customer_Data.getCustomerToken(customer_id!).then((value) {
+      token = value;
+    });
+
+    print("token : $token");
+    final tempController = Get.put(ReactiveController());
+    AlarmData.putChat(
+        tempController.pro.value.pro_name, [customer_id], "estimated price",
+        order_id: order_id, mainType: service_type);
+
+    final HttpsCallableResult result = await callable.call(
+      <String, dynamic>{
+        "token": token,
+        "title": "Alarm",
+        "body": tempController.pro.value.pro_name,
+      },
+    );
+    print(token);
+    print(result.data);
+  }
+
   insertChat() {
     EstimateData.insertEstimate_Chat(
             estimateId!,
@@ -56,6 +87,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
         .then((value) {
       if (value == "success") {
         print('Chat Success');
+        sendAlarm();
         Get.offAndToNamed('/request_form/true?order_id=$order_id');
         Get.snackbar('성공', '견적 보내기에 성공했습니다!', backgroundColor: Colors.white);
       } else {
@@ -240,6 +272,9 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             maxLength: 300,
                             textAlign: TextAlign.center,
                           ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
                         ),
                         // Spacer(),
                       ],

@@ -57,6 +57,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   TextEditingController chatTextController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
+  FocusNode focusNode = FocusNode();
+
   HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('sendFCM',
       options: HttpsCallableOptions(timeout: const Duration(seconds: 5)));
 
@@ -276,6 +278,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
                       maxLines: 4,
+                      focusNode: focusNode,
 
                       onTap: () {
                         isSelect = false;
@@ -317,94 +320,111 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                 SizedBox(width: 10),
                 InkWell(
                     onTap: () {
-                      if (chatting.length == 1 &&
-                          controller.pro.value.type == 'pro') {
-                        Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다',
-                            backgroundColor: Colors.white);
-                      } else {
-                        if (chatTextController.text != "") {
-                          Chat chat = Chat(
-                              id: 0,
-                              estimateId: widget.estimateId,
-                              text: chatTextController.text,
-                              image: "",
-                              estimatePrice: 0,
-                              finalPrice: 0,
-                              isPro: isPro,
-                              createAt: "");
-                          ChatData.putChat(chat, "text").then((value) async {
-                            if (value.isNotEmpty) {
-                              print(value);
-                              chat.createAt = value[0];
-                              if (isPro == 1) {
-                                chatRoom[widget.chatRoomIndex].lastChat =
-                                    chat.text;
-                                chatRoom[widget.chatRoomIndex].chatType =
-                                    "text";
-                                chatRoom[widget.chatRoomIndex].createAt =
-                                    value[0];
-                              } else {
-                                userChatRooms[widget.chatRoomIndex].lastChat =
-                                    chat.text;
-                                userChatRooms[widget.chatRoomIndex].chatType =
-                                    "text";
-                                userChatRooms[widget.chatRoomIndex].createAt =
-                                    value[0];
-                              }
-
-                              setState(() {
-                                DateTime currentDate = DateTime.now();
-                                DateTime pastDate =
-                                    DateTime.parse(chatting[0].createAt);
-
-                                if ((currentDate.difference(pastDate).inHours /
-                                            24)
-                                        .round() >
-                                    0) {
-                                  print(currentDate);
-                                  print(pastDate);
-                                  chatting.insert(
-                                      0,
-                                      Chat(
-                                          id: 0,
-                                          estimateId: "0",
-                                          text: "",
-                                          image: "",
-                                          estimatePrice: 0,
-                                          finalPrice: 0,
-                                          isPro: 3,
-                                          createAt: DateTime.now().toString()));
+                      if(!isSelect){
+                        if (chatting.length == 1 &&
+                            controller.pro.value.type == 'pro') {
+                          Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다',
+                              backgroundColor: Colors.white);
+                        } else {
+                          if (chatTextController.text != "") {
+                            Chat chat = Chat(
+                                id: 0,
+                                estimateId: widget.estimateId,
+                                text: chatTextController.text,
+                                image: "",
+                                estimatePrice: 0,
+                                finalPrice: 0,
+                                isPro: isPro,
+                                createAt: "");
+                            ChatData.putChat(chat, "text").then((value) async {
+                              if (value.isNotEmpty) {
+                                print(value);
+                                chat.createAt = value[0];
+                                if (isPro == 1) {
+                                  chatRoom[widget.chatRoomIndex].lastChat =
+                                      chat.text;
+                                  chatRoom[widget.chatRoomIndex].chatType =
+                                      "text";
+                                  chatRoom[widget.chatRoomIndex].createAt =
+                                      value[0];
+                                } else {
+                                  userChatRooms[widget.chatRoomIndex].lastChat =
+                                      chat.text;
+                                  userChatRooms[widget.chatRoomIndex].chatType =
+                                      "text";
+                                  userChatRooms[widget.chatRoomIndex].createAt =
+                                      value[0];
                                 }
-                                chatting.insert(0, chat);
 
-                                chatTextController.text = "";
-                                isTextChange = false;
-                                isSelect = false;
-                                Timer(
-                                    Duration(milliseconds: 200),
-                                    () => scrollController.animateTo(0.0,
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.easeInOut));
-                              });
-                              print(token);
-                              final HttpsCallableResult result =
-                                  await callable.call(
-                                <String, dynamic>{
-                                  "token": token,
-                                  "title": controller.pro.value.pro_name,
-                                  "body": chat.text,
-                                },
-                              );
-                              print(result.data);
+                                setState(() {
+                                  DateTime currentDate = DateTime.now();
+                                  DateTime pastDate =
+                                      DateTime.parse(chatting[0].createAt);
+
+                                  if ((currentDate
+                                                  .difference(pastDate)
+                                                  .inHours /
+                                              24)
+                                          .round() >
+                                      0) {
+                                    print(currentDate);
+                                    print(pastDate);
+                                    chatting.insert(
+                                        0,
+                                        Chat(
+                                            id: 0,
+                                            estimateId: "0",
+                                            text: "",
+                                            image: "",
+                                            estimatePrice: 0,
+                                            finalPrice: 0,
+                                            isPro: 3,
+                                            createAt:
+                                                DateTime.now().toString()));
+                                  }
+                                  chatting.insert(0, chat);
+
+                                  chatTextController.text = "";
+                                  isTextChange = false;
+                                  isSelect = false;
+                                  Timer(
+                                      Duration(milliseconds: 200),
+                                      () => scrollController.animateTo(0.0,
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.easeInOut));
+                                });
+                                print(token);
+                                final HttpsCallableResult result =
+                                    await callable.call(
+                                  <String, dynamic>{
+                                    "token": token,
+                                    "title": controller.pro.value.pro_name,
+                                    "body": chat.text,
+                                  },
+                                );
+                                print(result.data);
+                              }
+                            });
+                          } else {
+                            if (focusNode.hasFocus) {
+                              FocusScope.of(context).unfocus();
+                            } else {
+                              focusNode.requestFocus();
                             }
-                          });
+                          }
                         }
+                      } else {
+                        setState(() {
+                          isSelect = !isSelect;
+                        });
                       }
                     },
                     child: Image.asset(
                         isTextChange
                             ? 'assets/rightarrow.png'
-                            : 'assets/uparrow.png',
+                            : focusNode.hasFocus || isSelect
+                                ? 'assets/downarrow.png'
+                                : 'assets/uparrow.png',
                         width: 35,
                         height: 35)),
               ],

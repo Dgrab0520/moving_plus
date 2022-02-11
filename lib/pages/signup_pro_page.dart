@@ -201,543 +201,549 @@ class _SignUp_PageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          '회원가입',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-            fontFamily: 'NanumSquareB',
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(
+            '회원가입',
+            style: TextStyle(
               color: Colors.black,
-            )),
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //아이디
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '아이디',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+              fontSize: 17,
+              fontFamily: 'NanumSquareB',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              )),
+        ),
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //아이디
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '아이디',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Container(
-                                    width: double.infinity,
-                                    height: 45,
-                                    child: TextField(
-                                      controller: idController,
-                                      onChanged: (text) {
-                                        setState(() {
-                                          _idChecked = false;
-                                        });
+                            SizedBox(height: 7),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Container(
+                                      width: double.infinity,
+                                      height: 45,
+                                      child: TextField(
+                                        controller: idController,
+                                        onChanged: (text) {
+                                          setState(() {
+                                            _idChecked = false;
+                                          });
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.only(
+                                              top: 10.0, bottom: 10, left: 15),
+                                          counterStyle: TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                          hintStyle: TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                          hintText: '아이디 이메일을 입력해주세요.',
+                                          labelStyle: TextStyle(
+                                              color: Color(0xFFACACAC)),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                            borderSide: BorderSide(
+                                                width: 1,
+                                                color: Color(0xFFACACAC)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                            borderSide: BorderSide(
+                                                width: 1,
+                                                color: Color(0xFFACACAC)),
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                          ),
+                                        ),
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                      )),
+                                ),
+                                SizedBox(
+                                  width: 7.0,
+                                ),
+                                Expanded(
+                                    flex: 1,
+                                    child: InkWell(
+                                      onTap: () {
+                                        print('중복확인');
+                                        idCheck(idController.text);
                                       },
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                            top: 10.0, bottom: 10, left: 15),
-                                        counterStyle: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                        hintStyle: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                        hintText: '아이디 이메일을 입력해주세요.',
-                                        labelStyle:
-                                            TextStyle(color: Color(0xFFACACAC)),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0)),
-                                          borderSide: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFFACACAC)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0)),
-                                          borderSide: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFFACACAC)),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0)),
-                                        ),
-                                      ),
-                                      keyboardType: TextInputType.emailAddress,
-                                    )),
-                              ),
-                              SizedBox(
-                                width: 7.0,
-                              ),
-                              Expanded(
-                                  flex: 1,
-                                  child: InkWell(
-                                    onTap: () {
-                                      print('중복확인');
-                                      idCheck(idController.text);
-                                    },
-                                    child: Container(
-                                      height: 40.0,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          width: 1.0,
-                                          color: Color(0xFF025595),
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '중복확인',
-                                          style: TextStyle(
+                                      child: Container(
+                                        height: 40.0,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1.0,
                                             color: Color(0xFF025595),
-                                            fontSize: 12,
-                                            fontFamily: 'NanumSquareR',
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '중복확인',
+                                            style: TextStyle(
+                                              color: Color(0xFF025595),
+                                              fontSize: 12,
+                                              fontFamily: 'NanumSquareR',
+                                            ),
                                           ),
                                         ),
                                       ),
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 20),
+
+                      //비밀번호
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '비밀번호 [10글자 이상 입력해주세요]',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
+                            ),
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: pwController,
+                                  obscuringCharacter: '*',
+                                  obscureText: true,
+                                  onChanged: (text) {
+                                    if (text == pwCheckController.text &&
+                                        text.isNotEmpty) {
+                                      setState(() {
+                                        _pwChecked = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _pwChecked = false;
+                                      });
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
                                     ),
-                                  ))
-                            ],
-                          ),
-                        ],
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '비밀번호를 입력해주세요',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                    //비밀번호
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '비밀번호 [10글자 이상 입력해주세요]',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //비밀번호 확인
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '비밀번호 확인',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: pwController,
-                                obscuringCharacter: '*',
-                                obscureText: true,
-                                onChanged: (text) {
-                                  if (text == pwCheckController.text &&
-                                      text.isNotEmpty) {
-                                    setState(() {
-                                      _pwChecked = true;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      _pwChecked = false;
-                                    });
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: pwCheckController,
+                                  obscuringCharacter: '*',
+                                  obscureText: true,
+                                  onChanged: (text) {
+                                    if (text == pwController.text &&
+                                        text.isNotEmpty) {
+                                      setState(() {
+                                        _pwChecked = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        _pwChecked = false;
+                                      });
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '비밀번호를 한번 더 입력해주세요.',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
                                   ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                            _pwChecked
+                                ? Text(
+                                    '비밀번호가 일치합니다',
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.blueAccent),
+                                  )
+                                : Text(
+                                    '비밀번호가 일치하지 않습니다',
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.deepOrange),
                                   ),
-                                  hintText: '비밀번호를 입력해주세요',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                    //비밀번호 확인
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '비밀번호 확인',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //업체명
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '업체명',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: pwCheckController,
-                                obscuringCharacter: '*',
-                                obscureText: true,
-                                onChanged: (text) {
-                                  if (text == pwController.text &&
-                                      text.isNotEmpty) {
-                                    setState(() {
-                                      _pwChecked = true;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      _pwChecked = false;
-                                    });
-                                  }
-                                },
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: comController,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '업체명을 입력해주세요.',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
                                   ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintText: '비밀번호를 한번 더 입력해주세요.',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                          _pwChecked
-                              ? Text(
-                                  '비밀번호가 일치합니다',
-                                  style: TextStyle(
-                                      fontSize: 10.0, color: Colors.blueAccent),
-                                )
-                              : Text(
-                                  '비밀번호가 일치하지 않습니다',
-                                  style: TextStyle(
-                                      fontSize: 10.0, color: Colors.deepOrange),
-                                ),
-                        ],
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                    //업체명
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '업체명',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //사업자 등록 번호
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '사업자 등록번호',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: comController,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: comNoController,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '업체명을 입력해주세요.',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
                                   ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintText: '업체명을 입력해주세요.',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                        ],
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                    //사업자 등록 번호
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '사업자 등록번호',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //담당자 명
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '담당자 이름',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: comNoController,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: nameController,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '업체명을 입력해주세요.',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
                                   ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintText: '업체명을 입력해주세요.',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                        ],
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                    //담당자 명
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '담당자 이름',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //담당자 번호
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '담당자 연락처',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
+                            SizedBox(height: 7),
+                            Container(
+                                width: double.infinity,
+                                height: 45,
+                                child: TextField(
+                                  controller: phoneController,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                        top: 10.0, bottom: 10, left: 15),
+                                    counterStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                    hintText: '업체명을 입력해주세요.',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFFACACAC)),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide(
+                                          width: 1, color: Color(0xFFACACAC)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                    ),
                                   ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintText: '업체명을 입력해주세요.',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                        ],
+                                  keyboardType: TextInputType.visiblePassword,
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 20),
+                      SizedBox(height: 30),
 
-                    //담당자 번호
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '담당자 연락처',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //나의 서비스
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '나의 서비스 [최대 5개]',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                              width: double.infinity,
-                              height: 45,
-                              child: TextField(
-                                controller: phoneController,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(
-                                      top: 10.0, bottom: 10, left: 15),
-                                  counterStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintStyle: TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                  hintText: '업체명을 입력해주세요.',
-                                  labelStyle:
-                                      TextStyle(color: Color(0xFFACACAC)),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    borderSide: BorderSide(
-                                        width: 1, color: Color(0xFFACACAC)),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.visiblePassword,
-                              )),
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 30),
-
-                    //나의 서비스
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '나의 서비스 [최대 5개]',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
-                            ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                            child: Form(
+                            SizedBox(height: 7),
+                            Form(
                               key: formKey_Service,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -811,251 +817,252 @@ class _SignUp_PageState extends State<SignUpPage> {
                                   // ),
                                 ],
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: 30),
+                      SizedBox(height: 30),
 
-                    //서비스 가능 지역
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '서비스 가능 지역 [최대 3개]',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 12,
-                              fontFamily: 'NanumSquareR',
+                      //서비스 가능 지역
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '서비스 가능 지역 [최대 3개]',
+                              style: TextStyle(
+                                color: Color(0xFF444444),
+                                fontSize: 12,
+                                fontFamily: 'NanumSquareR',
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 7),
-                          Container(
-                            child: Form(
-                              key: formKey_Area,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.symmetric(),
-                                    child: MultiSelectFormField(
-                                      autovalidate: AutovalidateMode.disabled,
-                                      chipBackGroundColor: Color(0xFF025595),
-                                      chipLabelStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          fontSize: 12.0),
-                                      dialogTextStyle: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12.0),
-                                      checkBoxActiveColor: Colors.blue,
-                                      checkBoxCheckColor: Colors.white,
-                                      dialogShapeBorder: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12.0))),
-                                      title: Text(
-                                        "서비스 가능 지역",
-                                        style: TextStyle(fontSize: 12),
+                            SizedBox(height: 7),
+                            Container(
+                              child: Form(
+                                key: formKey_Area,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.symmetric(),
+                                      child: MultiSelectFormField(
+                                        autovalidate: AutovalidateMode.disabled,
+                                        chipBackGroundColor: Color(0xFF025595),
+                                        chipLabelStyle: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 12.0),
+                                        dialogTextStyle: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12.0),
+                                        checkBoxActiveColor: Colors.blue,
+                                        checkBoxCheckColor: Colors.white,
+                                        dialogShapeBorder:
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12.0))),
+                                        title: Text(
+                                          "서비스 가능 지역",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.length == 0) {
+                                            return '서비스 가능 지역을 한개 이상 선택해주세요';
+                                          } else if (value.length > 3) {
+                                            return '최대 3개까지 선택 할 수 있습니다';
+                                          }
+                                          return null;
+                                        },
+                                        dataSource: myArea,
+                                        textField: 'display',
+                                        valueField: 'value',
+                                        okButtonLabel: 'OK',
+                                        cancelButtonLabel: 'CANCEL',
+                                        hintWidget: Text(
+                                          '서비스 가능 지역을 한개 이상 선택해주세요',
+                                          style: TextStyle(fontSize: 12.0),
+                                        ),
+                                        initialValue: _myAreas,
+                                        onSaved: (value) {
+                                          if (value.length == 0) {
+                                            return;
+                                          } else if (value.length <= 3) {
+                                            setState(() {
+                                              _myAreas = value;
+                                            });
+                                          } else if (value.length > 3) {
+                                            Get.snackbar(
+                                                '등록실패', '최대 3개의 지역을 선택할 수 있습니다',
+                                                backgroundColor:
+                                                    Color(0xBC000000),
+                                                colorText: Colors.white);
+                                          }
+                                        },
                                       ),
-                                      validator: (value) {
-                                        if (value == null ||
-                                            value.length == 0) {
-                                          return '서비스 가능 지역을 한개 이상 선택해주세요';
-                                        } else if (value.length > 3) {
-                                          return '최대 3개까지 선택 할 수 있습니다';
-                                        }
-                                        return null;
-                                      },
-                                      dataSource: myArea,
-                                      textField: 'display',
-                                      valueField: 'value',
-                                      okButtonLabel: 'OK',
-                                      cancelButtonLabel: 'CANCEL',
-                                      hintWidget: Text(
-                                        '서비스 가능 지역을 한개 이상 선택해주세요',
-                                        style: TextStyle(fontSize: 12.0),
-                                      ),
-                                      initialValue: _myAreas,
-                                      onSaved: (value) {
-                                        if (value.length == 0) {
-                                          return;
-                                        } else if (value.length <= 3) {
-                                          setState(() {
-                                            _myAreas = value;
-                                          });
-                                        } else if (value.length > 3) {
-                                          Get.snackbar(
-                                              '등록실패', '최대 3개의 지역을 선택할 수 있습니다',
-                                              backgroundColor:
-                                                  Color(0xBC000000),
-                                              colorText: Colors.white);
-                                        }
-                                      },
                                     ),
-                                  ),
-                                  // Container(
-                                  //   padding: EdgeInsets.all(8),
-                                  //   child: ElevatedButton(
-                                  //     child: Text('Save'),
-                                  //     onPressed: (){
-                                  //       _saveFormArea;
-                                  //       print(_myAreas![2].isNull ? true : false);
-                                  //     },
-                                  //   ),
-                                  // ),
-                                ],
+                                    // Container(
+                                    //   padding: EdgeInsets.all(8),
+                                    //   child: ElevatedButton(
+                                    //     child: Text('Save'),
+                                    //     onPressed: (){
+                                    //       _saveFormArea;
+                                    //       print(_myAreas![2].isNull ? true : false);
+                                    //     },
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
                               ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 100),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: Checkbox(
+                                value: _isChecked1,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isChecked1 = value!;
+                                  });
+                                },
+                                activeColor: Color(0xFF025595),
+                              )),
+                          Expanded(
+                            flex: 5,
+                            child: Text(
+                              '[필수] 서비스 이용약관에 동의',
+                              style: TextStyle(fontSize: 12.0),
                             ),
-                          )
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: TextButton(
+                                onPressed: () {
+                                  print('이용약관 자세히 보기');
+                                },
+                                child: Text(
+                                  '자세히 보기',
+                                  style: TextStyle(
+                                      fontSize: 11.0, color: Colors.grey),
+                                ),
+                              )),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 100),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: Checkbox(
-                              value: _isChecked1,
-                              onChanged: (value) {
-                                setState(() {
-                                  _isChecked1 = value!;
-                                });
-                              },
-                              activeColor: Color(0xFF025595),
-                            )),
-                        Expanded(
-                          flex: 5,
-                          child: Text(
-                            '[필수] 서비스 이용약관에 동의',
-                            style: TextStyle(fontSize: 12.0),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: Checkbox(
+                                value: _isChecked2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isChecked2 = value!;
+                                  });
+                                },
+                                activeColor: Color(0xFF025595),
+                              )),
+                          Expanded(
+                            flex: 5,
+                            child: Text(
+                              '[필수] 개인정보 수집 이용에 동의',
+                              style: TextStyle(fontSize: 12.0),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 2,
-                            child: TextButton(
-                              onPressed: () {
-                                print('이용약관 자세히 보기');
-                              },
-                              child: Text(
-                                '자세히 보기',
-                                style: TextStyle(
-                                    fontSize: 11.0, color: Colors.grey),
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: Checkbox(
-                              value: _isChecked2,
-                              onChanged: (value) {
-                                setState(() {
-                                  _isChecked2 = value!;
-                                });
-                              },
-                              activeColor: Color(0xFF025595),
-                            )),
-                        Expanded(
-                          flex: 5,
-                          child: Text(
-                            '[필수] 개인정보 수집 이용에 동의',
-                            style: TextStyle(fontSize: 12.0),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 2,
-                            child: TextButton(
-                              onPressed: () {
-                                print('개인정보처리방침 자세히 보기');
-                              },
-                              child: Text(
-                                '자세히 보기',
-                                style: TextStyle(
-                                    fontSize: 11.0, color: Colors.grey),
-                              ),
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              InkWell(
-                onTap: () {
-                  print('회원 가입');
-                  _saveFormService();
-                  _saveFormArea();
-                  if (_myServices!.length > 5) {
-                    Get.snackbar("회원가입 실패", "나의 서비스는 최대 5개까지 선택 가능합니다",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else if (_myAreas!.length > 3) {
-                    Get.snackbar("회원가입 실패", "서비스 가능 지역 최대 3개까지 선택 가능합니다",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else if (_pwChecked == false ||
-                      pwController.text.length < 10) {
-                    Get.snackbar("회원가입 실패", "비밀번호를 확인 후 다시 시도해주세요",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else if (_isChecked2 == false || _isChecked1 == false) {
-                    Get.snackbar("회원가입 실패", "필수 동의 항목을 확인해주세요",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else if (_idChecked == false) {
-                    Get.snackbar("회원가입 실패", "아이디 중복확인 후 다시 시도해주세요",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else if (idController.text.isEmpty ||
-                      pwController.text.isEmpty ||
-                      comController.text.isEmpty ||
-                      comNoController.text.isEmpty ||
-                      nameController.text.isEmpty ||
-                      phoneController.text.isEmpty) {
-                    Get.snackbar("회원가입 실패", "입력하지 않은 항목이 있습니다",
-                        backgroundColor: Color(0xBC000000),
-                        colorText: Colors.white);
-                  } else {
-                    insertSignUp();
-                  }
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 8, right: 8),
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF025595),
-                    borderRadius: BorderRadius.circular(5),
+                          Expanded(
+                              flex: 2,
+                              child: TextButton(
+                                onPressed: () {
+                                  print('개인정보처리방침 자세히 보기');
+                                },
+                                child: Text(
+                                  '자세히 보기',
+                                  style: TextStyle(
+                                      fontSize: 11.0, color: Colors.grey),
+                                ),
+                              )),
+                        ],
+                      )
+                    ],
                   ),
-                  child: Center(
-                    child: Text(
-                      '가입하기',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontFamily: 'NanumSquareB',
+                ),
+                SizedBox(height: 20),
+                InkWell(
+                  onTap: () {
+                    print('회원 가입');
+                    _saveFormService();
+                    _saveFormArea();
+                    if (_myServices!.length > 5) {
+                      Get.snackbar("회원가입 실패", "나의 서비스는 최대 5개까지 선택 가능합니다",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else if (_myAreas!.length > 3) {
+                      Get.snackbar("회원가입 실패", "서비스 가능 지역 최대 3개까지 선택 가능합니다",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else if (_pwChecked == false ||
+                        pwController.text.length < 10) {
+                      Get.snackbar("회원가입 실패", "비밀번호를 확인 후 다시 시도해주세요",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else if (_isChecked2 == false || _isChecked1 == false) {
+                      Get.snackbar("회원가입 실패", "필수 동의 항목을 확인해주세요",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else if (_idChecked == false) {
+                      Get.snackbar("회원가입 실패", "아이디 중복확인 후 다시 시도해주세요",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else if (idController.text.isEmpty ||
+                        pwController.text.isEmpty ||
+                        comController.text.isEmpty ||
+                        comNoController.text.isEmpty ||
+                        nameController.text.isEmpty ||
+                        phoneController.text.isEmpty) {
+                      Get.snackbar("회원가입 실패", "입력하지 않은 항목이 있습니다",
+                          backgroundColor: Color(0xBC000000),
+                          colorText: Colors.white);
+                    } else {
+                      insertSignUp();
+                    }
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(left: 8, right: 8),
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF025595),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '가입하기',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontFamily: 'NanumSquareB',
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 50),
-            ],
+                SizedBox(height: 50),
+              ],
+            ),
           ),
         ),
       ),

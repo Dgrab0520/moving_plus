@@ -19,6 +19,8 @@ class Receive_Estimate extends StatefulWidget {
 class _Receive_EstimateState extends State<Receive_Estimate> {
   TextEditingController searchController = TextEditingController();
   List<OrderChat> orders = [];
+  List<OrderChat> searchOrders = [];
+  bool isSearch = false;
 
   @override
   void initState() {
@@ -83,9 +85,24 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
               child: TextField(
                 controller: searchController,
                 keyboardType: TextInputType.text,
-                onChanged: (text) {},
-                onSubmitted: (text) {
-                  searchController.text = "";
+                onSubmitted: (text) {},
+                onChanged: (text) {
+                  searchOrders = [];
+                  if (text != "") {
+                    searchOrders.addAll(orders.where((element) =>
+                        element.service_type.contains(text) ||
+                        element.address.contains(text) ||
+                        Api()
+                            .findMainCategory(element.service_type)
+                            .contains(text)));
+                    setState(() {
+                      isSearch = true;
+                    });
+                  } else {
+                    setState(() {
+                      isSearch = false;
+                    });
+                  }
                 },
                 decoration: InputDecoration(
                     border: InputBorder.none,
@@ -97,10 +114,12 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
             SizedBox(height: 20),
             Expanded(
                 child: ListView.builder(
-                    itemCount: orders.length,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: isSearch ? searchOrders.length : orders.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CustomerEstimate(
-                        orderChat: orders[index],
+                        orderChat:
+                            isSearch ? searchOrders[index] : orders[index],
                       );
                     })),
           ],
@@ -218,23 +237,30 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
                       child: Text("받은 견적서가 없습니다"),
                     )
                   : ListView.builder(
-                      itemCount: profile.length,
+                      itemCount: profile.length <= 6 ? profile.length : 6,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          padding: EdgeInsets.only(top: 5),
                           margin: EdgeInsets.only(right: 8),
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
+                              color: Colors.black38,
+                              borderRadius: BorderRadius.circular(50),
                               image: DecorationImage(
-                            image: NetworkImage(
-                                "$homeURL/plus/pro_profile/${profile[index]}"),
-                          )),
-                          child: index < 5
+                                image: NetworkImage(
+                                    "$homeURL/plus/pro_profile/${profile[index]}"),
+                                fit: BoxFit.cover,
+                                colorFilter: index < 6 && index != 5
+                                    ? null
+                                    : ColorFilter.mode(
+                                        Colors.black.withOpacity(0.5),
+                                        BlendMode.dstATop),
+                              )),
+                          child: index < 6 && index != 5
                               ? null
                               : Center(
-                                  child: Text('+5',
+                                  child: Text("+${(profile.length - 6)}",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17,
@@ -247,6 +273,7 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
             SizedBox(height: 20),
             InkWell(
               onTap: () {
+                FocusScope.of(context).unfocus();
                 Get.to(C_ChatList(
                   mainType: mainType,
                   orderChat: orderChat,

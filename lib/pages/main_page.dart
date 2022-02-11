@@ -63,6 +63,7 @@ class _Main_PageState extends State<Main_Page> {
   final proController = Get.put(Pro_Data());
 
   bool isAlarm = false;
+  bool isChat = false;
 
   @override
   void initState() {
@@ -76,7 +77,13 @@ class _Main_PageState extends State<Main_Page> {
 
     FirebaseMessaging.onMessage.listen((message) {
       setState(() {
-        isAlarm = true;
+        if (message.notification!.title == "Alarm") {
+          isAlarm = true;
+        } else {
+          if (_selectedIndex != 2) {
+            isChat = true;
+          }
+        }
       });
     });
 //앱 실행중일때
@@ -189,14 +196,15 @@ class _Main_PageState extends State<Main_Page> {
                         setState(() {
                           isAlarm = false;
                         });
-                        Get.to(Main_Arlim());
+                        Get.to(() => MainAlarm());
                       },
                       child: Stack(
                         children: [
                           Positioned(
                               top: 15,
                               child: CircleAvatar(
-                                radius: isAlarm ? 2 : 0,
+                                radius: isAlarm ? 3 : 0,
+                                backgroundColor: Color(0xFF025595),
                               )),
                           Align(
                             alignment: Alignment.center,
@@ -522,6 +530,7 @@ class _Main_PageState extends State<Main_Page> {
           unselectedFontSize: 11,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
+            if (index == 2) isChat = false;
             if (index == 2 && controller.pro.value.pro_id == "None") {
               Get.dialog(P_Login());
             } else if (index == 0) {
@@ -549,60 +558,59 @@ class _Main_PageState extends State<Main_Page> {
             }
           },
 
+          selectedLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 11,
+          ),
+          unselectedLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+          ),
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
           items: [
             BottomNavigationBarItem(
-              title: Text(
-                '견적신청',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                ),
-              ),
-              icon: new Image.asset(
-                "assets/notice.png",
-                width: 22,
-                height: 20,
-              ),
-              activeIcon: Image.asset(
+              label: '견적신청',
+              icon: Image.asset(
                 "assets/notice.png",
                 width: 22,
                 height: 20,
               ),
             ),
             BottomNavigationBarItem(
-              title: Text('홈',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                  )),
-              icon: new Image.asset(
-                "assets/home.png",
-                width: 22,
-                height: 20,
-              ),
-              activeIcon: Image.asset(
+              label: '홈',
+              icon: Image.asset(
                 "assets/home.png",
                 width: 22,
                 height: 20,
               ),
             ),
             BottomNavigationBarItem(
-              title: Text('채팅',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                  )),
-              icon: new Image.asset(
-                "assets/chat.png",
-                width: 22,
-                height: 20,
-              ),
-              activeIcon: Image.asset(
-                "assets/chat.png",
-                width: 22,
-                height: 20,
-              ),
-            ),
+                label: '채팅',
+                icon: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        child: CircleAvatar(
+                          radius: isChat ? 2 : 0,
+                          backgroundColor: Colors.white,
+                        ),
+                        top: 0,
+                        right: 0,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.asset(
+                          "assets/chat.png",
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
           ],
         ),
       ),

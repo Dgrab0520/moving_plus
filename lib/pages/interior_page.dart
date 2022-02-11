@@ -99,7 +99,7 @@ class _Interior_PageState extends State<Interior_Page>
             padding: EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () {
-                Get.to(Main_Arlim());
+                Get.to(() => MainAlarm());
               },
               child: Align(
                 alignment: Alignment.centerRight,
@@ -377,7 +377,6 @@ class _TabViewState extends State<TabView> {
                   ),
                 ],
               )),
-
       ],
     );
   }

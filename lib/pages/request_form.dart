@@ -399,10 +399,12 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item1 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         order[0].item1.split(" |  ")[0],
@@ -427,7 +429,8 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item2 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -456,7 +459,8 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item3 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -485,7 +489,8 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item4 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -514,7 +519,8 @@ class _RequestFormState extends State<RequestForm> {
                           order[0].item5 != ""
                               ? Container(
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -539,7 +545,9 @@ class _RequestFormState extends State<RequestForm> {
                                 )
                               : Container(),
 
-                          SizedBox(height: 20.0,),
+                          SizedBox(
+                            height: 20.0,
+                          ),
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 15.0),
                             width: Get.width,
@@ -550,56 +558,60 @@ class _RequestFormState extends State<RequestForm> {
                                   flex: 1,
                                   child: order[0].request_img1 != ""
                                       ? InkWell(
-                                    onTap: () {
-                                      Get.to(DetailScreen(
-                                          path:
-                                          "$homeURL/plus/order_image/${order[0].request_img1}"));
-                                    },
-                                    child: Image.network(
-                                      "$homeURL/plus/order_image/${order[0].request_img1}",
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
+                                          onTap: () {
+                                            Get.to(DetailScreen(
+                                                path:
+                                                    "$homeURL/plus/order_image/${order[0].request_img1}"));
+                                          },
+                                          child: Image.network(
+                                            "$homeURL/plus/order_image/${order[0].request_img1}",
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                       : Container(),
                                 ),
-                                SizedBox(width: 10.0,),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
                                 Expanded(
                                   flex: 1,
                                   child: order[0].request_img2 != ""
                                       ? InkWell(
-                                    onTap: () {
-                                      Get.to(DetailScreen(
-                                          path:
-                                          "$homeURL/plus/order_image/${order[0].request_img2}"));
-                                    },
-                                    child: Image.network(
-                                      "$homeURL/plus/order_image/${order[0].request_img2}",
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
+                                          onTap: () {
+                                            Get.to(DetailScreen(
+                                                path:
+                                                    "$homeURL/plus/order_image/${order[0].request_img2}"));
+                                          },
+                                          child: Image.network(
+                                            "$homeURL/plus/order_image/${order[0].request_img2}",
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                       : Container(),
                                 ),
-                                SizedBox(width: 10.0,),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
                                 Expanded(
                                   flex: 1,
                                   child: order[0].request_img3 != ""
                                       ? InkWell(
-                                    onTap: () {
-                                      Get.to(DetailScreen(
-                                          path:
-                                          "$homeURL/plus/order_image/${order[0].request_img3}"));
-                                    },
-                                    child: Image.network(
-                                      "$homeURL/plus/order_image/${order[0].request_img3}",
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
+                                          onTap: () {
+                                            Get.to(DetailScreen(
+                                                path:
+                                                    "$homeURL/plus/order_image/${order[0].request_img3}"));
+                                          },
+                                          child: Image.network(
+                                            "$homeURL/plus/order_image/${order[0].request_img3}",
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                       : Container(),
                                 ),
                               ],
@@ -618,7 +630,7 @@ class _RequestFormState extends State<RequestForm> {
                             onTap: () {
                               if (index * 10 > _countEstimate) {
                                 Get.offNamed(
-                                    '/estimate/true?order_id=$order_id&customer_id=${order[0].user_id}');
+                                    '/estimate/true?order_id=$order_id&customer_id=${order[0].user_id}&&service_type=${order[0].service_type}');
                               } else {
                                 Get.snackbar(
                                     '견적 만료', '견적 가능 개수가 초과되어 견적을 보낼 수 없습니다',

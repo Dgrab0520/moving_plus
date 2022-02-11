@@ -12,6 +12,7 @@ class OrderList_Data {
   static const GET_CUS_ACTION = "GET_CUS";
   static const GET_EACH_ORDER = "EACH_ORDER";
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
+  static const GET_ORDER_CHAT_ACTION = "ORDER_CHAT";
 
   //Pro order_list 불러오기
   static Future<List<Order>> getOrder(String pro_id) async {
@@ -54,7 +55,7 @@ class OrderList_Data {
   //request_form 특정 order 정보 불러오기
   static Future<List<Order>> getEach_Order(String order_id) async {
     try {
-      var map = Map<String, dynamic>();
+      var map = <String, dynamic>{};
       map['action'] = GET_EACH_ORDER;
       map['order_id'] = order_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
@@ -87,6 +88,30 @@ class OrderList_Data {
       }
     } catch (e) {
       return [];
+    }
+  }
+
+  //특정 orderId OrderChat 불러오기
+  static Future<OrderChat?> getOrderChat(String orderId) async {
+    print(orderId);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = GET_ORDER_CHAT_ACTION;
+      map['order_id'] = orderId;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Get User OrderChat Response : ${response.body}');
+      if (response.statusCode == 200) {
+        Iterable jsonResponse = json.decode(response.body);
+        OrderChat orderChat =
+            jsonResponse.map((model) => OrderChat.fromJson(model)).toList()[0];
+        print(orderChat);
+        return orderChat;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("exception : $e");
+      return null;
     }
   }
 

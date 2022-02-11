@@ -19,6 +19,9 @@ class _P_ChatState extends State<P_Chat> {
   TextEditingController searchController = TextEditingController();
   List<String> category = ['전체', '실리콘 오염 방지', '입주 청소'];
 
+  List<ChatRoom> searchEstimate = [];
+  bool isSearch = false;
+
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
@@ -110,7 +113,22 @@ class _P_ChatState extends State<P_Chat> {
               child: TextField(
                 controller: searchController,
                 keyboardType: TextInputType.text,
-                onChanged: (text) {},
+                onChanged: (text) {
+                  searchEstimate = [];
+                  if (text != "") {
+                    searchEstimate.addAll(chatRoom.where((element) =>
+                        element.serviceType.contains(text) ||
+                        element.userName.contains(text) ||
+                        element.area.contains(text)));
+                    setState(() {
+                      isSearch = true;
+                    });
+                  } else {
+                    setState(() {
+                      isSearch = false;
+                    });
+                  }
+                },
                 onSubmitted: (text) {
                   searchController.text = "";
                 },
@@ -127,11 +145,15 @@ class _P_ChatState extends State<P_Chat> {
                   ? chatRoom.isEmpty
                       ? const Text("채팅이 없습니다.")
                       : ListView.builder(
-                          itemCount: chatRoom.length,
+                          itemCount: isSearch
+                              ? searchEstimate.length
+                              : chatRoom.length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             return ChatRoomBox(
-                              chatRoom: chatRoom[index],
+                              chatRoom: isSearch
+                                  ? searchEstimate[index]
+                                  : chatRoom[index],
                               chatRoomIndex: index,
                             );
                           })

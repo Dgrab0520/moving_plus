@@ -11,6 +11,7 @@ class Pro_Data extends GetxController {
   static const PRO_BEST_ACTION = "PRO_ACTION";
   static const PRO_TOKEN_ACTION = "PRO_TOKEN";
   static const PRO_CHECK_ACTION = "PRO_CHECK";
+  static const SELECT_PRO_TOKEN_ACTION = "SELECT_PRO_TOKEN";
 
   List<Pro> proAlli = [];
   var isAlliLoading = false.obs;
@@ -98,19 +99,42 @@ class Pro_Data extends GetxController {
 
   //전문가 회원가입 중복확인
   static Future<String> CheckPro(String pro_id) async {
-    try{
+    try {
       var map = Map<String, dynamic>();
       map['action'] = PRO_CHECK_ACTION;
       map['pro_id'] = pro_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Pro Check Response : ${response.body}');
-      if(200 == response.statusCode){
+      if (200 == response.statusCode) {
         return response.body;
-      }else{
+      } else {
         return "error";
       }
-    }catch(e){
+    } catch (e) {
       return "error";
+    }
+  }
+
+  //해당 서비스, 지역 프로 토큰 불러오기
+  static Future<Map<String, dynamic>> selectProToken(
+      String service_type, String area) async {
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = SELECT_PRO_TOKEN_ACTION;
+      map['service_type'] = service_type;
+      map['area'] = area;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Pro Token Select : ${response.body}");
+      if (200 == response.statusCode) {
+        Map<String, dynamic> body = jsonDecode(response.body);
+        print(body['token']);
+        return {"token": body['token'], "name": body['name']};
+      } else {
+        return {};
+      }
+    } catch (e) {
+      print("exception : $e");
+      return {};
     }
   }
 

@@ -11,7 +11,6 @@ import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
-import 'package:timelines/timelines.dart';
 
 final _processes = [
   '필수정보',
@@ -74,7 +73,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
       if (value == "success") {
         print('Insert Success');
         Get.toNamed(
-            "/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId");
+            "/request_estimate2/true?serviceType=$_serviceType&orderId=${controller.pro.value.pro_id.split('@')[0]}$orderId&&address=$addressJSON");
       } else {
         print('$value : Insert Fails');
       }
@@ -88,16 +87,16 @@ class _Request_EstimateState extends State<Request_Estimate> {
       _asyncMethod();
     });
 
-    if(controller.pro.value.type == 'cus'){
-      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value){
+    if (controller.pro.value.type == 'cus') {
+      Customer_Data.get_Customer(controller.pro.value.pro_id).then((value) {
         print('token11: ${controller.pro.value.pro_id}');
         setState(() {
           customer = value;
         });
         print({'customer : ${customer[0].cus_token}'});
-        if(value.length == 0){
+        if (value.length == 0) {
           isLoading = false;
-        }else{
+        } else {
           isLoading = true;
           controller.change(
             type: 'cus',

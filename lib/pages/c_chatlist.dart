@@ -19,6 +19,9 @@ class C_ChatList extends StatefulWidget {
 }
 
 class _C_ChatListState extends State<C_ChatList> {
+  List<UserChatRoom> searchEstimate = [];
+  bool isSearch = false;
+
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
@@ -131,7 +134,20 @@ class _C_ChatListState extends State<C_ChatList> {
                 ),
                 child: TextField(
                   keyboardType: TextInputType.text,
-                  onChanged: (text) {},
+                  onChanged: (text) {
+                    searchEstimate = [];
+                    if (text != "") {
+                      searchEstimate.addAll(userChatRooms
+                          .where((element) => element.proName.contains(text)));
+                      setState(() {
+                        isSearch = true;
+                      });
+                    } else {
+                      setState(() {
+                        isSearch = false;
+                      });
+                    }
+                  },
                   decoration: const InputDecoration(
                       border: InputBorder.none,
                       icon: Padding(
@@ -144,10 +160,15 @@ class _C_ChatListState extends State<C_ChatList> {
                   child: userChatRooms.isEmpty
                       ? const Text("받은 견적이 없습니다")
                       : ListView.builder(
-                          itemCount: userChatRooms.length,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: isSearch
+                              ? searchEstimate.length
+                              : userChatRooms.length,
                           itemBuilder: (BuildContext context, int index) {
                             return ChatRoomBox(
-                                chatRoom: userChatRooms[index],
+                                chatRoom: isSearch
+                                    ? searchEstimate[index]
+                                    : userChatRooms[index],
                                 chatRoomIndex: index,
                                 serviceType: widget.orderChat.service_type,
                                 address:

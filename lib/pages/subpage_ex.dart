@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
             padding: EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () {
-                Get.to(Main_Arlim());
+                Get.to(() => MainAlarm());
               },
               child: Align(
                 alignment: Alignment.centerRight,
