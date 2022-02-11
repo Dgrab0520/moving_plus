@@ -17,7 +17,7 @@ class P_Chat extends StatefulWidget {
 class _P_ChatState extends State<P_Chat> {
   bool isLoading = false;
   TextEditingController searchController = TextEditingController();
-  List<String> category = ['전체', '실리콘 오염 방지', '입주 청소'];
+
 
   List<ChatRoom> searchEstimate = [];
   bool isSearch = false;

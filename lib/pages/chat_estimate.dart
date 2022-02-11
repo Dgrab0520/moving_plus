@@ -474,8 +474,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                             ? Container()
                             : InkWell(
                                 onTap: () async {
-                                  var result =
-                                      await Get.to(P_Detail_Estimate());
+                                  var result = await Get.to(P_Detail_Estimate(), arguments: widget.estimateId);
                                   print(result);
                                   setState(() {
                                     isSelect = false;
