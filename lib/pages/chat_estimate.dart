@@ -13,6 +13,7 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
+import 'package:moving_plus/pages/payment_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
@@ -184,6 +185,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           if (chatting[index].finalPrice != 0) {
                             return FinalPrice(
                                 price: chatting[index].finalPrice,
+                                estimateId: chatting[index].estimateId,
                                 createAt: chatting[index].createAt,
                                 detail: chatting[index].text,
                                 isPro: isPro == 1 ? true : false,
@@ -873,12 +875,14 @@ class FinalPrice extends StatelessWidget {
   const FinalPrice({
     Key? key,
     required this.price,
+    required this.estimateId,
     required this.createAt,
     required this.isPro,
     required this.serviceType,
     required this.detail,
   }) : super(key: key);
   final int price;
+  final String estimateId;
   final String createAt;
   final bool isPro;
   final String serviceType;
@@ -891,7 +895,26 @@ class FinalPrice extends StatelessWidget {
     finalPriceController.updateValue(price.toDouble());
     var finalPriceController2 = MoneyMaskedTextController(
         decimalSeparator: '', thousandSeparator: ',', precision: 0);
-    finalPriceController2.updateValue((price / 10));
+
+    if(price <= 150000){
+      finalPriceController2.updateValue(15000);
+    }else if(price > 150000 && price < 500000){
+      finalPriceController2.updateValue(price / 10);
+    }else if(price >= 500000 && price <= 1000000){
+      finalPriceController2.updateValue(50000);
+    }else if(price >= 1000001 &&price <= 1500000){
+      finalPriceController2.updateValue(60000);
+    }else if(price >= 1500001 &&price <= 2000000){
+      finalPriceController2.updateValue(70000);
+    }else if(price >= 2000001 &&price <= 2500000){
+      finalPriceController2.updateValue(80000);
+    }else if(price >= 2500001 &&price <= 3000000){
+      finalPriceController2.updateValue(90000);
+    }else if(price >= 3000001){
+      finalPriceController2.updateValue(100000);
+    }
+
+    // finalPriceController2.updateValue((price / 10));
     DateTime createAtTime = DateTime.parse(createAt);
     String time = DateFormat("HH:mm").format(createAtTime);
     return Padding(
@@ -938,7 +961,7 @@ class FinalPrice extends StatelessWidget {
                                 width: 23, height: 23),
                             SizedBox(width: 7),
                             Text(
-                              '견적서',
+                              '최종 견적서',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: 'NanumSquareB',
@@ -1015,7 +1038,9 @@ class FinalPrice extends StatelessWidget {
                         ),
                         SizedBox(height: 13),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(Payment_Page(), arguments: estimateId);
+                          },
                           child: Container(
                             width: Get.width,
                             height: 28,
