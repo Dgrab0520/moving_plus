@@ -3,30 +3,13 @@ import 'package:get/get.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/pages/p_portfolio_edit_page.dart';
 
-class Partner_Sub2 extends StatefulWidget {
-  const Partner_Sub2({Key? key}) : super(key: key);
-
-  @override
-  _Partner_Sub2State createState() => _Partner_Sub2State();
-}
-
-class _Partner_Sub2State extends State<Partner_Sub2> {
+class Partner_Sub2 extends StatelessWidget {
+  Partner_Sub2({Key? key}) : super(key: key);
   final controller = Get.put(Pro_Data());
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isBestLoading.isTrue
-        ? Container(
+    return Obx(() => controller.isBestLoading
+        ? SizedBox(
             width: Get.width,
             height: 330,
             child: ListView.builder(

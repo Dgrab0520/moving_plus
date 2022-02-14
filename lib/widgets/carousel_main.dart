@@ -28,7 +28,7 @@ class _Carousel_MainState extends State<Carousel_Main> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isMainLoading.isTrue
+    return Obx(() => controller.isMainLoading
         ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

@@ -124,7 +124,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
         .then((value) {
       if (value == "success") {
         sendAlarm();
-        Get.dialog(AlertDialog(
+        Get.dialog(
+            AlertDialog(
             insetPadding: EdgeInsets.symmetric(horizontal: 20),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -235,7 +236,9 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   ],
                 )
               ],
-            )));
+            )),
+          barrierDismissible: false,
+        );
         print('Update Success');
       } else {
         print('$value : Update Fails');

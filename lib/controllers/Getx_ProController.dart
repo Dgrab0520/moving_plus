@@ -33,7 +33,7 @@ class Pro_Getx {
 }
 
 class ReactiveController extends GetxController {
-  var pro = new Pro_Getx(
+  var pro = Pro_Getx(
     type: 'None',
     id: 'None',
     pro_id: 'None',

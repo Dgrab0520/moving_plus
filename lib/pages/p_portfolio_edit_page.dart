@@ -722,203 +722,195 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                 SizedBox(
                                   height: 20.0,
                                 ),
-                                Container(
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20.0),
-                                        width: Get.width,
-                                        height: 60.0,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Container(
-                                              width: width_star,
-                                              height: 50.0,
-                                              child: ListView.builder(
-                                                itemCount: average
-                                                    .toInt(), //average.round(),
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (_, int index) {
-                                                  return Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.star,
-                                                        color:
-                                                            Color(0xFFFFC107),
-                                                        size: 18.0,
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Container(
-                                                width: 120.0,
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 10.0,
-                                                    ),
-                                                    Text(
-                                                      '${average.toStringAsFixed(2)}',
-                                                      style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 25,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10.0,
-                                                    ),
-                                                    Text(
-                                                      '( ${review.length}개 )',
-                                                      style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontSize: 13,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                          ],
-                                        ),
-                                      ),
-                                      Divider(
-                                        thickness: 0.5,
-                                        height: 1.0,
-                                        color: Color(0xFFe6e6e6),
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      Container(
-                                        width: Get.width,
-                                        height: 300.0,
-                                        child: ListView.builder(
-                                            itemCount: review.length > 5
-                                                ? 5
-                                                : review.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Container(
-                                                width: Get.width,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 25.0,
-                                                    vertical: 10.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                Column(
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      width: Get.width,
+                                      height: 60.0,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            width: width_star,
+                                            height: 50.0,
+                                            child: ListView.builder(
+                                              itemCount: average
+                                                  .toInt(), //average.round(),
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (_, int index) {
+                                                return Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[
-                                                        Text(
-                                                          '${review[index].cus_id}'
-                                                              .split('@')[0],
-                                                          style: TextStyle(
-                                                            color:
-                                                                Colors.black87,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10.0,
-                                                        ),
-                                                        Container(
-                                                          width: double.parse(review[
-                                                                          index]
-                                                                      .review_point)
-                                                                  .toInt() *
-                                                              15,
-                                                          height: 20.0,
-                                                          child:
-                                                              ListView.builder(
-                                                            itemCount: double
-                                                                    .parse(review[
-                                                                            index]
-                                                                        .review_point)
-                                                                .toInt(),
-                                                            scrollDirection:
-                                                                Axis.horizontal,
-                                                            itemBuilder:
-                                                                (_, int index) {
-                                                              return Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Icon(
-                                                                    Icons.star,
-                                                                    color: Color(
-                                                                        0xFFFFC107),
-                                                                    size: 14.0,
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 5.0,
-                                                        ),
-                                                        Text(
-                                                          '${review[index].register_date}'
-                                                              .split(" ")[0],
-                                                          style: TextStyle(
-                                                            color:
-                                                                Colors.black54,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5.0,
-                                                    ),
-                                                    Text(
-                                                      '${review[index].review_content}',
-                                                      style: TextStyle(
-                                                        color: Colors.black54,
-                                                        fontSize: 13,
-                                                      ),
-                                                      maxLines: 4,
-                                                      softWrap: false,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5.0,
-                                                    ),
-                                                    Divider(
-                                                      thickness: 0.5,
-                                                      height: 1.0,
-                                                      color: Color(0xFFe6e6e6),
+                                                  children: [
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Color(0xFFFFC107),
+                                                      size: 18.0,
                                                     ),
                                                   ],
-                                                ),
-                                              );
-                                            }),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Container(
+                                              width: 120.0,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    '${average.toStringAsFixed(2)}',
+                                                    style: TextStyle(
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 25,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    '( ${review.length}개 )',
+                                                    style: TextStyle(
+                                                      color: Colors.black87,
+                                                      fontSize: 13,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Divider(
+                                      thickness: 0.5,
+                                      height: 1.0,
+                                      color: Color(0xFFe6e6e6),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Container(
+                                      width: Get.width,
+                                      height: 300.0,
+                                      child: ListView.builder(
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: review.length > 5
+                                              ? 5
+                                              : review.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Container(
+                                              width: Get.width,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 25.0,
+                                                  vertical: 10.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        '${review[index].cus_id}'
+                                                            .split('@')[0],
+                                                        style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10.0,
+                                                      ),
+                                                      Container(
+                                                        width: double.parse(review[
+                                                                        index]
+                                                                    .review_point)
+                                                                .toInt() *
+                                                            15,
+                                                        height: 20.0,
+                                                        child: ListView.builder(
+                                                          itemCount: double
+                                                                  .parse(review[
+                                                                          index]
+                                                                      .review_point)
+                                                              .toInt(),
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          itemBuilder:
+                                                              (_, int index) {
+                                                            return Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons.star,
+                                                                  color: Color(
+                                                                      0xFFFFC107),
+                                                                  size: 14.0,
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5.0,
+                                                      ),
+                                                      Text(
+                                                        '${review[index].register_date}'
+                                                            .split(" ")[0],
+                                                        style: TextStyle(
+                                                          color: Colors.black54,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.0,
+                                                  ),
+                                                  Text(
+                                                    '${review[index].review_content}',
+                                                    style: TextStyle(
+                                                      color: Colors.black54,
+                                                      fontSize: 13,
+                                                    ),
+                                                    maxLines: 4,
+                                                    softWrap: false,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.0,
+                                                  ),
+                                                  Divider(
+                                                    thickness: 0.5,
+                                                    height: 1.0,
+                                                    color: Color(0xFFe6e6e6),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 60.0,
@@ -976,6 +968,8 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         width: width_star,
                                         height: 50.0,
                                         child: ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
                                           itemCount: average
                                               .toInt(), //average.round(),
                                           scrollDirection: Axis.horizontal,

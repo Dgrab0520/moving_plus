@@ -28,7 +28,7 @@ class _Carousel_SubState extends State<Carousel_Sub> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isSubLoading.isTrue
+    return Obx(() => controller.isSubLoading
         ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

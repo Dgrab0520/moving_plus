@@ -3,23 +3,12 @@ import 'package:get/get.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/pages/p_portfolio_edit_page.dart';
 
-class Partner_Sub extends StatefulWidget {
-  const Partner_Sub({Key? key}) : super(key: key);
-
-  @override
-  _Partner_SubState createState() => _Partner_SubState();
-}
-
-class _Partner_SubState extends State<Partner_Sub> {
+class Partner_Sub extends StatelessWidget {
+  Partner_Sub({Key? key}) : super(key: key);
   final controller = Get.put(Pro_Data());
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isAlliLoading.isTrue
+    return Obx(() => controller.isAlliLoading
         ? SizedBox(
             width: Get.width,
             height: 220,
@@ -267,6 +256,6 @@ class _Partner_SubState extends State<Partner_Sub> {
               },
             ),
           )
-        : Center(child: CircularProgressIndicator()));
+        : Center(child: const CircularProgressIndicator()));
   }
 }

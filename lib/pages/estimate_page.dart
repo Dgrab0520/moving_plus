@@ -210,7 +210,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
                                   width: 1.5, color: Color(0xFF025595))),
                           child: Center(
                             child: Text(
-                              '총 비용',
+                              '예상 견적 비용',
                               style: TextStyle(
                                 color: Color(0xFF025595),
                                 fontSize: 18,
