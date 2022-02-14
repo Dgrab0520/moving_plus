@@ -15,13 +15,13 @@ class Partner_Search extends StatefulWidget {
 class _Partner_SearchState extends State<Partner_Search> {
   List<String> map = [
     '서울',
-    '경기',
+    '부산',
     '인천',
   ];
 
   List<String> category = [
     '필름 시공',
-    '올 인테리어',
+    '정수기 렌탈',
     '도배',
   ];
 
@@ -274,7 +274,7 @@ class _Partner_SearchState extends State<Partner_Search> {
             ),
           ),
           const SizedBox(height: 30),
-          Obx(() => controller.isProLoading.isTrue
+          Obx(() => controller.isProLoading
               ? Expanded(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),

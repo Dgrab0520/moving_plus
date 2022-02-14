@@ -34,6 +34,7 @@ class Pro_Data extends GetxController {
 
   //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
   get_Pro(String condition) async {
+    isProLoading = false;
     try {
       var map = Map<String, dynamic>();
       map['action'] = PRO_SELECT_ACTION;
@@ -45,6 +46,8 @@ class Pro_Data extends GetxController {
         List<Pro> list = parseResponse(response.body);
         isProLoading = true;
         pro = list;
+
+        _pro.refresh();
 
         print(pro);
         print(isProLoading);

@@ -15,7 +15,7 @@ class Banner_Data extends GetxController {
   final _isSubLoading = false.obs;
 
   get isMainLoading => _isMainLoading.value;
-  set isMainLoading(val) => isMainLoading.value = val;
+  set isMainLoading(val) => _isMainLoading.value = val;
 
   get isSubLoading => _isSubLoading.value;
   set isSubLoading(val) => _isSubLoading.value = val;
