@@ -66,6 +66,9 @@ dependencies:
   cloud_functions: ^3.0.5
   flutter_rating_bar: ^4.0.0
   multiselect_formfield: ^0.1.7
+  iamport_flutter: ^0.10.1+2
+  checkbox_grouped: ^1.7.1
+  group_button: ^4.5.0
 
 
 dev_dependencies:

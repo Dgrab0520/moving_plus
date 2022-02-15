@@ -23,6 +23,9 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
   List<Review> review = [];
   bool _isLoading = false;
   bool _isLoading2 = false;
+
+  TextEditingController Controller1 = TextEditingController();
+
   double average = 0.0;
 
   double width_star = 0.0;
@@ -329,14 +332,115 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(
-                                        '소개글',
-                                        style: TextStyle(
-                                          color: Colors.black87,
-                                          fontSize: 15,
-                                          fontFamily: 'NanumSquareB',
-                                        ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '소개글',
+                                            style: TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: 15,
+                                              fontFamily: 'NanumSquareB',
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: (){
+                                              Controller1.text = '${pro[0].pro_intro}';
+                                              Get.defaultDialog(
+                                                radius: 5.0,
+                                                title: "수정하기",
+                                                titleStyle: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 15,
+                                                  fontFamily: 'NanumSquareB',
+                                                ),
+                                                content: Container(
+                                                  width: Get.width,
+                                                  child: SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+                                                        TextField(
+                                                          controller: Controller1,
+                                                          maxLines: 7,
+                                                          maxLength: 500,
+                                                          style: TextStyle(
+                                                            fontSize: 14.0,
+                                                            color: Colors.black87,
+                                                            fontFamily: 'NanumSquareB',
+                                                          ),
+                                                          decoration: InputDecoration(
+                                                            hintText: '파트너 소개를 해주세요',
+                                                            hintStyle: TextStyle(
+                                                                fontSize: 13.0, color: Colors.black54),
+                                                            enabledBorder: OutlineInputBorder(
+                                                              borderSide: const BorderSide(width: 0.8, color: Colors.grey),
+                                                              borderRadius: BorderRadius.circular(5),
+                                                            ),
+                                                              focusedBorder: OutlineInputBorder(
+                                                                borderSide: BorderSide(width: 1.0, color: Color(0xFF025595)),
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 20.0,),
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: (){
+                                                                Get.back();
+                                                              },
+                                                              child: Container(
+                                                                width: Get.width*0.3,
+                                                                height: 40.0,
+                                                                color: Colors.grey,
+                                                                child: Center(child: Text('Cancel',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 13,
+                                                                    fontFamily: 'NanumSquareB',
+                                                                  ),
+                                                                )),
+                                                              ),
+                                                            ),
+                                                            SizedBox(width: 10.0,),
+                                                            InkWell(
+                                                              onTap: (){
+                                                                Get.back();
+                                                              },
+                                                              child: Container(
+                                                                width: Get.width*0.3,
+                                                                height: 40.0,
+                                                                color: Color(0xFF025595),
+                                                                child: Center(child: Text('Edit',
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 13,
+                                                                    fontFamily: 'NanumSquareB',
+                                                                  ),
+                                                                )),
+                                                              ),
+                                                            )
+
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              );
+                                            },
+                                            child: Text('수정',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'NanumSquareB',
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
+
                                       SizedBox(
                                         height: 10.0,
                                       ),

@@ -9,6 +9,7 @@ class FinalOrder_Data{
   static const INSERT_FINAL_ACTION = "INSERT_FINAL";
   static const SELECT_FINAL_ACTION = "SELECT_FINAL";
   static const SELECT_PAYMENT_ACTION = "SELECT_PAYMENT";
+  static const UPDATE_STATUS_ACTION = "UPDATE_STATUS";
 
 
   static Future<String> insertFinal(String estimate_id, String final_price, String final_fee, String final_date) async {
@@ -39,16 +40,12 @@ class FinalOrder_Data{
       final response = await http.post(Uri.parse(ROOT), body: map);
       print("Select Final Response : ${response.body}");
       if(200 == response.statusCode){
-        print('a1');
         List<Finals> list = parseResponse(response.body);
-        print('b1');
         return list;
       }else{
-        print('c1');
         return [];
       }
     }catch(e){
-      print('d1');
       return [];
     }
   }
@@ -68,6 +65,23 @@ class FinalOrder_Data{
       }
     }catch(e){
       return [];
+    }
+  }
+
+  static Future<String> updateStatus(String estimate_id) async{
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = UPDATE_STATUS_ACTION;
+      map['estimate_id'] = estimate_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Update Status Response : ${response.body}");
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
+      return "error";
     }
   }
 

@@ -13,6 +13,7 @@ class OrderList_Data {
   static const GET_EACH_ORDER = "EACH_ORDER";
   static const GET_USER_ORDER_ACTION = "USER_ORDER";
   static const GET_ORDER_CHAT_ACTION = "ORDER_CHAT";
+  static const UPDATE_INDEX_ACTION = "UPDATE_INDEX";
 
   //Pro order_list 불러오기
   static Future<List<Order>> getOrder(String pro_id) async {
@@ -127,6 +128,24 @@ class OrderList_Data {
 
     List<dynamic> profile = body['profile'];
     return profile;
+  }
+
+  static Future<String> updateIndex(String order_id, String index_value) async {
+    try{
+      var map = Map<String, dynamic>();
+      map['action'] = UPDATE_INDEX_ACTION;
+      map['order_id'] = order_id;
+      map['index_value'] = index_value;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Update Index Respnse ; ${response.body}");
+      if(200 == response.statusCode){
+        return response.body;
+      }else{
+        return "error";
+      }
+    }catch(e){
+      return "error";
+    }
   }
 
   static List<OrderChat> parseChatResponse(String responseBody) {

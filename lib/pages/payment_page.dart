@@ -1,9 +1,22 @@
+import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:group_button/group_button.dart';
 import 'package:intl/intl.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/final_order_data.dart';
 import 'package:moving_plus/models/payment_model.dart';
+
+/* 아임포트 결제 모듈을 불러옵니다. */
+import 'package:iamport_flutter/iamport_payment.dart';
+/* 아임포트 결제 데이터 모델을 불러옵니다. */
+import 'package:iamport_flutter/model/payment_data.dart';
+import 'package:moving_plus/pages/main_page.dart';
+
+
+
+final controller_Getx = Get.put(ReactiveController());
 
 class Payment_Page extends StatefulWidget{
   @override
@@ -17,6 +30,10 @@ class _Payment_PageState extends State<Payment_Page>{
   bool _isLoading = false;
   String estimate_id = Get.arguments;
   String strToday = '';
+  String method = '';
+
+
+
 
 
   selectPayment(){
@@ -52,7 +69,10 @@ class _Payment_PageState extends State<Payment_Page>{
   }
 
 
-
+  final controller = GroupButtonController(
+    selectedIndex: 3,
+    selectedIndexes: [1,2,3],
+  );
 
 
 
@@ -544,6 +564,37 @@ class _Payment_PageState extends State<Payment_Page>{
                                 ],
                               ),
 
+                              SizedBox(height: 20),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('결제방법',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                    )
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              GroupButton(
+                                controller: controller,
+                                isRadio: true,
+                                selectedTextStyle: TextStyle(fontSize: 12),
+                                unselectedTextStyle: TextStyle(fontSize: 12, color: Colors.grey),
+                                buttons: ['카드', '실시간계좌이체', '삼성페이'],
+                                selectedColor: Color(0xFF025595),
+                                onSelected: (i, selected) {
+                                  setState(() {
+                                    if(i == 0) {
+                                      method = 'card';
+                                    }else if(i == 1){
+                                      method = 'trans';
+                                    }else{
+                                      method = 'samsung';
+                                    }
+                                  });
+
+                                },
+                              ),
+
                             ],
                           ),
                         ),
@@ -584,6 +635,21 @@ class _Payment_PageState extends State<Payment_Page>{
                         SizedBox(height: 50),
                         InkWell(
                           onTap: () {
+                            if(controller_Getx.pro.value.type == 'cus'){
+                              if(method == ''){
+                                Get.snackbar("결제실패", "결제 수단을 선택하세요", backgroundColor: Colors.white);
+                              }else{
+                                Get.to(Payment_IMP(
+                                  method : method,
+                                  amount : payment[0].final_fee.split(',')[0]+payment[0].final_fee.split(',')[1],
+                                  user_name : payment[0].user_id,
+                                  estimate_id: estimate_id,
+                                ));
+                              }
+                            }else{
+                              Get.snackbar("결제실패", "고객으로 로그인하여 결제해주세요", backgroundColor: Colors.white);
+                            }
+
                           },
                           child: Container(
                             margin: EdgeInsets.only(left: 35, right: 35),
@@ -595,7 +661,7 @@ class _Payment_PageState extends State<Payment_Page>{
                             ),
                             child: Center(
                               child: Text(
-                                '보내기',
+                                '결제하기',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'NanumSquareB',
@@ -617,3 +683,90 @@ class _Payment_PageState extends State<Payment_Page>{
     );
   }
 }
+
+
+//아임포트 결제모듈
+
+class Payment_IMP extends StatelessWidget {
+
+  String method;
+  String amount;
+  String user_name;
+  String estimate_id;
+
+  Payment_IMP({
+    required this.method,
+    required this.amount,
+    required this.user_name,
+    required this.estimate_id,
+  });
+
+  updateStatus(){
+    FinalOrder_Data.updateStatus(estimate_id).then((value){
+      if(value == 'success'){
+        print('Update Status Success');
+        Get.offAll(Main_Page(index: 1));
+      }else{
+        print('Update Status Fail');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IamportPayment(
+      appBar: new AppBar(
+        backgroundColor: Colors.white,
+        title: new Text('입주플러스 결제', style: TextStyle(color: Colors.black),),
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )
+        ),
+      ),
+      /* 웹뷰 로딩 컴포넌트 */
+      initialChild: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('잠시만 기다려주세요...', style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
+      ),
+      /* [필수입력] 가맹점 식별코드 */
+      userCode: 'imp01232724',
+      /* [필수입력] 결제 데이터 */
+      data: PaymentData(
+          pg: 'html5_inicis',                                          // PG사
+          payMethod: method,                                           // 결제수단
+          name: '입주플러스 계약금 결제',                                    // 주문명
+          merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
+          amount: int.parse(amount),                                               // 결제금액
+          buyerName: user_name,                                           // 구매자 이름
+          buyerTel: '',                                     // 구매자 연락처
+          buyerEmail: '',                             // 구매자 이메일
+          appScheme: 'movingplusapp',                                  // 앱 URL scheme
+          displayCardQuota : [2,6]           //결제창 UI 내 할부개월수 제한
+      ),
+      /* [필수입력] 콜백 함수 */
+      callback: (Map<String, String> result) {
+        if(result['success'] == 'true'){
+          updateStatus();
+        }else{
+          Get.back();
+        }
+      },
+    );
+  }
+}
+
+
+// card(신용카드)
+// trans(실시간계좌이체)
+// samsung(삼성페이 / 이니시스, KCP 전용)

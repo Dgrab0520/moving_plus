@@ -138,8 +138,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
-          widget.otherName,
+        title: Text(widget.otherName,
           style: TextStyle(
             color: Colors.white,
             fontSize: 17,

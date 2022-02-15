@@ -266,8 +266,7 @@ class _Main_PageState extends State<Main_Page> {
                                   Expanded(
                                       flex: 2,
                                       child: controller.pro.value.type == 'cus'
-                                          ? controller.pro.value.profile_img ==
-                                                  'default_image'
+                                          ? controller.pro.value.profile_img == 'default_image'
                                               ? Image.asset(
                                                   'assets/defaultImage.png',
                                                   width: 70,

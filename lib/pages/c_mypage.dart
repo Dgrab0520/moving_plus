@@ -55,18 +55,29 @@ class C_Mypage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
+                      SizedBox(width: 10.0,),
                       Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                controller.pro.value.profile_img,
-                              ),
-                              fit: BoxFit.cover,
-                            )),
+                          child: controller.pro.value.type == 'cus'
+                              ? controller.pro.value.profile_img == 'default_image'
+                              ? Image.asset(
+                              'assets/defaultImage.png',
+                              width: 70,
+                              height: 70)
+                              : Container(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    controller.pro.value
+                                        .profile_img,
+                                  ),
+                                  fit: BoxFit.fill,
+                                )),
+                          )
+                          // Image.network(controller.pro.value.profile_img, width:70,height:70)
+                              : Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}", width: 70, height: 70)
                       ),
+
                       const SizedBox(width: 10),
                       Expanded(
                         flex: 8,

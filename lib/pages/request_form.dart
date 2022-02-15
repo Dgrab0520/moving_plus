@@ -24,7 +24,7 @@ class _RequestFormState extends State<RequestForm> {
   bool _isLoading = false;
   bool _isLoading2 = false;
   int _countEstimate = 0;
-  int index = 1;
+  int? index;
   String? order_id = Get.parameters['order_id'];
 
   getOrder() {
@@ -43,6 +43,19 @@ class _RequestFormState extends State<RequestForm> {
           index = int.parse('${order[0].index}');
         });
         print('index : ${index}');
+      }
+    });
+  }
+
+  updateIndex(){
+    getOrder();
+    OrderList_Data.updateIndex(order_id!, '${int.parse('${order[0].index}') + 1}').then((value){
+      print('${index! + 1}');
+      if(value == 'success'){
+        print('Update Index Success');
+        Get.back();
+      }else{
+        print('Update Index Fail');
       }
     });
   }
@@ -95,6 +108,86 @@ class _RequestFormState extends State<RequestForm> {
               Icons.arrow_back,
               color: Colors.white,
             )),
+
+        actions: [
+          controller.pro.value.type == 'cus'?
+          IconButton(
+            onPressed: (){
+              Get.defaultDialog(
+                radius: 5.0,
+                title: '추가 견적 받기',
+                titleStyle: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                  fontFamily: 'NanumSquareB',
+                ),
+                content: Container(
+                  width: Get.width,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Text('추가 견적을 받으시겠습니까?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Get.back();
+                              },
+                              child: Container(
+                                width: Get.width*0.3,
+                                height: 40.0,
+                                color: Colors.grey,
+                                child: Center(child: Text('Cancel',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'NanumSquareB',
+                                  ),
+                                )),
+                              ),
+                            ),
+                            SizedBox(width: 10.0,),
+                            InkWell(
+                              onTap: (){
+                                updateIndex();
+                              },
+                              child: Container(
+                                width: Get.width*0.3,
+                                height: 40.0,
+                                color: Color(0xFF025595),
+                                child: Center(child: Text('Ok',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'NanumSquareB',
+                                  ),
+                                )),
+                              ),
+                            )
+
+                          ],
+                        )
+
+                      ],
+                    ),
+                  ),
+                )
+              );
+
+              },
+            icon: Icon(Icons.refresh, color: Colors.white,)
+          ) : SizedBox(),
+        ]
       ),
       body: _isLoading
           ? Container(
@@ -628,7 +721,8 @@ class _RequestFormState extends State<RequestForm> {
                           flex: 1,
                           child: InkWell(
                             onTap: () {
-                              if (index * 10 > _countEstimate) {
+                              if (index! * 10 > _countEstimate) {
+                                print('multiple = ${index! * 10}');
                                 Get.offNamed(
                                     '/estimate/true?order_id=$order_id&customer_id=${order[0].user_id}&&service_type=${order[0].service_type}');
                               } else {

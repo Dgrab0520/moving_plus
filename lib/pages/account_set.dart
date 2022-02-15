@@ -51,11 +51,26 @@ class _Account_SetState extends State<Account_Set> {
               SizedBox(
                 height: 25,
               ),
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(
-                  controller.pro.value.profile_img,
-                ),
+              Container(
+                  child: controller.pro.value.type == 'cus'
+                      ? controller.pro.value.profile_img == 'default_image'
+                      ? Image.asset(
+                      'assets/defaultImage.png',
+                      width: 80,
+                      height: 80)
+                      : Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            controller.pro.value
+                                .profile_img,
+                          ),
+                          fit: BoxFit.fill,
+                        )),
+                  )
+                  // Image.network(controller.pro.value.profile_img, width:70,height:70)
+                      : Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}", width: 80, height: 80)
               ),
               Container(
                 width: MediaQuery.of(context).size.width,

@@ -115,6 +115,10 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.0)
+  - iamport_flutter (0.0.1):
+    - Flutter
+  - iamport_webview_flutter (0.0.1):
+    - Flutter
   - image_picker (0.0.1):
     - Flutter
   - kakao_flutter_sdk (0.8.2):
@@ -135,6 +139,10 @@ PODS:
   - shared_preferences_ios (0.0.1):
     - Flutter
   - SwiftyGif (5.4.2)
+  - uni_links (0.0.1):
+    - Flutter
+  - url_launcher_ios (0.0.1):
+    - Flutter
   - vertical_scrollable_tabview (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
@@ -148,11 +156,15 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - iamport_flutter (from `.symlinks/plugins/iamport_flutter/ios`)
+  - iamport_webview_flutter (from `.symlinks/plugins/iamport_webview_flutter/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - kakao_flutter_sdk (from `.symlinks/plugins/kakao_flutter_sdk/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - uni_links (from `.symlinks/plugins/uni_links/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - vertical_scrollable_tabview (from `.symlinks/plugins/vertical_scrollable_tabview/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
@@ -190,6 +202,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  iamport_flutter:
+    :path: ".symlinks/plugins/iamport_flutter/ios"
+  iamport_webview_flutter:
+    :path: ".symlinks/plugins/iamport_webview_flutter/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   kakao_flutter_sdk:
@@ -200,6 +216,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  uni_links:
+    :path: ".symlinks/plugins/uni_links/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
   vertical_scrollable_tabview:
     :path: ".symlinks/plugins/vertical_scrollable_tabview/ios"
   webview_flutter_wkwebview:
@@ -225,6 +245,8 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
+  iamport_flutter: f698983444b7c0f83e356407631cfeec77a776bf
+  iamport_webview_flutter: 70dbc31045e4cf7a0c829b76c6f8319dc94b299e
   image_picker: 9aa50e1d8cdacdbed739e925b7eea16d014367e6
   kakao_flutter_sdk: 99c58edf8b0996fb735cbe9e610096555ef7472e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
@@ -234,6 +256,8 @@ SPEC CHECKSUMS:
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
   SwiftyGif: dec758a9dd3d278e5a855dbf279bf062c923c387
+  uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
+  url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
   vertical_scrollable_tabview: 6e6f25411f226cc077ac4d915c8cd407a1317587
   webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
 

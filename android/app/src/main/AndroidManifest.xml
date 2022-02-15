@@ -5,11 +5,15 @@
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 
-       <activity android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity">
+       <activity
+           android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+           android:launchMode="singleTask"
+           >
            <intent-filter android:label="flutter_web_auth">
                <action android:name="android.intent.action.VIEW" />
                <category android:name="android.intent.category.DEFAULT" />
                <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="movingplusapp" />
                <data android:scheme="kakao5ea560970fe7158c7724fd4140be4fab" android:host="oauth"/>
            </intent-filter>
        </activity>
