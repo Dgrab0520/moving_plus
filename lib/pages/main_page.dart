@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/controllers/main_alarm_controller.dart';
 import 'package:moving_plus/datas/banner_data.dart';
 import 'package:moving_plus/datas/pro_data.dart';
 import 'package:moving_plus/pages/c_mypage.dart';
@@ -12,7 +13,6 @@ import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
-import 'package:moving_plus/pages/request_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
@@ -61,9 +61,7 @@ class _Main_PageState extends State<Main_Page> {
 
   final bannerController = Get.put(Banner_Data());
   final proController = Get.put(Pro_Data());
-
-  bool isAlarm = false;
-  bool isChat = false;
+  final mainController = Get.put(MainController());
 
   @override
   void initState() {
@@ -78,10 +76,10 @@ class _Main_PageState extends State<Main_Page> {
     FirebaseMessaging.onMessage.listen((message) {
       setState(() {
         if (message.notification!.title == "Alarm") {
-          isAlarm = true;
+          mainController.isAlarm = true;
         } else {
           if (_selectedIndex != 2) {
-            isChat = true;
+            mainController.isChat = true;
           }
         }
       });
@@ -101,13 +99,13 @@ class _Main_PageState extends State<Main_Page> {
     print('user_idd : $user_id');
     if (controller.pro.value.type == "pro") {
       _widgetOptions = [
-        Request_Estimate(),
+        Interior_Page(categoryTitle: 0),
         HomePage(),
         P_Chat(),
       ];
     } else {
       _widgetOptions = [
-        Request_Estimate(),
+        Interior_Page(categoryTitle: 0),
         HomePage(),
         Receive_Estimate(
           isMain: true,
@@ -193,19 +191,19 @@ class _Main_PageState extends State<Main_Page> {
                   padding: EdgeInsets.only(right: 15),
                   child: InkWell(
                       onTap: () {
-                        setState(() {
-                          isAlarm = false;
-                        });
+                        mainController.isAlarm = false;
                         Get.to(() => MainAlarm());
                       },
                       child: Stack(
                         children: [
-                          Positioned(
-                              top: 15,
-                              child: CircleAvatar(
-                                radius: isAlarm ? 3 : 0,
-                                backgroundColor: Color(0xFF025595),
-                              )),
+                          Obx(
+                            () => Positioned(
+                                top: 15,
+                                child: CircleAvatar(
+                                  radius: mainController.isAlarm ? 3 : 0,
+                                  backgroundColor: Color(0xFF025595),
+                                )),
+                          ),
                           Align(
                             alignment: Alignment.center,
                             child: Icon(Icons.notifications,
@@ -529,28 +527,33 @@ class _Main_PageState extends State<Main_Page> {
           unselectedFontSize: 11,
           currentIndex: _selectedIndex, //현재 선택된 Index
           onTap: (int index) {
-            if (index == 2) isChat = false;
-            if (index == 2 && controller.pro.value.pro_id == "None") {
-              Get.dialog(P_Login());
-            } else if (index == 0) {
-              Get.to(Interior_Page(categoryTitle: 0));
-            } else {
-              if (index == 2 && controller.pro.value.type == "pro") {
+            if (index == 2) {
+              mainController.isChat = false;
+              if (controller.pro.value.pro_id == "None") {
+                Get.dialog(const P_Login());
+              } else if (controller.pro.value.type == "pro") {
                 _widgetOptions = [
-                  Request_Estimate(),
-                  HomePage(),
-                  P_Chat(),
+                  const Interior_Page(categoryTitle: 0),
+                  const HomePage(),
+                  const P_Chat(),
                 ];
               } else {
                 _widgetOptions = [
-                  Request_Estimate(),
-                  HomePage(),
-                  Receive_Estimate(
+                  const Interior_Page(categoryTitle: 0),
+                  const HomePage(),
+                  const Receive_Estimate(
                     isMain: true,
                   ),
                 ];
               }
-
+              setState(() {
+                _selectedIndex = index;
+              });
+            } else if (index == 0) {
+              Get.to(
+                const Interior_Page(categoryTitle: 0),
+              );
+            } else {
               setState(() {
                 _selectedIndex = index;
               });
@@ -591,13 +594,15 @@ class _Main_PageState extends State<Main_Page> {
                   height: 24,
                   child: Stack(
                     children: [
-                      Positioned(
-                        child: CircleAvatar(
-                          radius: isChat ? 2 : 0,
-                          backgroundColor: Colors.white,
+                      Obx(
+                        () => Positioned(
+                          child: CircleAvatar(
+                            radius: mainController.isChat ? 2 : 0,
+                            backgroundColor: Colors.white,
+                          ),
+                          top: 0,
+                          right: 0,
                         ),
-                        top: 0,
-                        right: 0,
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,

@@ -15,13 +15,13 @@ class Partner_Search extends StatefulWidget {
 class _Partner_SearchState extends State<Partner_Search> {
   List<String> map = [
     '서울',
-    '경기',
+    '부산',
     '인천',
   ];
 
   List<String> category = [
     '필름 시공',
-    '올 인테리어',
+    '정수기 렌탈',
     '도배',
   ];
 
@@ -45,7 +45,7 @@ class _Partner_SearchState extends State<Partner_Search> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           '파트너 찾기',
           style: TextStyle(
             color: Colors.white,
@@ -54,12 +54,12 @@ class _Partner_SearchState extends State<Partner_Search> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -67,7 +67,7 @@ class _Partner_SearchState extends State<Partner_Search> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 20, left: 15.0, right: 15),
+            padding: const EdgeInsets.only(top: 20, left: 15.0, right: 15),
             child: Row(
               children: [
                 Expanded(
@@ -80,15 +80,11 @@ class _Partner_SearchState extends State<Partner_Search> {
                         children: [
                           DropdownButtonFormField2(
                             decoration: InputDecoration(
-                              //Add isDense true and zero Padding.
-                              //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              //Add more decoration as you want here
-                              //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                             ),
                             isExpanded: true,
                             hint: Row(
@@ -99,7 +95,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                                   child: Image.asset('assets/placeholder_g.png',
                                       width: 17, height: 17),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   flex: 4,
                                   child: Center(
                                     child: Text(
@@ -150,10 +146,10 @@ class _Partner_SearchState extends State<Partner_Search> {
                     ),
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Expanded(
                   flex: 2,
-                  child: Container(
+                  child: SizedBox(
                     width: 220,
                     child: Form(
                       key: _formKey2,
@@ -180,7 +176,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                                   child: Image.asset('assets/categories.png',
                                       width: 17, height: 17),
                                 ),
-                                Expanded(
+                                const Expanded(
                                     flex: 4,
                                     child: Center(
                                       child: Text(
@@ -230,7 +226,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                     ),
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Expanded(
                   flex: 1,
                   child: InkWell(
@@ -263,9 +259,9 @@ class _Partner_SearchState extends State<Partner_Search> {
                     child: Container(
                       height: 30.0,
                       decoration: BoxDecoration(
-                          color: Color(0xFF025595),
+                          color: const Color(0xFF025595),
                           borderRadius: BorderRadius.circular(5.0)),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           '검색',
                           style: TextStyle(fontSize: 13.0, color: Colors.white),
@@ -278,23 +274,23 @@ class _Partner_SearchState extends State<Partner_Search> {
             ),
           ),
           const SizedBox(height: 30),
-          Obx(() => controller.isProLoading.isTrue
+          Obx(() => controller.isProLoading
               ? Expanded(
                   child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: controller.pro.length,
                     itemBuilder: (_, int index) {
                       return InkWell(
                         onTap: () {
-                          Get.to(PortfolioEdit_Page(),
+                          Get.to(const PortfolioEdit_Page(),
                               arguments: controller.pro[index].pro_id);
                         },
                         child: Container(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: 10,
                             right: 10,
                           ),
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               left: 10, right: 10, bottom: 20.0),
                           width: double.infinity,
                           height: 100,
@@ -306,8 +302,8 @@ class _Partner_SearchState extends State<Partner_Search> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -317,14 +313,12 @@ class _Partner_SearchState extends State<Partner_Search> {
                             children: [
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  child: Image.network(
-                                      "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}",
-                                      width: 60,
-                                      height: 60),
-                                ),
+                                child: Image.network(
+                                    "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}",
+                                    width: 60,
+                                    height: 60),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10.0,
                               ),
                               Expanded(
@@ -336,8 +330,8 @@ class _Partner_SearchState extends State<Partner_Search> {
                                     Row(
                                       children: [
                                         Text(
-                                          '${controller.pro[index].com_name}',
-                                          style: TextStyle(
+                                          controller.pro[index].com_name,
+                                          style: const TextStyle(
                                             color: Color(0xFF444444),
                                             fontFamily: 'NanumSquareEB',
                                             fontSize: 14,
@@ -345,17 +339,18 @@ class _Partner_SearchState extends State<Partner_Search> {
                                           softWrap: false,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         controller.pro[index].index == 'alli'
                                             ? Container(
                                                 width: 30,
                                                 height: 15,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0xFF025595),
+                                                  color:
+                                                      const Color(0xFF025595),
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                child: Center(
+                                                child: const Center(
                                                   child: Text(
                                                     '인기',
                                                     style: TextStyle(
@@ -368,29 +363,25 @@ class _Partner_SearchState extends State<Partner_Search> {
                                             : Container(),
                                       ],
                                     ),
-                                    SizedBox(height: 5),
+                                    const SizedBox(height: 5),
                                     Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '총 공사 20건',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ],
+                                        const Text(
+                                          '총 공사 20건',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
                                         ),
-                                        SizedBox(width: 20),
+                                        const SizedBox(width: 20),
                                         Row(
                                           children: [
                                             Image.asset("assets/star1.png",
                                                 width: 13, height: 13),
-                                            Text('4.7',
+                                            const Text('4.7',
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                 )),
-                                            Text('(10개)',
+                                            const Text('(10개)',
                                                 style: TextStyle(
                                                   fontSize: 8,
                                                 )),
@@ -398,7 +389,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
@@ -406,19 +397,22 @@ class _Partner_SearchState extends State<Partner_Search> {
                                           controller.pro[index].pro_service1 !=
                                                   ""
                                               ? Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 7, right: 7),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 7, right: 7),
                                                   height: 17,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF444444),
+                                                    color:
+                                                        const Color(0xFF444444),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                        '${controller.pro[index].pro_service3}',
-                                                        style: TextStyle(
+                                                        controller.pro[index]
+                                                            .pro_service3,
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 7,
                                                           fontFamily:
@@ -429,24 +423,27 @@ class _Partner_SearchState extends State<Partner_Search> {
                                               : Container(),
                                           controller.pro[index].pro_service1 !=
                                                   ""
-                                              ? SizedBox(width: 3)
-                                              : SizedBox(width: 0),
+                                              ? const SizedBox(width: 3)
+                                              : const SizedBox(width: 0),
                                           controller.pro[index].pro_service2 !=
                                                   ""
                                               ? Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 7, right: 7),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 7, right: 7),
                                                   height: 17,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF444444),
+                                                    color:
+                                                        const Color(0xFF444444),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                        '${controller.pro[index].pro_service3}',
-                                                        style: TextStyle(
+                                                        controller.pro[index]
+                                                            .pro_service3,
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 7,
                                                           fontFamily:
@@ -457,24 +454,27 @@ class _Partner_SearchState extends State<Partner_Search> {
                                               : Container(),
                                           controller.pro[index].pro_service2 !=
                                                   ""
-                                              ? SizedBox(width: 3)
-                                              : SizedBox(width: 0),
+                                              ? const SizedBox(width: 3)
+                                              : const SizedBox(width: 0),
                                           controller.pro[index].pro_service3 !=
                                                   ""
                                               ? Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 7, right: 7),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 7, right: 7),
                                                   height: 17,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF444444),
+                                                    color:
+                                                        const Color(0xFF444444),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                        '${controller.pro[index].pro_service3}',
-                                                        style: TextStyle(
+                                                        controller.pro[index]
+                                                            .pro_service3,
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 7,
                                                           fontFamily:
@@ -485,18 +485,18 @@ class _Partner_SearchState extends State<Partner_Search> {
                                               : Container(),
                                           controller.pro[index].pro_service3 !=
                                                   ""
-                                              ? SizedBox(width: 3)
-                                              : SizedBox(width: 0),
+                                              ? const SizedBox(width: 3)
+                                              : const SizedBox(width: 0),
                                           Container(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 7, right: 7),
                                             height: 17,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFF031D63),
+                                              color: const Color(0xFF031D63),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text('카드결제',
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -505,17 +505,17 @@ class _Partner_SearchState extends State<Partner_Search> {
                                                   )),
                                             ),
                                           ),
-                                          SizedBox(width: 3),
+                                          const SizedBox(width: 3),
                                           Container(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 7, right: 7),
                                             height: 17,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFF031D63),
+                                              color: const Color(0xFF031D63),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text('현금영수증',
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -530,15 +530,13 @@ class _Partner_SearchState extends State<Partner_Search> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10.0,
                               ),
                               Expanded(
                                 flex: 1,
-                                child: Container(
-                                  child: Image.asset("assets/p_img2-1.png",
-                                      width: 60, height: 60),
-                                ),
+                                child: Image.asset("assets/p_img2-1.png",
+                                    width: 60, height: 60),
                               ),
                             ],
                           ),

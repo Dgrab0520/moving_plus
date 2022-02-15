@@ -14,14 +14,27 @@ class Pro_Data extends GetxController {
   static const SELECT_PRO_TOKEN_ACTION = "SELECT_PRO_TOKEN";
 
   List<Pro> proAlli = [];
-  var isAlliLoading = false.obs;
+  final _isAlliLoading = false.obs;
+  get isAlliLoading => _isAlliLoading.value;
+  set isAlliLoading(val) => _isAlliLoading.value = val;
+
   List<Pro> proBest = [];
-  var isBestLoading = false.obs;
-  var pro = <Pro>[].obs;
-  var isProLoading = false.obs;
+  final _isBestLoading = false.obs;
+  get isBestLoading => _isBestLoading.value;
+  set isBestLoading(val) => _isBestLoading.value = val;
+
+  final _pro = <Pro>[].obs;
+  final _isProLoading = false.obs;
+
+  get pro => _pro.value;
+  set pro(val) => _pro.value = val;
+
+  get isProLoading => _isProLoading.value;
+  set isProLoading(val) => _isProLoading.value = val;
 
   //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
   get_Pro(String condition) async {
+    isProLoading = false;
     try {
       var map = Map<String, dynamic>();
       map['action'] = PRO_SELECT_ACTION;
@@ -31,8 +44,10 @@ class Pro_Data extends GetxController {
 
       if (response.statusCode == 200) {
         List<Pro> list = parseResponse(response.body);
-        isProLoading.value = true;
-        pro.value = list;
+        isProLoading = true;
+        pro = list;
+
+        _pro.refresh();
 
         print(pro);
         print(isProLoading);
@@ -53,7 +68,7 @@ class Pro_Data extends GetxController {
       if (response.statusCode == 200) {
         List<Pro> list = parseResponse(response.body);
         proAlli = list;
-        isAlliLoading.value = true;
+        isAlliLoading = true;
       }
     } catch (e) {
       print(e);
@@ -71,7 +86,7 @@ class Pro_Data extends GetxController {
       if (response.statusCode == 200) {
         List<Pro> list = parseResponse(response.body);
         proBest = list;
-        isBestLoading.value = true;
+        isBestLoading = true;
       }
     } catch (e) {
       print(e);

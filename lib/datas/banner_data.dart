@@ -11,8 +11,14 @@ class Banner_Data extends GetxController {
 
   List<Banners> bannerMain = [];
   List<Banners> bannerSub = [];
-  var isMainLoading = false.obs;
-  var isSubLoading = false.obs;
+  final _isMainLoading = false.obs;
+  final _isSubLoading = false.obs;
+
+  get isMainLoading => _isMainLoading.value;
+  set isMainLoading(val) => _isMainLoading.value = val;
+
+  get isSubLoading => _isSubLoading.value;
+  set isSubLoading(val) => _isSubLoading.value = val;
 
   getBanner_Main() async {
     try {
@@ -24,8 +30,8 @@ class Banner_Data extends GetxController {
       if (response.statusCode == 200) {
         List<Banners> list = parseResponse(response.body);
         bannerMain = list;
-        isMainLoading.value = true;
-        print(isMainLoading);
+        isMainLoading = true;
+        print("isMainLoading : $isMainLoading");
       }
     } catch (e) {
       print(e);
@@ -42,7 +48,7 @@ class Banner_Data extends GetxController {
       if (response.statusCode == 200) {
         List<Banners> list = parseResponse(response.body);
         bannerSub = list;
-        isSubLoading.value = true;
+        isSubLoading = true;
         print(isSubLoading);
       }
     } catch (e) {

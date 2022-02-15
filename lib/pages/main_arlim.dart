@@ -87,6 +87,7 @@ class AlarmBox extends StatelessWidget {
         } else {
           Get.off(() => const Request_Received());
         }
+        alarmController.alarmDelete(index);
       },
       child: Container(
         padding: const EdgeInsets.only(left: 15.0, right: 15),

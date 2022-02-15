@@ -81,23 +81,14 @@ class _Request_ReceivedState extends State<Request_Received> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: controller.pro.value.type == 'cus'
-              ? Text(
-                  '보낸 요청서',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                )
-              : Text(
-                  '받은 요청서',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                ),
+          title: Text(
+            controller.pro.value.type == 'cus' ? '보낸 요청서' : '받은 요청서',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontFamily: 'NanumSquareB',
+            ),
+          ),
           centerTitle: true,
           backgroundColor: Color(0xFF025595),
           leading: IconButton(
@@ -346,7 +337,9 @@ class _Request_ReceivedState extends State<Request_Received> {
             : Container(
                 margin: EdgeInsets.only(bottom: 200.0),
                 child: Center(
-                  child: Text('받은 요청서가 없습니다'),
+                  child: Text(controller.pro.value.type == 'cus'
+                      ? '보낸 요청서가 없습니다'
+                      : '받은 요청서가 없습니다'),
                 ),
               ));
   }

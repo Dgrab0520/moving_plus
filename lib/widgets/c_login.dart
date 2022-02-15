@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/pages/p_signup.dart';
@@ -291,6 +292,8 @@ class _C_LoginState extends State<C_Login> {
                           pro_token:
                               'cqIz-tfDSV-BZrr6xIhdCy:APA91bF-ZPNg8CcmIw3lKD3hlTOHQwIfl8lbzVWp_SlBN-jbfjtW4QbkfIJJub08jDJl6XBRbAZIhrrQHurFLyvBBw6jjFav2wvG6QRs73TP5q1fGtHFHy_evZnzQ861pwk9-pT_SsM7',
                         );
+                        AlarmData().alarmCount('skstjdtndi12@naver.com');
+
                         Get.offAll(Main_Page(index: 1));
                       },
                       child: Text("test")),

@@ -21,6 +21,7 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
   List<OrderChat> orders = [];
   List<OrderChat> searchOrders = [];
   bool isSearch = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
       print(value);
       setState(() {
         orders = value;
+        isLoading = true;
       });
     });
     super.initState();
@@ -113,15 +115,24 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
             ),
             SizedBox(height: 20),
             Expanded(
-                child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: isSearch ? searchOrders.length : orders.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CustomerEstimate(
-                        orderChat:
-                            isSearch ? searchOrders[index] : orders[index],
-                      );
-                    })),
+              child: isLoading
+                  ? orders.isNotEmpty || searchOrders.isNotEmpty
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount:
+                              isSearch ? searchOrders.length : orders.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomerEstimate(
+                              orderChat: isSearch
+                                  ? searchOrders[index]
+                                  : orders[index],
+                            );
+                          })
+                      : const Text("보낸 견적이 없습니다")
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+            ),
           ],
         ),
       ),
