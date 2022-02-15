@@ -12,6 +12,7 @@ class Pro_Data extends GetxController {
   static const PRO_TOKEN_ACTION = "PRO_TOKEN";
   static const PRO_CHECK_ACTION = "PRO_CHECK";
   static const SELECT_PRO_TOKEN_ACTION = "SELECT_PRO_TOKEN";
+  static const PRO_UPDATE_ACTION = "PRO_UPDATE";
 
   List<Pro> proAlli = [];
   final _isAlliLoading = false.obs;
@@ -26,7 +27,7 @@ class Pro_Data extends GetxController {
   final _pro = <Pro>[].obs;
   final _isProLoading = false.obs;
 
-  get pro => _pro.value;
+  List<Pro> get pro => _pro.value;
   set pro(val) => _pro.value = val;
 
   get isProLoading => _isProLoading.value;
@@ -34,7 +35,9 @@ class Pro_Data extends GetxController {
 
   //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
   get_Pro(String condition) async {
+    print("isProLoading : $isProLoading");
     isProLoading = false;
+    print("isProLoading : $isProLoading");
     try {
       var map = Map<String, dynamic>();
       map['action'] = PRO_SELECT_ACTION;
@@ -47,13 +50,13 @@ class Pro_Data extends GetxController {
         isProLoading = true;
         pro = list;
 
-        _pro.refresh();
-
         print(pro);
         print(isProLoading);
       }
     } catch (e) {
       print(e);
+      isProLoading = true;
+      pro = <Pro>[];
     }
   }
 
@@ -90,6 +93,50 @@ class Pro_Data extends GetxController {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  //전문가 토큰 저장
+  static Future<String> updatePro(
+      String pro_id,
+      String intro,
+      String pro_name,
+      String service_type1,
+      String service_type2,
+      String service_type3,
+      String service_type4,
+      String service_type5,
+      String pro_area1,
+      String pro_area2,
+      String pro_area3,
+      String pro_career,
+      String pro_pay) async {
+    try {
+      var map = Map<String, dynamic>();
+      map['action'] = PRO_UPDATE_ACTION;
+      map['pro_id'] = pro_id;
+      map['intro'] = intro;
+      map['pro_name'] = pro_name;
+      map['service_type1'] = service_type1;
+      map['service_type2'] = service_type2;
+      map['service_type3'] = service_type3;
+      map['service_type4'] = service_type4;
+      map['service_type5'] = service_type5;
+      map['pro_area1'] = pro_area1;
+      map['pro_area2'] = pro_area2;
+      map['pro_area3'] = pro_area3;
+      map['pro_career'] = pro_career;
+      map['pro_pay'] = pro_pay;
+      print(map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Pro Update : ${response.body}");
+      if (200 == response.statusCode) {
+        return response.body;
+      } else {
+        return "error";
+      }
+    } catch (e) {
+      return "error";
     }
   }
 

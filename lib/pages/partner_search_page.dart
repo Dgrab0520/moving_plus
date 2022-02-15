@@ -231,6 +231,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {
+                      print("isProLoading : ${controller.isProLoading}");
                       print('$selectedValue1 $selectedValue2');
                       if (selectedValue1 != "" && selectedValue2 == "") {
                         print('selected1');
@@ -238,22 +239,20 @@ class _Partner_SearchState extends State<Partner_Search> {
                           condition =
                               "WHERE pro_area1 = '$selectedValue1' OR pro_area2 = '$selectedValue1' OR pro_area3 = '$selectedValue1'";
                         });
-                        Pro_Data().get_Pro(condition);
                       } else if (selectedValue2 != "" && selectedValue1 == "") {
                         print('selected2');
                         setState(() {
                           condition =
                               "WHERE pro_service1 = '$selectedValue2' OR pro_service2 = '$selectedValue2' OR pro_service3 = '$selectedValue2' OR pro_service4 = '$selectedValue2' OR pro_service5 = '$selectedValue2'";
                         });
-                        Pro_Data().get_Pro(condition);
                       } else if (selectedValue2 != "" && selectedValue1 != "") {
                         print('selected1 & selected2');
                         setState(() {
                           condition =
                               "WHERE (pro_service1 = '$selectedValue2' OR pro_service2 = '$selectedValue2' OR pro_service3 = '$selectedValue2' OR pro_service4 = '$selectedValue2' OR pro_service5 = '$selectedValue2') AND (pro_area1 = '$selectedValue1' OR pro_area2 = '$selectedValue1' OR pro_area3 = '$selectedValue1')";
                         });
-                        Pro_Data().get_Pro(condition);
                       }
+                      controller.get_Pro(condition);
                       print(condition);
                     },
                     child: Container(
@@ -274,284 +273,327 @@ class _Partner_SearchState extends State<Partner_Search> {
             ),
           ),
           const SizedBox(height: 30),
-          Obx(() => controller.isProLoading
-              ? Expanded(
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: controller.pro.length,
-                    itemBuilder: (_, int index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(const PortfolioEdit_Page(),
-                              arguments: controller.pro[index].pro_id);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                          ),
-                          margin: const EdgeInsets.only(
-                              left: 10, right: 10, bottom: 20.0),
-                          width: double.infinity,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 2,
-                                blurRadius: 3,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Image.network(
-                                    "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}",
-                                    width: 60,
-                                    height: 60),
-                              ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          controller.pro[index].com_name,
-                                          style: const TextStyle(
-                                            color: Color(0xFF444444),
-                                            fontFamily: 'NanumSquareEB',
-                                            fontSize: 14,
-                                          ),
-                                          softWrap: false,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        controller.pro[index].index == 'alli'
-                                            ? Container(
-                                                width: 30,
-                                                height: 15,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFF025595),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: const Center(
-                                                  child: Text(
-                                                    '인기',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            : Container(),
-                                      ],
+          Obx(
+            () => controller.isProLoading
+                ? controller.pro.isNotEmpty
+                    ? Expanded(
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: controller.pro.length,
+                          itemBuilder: (_, int index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(const PortfolioEdit_Page(),
+                                    arguments: controller.pro[index].pro_id);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                ),
+                                margin: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 20.0),
+                                width: double.infinity,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      spreadRadius: 2,
+                                      blurRadius: 3,
+                                      offset: const Offset(
+                                          0, 3), // changes position of shadow
                                     ),
-                                    const SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          '총 공사 20건',
-                                          style: TextStyle(
-                                            fontSize: 12,
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Image.network(
+                                          "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}",
+                                          width: 60,
+                                          height: 60),
+                                    ),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                controller.pro[index].com_name,
+                                                style: const TextStyle(
+                                                  color: Color(0xFF444444),
+                                                  fontFamily: 'NanumSquareEB',
+                                                  fontSize: 14,
+                                                ),
+                                                softWrap: false,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const SizedBox(width: 5),
+                                              controller.pro[index].index ==
+                                                      'alli'
+                                                  ? Container(
+                                                      width: 30,
+                                                      height: 15,
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(
+                                                            0xFF025595),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: const Center(
+                                                        child: Text(
+                                                          '인기',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container(),
+                                            ],
                                           ),
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Row(
-                                          children: [
-                                            Image.asset("assets/star1.png",
-                                                width: 13, height: 13),
-                                            const Text('4.7',
+                                          const SizedBox(height: 5),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                '총 공사 20건',
                                                 style: TextStyle(
                                                   fontSize: 12,
-                                                )),
-                                            const Text('(10개)',
-                                                style: TextStyle(
-                                                  fontSize: 8,
-                                                )),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: [
-                                          controller.pro[index].pro_service1 !=
-                                                  ""
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7, right: 7),
-                                                  height: 17,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFF444444),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                        controller.pro[index]
-                                                            .pro_service3,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontFamily:
-                                                              'NanumSquareR',
-                                                        )),
-                                                  ),
-                                                )
-                                              : Container(),
-                                          controller.pro[index].pro_service1 !=
-                                                  ""
-                                              ? const SizedBox(width: 3)
-                                              : const SizedBox(width: 0),
-                                          controller.pro[index].pro_service2 !=
-                                                  ""
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7, right: 7),
-                                                  height: 17,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFF444444),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                        controller.pro[index]
-                                                            .pro_service3,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontFamily:
-                                                              'NanumSquareR',
-                                                        )),
-                                                  ),
-                                                )
-                                              : Container(),
-                                          controller.pro[index].pro_service2 !=
-                                                  ""
-                                              ? const SizedBox(width: 3)
-                                              : const SizedBox(width: 0),
-                                          controller.pro[index].pro_service3 !=
-                                                  ""
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7, right: 7),
-                                                  height: 17,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFF444444),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                        controller.pro[index]
-                                                            .pro_service3,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontFamily:
-                                                              'NanumSquareR',
-                                                        )),
-                                                  ),
-                                                )
-                                              : Container(),
-                                          controller.pro[index].pro_service3 !=
-                                                  ""
-                                              ? const SizedBox(width: 3)
-                                              : const SizedBox(width: 0),
-                                          Container(
-                                            padding: const EdgeInsets.only(
-                                                left: 7, right: 7),
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF031D63),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: const Center(
-                                              child: Text('카드결제',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 7,
-                                                    fontFamily: 'NanumSquareR',
-                                                  )),
-                                            ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 20),
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                      "assets/star1.png",
+                                                      width: 13,
+                                                      height: 13),
+                                                  const Text('4.7',
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                      )),
+                                                  const Text('(10개)',
+                                                      style: TextStyle(
+                                                        fontSize: 8,
+                                                      )),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(width: 3),
-                                          Container(
-                                            padding: const EdgeInsets.only(
-                                                left: 7, right: 7),
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF031D63),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
+                                          const SizedBox(height: 10),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              children: [
+                                                controller.pro[index]
+                                                            .pro_service1 !=
+                                                        ""
+                                                    ? Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 7,
+                                                                right: 7),
+                                                        height: 17,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                              0xFF444444),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                              controller
+                                                                  .pro[index]
+                                                                  .pro_service3,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 7,
+                                                                fontFamily:
+                                                                    'NanumSquareR',
+                                                              )),
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                                controller.pro[index]
+                                                            .pro_service1 !=
+                                                        ""
+                                                    ? const SizedBox(width: 3)
+                                                    : const SizedBox(width: 0),
+                                                controller.pro[index]
+                                                            .pro_service2 !=
+                                                        ""
+                                                    ? Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 7,
+                                                                right: 7),
+                                                        height: 17,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                              0xFF444444),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                              controller
+                                                                  .pro[index]
+                                                                  .pro_service3,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 7,
+                                                                fontFamily:
+                                                                    'NanumSquareR',
+                                                              )),
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                                controller.pro[index]
+                                                            .pro_service2 !=
+                                                        ""
+                                                    ? const SizedBox(width: 3)
+                                                    : const SizedBox(width: 0),
+                                                controller.pro[index]
+                                                            .pro_service3 !=
+                                                        ""
+                                                    ? Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 7,
+                                                                right: 7),
+                                                        height: 17,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                              0xFF444444),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(15),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                              controller
+                                                                  .pro[index]
+                                                                  .pro_service3,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 7,
+                                                                fontFamily:
+                                                                    'NanumSquareR',
+                                                              )),
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                                controller.pro[index]
+                                                            .pro_service3 !=
+                                                        ""
+                                                    ? const SizedBox(width: 3)
+                                                    : const SizedBox(width: 0),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 7, right: 7),
+                                                  height: 17,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xFF031D63),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text('카드결제',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 7,
+                                                          fontFamily:
+                                                              'NanumSquareR',
+                                                        )),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 3),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 7, right: 7),
+                                                  height: 17,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xFF031D63),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text('현금영수증',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 7,
+                                                          fontFamily:
+                                                              'NanumSquareR',
+                                                        )),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            child: const Center(
-                                              child: Text('현금영수증',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 7,
-                                                    fontFamily: 'NanumSquareR',
-                                                  )),
-                                            ),
-                                          ),
+                                          )
                                         ],
                                       ),
-                                    )
+                                    ),
+                                    const SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Image.asset("assets/p_img2-1.png",
+                                          width: 60, height: 60),
+                                    ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Image.asset("assets/p_img2-1.png",
-                                    width: 60, height: 60),
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                )
-              : SizedBox(
-                  width: Get.width,
-                  height: 200.0,
-                  child: const Center(
-                    child: Text('검색 결과가 없습니다'),
-                  ),
-                ))
+                      )
+                    : SizedBox(
+                        width: Get.width,
+                        height: 200.0,
+                        child: const Center(
+                          child: Text('검색 결과가 없습니다'),
+                        ),
+                      )
+                : const Center(child: CircularProgressIndicator()),
+          )
         ],
       ),
     );

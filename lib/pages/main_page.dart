@@ -537,6 +537,9 @@ class _Main_PageState extends State<Main_Page> {
                   const HomePage(),
                   const P_Chat(),
                 ];
+                setState(() {
+                  _selectedIndex = index;
+                });
               } else {
                 _widgetOptions = [
                   const Interior_Page(categoryTitle: 0),
@@ -545,10 +548,10 @@ class _Main_PageState extends State<Main_Page> {
                     isMain: true,
                   ),
                 ];
+                setState(() {
+                  _selectedIndex = index;
+                });
               }
-              setState(() {
-                _selectedIndex = index;
-              });
             } else if (index == 0) {
               Get.to(
                 const Interior_Page(categoryTitle: 0),

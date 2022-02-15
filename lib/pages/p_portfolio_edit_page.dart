@@ -137,7 +137,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                               height: 3.0,
                             ),
                             Text(
-                              '${pro[0].pro_email}',
+                              pro[0].pro_email,
                               style: TextStyle(
                                 fontSize: 14.0,
                               ),
@@ -148,7 +148,9 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                             InkWell(
                               onTap: () {
                                 if (controller.pro.value.type == "pro")
-                                  Get.to(ProFolio_Page());
+                                  Get.to(ProFolio_Page(
+                                    pro: pro[0],
+                                  ));
                               },
                               child: Container(
                                 width: Get.width * 0.4,
@@ -445,7 +447,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         height: 10.0,
                                       ),
                                       Text(
-                                        '${pro[0].pro_intro}',
+                                        pro[0].pro_intro,
                                         style: TextStyle(
                                           color: Colors.black54,
                                           fontSize: 14.0,
