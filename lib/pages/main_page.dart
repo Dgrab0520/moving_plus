@@ -158,6 +158,7 @@ class _Main_PageState extends State<Main_Page> {
                               type: 'None',
                               id: 'None',
                               pro_id: 'None',
+                              pro_pw: 'None',
                               pro_name: 'None',
                               pro_phone: 'None',
                               pro_email: 'None',
@@ -191,8 +192,12 @@ class _Main_PageState extends State<Main_Page> {
                   padding: EdgeInsets.only(right: 15),
                   child: InkWell(
                       onTap: () {
-                        mainController.isAlarm = false;
-                        Get.to(() => MainAlarm());
+                        if (controller.pro.value.type != "None") {
+                          mainController.isAlarm = false;
+                          Get.to(() => MainAlarm());
+                        } else {
+                          Get.snackbar("로그인", "로그인을 해주세요");
+                        }
                       },
                       child: Stack(
                         children: [
@@ -264,7 +269,8 @@ class _Main_PageState extends State<Main_Page> {
                                   Expanded(
                                       flex: 2,
                                       child: controller.pro.value.type == 'cus'
-                                          ? controller.pro.value.profile_img == 'default_image'
+                                          ? controller.pro.value.profile_img ==
+                                                  'default_image'
                                               ? Image.asset(
                                                   'assets/defaultImage.png',
                                                   width: 70,
@@ -281,10 +287,12 @@ class _Main_PageState extends State<Main_Page> {
                                                       )),
                                                 )
                                           // Image.network(controller.pro.value.profile_img, width:70,height:70)
-                                          : Image.network(
-                                              "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",
-                                              width: 70,
-                                              height: 70)),
+                                          : CircleAvatar(
+                                              radius: 35,
+                                              backgroundColor: Colors.white,
+                                              foregroundImage: NetworkImage(
+                                                  "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}"),
+                                            )),
                                   SizedBox(width: 10),
                                   Expanded(
                                     flex: 5,
@@ -445,9 +453,10 @@ class _Main_PageState extends State<Main_Page> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 if (controller.pro.value.type == "pro") {
-                                  Get.to(P_Mypage());
+                                  await Get.to(P_Mypage());
+                                  setState(() {});
                                 } else {
                                   Get.to(C_Mypage());
                                 }
@@ -487,6 +496,7 @@ class _Main_PageState extends State<Main_Page> {
                                 type: 'None',
                                 id: 'None',
                                 pro_id: 'None',
+                                pro_pw: 'None',
                                 pro_name: 'None',
                                 pro_phone: 'None',
                                 pro_email: 'None',

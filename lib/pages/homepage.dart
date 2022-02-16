@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/partner_search_page.dart';
 import 'package:moving_plus/widgets/carousel_main.dart';
 import 'package:moving_plus/widgets/carousel_sub.dart';
@@ -42,6 +41,7 @@ class _HomePageState extends State<HomePage> {
             type: 'cus',
             id: '0',
             pro_id: controller.pro.value.pro_id,
+            pro_pw: controller.pro.value.pro_pw,
             pro_name: controller.pro.value.pro_name,
             pro_phone: controller.pro.value.pro_phone,
             pro_email: 'None',
@@ -751,7 +751,6 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
             child: Carousel_Sub(),
           ),
-
           Container(
             color: Colors.white,
             padding: EdgeInsets.only(top: 50, left: 20.0, right: 20),
@@ -798,322 +797,330 @@ class _HomePageState extends State<HomePage> {
             height: 20.0,
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            color: Color(0xfff3f3f3),
-            width:Get.width,
-            height:250.0,
-
-
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-
-                SizedBox(height: 20.0,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text('상호',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      flex: 5,
-                      child: Text('|   케이에스하우징매니지먼트',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text('대표자',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      flex: 5,
-                      child: Text('|   최현성',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text('사업자번호',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      flex: 5,
-                      child: Text('|   285-05-02282',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0,),
-            Row(
-              children: [
-                Expanded(
-                  child: Text('통신판매업',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'NanumSquareR',
-                      fontSize: 12,
-                    ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              color: Color(0xfff3f3f3),
+              width: Get.width,
+              height: 250.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-
-                Expanded(
-                  flex: 5,
-                  child: Text('|   제 2022-안양동안-0159 호',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'NanumSquareR',
-                      fontSize: 12,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '상호',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   케이에스하우징매니지먼트',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0,),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text('TEL',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      flex: 5,
-                      child: Text('|   1533-1196',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0,),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text('이메일',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      flex: 5,
-                      child: Text('|   no200chs@naver.com',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'NanumSquareR',
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Spacer(),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: TextButton(
-                        onPressed: (){
-                          Get.defaultDialog(
-                            radius: 5.0,
-                            title: '이용약관',
-                            titleStyle: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NanumSquareR',
-                              fontSize: 14),
-                            content: Container(
-                              margin: EdgeInsets.all(20),
-                              height: Get.height*0.6,
-                              width: Get.width,
-                              child: SingleChildScrollView(
-                                child: Text(use),
-                              ),
-                            )
-                          );
-                        },
-                        child: Center(
-                          child: Text('이용약관',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NanumSquareR',
-                              fontSize: 10,
-                            ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '대표자',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
                           ),
-                        )
-                      )
-                    ),
-                    Expanded(
-                        child: TextButton(
-                          onPressed: (){},
-                          child: Text('|',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NanumSquareR',
-                              fontSize: 10,
-                            ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   최현성',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
                           ),
-                        )
-                    ),
-                    Expanded(
-                        flex: 3,
-                        child: TextButton(
-                          onPressed: (){
-                            Get.defaultDialog(
-                                radius: 5.0,
-                                title: '개인정보처리방침',
-                                titleStyle: TextStyle(
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '사업자번호',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   285-05-02282',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '통신판매업',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   제 2022-안양동안-0159 호',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'TEL',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   1533-1196',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '이메일',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          '|   no200chs@naver.com',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: TextButton(
+                              onPressed: () {
+                                Get.defaultDialog(
+                                    radius: 5.0,
+                                    title: '이용약관',
+                                    titleStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'NanumSquareR',
+                                        fontSize: 14),
+                                    content: Container(
+                                      margin: EdgeInsets.all(20),
+                                      height: Get.height * 0.6,
+                                      width: Get.width,
+                                      child: SingleChildScrollView(
+                                        child: Text(use),
+                                      ),
+                                    ));
+                              },
+                              child: Center(
+                                child: Text(
+                                  '이용약관',
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'NanumSquareR',
-                                    fontSize: 14),
-                                content: Container(
-                                  margin: EdgeInsets.all(20),
-                                  height: Get.height*0.6,
-                                  width: Get.width,
-                                  child: SingleChildScrollView(
-                                    child: Text(privacy),
+                                    fontSize: 10,
                                   ),
-                                )
-                            );
-                          },
-                          child: Center(
-                            child: Text('개인정보처리방침',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'NanumSquareR',
-                                fontSize: 10,
-                              ),
-                            ),
-                          )
-                        )
-                    ),
-                    Expanded(
-                        child: TextButton(
-                          onPressed: (){},
-                          child: Text('|',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NanumSquareR',
-                              fontSize: 10,
-                            ),
-                          ),
-                        )
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: TextButton(
-                        onPressed: (){
-                          Get.defaultDialog(
-                              radius: 5.0,
-                              title: '환불정보',
-                              titleStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'NanumSquareR',
-                                  fontSize: 14),
-                              content: Container(
-                                margin: EdgeInsets.all(20),
-                                height: Get.height*0.6,
-                                width: Get.width,
-                                child: SingleChildScrollView(
-                                  child: Text(return_service),
                                 ),
-                              )
-                          );
-                        },
-                        child: Center(
-                          child: Text('환불정보',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NanumSquareR',
-                              fontSize: 10,
-                            ),
+                              ))),
+                      Expanded(
+                          child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          '|',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 10,
                           ),
-                        )
-                      )
-                    ),
-
-                  ],
-                ),
-                Spacer(),
-
-                Center(
-                  child: Text('경기도 안양시 동안구 시민대로 327번길 11-41 안양창업지원센터 3층 3133호',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: 'NanumSquareR',
-                      fontSize: 10,
-                    ),
-                    textAlign: TextAlign.center,
+                        ),
+                      )),
+                      Expanded(
+                          flex: 3,
+                          child: TextButton(
+                              onPressed: () {
+                                Get.defaultDialog(
+                                    radius: 5.0,
+                                    title: '개인정보처리방침',
+                                    titleStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'NanumSquareR',
+                                        fontSize: 14),
+                                    content: Container(
+                                      margin: EdgeInsets.all(20),
+                                      height: Get.height * 0.6,
+                                      width: Get.width,
+                                      child: SingleChildScrollView(
+                                        child: Text(privacy),
+                                      ),
+                                    ));
+                              },
+                              child: Center(
+                                child: Text(
+                                  '개인정보처리방침',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'NanumSquareR',
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ))),
+                      Expanded(
+                          child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          '|',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NanumSquareR',
+                            fontSize: 10,
+                          ),
+                        ),
+                      )),
+                      Expanded(
+                          flex: 3,
+                          child: TextButton(
+                              onPressed: () {
+                                Get.defaultDialog(
+                                    radius: 5.0,
+                                    title: '환불정보',
+                                    titleStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'NanumSquareR',
+                                        fontSize: 14),
+                                    content: Container(
+                                      margin: EdgeInsets.all(20),
+                                      height: Get.height * 0.6,
+                                      width: Get.width,
+                                      child: SingleChildScrollView(
+                                        child: Text(return_service),
+                                      ),
+                                    ));
+                              },
+                              child: Center(
+                                child: Text(
+                                  '환불정보',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'NanumSquareR',
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ))),
+                    ],
                   ),
-                ),
-                SizedBox(height: 5.0,),
-                Center(
-                  child: Text('Copyright © 2022 케이에스하우징매니지먼트. All rights reserved.',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: 'NanumSquareR',
-                      fontSize: 10,
+                  Spacer(),
+                  Center(
+                    child: Text(
+                      '경기도 안양시 동안구 시민대로 327번길 11-41 안양창업지원센터 3층 3133호',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontFamily: 'NanumSquareR',
+                        fontSize: 10,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-
-              ],
-            )
-          ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Center(
+                    child: Text(
+                      'Copyright © 2022 케이에스하우징매니지먼트. All rights reserved.',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontFamily: 'NanumSquareR',
+                        fontSize: 10,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              )),
           SizedBox(
             height: 10.0,
           ),
@@ -1122,7 +1129,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String privacy = """<입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
+  String privacy =
+      """<입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
 
 
 제1조(개인정보의 처리 목적) <입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다. 
@@ -1179,7 +1187,8 @@ class _HomePageState extends State<HomePage> {
 
 제13조(개인정보 처리방침 변경) ① 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다.""";
 
-  String use = """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.\n2. 계약금 이외  착수금 및 선금은 계약 고객과 별도 협의 바랍니다.
+  String use =
+      """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.\n2. 계약금 이외  착수금 및 선금은 계약 고객과 별도 협의 바랍니다.
 
                             \n3. 계약을 위한  무리한 가격인하는 자제하여 주시고, 합리적은 시공 견적을 제시하여 주시기 바랍니다.
 
@@ -1195,8 +1204,7 @@ class _HomePageState extends State<HomePage> {
                             \n\n(담당자 1533-1196)
                             \n직영 파트너는 앱 이용 별도 혜택 외 명함, 팀조끼, 차량 홍보스티커(자석형) 등을 별도 제공해 드립니다.\n직영 파트너는 30만원  보증금이 있습니다.(1년 후 연장 의사가 없으면 전액 돌려드립니다.)""";
 
-  String return_service =
-  """
+  String return_service = """
   - 입주플러스는 입주 파트너와 고객간의 서비스 중개를 진행하며, 이에 대한 수수료다(이하 '계약금')가 발생합니다.\n\n
   - 이미 진행한 서비시의 경우 환불 진행이 불가합니다.\n\n
   - 서비스 이용 전 환불을 진행할 경우 서비스까지 남은 일정에 따라 수수료가 부과될 수 있습니다.\n\n

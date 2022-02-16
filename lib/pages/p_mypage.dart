@@ -55,10 +55,12 @@ class P_Mypage extends StatelessWidget {
                   children: [
                     Expanded(
                         flex: 2,
-                        child: Image.network(
-                            "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",
-                            width: 60,
-                            height: 60)),
+                        child: Obx(() => CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              foregroundImage: NetworkImage(
+                                  "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}"),
+                            ))),
                     const SizedBox(width: 10),
                     Expanded(
                       flex: 8,

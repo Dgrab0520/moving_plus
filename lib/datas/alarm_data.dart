@@ -63,6 +63,7 @@ class AlarmData extends GetxController {
     String receiverName = controller.pro.value.type == "cus"
         ? controller.pro.value.pro_id
         : controller.pro.value.pro_name;
+    print(controller.pro.value.pro_id);
     print(receiverName);
     try {
       var map = <String, dynamic>{};

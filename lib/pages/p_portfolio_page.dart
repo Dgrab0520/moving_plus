@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
-import '../datas/pro_data.dart';
+import '../datas/pro_data_portfolio_file.dart';
+import '../datas/pro_data_update.dart';
 import '../models/pro_intro_model.dart';
 
 class ProFolio_Page extends StatefulWidget {
@@ -23,6 +27,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
 
   final formKeyArea = GlobalKey<FormState>();
   List _myAreas = [];
+
+  List<Widget> photoAndVideo = [];
+  List<File> files = [];
+  List<String> types = [];
 //region
   List myArea = [
     {
@@ -1246,69 +1254,69 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '사진 및 동영상',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'NanumSquareEB',
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                '사진 및 동영상',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontFamily: 'NanumSquareEB',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              TextButton(
+                                  onPressed: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles(
+                                            type: FileType.media,
+                                            allowMultiple: true,
+                                            onFileLoading: (value) {
+                                              debugPrint(value.toString());
+                                            });
+
+                                    if (result != null) {
+                                      files = result.paths
+                                          .map((path) => File(path!))
+                                          .toList();
+                                      print(files);
+                                      photoAndVideo = [];
+                                      for (File file in files) {
+                                        print(file.path.split(".").last);
+                                        types.add(file.path.split(".").last);
+                                        setState(() {
+                                          photoAndVideo.add(Image.file(
+                                            file,
+                                            fit: BoxFit.cover,
+                                          ));
+                                        });
+                                      }
+                                      print(photoAndVideo.length);
+                                      print(types);
+                                    }
+                                  },
+                                  child: Text("사진 추가")),
+                            ],
                           ),
                           SizedBox(height: 10),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
+                          SizedBox(
+                            height: 90,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: photoAndVideo.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
                                     width: 90,
                                     height: 90,
+                                    margin: EdgeInsets.only(right: 7),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                                SizedBox(width: 7),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 90,
-                                    height: 90,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                                SizedBox(width: 7),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 90,
-                                    height: 90,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                                SizedBox(width: 7),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 90,
-                                    height: 90,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Image.asset('assets/p_img2-1.png'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                    child: photoAndVideo[index],
+                                  );
+                                }),
+                          )
                         ],
                       ),
                     ),
@@ -1318,23 +1326,27 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
             ),
             InkWell(
               onTap: () {
-                Pro_Data.updatePro(
-                    pro.pro_id,
-                    pro.pro_intro,
-                    pro.pro_name,
-                    pro.pro_service1,
-                    pro.pro_service2,
-                    pro.pro_service3,
-                    pro.pro_service4,
-                    pro.pro_service5,
-                    pro.pro_area1,
-                    pro.pro_area2,
-                    pro.pro_area3,
-                    pro.pro_career,
-                    pro.pro_pay).then((value){
-                      if(value == "success"){
-                        Get.snackbar("성공", "프토폴리오를 수정했습니다");
-                      }
+                ProDataUpdate.updatePro(
+                        pro.pro_id,
+                        pro.pro_intro,
+                        pro.pro_name,
+                        pro.pro_service1,
+                        pro.pro_service2,
+                        pro.pro_service3,
+                        pro.pro_service4,
+                        pro.pro_service5,
+                        pro.pro_area1,
+                        pro.pro_area2,
+                        pro.pro_area3,
+                        pro.pro_career,
+                        pro.pro_pay)
+                    .then((value) {
+                  if (value == "success") {
+                    ProDataPortfolioFile.changePortfolioImage(files, types)
+                        .then((value) {
+                      Get.snackbar("성공", "프토폴리오를 수정했습니다");
+                    });
+                  }
                 });
               },
               child: Container(

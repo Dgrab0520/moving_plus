@@ -97,50 +97,6 @@ class Pro_Data extends GetxController {
   }
 
   //전문가 토큰 저장
-  static Future<String> updatePro(
-      String pro_id,
-      String intro,
-      String pro_name,
-      String service_type1,
-      String service_type2,
-      String service_type3,
-      String service_type4,
-      String service_type5,
-      String pro_area1,
-      String pro_area2,
-      String pro_area3,
-      String pro_career,
-      String pro_pay) async {
-    try {
-      var map = Map<String, dynamic>();
-      map['action'] = PRO_UPDATE_ACTION;
-      map['pro_id'] = pro_id;
-      map['intro'] = intro;
-      map['pro_name'] = pro_name;
-      map['service_type1'] = service_type1;
-      map['service_type2'] = service_type2;
-      map['service_type3'] = service_type3;
-      map['service_type4'] = service_type4;
-      map['service_type5'] = service_type5;
-      map['pro_area1'] = pro_area1;
-      map['pro_area2'] = pro_area2;
-      map['pro_area3'] = pro_area3;
-      map['pro_career'] = pro_career;
-      map['pro_pay'] = pro_pay;
-      print(map);
-      final response = await http.post(Uri.parse(ROOT), body: map);
-      print("Pro Update : ${response.body}");
-      if (200 == response.statusCode) {
-        return response.body;
-      } else {
-        return "error";
-      }
-    } catch (e) {
-      return "error";
-    }
-  }
-
-  //전문가 토큰 저장
   static Future<String> updateToken_Pro(String pro_id, String token) async {
     try {
       var map = Map<String, dynamic>();
@@ -197,6 +153,28 @@ class Pro_Data extends GetxController {
     } catch (e) {
       print("exception : $e");
       return {};
+    }
+  }
+
+  //해당 프로 토큰 불러오기
+  static Future<String> selectProIdToken(String pro_id) async {
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "SELECT_PRO_ID_TOKEN";
+      map['pro_id'] = pro_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Pro ID Token Select : ${response.body}");
+      print(response.reasonPhrase);
+      if (200 == response.statusCode) {
+        Map<String, dynamic> body = jsonDecode(response.body);
+        print(body['token']);
+        return body['token'];
+      } else {
+        return "";
+      }
+    } catch (e) {
+      print("exception : $e");
+      return "";
     }
   }
 

@@ -102,6 +102,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
             type: 'cus',
             id: '0',
             pro_id: controller.pro.value.pro_id,
+            pro_pw: controller.pro.value.pro_pw,
             pro_name: controller.pro.value.pro_name,
             pro_phone: controller.pro.value.pro_phone,
             pro_email: 'None',

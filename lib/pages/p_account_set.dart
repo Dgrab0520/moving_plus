@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+
+import '../datas/pro_data_update.dart';
 
 final controller = Get.put(ReactiveController());
 
@@ -15,6 +20,9 @@ class _P_Account_SetState extends State<P_Account_Set> {
   TextEditingController currentPwd = TextEditingController();
   TextEditingController changePwd = TextEditingController();
   TextEditingController changePwdCheck = TextEditingController();
+
+  ImageProvider accountImage = NetworkImage(
+      "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}");
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +60,42 @@ class _P_Account_SetState extends State<P_Account_Set> {
                   bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
                 ),
               ),
-              child: Column(
+              alignment: Alignment.center,
+              child: Stack(
                 children: [
-                  Stack(
-                    children: [
-                      Image.network(
-                          "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",
-                          width: 90,
-                          height: 90),
-                      Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: Image.asset("assets/photo-camera2.png",
-                              width: 30, height: 30)),
-                    ],
-                  ),
+                  InkWell(
+                      onTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                                type: FileType.image,
+                                allowMultiple: false,
+                                onFileLoading: (value) {
+                                  debugPrint(value.toString());
+                                });
+                        if (result != null) {
+                          File file = File(result.files.single.path!);
+                          setState(() {
+                            accountImage = FileImage(file);
+                          });
+                          ProDataUpdate.changeProfileImage(file).then((value) {
+                            if (value == "success") {
+                              Get.snackbar("성공", "프로필 이미지 변경 성공");
+                            } else {
+                              Get.snackbar("실패", "프로필 이미지 변경 실패");
+                            }
+                          });
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.white,
+                        foregroundImage: accountImage,
+                      )),
+                  Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Image.asset("assets/photo-camera2.png",
+                          width: 30, height: 30)),
                 ],
               ),
             ),

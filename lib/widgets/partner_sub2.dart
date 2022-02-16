@@ -44,14 +44,13 @@ class Partner_Sub2 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                          flex: 1,
-                          child: Container(
-                            child: Image.network(
-                                "http://211.110.44.91/plus/pro_profile/${controller.proBest[index].profile_img}",
-                                width: 60,
-                                height: 60),
-                          ),
-                        ),
+                            flex: 1,
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              foregroundImage: NetworkImage(
+                                  "http://211.110.44.91/plus/pro_profile/${controller.proBest[index].profile_img}"),
+                            )),
                         SizedBox(
                           width: 10.0,
                         ),
@@ -64,7 +63,7 @@ class Partner_Sub2 extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    '${controller.proBest[index].com_name}',
+                                    controller.proBest[index].com_name,
                                     style: TextStyle(
                                       color: Color(0xFF444444),
                                       fontFamily: 'NanumSquareEB',
