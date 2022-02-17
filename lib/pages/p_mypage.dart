@@ -234,7 +234,7 @@ class P_Mypage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(const Notice());
+                      Get.to(Notice());
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),

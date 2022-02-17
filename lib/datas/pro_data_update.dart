@@ -80,4 +80,27 @@ class ProDataUpdate {
       return "error";
     }
   }
+
+  //비밀번호 변경
+  static Future<String> changePWD(String pwd) async {
+    print(controller.pro.value.pro_id);
+    try {
+      var url = Uri.parse(ROOT);
+      var request = http.MultipartRequest('POST', url);
+      request.fields['action'] = "CHANGE_PWD";
+      request.fields['pwd'] = pwd;
+      request.fields['pro_id'] = controller.pro.value.pro_id;
+      http.Response response =
+          await http.Response.fromStream(await request.send());
+      print("Profile Password Response : ${response.body}");
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return "error";
+      }
+    } catch (e) {
+      print(e);
+      return "error";
+    }
+  }
 }

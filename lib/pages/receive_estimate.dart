@@ -4,6 +4,7 @@ import 'package:moving_plus/datas/order_list_data.dart';
 import 'package:moving_plus/models/order_chat_model.dart';
 import 'package:moving_plus/pages/api.dart';
 import 'package:moving_plus/pages/c_chatlist.dart';
+import 'package:moving_plus/pages/c_chatlist_personal.dart';
 
 import '../main.dart';
 import 'main_page.dart';
@@ -29,6 +30,12 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
       print(value);
       setState(() {
         orders = value;
+        orders.add(OrderChat(
+            order_id: "order_id",
+            address: "address",
+            service_type: "service_type",
+            order_status: "order_status",
+            order_date: "order_date"));
         isLoading = true;
       });
     });
@@ -122,11 +129,68 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
                           itemCount:
                               isSearch ? searchOrders.length : orders.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return CustomerEstimate(
-                              orderChat: isSearch
-                                  ? searchOrders[index]
-                                  : orders[index],
-                            );
+                            if (!isSearch && index == orders.length - 1) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 20.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 15, right: 15),
+                                  padding: EdgeInsets.all(10),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 1.0,
+                                      color: Color(0xFFcccccc),
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "개인 문의",
+                                        style: TextStyle(
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      InkWell(
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          Get.to(ChatListPersonal());
+                                        },
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF025595),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '보낸 개인 문의 보기',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return CustomerEstimate(
+                                orderChat: isSearch
+                                    ? searchOrders[index]
+                                    : orders[index],
+                              );
+                            }
                           })
                       : const Text("보낸 견적이 없습니다")
                   : const Center(

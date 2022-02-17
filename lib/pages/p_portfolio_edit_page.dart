@@ -161,35 +161,39 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                             SizedBox(
                               height: 10.0,
                             ),
-                            InkWell(
-                              onTap: () {
-                                if (controller.pro.value.type == "pro") {
-                                  Get.to(ProFolio_Page(
-                                    pro: pro[0],
-                                  ));
-                                } else {
-                                  Get.to(ChatPersonal(proId: proId));
-                                }
-                              },
-                              child: Container(
-                                width: Get.width * 0.4,
-                                height: 30.0,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFF025595),
-                                    borderRadius: BorderRadius.circular(7.0)),
-                                child: Center(
-                                  child: Text(
-                                    controller.pro.value.type == "cus"
-                                        ? '문의하기'
-                                        : '수정하기',
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.white,
+                            controller.pro.value.pro_id == pro[0].pro_id ||
+                                    controller.pro.value.type == 'cus'
+                                ? InkWell(
+                                    onTap: () {
+                                      if (controller.pro.value.type == "pro") {
+                                        Get.to(ProFolio_Page(
+                                          pro: pro[0],
+                                        ));
+                                      } else {
+                                        Get.to(ChatPersonal(proId: proId));
+                                      }
+                                    },
+                                    child: Container(
+                                      width: Get.width * 0.4,
+                                      height: 30.0,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFF025595),
+                                          borderRadius:
+                                              BorderRadius.circular(7.0)),
+                                      child: Center(
+                                        child: Text(
+                                          controller.pro.value.type == "cus"
+                                              ? '문의하기'
+                                              : '수정하기',
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                                  )
+                                : Container(),
                             SizedBox(
                               height: 30.0,
                             ),
@@ -608,7 +612,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           Expanded(
                                             flex: 9,
                                             child: Text(
-                                              '|   ${pro[0].pro_pay} 가능',
+                                              '|   ${pro[0].pro_pay}',
                                               softWrap: false,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,

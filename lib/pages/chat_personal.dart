@@ -102,7 +102,7 @@ class _ChatPersonalState extends State<ChatPersonal> {
 
   @override
   void initState() {
-    estimateId = widget.proId + controller.pro.value.pro_id;
+    estimateId = widget.proId + "/" + controller.pro.value.pro_id;
     print(estimateId);
     getChat(estimateId);
     getToken(widget.proId);
@@ -340,30 +340,32 @@ class _ChatPersonalState extends State<ChatPersonal> {
                                 chat.createAt = value[0];
 
                                 setState(() {
-                                  DateTime currentDate = DateTime.now();
-                                  DateTime pastDate =
-                                      DateTime.parse(chatting[0].createAt);
+                                  if (chatting.isNotEmpty) {
+                                    DateTime currentDate = DateTime.now();
+                                    DateTime pastDate =
+                                        DateTime.parse(chatting[0].createAt);
 
-                                  if ((currentDate
-                                                  .difference(pastDate)
-                                                  .inHours /
-                                              24)
-                                          .round() >
-                                      0) {
-                                    print(currentDate);
-                                    print(pastDate);
-                                    chatting.insert(
-                                        0,
-                                        Chat(
-                                            id: 0,
-                                            estimateId: "0",
-                                            text: "",
-                                            image: "",
-                                            estimatePrice: 0,
-                                            finalPrice: 0,
-                                            isPro: 3,
-                                            createAt:
-                                                DateTime.now().toString()));
+                                    if ((currentDate
+                                                    .difference(pastDate)
+                                                    .inHours /
+                                                24)
+                                            .round() >
+                                        0) {
+                                      print(currentDate);
+                                      print(pastDate);
+                                      chatting.insert(
+                                          0,
+                                          Chat(
+                                              id: 0,
+                                              estimateId: "0",
+                                              text: "",
+                                              image: "",
+                                              estimatePrice: 0,
+                                              finalPrice: 0,
+                                              isPro: 3,
+                                              createAt:
+                                                  DateTime.now().toString()));
+                                    }
                                   }
                                   chatting.insert(0, chat);
 

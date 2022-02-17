@@ -18,7 +18,6 @@ class _P_ChatState extends State<P_Chat> {
   bool isLoading = false;
   TextEditingController searchController = TextEditingController();
 
-
   List<ChatRoom> searchEstimate = [];
   bool isSearch = false;
 
@@ -28,8 +27,13 @@ class _P_ChatState extends State<P_Chat> {
       ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
         // controller.pro.value.pro_id
         print(value);
+        chatRoom = value;
+        ChatData.getPersonalChatList(controller.pro.value.pro_id).then((value) {
+          if (value.isNotEmpty) {
+            chatRoom.addAll(value);
+          }
+        });
         setState(() {
-          chatRoom = value;
           isLoading = true;
         });
       });
@@ -37,9 +41,15 @@ class _P_ChatState extends State<P_Chat> {
     ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
       // controller.pro.value.pro_id
       print(value);
-      setState(() {
-        chatRoom = value;
-        isLoading = true;
+      chatRoom = value;
+      ChatData.getPersonalChatList(controller.pro.value.pro_id).then((value) {
+        print(value);
+        if (value.isNotEmpty) {
+          chatRoom.addAll(value);
+        }
+        setState(() {
+          isLoading = true;
+        });
       });
     });
     super.initState();
@@ -267,7 +277,9 @@ class ChatRoomBox extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '${chatRoom.serviceType} | $area',
+                      chatRoom.serviceType == '개인 문의'
+                          ? chatRoom.serviceType
+                          : '${chatRoom.serviceType} | $area',
                       style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'NanumSquareR',

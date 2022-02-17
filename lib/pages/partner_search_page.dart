@@ -315,10 +315,12 @@ class _Partner_SearchState extends State<Partner_Search> {
                                   children: [
                                     Expanded(
                                       flex: 1,
-                                      child: Image.network(
-                                          "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}",
-                                          width: 60,
-                                          height: 60),
+                                      child: CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: Colors.white,
+                                        foregroundImage: NetworkImage(
+                                            "http://211.110.44.91/plus/pro_profile/${controller.pro[index].profile_img}"),
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 10.0,
@@ -575,8 +577,28 @@ class _Partner_SearchState extends State<Partner_Search> {
                                     ),
                                     Expanded(
                                       flex: 1,
-                                      child: Image.asset("assets/p_img2-1.png",
-                                          width: 60, height: 60),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image.network(
+                                          "http://211.110.44.91/plus/portfolio_file/${controller.pro[index].portfolioFileName}${controller.pro[index].portfolioFileType}",
+                                          fit: BoxFit.cover,
+                                          width: 60,
+                                          height: 60,
+                                          errorBuilder: (BuildContext context,
+                                              Object exception,
+                                              StackTrace? stackTrace) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xFFE6E5E5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              width: 60,
+                                              height: 60,
+                                            );
+                                          },
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),

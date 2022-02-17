@@ -49,6 +49,27 @@ class ChatData {
     }
   }
 
+  //전문가일때 개인 문의 채팅목록 불러오기
+  static Future<List<ChatRoom>> getPersonalChatList(String proId) async {
+    print(proId);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "CHAT_LIST_PERSONAL";
+      map['proId'] = proId;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Personal Chat List Response : ${response.body}');
+
+      if (response.statusCode == 200) {
+        List<ChatRoom> list = chatRoomParseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
   //고객일때 채팅목록 불러오기
   static Future<List<UserChatRoom>> getUserChatList(String orderId) async {
     print(orderId);
@@ -58,6 +79,28 @@ class ChatData {
       map['order_id'] = orderId;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('User Chat List Response : ${response.body}');
+
+      if (response.statusCode == 200) {
+        List<UserChatRoom> list = userChatRoomParseResponse(response.body);
+        return list;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
+    }
+  }
+
+  //고객일때 개인 문의 채팅목록 불러오기
+  static Future<List<UserChatRoom>> getUserPersonalChatList(
+      String userId) async {
+    print(userId);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "USER_CHAT_LIST_PERSONAL";
+      map['userId'] = userId;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('User Personal Chat List Response : ${response.body}');
 
       if (response.statusCode == 200) {
         List<UserChatRoom> list = userChatRoomParseResponse(response.body);

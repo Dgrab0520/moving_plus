@@ -385,6 +385,23 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
   ];
   //endregion
   //myService
+
+  getProPhotos() {
+    ProDataPortfolioFile.getPortfolioFiles(widget.pro.pro_id).then((value) {
+      print(value);
+      if (value.isNotEmpty) {
+        for (int i = 0; i < value.length; i++) {
+          setState(() {
+            photoAndVideo.add(Image.network(
+              "http://211.110.44.91/plus/portfolio_file/${value[i].fileName}${value[i].fileType}",
+              fit: BoxFit.cover,
+            ));
+          });
+        }
+      }
+    });
+  }
+
   @override
   void initState() {
     pro = widget.pro;
@@ -401,6 +418,9 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
 
     print(_myServices);
     print(_myAreas);
+
+    getProPhotos();
+
     super.initState();
   }
 

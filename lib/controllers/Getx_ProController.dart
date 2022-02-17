@@ -54,6 +54,11 @@ class ReactiveController extends GetxController {
     pro.refresh();
   }
 
+  setPWD(String pwd) {
+    pro.value.pro_pw = pwd;
+    pro.refresh();
+  }
+
   change({
     required String type,
     required String id,

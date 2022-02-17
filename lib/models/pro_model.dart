@@ -1,4 +1,4 @@
-class Pro{
+class Pro {
   String id;
   String pro_id;
   String pro_pw;
@@ -18,8 +18,8 @@ class Pro{
   String pro_area3;
   String pro_token;
   String index;
-
-
+  String portfolioFileName;
+  String portfolioFileType;
 
   Pro({
     required this.id,
@@ -41,9 +41,11 @@ class Pro{
     required this.pro_area3,
     required this.pro_token,
     required this.index,
+    required this.portfolioFileName,
+    required this.portfolioFileType,
   });
 
-  factory Pro.fromJson(Map<String, dynamic> json){
+  factory Pro.fromJson(Map<String, dynamic> json) {
     return Pro(
       id: json['id'] == null ? "" : json['id'] as String,
       pro_id: json['pro_id'] == null ? "" : json['pro_id'] as String,
@@ -53,17 +55,27 @@ class Pro{
       pro_email: json['pro_mail'] == null ? "" : json['pro_mail'] as String,
       com_no: json['com_no'] == null ? "" : json['com_no'] as String,
       com_name: json['com_name'] == null ? "" : json['com_name'] as String,
-      profile_img: json['profile_img'] == null ? "" : json['profile_img'] as String,
-      pro_service1: json['pro_service1'] == null ? "" : json['pro_service1'] as String,
-      pro_service2: json['pro_service2'] == null ? "" : json['pro_service2'] as String,
-      pro_service3: json['pro_service3'] == null ? "" : json['pro_service3'] as String,
-      pro_service4: json['pro_service4'] == null ? "" : json['pro_service4'] as String,
-      pro_service5: json['pro_service5'] == null ? "" : json['pro_service5'] as String,
+      profile_img:
+          json['profile_img'] == null ? "" : json['profile_img'] as String,
+      pro_service1:
+          json['pro_service1'] == null ? "" : json['pro_service1'] as String,
+      pro_service2:
+          json['pro_service2'] == null ? "" : json['pro_service2'] as String,
+      pro_service3:
+          json['pro_service3'] == null ? "" : json['pro_service3'] as String,
+      pro_service4:
+          json['pro_service4'] == null ? "" : json['pro_service4'] as String,
+      pro_service5:
+          json['pro_service5'] == null ? "" : json['pro_service5'] as String,
       pro_area1: json['pro_area1'] == null ? "" : json['pro_area1'] as String,
       pro_area2: json['pro_area2'] == null ? "" : json['pro_area2'] as String,
       pro_area3: json['pro_area3'] == null ? "" : json['pro_area3'] as String,
       pro_token: json['pro_token'] == null ? "" : json['pro_token'] as String,
       index: json['index'] == null ? "" : json['index'] as String,
+      portfolioFileName:
+          json['fileName'] == null ? "" : json['fileName'] as String,
+      portfolioFileType:
+          json['fileType'] == null ? "" : json['fileType'] as String,
     );
   }
 }

@@ -2,40 +2,45 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
-import 'package:moving_plus/models/order_chat_model.dart';
 import 'package:moving_plus/models/user_chat_room_model.dart';
 import 'package:moving_plus/pages/chat_estimate.dart';
 
-class C_ChatList extends StatefulWidget {
-  const C_ChatList({Key? key, required this.mainType, required this.orderChat})
-      : super(key: key);
-  final String mainType;
-  final OrderChat orderChat;
+class ChatListPersonal extends StatefulWidget {
+  const ChatListPersonal({Key? key}) : super(key: key);
 
   @override
-  _C_ChatListState createState() => _C_ChatListState();
+  _ChatListPersonalState createState() => _ChatListPersonalState();
 }
 
-class _C_ChatListState extends State<C_ChatList> {
+class _ChatListPersonalState extends State<ChatListPersonal> {
   List<UserChatRoom> searchEstimate = [];
   bool isSearch = false;
+
+  final proController = Get.put(ReactiveController());
 
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
-      ChatData.getUserChatList(widget.orderChat.order_id).then((value) {
+      ChatData.getUserPersonalChatList(proController.pro.value.pro_id)
+          .then((value) {
         print(value);
+        if (value.isNotEmpty) {
+          setState(() {
+            userChatRooms = value;
+          });
+        }
+      });
+    });
+    ChatData.getUserPersonalChatList(proController.pro.value.pro_id)
+        .then((value) {
+      print(value);
+      if (value.isNotEmpty) {
         setState(() {
           userChatRooms = value;
         });
-      });
-    });
-    ChatData.getUserChatList(widget.orderChat.order_id).then((value) {
-      print(value);
-      setState(() {
-        userChatRooms = value;
-      });
+      }
     });
     super.initState();
   }
@@ -86,7 +91,7 @@ class _C_ChatListState extends State<C_ChatList> {
                   children: [
                     const SizedBox(height: 45),
                     Text(
-                      widget.mainType,
+                      "개인 문의",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -94,27 +99,6 @@ class _C_ChatListState extends State<C_ChatList> {
                       ),
                     ),
                     const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${widget.orderChat.service_type} | ${widget.orderChat.address.substring(0, 2)}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontFamily: 'NanumSquareR',
-                          ),
-                        ),
-                        Text(
-                          widget.orderChat.order_date,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'NanumSquareB',
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -169,9 +153,8 @@ class _C_ChatListState extends State<C_ChatList> {
                                     ? searchEstimate[index]
                                     : userChatRooms[index],
                                 chatRoomIndex: index,
-                                serviceType: widget.orderChat.service_type,
-                                address:
-                                    widget.orderChat.address.substring(0, 2));
+                                serviceType: "개인 문의",
+                                address: "");
                           }))
             ],
           ),
@@ -254,7 +237,7 @@ class ChatRoomBox extends StatelessWidget {
           margin: const EdgeInsets.only(left: 15, right: 15),
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
-          height: 145,
+          height: 130,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.0,
@@ -313,11 +296,6 @@ class ChatRoomBox extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 0.5, color: Color(0xFFcccccc)),
-                  ),
-                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -351,31 +329,6 @@ class ChatRoomBox extends StatelessWidget {
                     // ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    children: [
-                      const Text(
-                        '예상 견적 금액 |',
-                        style: TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        '총 ${finalPriceController.numberValue.toInt()}~원',
-                        style: const TextStyle(
-                          fontFamily: 'NanumSquareB',
-                          fontSize: 12,
-                          color: Color(0xFF025595),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ],
           ),

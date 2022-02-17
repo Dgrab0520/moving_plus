@@ -225,9 +225,24 @@ class Partner_Sub2 extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Container(
-                            child: Image.asset("assets/p_img2-1.png",
-                                width: 60, height: 60),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              "http://211.110.44.91/plus/portfolio_file/${controller.proBest[index].portfolioFileName}${controller.proBest[index].portfolioFileType}",
+                              fit: BoxFit.cover,
+                              width: 60,
+                              height: 60,
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace? stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFE6E5E5),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  width: 60,
+                                  height: 60,
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],

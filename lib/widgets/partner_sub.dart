@@ -45,11 +45,11 @@ class Partner_Sub extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: Container(
-                            child: Image.network(
-                                "http://211.110.44.91/plus/pro_profile/${controller.proAlli[index].profile_img}",
-                                width: 60,
-                                height: 60),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                            foregroundImage: NetworkImage(
+                                "http://211.110.44.91/plus/pro_profile/${controller.proAlli[index].profile_img}"),
                           ),
                         ),
                         SizedBox(
@@ -64,7 +64,7 @@ class Partner_Sub extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    '${controller.proAlli[index].com_name}',
+                                    controller.proAlli[index].com_name,
                                     style: TextStyle(
                                       color: Color(0xFF444444),
                                       fontFamily: 'NanumSquareEB',
@@ -244,9 +244,24 @@ class Partner_Sub extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Container(
-                            child: Image.asset("assets/p_img2-1.png",
-                                width: 60, height: 60),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              "http://211.110.44.91/plus/portfolio_file/${controller.proAlli[index].portfolioFileName}${controller.proAlli[index].portfolioFileType}",
+                              fit: BoxFit.cover,
+                              width: 60,
+                              height: 60,
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace? stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFE6E5E5),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  width: 60,
+                                  height: 60,
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],

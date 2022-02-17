@@ -17,10 +17,6 @@ class P_Account_Set extends StatefulWidget {
 }
 
 class _P_Account_SetState extends State<P_Account_Set> {
-  TextEditingController currentPwd = TextEditingController();
-  TextEditingController changePwd = TextEditingController();
-  TextEditingController changePwdCheck = TextEditingController();
-
   ImageProvider accountImage = NetworkImage(
       "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}");
 
@@ -169,6 +165,9 @@ class _P_Account_SetState extends State<P_Account_Set> {
             ),
             InkWell(
               onTap: () {
+                TextEditingController currentPwd = TextEditingController();
+                TextEditingController changePwd = TextEditingController();
+                TextEditingController changePwdCheck = TextEditingController();
                 Get.defaultDialog(
                     title: "비밀번호 변경",
                     content: Column(
@@ -224,7 +223,23 @@ class _P_Account_SetState extends State<P_Account_Set> {
                       ],
                     ),
                     textConfirm: "변경",
-                    onConfirm: () {});
+                    onConfirm: () {
+                      if (currentPwd.text == controller.pro.value.pro_pw) {
+                        if (changePwd.text == changePwdCheck.text) {
+                          ProDataUpdate.changePWD(changePwd.text).then((value) {
+                            if (value == "success") {
+                              controller.setPWD(changePwd.text);
+                              Get.back();
+                              Get.snackbar("성공", "비밀번호 변경을 성공했습니다");
+                            }
+                          });
+                        } else {
+                          Get.snackbar("실패", "비밀번호가 서로 다릅니다");
+                        }
+                      } else {
+                        Get.snackbar("실패", "현재 비밀번호가 틀립니다");
+                      }
+                    });
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
