@@ -1,4 +1,4 @@
-class Pro_Intro{
+class Pro_Intro {
   String pro_id;
   String pro_recom;
   String pro_name;
@@ -24,6 +24,7 @@ class Pro_Intro{
   String pro_career;
   String pro_pay;
   String pro_portfolio;
+  int estimateCount;
 
   Pro_Intro({
     required this.pro_id,
@@ -51,23 +52,30 @@ class Pro_Intro{
     required this.pro_career,
     required this.pro_pay,
     required this.pro_portfolio,
+    required this.estimateCount,
   });
 
-  factory Pro_Intro.fromJson(Map<String, dynamic> json){
+  factory Pro_Intro.fromJson(Map<String, dynamic> json) {
     return Pro_Intro(
       pro_id: json['pro_id'] == null ? "" : json['pro_id'] as String,
       pro_recom: json['pro_recom'] == null ? "" : json['pro_recom'] as String,
       pro_name: json['pro_name'] == null ? "" : json['pro_name'] as String,
       pro_phone: json['pro_phone'] == null ? "" : json['pro_phone'] as String,
       pro_email: json['pro_email'] == null ? "" : json['pro_email'] as String,
-      profile_img: json['profile_img'] == null ? "" : json['profile_img'] as String,
+      profile_img:
+          json['profile_img'] == null ? "" : json['profile_img'] as String,
       com_no: json['com_no'] == null ? "" : json['com_no'] as String,
       com_name: json['com_name'] == null ? "" : json['com_name'] as String,
-      pro_service1: json['pro_service1'] == null ? "" : json['pro_service1'] as String,
-      pro_service2: json['pro_service2'] == null ? "" : json['pro_service2'] as String,
-      pro_service3: json['pro_service3'] == null ? "" : json['pro_service3'] as String,
-      pro_service4: json['pro_service4'] == null ? "" : json['pro_service4'] as String,
-      pro_service5: json['pro_service5'] == null ? "" : json['pro_service5'] as String,
+      pro_service1:
+          json['pro_service1'] == null ? "" : json['pro_service1'] as String,
+      pro_service2:
+          json['pro_service2'] == null ? "" : json['pro_service2'] as String,
+      pro_service3:
+          json['pro_service3'] == null ? "" : json['pro_service3'] as String,
+      pro_service4:
+          json['pro_service4'] == null ? "" : json['pro_service4'] as String,
+      pro_service5:
+          json['pro_service5'] == null ? "" : json['pro_service5'] as String,
       pro_area1: json['pro_area1'] == null ? "" : json['pro_area1'] as String,
       pro_area2: json['pro_area2'] == null ? "" : json['pro_area2'] as String,
       pro_area3: json['pro_area3'] == null ? "" : json['pro_area3'] as String,
@@ -77,10 +85,12 @@ class Pro_Intro{
       index: json['index'] == null ? "" : json['index'] as String,
       pro_intro: json['pro_intro'] == null ? "" : json['pro_intro'] as String,
       pro_basic: json['pro_basic'] == null ? "" : json['pro_basic'] as String,
-      pro_career: json['pro_career'] == null ? "" : json['pro_career'] as String,
+      pro_career:
+          json['pro_career'] == null ? "" : json['pro_career'] as String,
       pro_pay: json['pro_pay'] == null ? "" : json['pro_pay'] as String,
-      pro_portfolio: json['pro_portfolio'] == null ? "" : json['pro_portfolio'] as String,
+      pro_portfolio:
+          json['pro_portfolio'] == null ? "" : json['pro_portfolio'] as String,
+      estimateCount: json['count'] == null ? 0 : int.parse(json['count']),
     );
   }
-
 }

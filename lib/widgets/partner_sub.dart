@@ -94,26 +94,23 @@ class Partner_Sub extends StatelessWidget {
                               SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '총 공사 20건',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    '총 공사 ${controller.proAlli[index].finalCount}건',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
                                   ),
                                   SizedBox(width: 20),
                                   Row(
                                     children: [
                                       Image.asset("assets/star1.png",
                                           width: 13, height: 13),
-                                      Text('4.7',
+                                      Text(controller.proAlli[index].reviewAvg,
                                           style: TextStyle(
                                             fontSize: 12,
                                           )),
-                                      Text('(10개)',
+                                      Text(
+                                          '(${controller.proAlli[index].reviewCount}개)',
                                           style: TextStyle(
                                             fontSize: 8,
                                           )),
@@ -138,7 +135,8 @@ class Partner_Sub extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                  '${controller.proAlli[index].pro_service3}',
+                                                  controller.proAlli[index]
+                                                      .pro_service1,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 7,
@@ -162,7 +160,8 @@ class Partner_Sub extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                  '${controller.proAlli[index].pro_service3}',
+                                                  controller.proAlli[index]
+                                                      .pro_service2,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 7,
@@ -186,7 +185,8 @@ class Partner_Sub extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                  '${controller.proAlli[index].pro_service3}',
+                                                  controller.proAlli[index]
+                                                      .pro_service3,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 7,

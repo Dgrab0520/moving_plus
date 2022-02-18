@@ -205,7 +205,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      '4개',
+                                      '${pro[0].estimateCount}개',
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         fontFamily: 'NanumSquareEB',
@@ -259,7 +259,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           width: 1.0,
                                         ),
                                         Text(
-                                          '${average.toStringAsFixed(2)}',
+                                          average.toStringAsFixed(2),
                                           style: TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w600,
@@ -374,7 +374,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           TextButton(
                                             onPressed: () {
                                               Controller1.text =
-                                                  '${pro[0].pro_intro}';
+                                                  pro[0].pro_intro;
                                               Get.defaultDialog(
                                                   radius: 5.0,
                                                   title: "수정하기",

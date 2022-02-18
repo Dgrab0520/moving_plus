@@ -20,6 +20,9 @@ class Pro {
   String index;
   String portfolioFileName;
   String portfolioFileType;
+  int finalCount;
+  int reviewCount;
+  String reviewAvg;
 
   Pro({
     required this.id,
@@ -43,6 +46,9 @@ class Pro {
     required this.index,
     required this.portfolioFileName,
     required this.portfolioFileType,
+    required this.finalCount,
+    required this.reviewCount,
+    required this.reviewAvg,
   });
 
   factory Pro.fromJson(Map<String, dynamic> json) {
@@ -76,6 +82,10 @@ class Pro {
           json['fileName'] == null ? "" : json['fileName'] as String,
       portfolioFileType:
           json['fileType'] == null ? "" : json['fileType'] as String,
+      finalCount: json['count'] == null ? 0 : int.parse(json['count']),
+      reviewCount:
+          json['reviewCount'] == null ? 0 : int.parse(json['reviewCount']),
+      reviewAvg: json['reviewAvg'] == null ? "" : json['reviewAvg'] as String,
     );
   }
 }

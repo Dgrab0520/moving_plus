@@ -426,7 +426,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                                                           child: Text(
                                                               controller
                                                                   .pro[index]
-                                                                  .pro_service3,
+                                                                  .pro_service1,
                                                               style:
                                                                   const TextStyle(
                                                                 color: Colors
@@ -465,7 +465,7 @@ class _Partner_SearchState extends State<Partner_Search> {
                                                           child: Text(
                                                               controller
                                                                   .pro[index]
-                                                                  .pro_service3,
+                                                                  .pro_service2,
                                                               style:
                                                                   const TextStyle(
                                                                 color: Colors
