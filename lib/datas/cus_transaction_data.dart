@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:moving_plus/models/transaction_model.dart';
 
+import '../models/cus_transaction_model.dart';
 import '../pages/chat_estimate.dart';
 
-class TransActionData extends GetxController {
-  static const ROOT = "http://211.110.44.91/plus/plus_transaction.php";
+class CusTransActionData extends GetxController {
+  static const ROOT = "http://211.110.44.91/plus/plus_review.php";
 
   final _selectedDate = DateTime.now().obs;
   final _selectedDate2 = DateTime.now().obs;
@@ -44,8 +44,8 @@ class TransActionData extends GetxController {
     }
   }
 
-  final _transAction = <TransAction>[].obs;
-  List<TransAction> get transAction => _transAction;
+  final _transAction = <CusTransAction>[].obs;
+  List<CusTransAction> get transAction => _transAction;
   set transAction(val) => _transAction.value = val;
 
   final _isTransActionLoading = false.obs;
@@ -58,35 +58,39 @@ class TransActionData extends GetxController {
 
   //거래 내역 불러오기
   getTransaction() async {
+    print(controller.pro.value.pro_id);
     isAll = true;
     try {
       var map = <String, dynamic>{};
-      map['action'] = "getTrans";
-      map['cusId'] = controller.pro.value.pro_id;
+      map['action'] = "SELECT_CUS_REVIEW";
+      map['cus_id'] = controller.pro.value.pro_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
-      print("TransAction BreakDown Response : ${response.body}");
+      print("Customer TransAction BreakDown Response : ${response.body}");
       if (response.statusCode == 200) {
         transAction = parseResponse(response.body);
         isTransActionLoading = true;
       }
     } catch (e) {
+      transAction = <CusTransAction>[];
+      isTransActionLoading = true;
       print("exception : $e");
     }
   }
 
   //기간별 거래 내역 불러오기
   getTransactionRange(DateTime from, DateTime to) async {
-    print(DateFormat("yyyy-MM-dd HH:mm:ss").format(from));
-    print(DateFormat("yyyy-MM-dd HH:mm:ss").format(to));
+    to = to.add(Duration(days: 1));
+    print(DateFormat("yyyy-MM-dd").format(from));
+    print(DateFormat("yyyy-MM-dd").format(to));
     print(controller.pro.value.pro_id);
 
     isAll = false;
     try {
       var map = <String, dynamic>{};
       map['action'] = "getTransRange";
-      map['cusId'] = controller.pro.value.pro_id;
-      map['from'] = DateFormat("yyyy-MM-dd hh:mm:ss").format(from);
-      map['to'] = DateFormat("yyyy-MM-dd hh:mm:ss").format(to);
+      map['cus_id'] = controller.pro.value.pro_id;
+      map['from'] = DateFormat("yyyy-MM-dd").format(from);
+      map['to'] = DateFormat("yyyy-MM-dd").format(to);
       final response = await http.post(Uri.parse(ROOT), body: map);
       print("TransAction BreakDown Range Response : ${response.body}");
       if (response.statusCode == 200) {
@@ -94,16 +98,16 @@ class TransActionData extends GetxController {
         isTransActionLoading = true;
       }
     } catch (e) {
-      transAction = <TransAction>[];
+      transAction = <CusTransAction>[];
       isTransActionLoading = true;
       print("exception : $e");
     }
   }
 
-  static List<TransAction> parseResponse(String responseBody) {
+  static List<CusTransAction> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed
-        .map<TransAction>((json) => TransAction.fromJson(json))
+        .map<CusTransAction>((json) => CusTransAction.fromJson(json))
         .toList();
   }
 }

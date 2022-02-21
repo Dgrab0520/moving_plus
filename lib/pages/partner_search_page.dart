@@ -374,9 +374,9 @@ class _Partner_SearchState extends State<Partner_Search> {
                                           const SizedBox(height: 5),
                                           Row(
                                             children: [
-                                              const Text(
-                                                '총 공사 20건',
-                                                style: TextStyle(
+                                              Text(
+                                                '총 공사 ${controller.pro[index].finalCount}건',
+                                                style: const TextStyle(
                                                   fontSize: 12,
                                                 ),
                                               ),
@@ -387,12 +387,15 @@ class _Partner_SearchState extends State<Partner_Search> {
                                                       "assets/star1.png",
                                                       width: 13,
                                                       height: 13),
-                                                  const Text('4.7',
-                                                      style: TextStyle(
+                                                  Text(
+                                                      controller
+                                                          .pro[index].reviewAvg,
+                                                      style: const TextStyle(
                                                         fontSize: 12,
                                                       )),
-                                                  const Text('(10개)',
-                                                      style: TextStyle(
+                                                  Text(
+                                                      '(${controller.pro[index].reviewCount}개)',
+                                                      style: const TextStyle(
                                                         fontSize: 8,
                                                       )),
                                                 ],

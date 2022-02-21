@@ -194,7 +194,7 @@ class C_Mypage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(const C_Review());
+                        Get.to(CReview());
                       },
                       child: Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),

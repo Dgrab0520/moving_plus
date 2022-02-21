@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/delete_account_data.dart';
 
 import 'main_page.dart';
 
@@ -54,24 +55,23 @@ class _Account_SetState extends State<Account_Set> {
               Container(
                   child: controller.pro.value.type == 'cus'
                       ? controller.pro.value.profile_img == 'default_image'
-                      ? Image.asset(
-                      'assets/defaultImage.png',
-                      width: 80,
-                      height: 80)
-                      : Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            controller.pro.value
-                                .profile_img,
-                          ),
-                          fit: BoxFit.fill,
-                        )),
-                  )
-                  // Image.network(controller.pro.value.profile_img, width:70,height:70)
-                      : Image.network("http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}", width: 80, height: 80)
-              ),
+                          ? Image.asset('assets/defaultImage.png',
+                              width: 80, height: 80)
+                          : Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      controller.pro.value.profile_img,
+                                    ),
+                                    fit: BoxFit.fill,
+                                  )),
+                            )
+                      // Image.network(controller.pro.value.profile_img, width:70,height:70)
+                      : Image.network(
+                          "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}",
+                          width: 80,
+                          height: 80)),
               Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.only(bottom: 25, left: 15, right: 15),
@@ -230,7 +230,30 @@ class _Account_SetState extends State<Account_Set> {
               ),
               SizedBox(height: 40),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  DeleteAccount.deleteCus(controller.pro.value.pro_id)
+                      .then((value) {
+                    if (value == "success") {
+                      controller.change(
+                        type: 'None',
+                        id: 'None',
+                        pro_id: 'None',
+                        pro_pw: 'None',
+                        pro_name: 'None',
+                        pro_phone: 'None',
+                        pro_email: 'None',
+                        com_name: 'None',
+                        profile_img: 'None',
+                        pro_token: 'None',
+                      );
+                      Get.offAll(const Main_Page(index: 1));
+
+                      Get.snackbar("성공", "계정이 탈퇴되었습니다");
+                    } else {
+                      Get.snackbar("실패", "실패했습니다");
+                    }
+                  });
+                },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding:

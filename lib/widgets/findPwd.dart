@@ -1,121 +1,15 @@
-import 'package:custom_check_box/custom_check_box.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/datas/alarm_data.dart';
-import 'package:moving_plus/datas/pro_data.dart';
-import 'package:moving_plus/datas/pro_login_data.dart';
-import 'package:moving_plus/models/pro_login_model.dart';
-import 'package:moving_plus/pages/main_page.dart';
 import 'package:moving_plus/pages/signup_pro_page.dart';
-import 'package:moving_plus/widgets/c_login.dart';
-import 'package:moving_plus/widgets/findId.dart';
+import 'package:moving_plus/widgets/p_login.dart';
 
-import 'findPwd.dart';
+import 'findResult.dart';
 
-final controller = Get.put(ReactiveController());
+class FindPwd extends StatelessWidget {
+  FindPwd({Key? key}) : super(key: key);
 
-class P_Login extends StatefulWidget {
-  const P_Login({Key? key}) : super(key: key);
-
-  @override
-  _P_LoginState createState() => _P_LoginState();
-}
-
-class _P_LoginState extends State<P_Login> {
-  List<Pro_Info> pro_info = [];
-  bool _isLoading = false;
-  bool shouldCheck = false;
-
-  TextEditingController idController = TextEditingController();
-  TextEditingController pwController = TextEditingController();
-  String proInfo = ""; //자동 로그인시 로그인 정보 저장
-
-  static final storage =
-      new FlutterSecureStorage(); //flutter_secure_storage 사용을 위한 초기화 작업
-
-  @override
-  void initState() {
-    //비동기로 flutter secure storage 정보를 불러오는 작업.
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _asyncMethod();
-    });
-    super.initState();
-  }
-
-  _asyncMethod() async {
-    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
-    //(데이터가 없을때는 null을 반환을 합니다.)
-    proInfo = (await storage.read(key: "login"))!;
-    print('proInfo?? $proInfo');
-
-    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
-    if (proInfo != null) {
-      print('Success & return ${proInfo.split(" ")[1]}');
-    } else {
-      print('false & Again');
-    }
-  }
-
-  Pro_Login() {
-    Pro_Login_Data.getPro_Login(
-            idController.text.trim(), pwController.text.trim())
-        .then((value) {
-      setState(() {
-        pro_info = value;
-      });
-      if (value.length == 1) {
-        setState(() {
-          _isLoading = true;
-          AlarmData().alarmCount(pro_info[0].pro_name);
-          FirebaseMessaging.instance.getToken().then((value) =>
-              Pro_Data.updateToken_Pro(pro_info[0].pro_id, value!)
-                  .then((value) {
-                if (value == 'success') {
-                  print('update token success');
-                } else {
-                  print('update token fail');
-                }
-              }));
-          storage.write(
-              key: "login",
-              value: "id " +
-                  idController.text.toString() +
-                  " " +
-                  "password " +
-                  pwController.text.toString());
-        });
-        controller.change(
-            type: 'pro',
-            id: pro_info[0].id,
-            pro_id: pro_info[0].pro_id,
-            pro_pw: pro_info[0].pro_pw,
-            pro_name: pro_info[0].pro_name,
-            pro_phone: pro_info[0].pro_phone,
-            pro_email: pro_info[0].pro_email,
-            com_name: pro_info[0].com_name,
-            profile_img: pro_info[0].profile_img,
-            pro_token: pro_info[0].pro_token);
-        Get.offAll(Main_Page(index: 1));
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        Get.snackbar("로그인 실패", "아이디 또는 비밀번호가 틀렸습니다",
-            backgroundColor: Colors.white, colorText: Colors.black);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    idController;
-    pwController;
-    super.dispose();
-  }
-
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController pwController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -125,22 +19,30 @@ class _P_LoginState extends State<P_Login> {
       )),
       backgroundColor: Colors.white,
       content: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(child: Icon(Icons.close))),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Get.back();
+                        Get.dialog(P_Login());
+                      },
+                      child: const Icon(Icons.arrow_back)),
+                  InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(Icons.close)),
+                ],
               ),
               SizedBox(height: 10),
               const Text(
-                '파트너 로그인',
+                '비밀번호 찾기',
                 style: TextStyle(
                   color: Color(0xFF444444),
                   fontSize: 23,
@@ -149,7 +51,7 @@ class _P_LoginState extends State<P_Login> {
               ),
               SizedBox(height: 7),
               const Text(
-                '로그인 후 입주 플러스를 이용해 주세요.',
+                '정보를 입력해주세요',
                 style: TextStyle(
                   color: Color(0xFF444444),
                   fontSize: 12,
@@ -216,7 +118,7 @@ class _P_LoginState extends State<P_Login> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          '비밀번호',
+                          '핸드폰번호',
                           style: TextStyle(
                             color: Color(0xFF444444),
                             fontSize: 12,
@@ -232,9 +134,7 @@ class _P_LoginState extends State<P_Login> {
                               obscureText: true,
                               obscuringCharacter: "*",
                               keyboardType: TextInputType.visiblePassword,
-                              onSubmitted: (String value) async {
-                                await Pro_Login();
-                              },
+                              onSubmitted: (String value) async {},
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                     top: 10.0, bottom: 10, left: 15),
@@ -244,7 +144,7 @@ class _P_LoginState extends State<P_Login> {
                                 hintStyle: TextStyle(
                                   fontSize: 10,
                                 ),
-                                hintText: '비밀번호를 입력해주세요.',
+                                hintText: '"-"를 제외한 핸드폰 번호를 입력해주세요.',
                                 labelStyle: TextStyle(color: Color(0xFFACACAC)),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
@@ -270,92 +170,14 @@ class _P_LoginState extends State<P_Login> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        child: CustomCheckBox(
-                          value: shouldCheck,
-                          shouldShowBorder: true,
-                          borderColor: Color(0xFF025595),
-                          checkedFillColor: Color(0xFF025595),
-                          borderRadius: 4,
-                          borderWidth: 2,
-                          checkBoxSize: 10,
-                          onChanged: (val) {
-                            //do your stuff here
-                            setState(() {
-                              shouldCheck = val;
-                            });
-                          },
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          child: Text(
-                            '자동 로그인',
-                            style: TextStyle(
-                              color: Color(0xFF444444),
-                              fontSize: 10,
-                              fontFamily: 'NanumSquareB',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                          Get.dialog(FindId());
-                        },
-                        child: Container(
-                          child: Text(
-                            '아이디 찾기',
-                            style: TextStyle(
-                              fontFamily: 'NanumSquareB',
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                          Get.dialog(FindPwd());
-                        },
-                        child: Container(
-                          child: Text(
-                            '비밀번호 찾기',
-                            style: TextStyle(
-                              fontFamily: 'NanumSquareB',
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 7),
-                    ],
-                  ),
-                ],
-              ),
               SizedBox(height: 20),
               InkWell(
                 onTap: () {
-                  if (idController.text != "" && pwController.text != "") {
-                    Pro_Login();
-                  } else {
-                    Get.snackbar("로그인 실패", "아이디 또는 비밀번호를 입력해주세요",
-                        colorText: Colors.black, backgroundColor: Colors.white);
-                  }
+                  Get.back();
+                  Get.dialog(const FindResult(
+                    result: "pwd",
+                    type: "비밀번호",
+                  ));
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 8, right: 8),
@@ -367,7 +189,7 @@ class _P_LoginState extends State<P_Login> {
                   ),
                   child: Center(
                     child: Text(
-                      '로그인',
+                      '찾기',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -377,21 +199,6 @@ class _P_LoginState extends State<P_Login> {
                   ),
                 ),
               ),
-              TextButton(
-                  onPressed: () {
-                    print('고객 로그인');
-                    Get.back();
-                    Get.dialog(C_Login(
-                      index: 0,
-                    ));
-                  },
-                  child: Text(
-                    '고객 로그인하기',
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        fontFamily: 'NanumSquareB',
-                        color: Colors.black87),
-                  )),
               SizedBox(height: 25),
               Container(
                 child: Row(

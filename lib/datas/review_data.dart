@@ -6,6 +6,7 @@ import 'package:moving_plus/models/review_model.dart';
 class Review_Data {
   static const ROOT = "http://211.110.44.91/plus/plus_review.php";
   static const SELECT_REVIEW_ACTION = "SELECT_REVIEW";
+  static const WRITE_REVIEW_ACTION = "WRITE_REVIEW";
 
   static Future<List<Review>> getReview(String pro_id) async {
     try {
@@ -26,33 +27,28 @@ class Review_Data {
   }
 
   //리뷰 입력
-  static Future<String> putReview(
-      String callerName, List<dynamic> receiverName, String alarmType,
-      {String? order_id, String? mainType}) async {
-    print(jsonEncode(receiverName));
+  static Future<String> putReview(String estimateId, String proId, String cusId,
+      String reviewPoint, String reviewContent) async {
     try {
       var url = Uri.parse(ROOT);
       var request = http.MultipartRequest('POST', url);
-      request.fields['action'] = WRITE_ACTION;
-      request.fields['callerName'] = callerName;
-      request.fields['receiverName'] = jsonEncode(receiverName);
-      request.fields['alarmType'] = alarmType;
-      if (order_id != null) {
-        request.fields['order_id'] = order_id;
-        request.fields['mainType'] = mainType!;
-      }
+      request.fields['action'] = WRITE_REVIEW_ACTION;
+      request.fields['estimate_id'] = estimateId;
+      request.fields['pro_id'] = proId;
+      request.fields['cus_id'] = cusId;
+      request.fields['review_point'] = reviewPoint;
+      request.fields['review_content'] = reviewContent;
       http.Response response =
           await http.Response.fromStream(await request.send());
-      print("Alarm Write Response : ${response.body}");
+      print("Review Write Response : ${response.body}");
       if (response.statusCode == 200) {
-        List<String> result = [response.body];
-        return result;
+        return response.body;
       } else {
-        return [];
+        return "";
       }
     } catch (e) {
       print(e);
-      return [];
+      return "";
     }
   }
 
