@@ -230,7 +230,7 @@ class C_Mypage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(const MyPage_Arlim());
+                        Get.to(MyPageAlarm());
                       },
                       child: Container(
                         padding: const EdgeInsets.only(top: 15, bottom: 10),

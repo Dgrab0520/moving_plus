@@ -231,28 +231,63 @@ class _Account_SetState extends State<Account_Set> {
               SizedBox(height: 40),
               InkWell(
                 onTap: () {
-                  DeleteAccount.deleteCus(controller.pro.value.pro_id)
-                      .then((value) {
-                    if (value == "success") {
-                      controller.change(
-                        type: 'None',
-                        id: 'None',
-                        pro_id: 'None',
-                        pro_pw: 'None',
-                        pro_name: 'None',
-                        pro_phone: 'None',
-                        pro_email: 'None',
-                        com_name: 'None',
-                        profile_img: 'None',
-                        pro_token: 'None',
-                      );
-                      Get.offAll(const Main_Page(index: 1));
+                  Get.defaultDialog(
+                      title: "계정 탈퇴",
+                      titleStyle: TextStyle(
+                        fontFamily: 'NanumSquareR',
+                      ),
+                      content: const Text(
+                        "탈퇴하시겠습니까?",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: 'NanumSquareR',
+                        ),
+                      ),
+                      confirm: ElevatedButton(
+                        onPressed: () {
+                          DeleteAccount.deleteCus(controller.pro.value.pro_id)
+                              .then((value) {
+                            if (value == "success") {
+                              controller.change(
+                                type: 'None',
+                                id: 'None',
+                                pro_id: 'None',
+                                pro_pw: 'None',
+                                pro_name: 'None',
+                                pro_phone: 'None',
+                                pro_email: 'None',
+                                com_name: 'None',
+                                profile_img: 'None',
+                                pro_token: 'None',
+                              );
+                              Get.offAll(const Main_Page(index: 1));
 
-                      Get.snackbar("성공", "계정이 탈퇴되었습니다");
-                    } else {
-                      Get.snackbar("실패", "실패했습니다");
-                    }
-                  });
+                              Get.snackbar("성공", "계정이 탈퇴되었습니다");
+                            } else {
+                              Get.snackbar("실패", "실패했습니다");
+                            }
+                          });
+                        },
+                        child: const Text(
+                          "예",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xFF025595),
+                        ),
+                      ),
+                      cancel: OutlinedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text(
+                          "아니오",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          primary: Color(0xFF025595),
+                        ),
+                      ));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,

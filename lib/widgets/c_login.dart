@@ -292,10 +292,29 @@ class _C_LoginState extends State<C_Login> {
                           com_name: 'None',
                           profile_img: "default_image",
                           pro_token:
-                              'cqIz-tfDSV-BZrr6xIhdCy:APA91bF-ZPNg8CcmIw3lKD3hlTOHQwIfl8lbzVWp_SlBN-jbfjtW4QbkfIJJub08jDJl6XBRbAZIhrrQHurFLyvBBw6jjFav2wvG6QRs73TP5q1fGtHFHy_evZnzQ861pwk9-pT_SsM7',
+                              'fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV',
                         );
                         AlarmData().alarmCount('skstjdtndi12@naver.com');
-
+                        // Customer_Data.insertCustomer('skstjdtndi12@naver.com',
+                        //         generateRandomString(8))
+                        //     .then((value) {
+                        //   if (value == "success") {
+                        //     print('Insert Success');
+                        //     FirebaseMessaging.instance.getToken().then(
+                        //         (value) => Customer_Data.updateToken(
+                        //                     'skstjdtndi12@naver.com', value!)
+                        //                 .then((value2) {
+                        //               if (value2 == 'success') {
+                        //                 print('update token success');
+                        //               } else {
+                        //                 print('update token fail');
+                        //               }
+                        //             }));
+                        //     Get.offAll(Main_Page(index: 1));
+                        //   } else {
+                        //     print('$value : Insert Fails');
+                        //   }
+                        // });
                         Get.offAll(Main_Page(index: 1));
                       },
                       child: Text("test")),

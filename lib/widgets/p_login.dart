@@ -79,13 +79,17 @@ class _P_LoginState extends State<P_Login> {
                   print('update token fail');
                 }
               }));
-          storage.write(
-              key: "login",
-              value: "id " +
-                  idController.text.toString() +
-                  " " +
-                  "password " +
-                  pwController.text.toString());
+          if (shouldCheck) {
+            storage.write(
+                key: "login",
+                value: "id " +
+                    idController.text.toString() +
+                    " " +
+                    "password " +
+                    pwController.text.toString());
+          } else {
+            storage.delete(key: "login");
+          }
         });
         controller.change(
             type: 'pro',
@@ -295,7 +299,11 @@ class _P_LoginState extends State<P_Login> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            shouldCheck = !shouldCheck;
+                          });
+                        },
                         child: Container(
                           child: Text(
                             '자동 로그인',

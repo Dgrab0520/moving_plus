@@ -1,67 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:moving_plus/datas/find_account_data.dart';
-import 'package:moving_plus/pages/signup_pro_page.dart';
-import 'package:moving_plus/widgets/p_login.dart';
+import 'package:moving_plus/datas/notice_data.dart';
 
-import 'findResult.dart';
+class NoticeWrite extends StatelessWidget {
+  NoticeWrite({Key? key}) : super(key: key);
 
-class FindPwd extends StatelessWidget {
-  FindPwd({Key? key}) : super(key: key);
+  final noticeController = Get.put(NoticeData());
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
 
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(32),
-      )),
-      backgroundColor: Colors.white,
-      content: SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: const Text(
+            '공지사항 작성',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontFamily: 'NanumSquareB',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: const Color(0xFF025595),
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
+        ),
+        body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Get.back();
-                        Get.dialog(P_Login());
-                      },
-                      child: const Icon(Icons.arrow_back)),
-                  InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: const Icon(Icons.close)),
-                ],
-              ),
-              SizedBox(height: 10),
-              const Text(
-                '비밀번호 찾기',
-                style: TextStyle(
-                  color: Color(0xFF444444),
-                  fontSize: 23,
-                  fontFamily: 'NanumSquareB',
-                ),
-              ),
-              SizedBox(height: 7),
-              const Text(
-                '정보를 입력해주세요',
-                style: TextStyle(
-                  color: Color(0xFF444444),
-                  fontSize: 12,
-                  fontFamily: 'NanumSquareR',
-                ),
-              ),
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               Container(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 8,
                   right: 8,
                 ),
@@ -70,20 +52,20 @@ class FindPwd extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      '아이디',
+                      '공지사항 제목',
                       style: TextStyle(
                         color: Color(0xFF444444),
                         fontSize: 12,
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
-                    Container(
+                    const SizedBox(height: 7),
+                    SizedBox(
                         width: Get.width,
                         height: 45,
                         child: TextField(
-                          controller: idController,
-                          decoration: InputDecoration(
+                          controller: titleController,
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.only(
                                 top: 10.0, bottom: 10, left: 15),
                             counterStyle: TextStyle(
@@ -92,7 +74,7 @@ class FindPwd extends StatelessWidget {
                             hintStyle: TextStyle(
                               fontSize: 10,
                             ),
-                            hintText: '아이디를 입력해주세요.',
+                            hintText: '공지사항 제목을 입력해주세요.',
                             labelStyle: TextStyle(color: Color(0xFFACACAC)),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
@@ -113,28 +95,28 @@ class FindPwd extends StatelessWidget {
                           ),
                           keyboardType: TextInputType.emailAddress,
                         )),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          '핸드폰번호',
+                          '공지사항 내용',
                           style: TextStyle(
                             color: Color(0xFF444444),
                             fontSize: 12,
                             fontFamily: 'NanumSquareR',
                           ),
                         ),
-                        SizedBox(height: 7),
-                        Container(
+                        const SizedBox(height: 7),
+                        SizedBox(
                             width: Get.width,
-                            height: 45,
                             child: TextField(
-                              controller: phoneController,
-                              keyboardType: TextInputType.number,
+                              controller: contentController,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: 10,
                               onSubmitted: (String value) async {},
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                     top: 10.0, bottom: 10, left: 15),
                                 counterStyle: TextStyle(
@@ -143,7 +125,7 @@ class FindPwd extends StatelessWidget {
                                 hintStyle: TextStyle(
                                   fontSize: 10,
                                 ),
-                                hintText: '"-"를 제외한 핸드폰 번호를 입력해주세요.',
+                                hintText: '공지사항 내용을 입력해주세요',
                                 labelStyle: TextStyle(color: Color(0xFFACACAC)),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius:
@@ -165,37 +147,24 @@ class FindPwd extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InkWell(
-                onTap: () {
-                  FindAccount.getPwd(idController.text, phoneController.text)
-                      .then((value) {
-                    if (value != "") {
-                      Get.back();
-                      Get.dialog(FindResult(
-                        result: value,
-                        type: "비밀번호",
-                      ));
-                    } else {
-                      Get.snackbar("실패", "일치하는 정보가 없습니다");
-                    }
-                  });
-                },
+                onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(left: 8, right: 8),
+                  margin: const EdgeInsets.only(left: 8, right: 8),
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Color(0xFF025595),
+                    color: const Color(0xFF025595),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
-                      '찾기',
+                      '작성',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -205,40 +174,7 @@ class FindPwd extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 25),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '아직 임주 플러스 회원이 아니신가요?',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontFamily: 'NanumSquareR',
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                        Get.to(SignUpPage());
-                        //Get.dialog(P_Signup());
-                      },
-                      child: Container(
-                        child: Text(
-                          '회원가입 하기',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'NanumSquareB',
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 25),
             ],
           ),
         ),

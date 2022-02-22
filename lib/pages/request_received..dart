@@ -102,6 +102,7 @@ class _Request_ReceivedState extends State<Request_Received> {
         ),
         body: _isLoading
             ? ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: order.length,
                 itemBuilder: (_, int index) {
                   return Container(

@@ -54,11 +54,11 @@ class FindResult extends StatelessWidget {
                   right: 8,
                 ),
                 child: Text(
-                  result,
+                  "$type : $result",
                   style: TextStyle(
                     color: Color(0xFF444444),
-                    fontSize: 12,
-                    fontFamily: 'NanumSquareR',
+                    fontSize: 15,
+                    fontFamily: 'NanumSquareB',
                   ),
                 ),
               ),

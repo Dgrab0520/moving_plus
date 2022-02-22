@@ -258,26 +258,24 @@ class _TabViewState extends State<TabView> {
     return Column(
       children: [
         SizedBox(height: 30),
-        Container(
-          child: Column(
-            children: [
-              Text(
-                widget.category.name + " 서비스",
-                style: TextStyle(
-                  fontSize: 23,
-                  fontFamily: 'NanumSquareB',
-                ),
+        Column(
+          children: [
+            Text(
+              widget.category.name + " 서비스",
+              style: TextStyle(
+                fontSize: 23,
+                fontFamily: 'NanumSquareB',
               ),
-              SizedBox(height: 10),
-              Text(
-                widget.category.description,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'NanumSquareR',
-                ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              widget.category.description,
+              style: TextStyle(
+                fontSize: 12,
+                fontFamily: 'NanumSquareR',
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         SizedBox(height: 25),
         for (CategorySub category in widget.category.sub)

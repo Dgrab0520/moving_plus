@@ -89,10 +89,86 @@ class Api {
     "기타": ["사전점검", "소독 / 방역", "기타 서비스"],
   };
 
+  Map<String, String> categoryImages = {
+    "입주 청소": "assets/c_1.jpg",
+    "이사 청소": "assets/c_2.jpg",
+    "인테리어 청소": "assets/c_3.jpg",
+    "거주 청소": "assets/c_4.jpg",
+    "준공 청소": "assets/c_5.jpg",
+    "정기 청소": "assets/c_6.jpg",
+    "화재 청소": "assets/c_7.jpg",
+    "쓰레기집 청소": "assets/c_8.jpg",
+    '간판 청소': "assets/c_9.jpg",
+    '외벽 청소': "assets/c_10.jpg",
+    "학교/관공서 청소": "assets/c_11.jpg",
+    "상가 청소": "assets/building.jpg",
+    "주방후드 청소": "assets/hood.jpg",
+    "기타 청소": "assets/toilet.jpg",
+    "올 인테리어": "assets/img1.jpg",
+    "필름 인테리어": "assets/img2.jpg",
+    "탄성 코트": "assets/img3.jpg",
+    "도배": "assets/img4.jpg",
+    "장판 & 마루": "assets/img5.jpg",
+    "페인트": "assets/img6.jpg",
+    "방충망 교체": "assets/img7.jpg",
+    "욕실 인테리어": "assets/img8.jpg",
+    "타일 교체": "assets/img9.jpg",
+    "중문": "assets/img10.jpg",
+    "커튼 & 블라인드": "assets/img11.jpg",
+    "바닥 매트": "assets/mat.jpg",
+    "기타 인테리어": "assets/img12.jpg",
+    "줄눈": "assets/h_1.jpg",
+    "실리콘 오염 방지": "assets/h_2.jpg",
+    "욕실 나노 코팅": "assets/h_3.jpg",
+    "상판 연마 코팅": "assets/h_4.jpg",
+    "엔지니어스톤 코팅": "assets/h_5.jpg",
+    "바닥 왁싱": "assets/h_6.jpg",
+    "단열 차단 필름": "assets/h_7.jpg",
+    "정리정돈": "assets/h_8.jpg",
+    "새집 증후군": "assets/h_9.jpg",
+    "곰팡이 제거": "assets/h_10.jpg",
+    "기타 홈스타일링": "assets/kitchen.jpg",
+    "조명 설치": "assets/g_1.jpg",
+    "에어컨 이전 설치": "assets/g_2.jpg",
+    "에어컨 분해 청소": "assets/g_3.jpg",
+    "세탁기 분해 청소": "assets/g_4.jpg",
+    "냉장고 청소": "assets/g_5.jpg",
+    "맞춤 가구 제작": "assets/g_6.jpg",
+    "붙박이장 설치": "assets/g_7.jpg",
+    "시스템 행거": "assets/g_8.jpg",
+    "펜트리 선반 설치": "assets/g_9.jpg",
+    "매트리스 케어": "assets/g_10.jpg",
+    "쇼파 천갈이": "assets/g_11.jpg",
+    "보일러 설치": "assets/heater.jpg",
+    "배관수리 및 청소": "assets/plumbing.jpg",
+    "기타 가전/가구": "assets/g_12.jpg",
+    "정수기 렌탈": "assets/l_1.jpg",
+    "에어컨 렌탈": "assets/l_2.jpg",
+    "비데 렌탈": "assets/l_3.jpg",
+    "매트리스 렌탈": "assets/l_4.jpg",
+    "쇼파 렌탈": "assets/l_5.jpg",
+    "TV 렌탈": "assets/l_6.jpg",
+    "안마의자 렌탈": "assets/l_7.jpg",
+    "운동기구 렌탈": "assets/l_8.jpg",
+    "의류 관리기 렌탈": "assets/l_9.jpg",
+    "식기 세척기 렌탈": "assets/l_10.jpg",
+    "음식물 분쇄기 렌탈": "assets/l_11.jpg",
+    "청소기 렌탈": "assets/l_12.jpg",
+    "공기 청정기 렌탈": "assets/l_13.jpg",
+    "기타 렌탈": "assets/rental.jpg",
+    "사전점검": "assets/e_1.jpg",
+    "소독 / 방역": "assets/e_2.jpg",
+    "기타 서비스": "assets/etc.jpg",
+  };
+
   String findMainCategory(String category) {
     Iterable item = categories.keys
         .where((element) => categories[element]!.contains(category));
     return item.toList()[0];
+  }
+
+  String findCategoryImage(String category) {
+    return categoryImages[category] ?? "";
   }
 }
 
@@ -322,7 +398,8 @@ const List<CategorySub> homeList = [
       category: '홈 스타일링',
       image2: 'assets/h_10.jpg',
       title2: '곰팡이 제거',
-      content2: "바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 등에 습기로\n 인해 발생한 곰팡이를 제거하는 서비스",
+      content2:
+          "바깥과 닿는 벽 ( 베란다 / 세탁실 등) 환기가 어려운 수납장 등에 습기로\n 인해 발생한 곰팡이를 제거하는 서비스",
       category2: '홈 스타일링'),
   CategorySub(
       image: 'assets/kitchen.jpg',
@@ -396,7 +473,7 @@ const List<CategorySub> careList = [
       content: "-",
       category: '가전/가구 케어',
       image2: 'assets/g_12.jpg',
-      title2: '기타 가전 & 가구',
+      title2: '기타 가전/가구',
       content2: "식탁 상판 코팅, 벽걸이 TV 설치,\n 벽 시계 설치 등의 가전 / 가구\n 클린 및 케어 서비스",
       category2: '가전/가구 케어'),
 ];
@@ -469,10 +546,11 @@ const List<CategorySub> etcList = [
   CategorySub(
       image: 'assets/e_1.jpg',
       title: '사전점검',
-      content: "신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
+      content:
+          "신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
       category: '기타',
       image2: 'assets/e_2.jpg',
-      title2: '소독 & 방역',
+      title2: '소독 / 방역',
       content2:
           " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'),

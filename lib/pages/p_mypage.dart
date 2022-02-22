@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/pages/notice_write.dart';
 import 'package:moving_plus/pages/p_account_set.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_transcation_breakdown.dart';
@@ -208,7 +209,7 @@ class P_Mypage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(const MyPage_Arlim());
+                      Get.to(MyPageAlarm());
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 15, bottom: 10),
@@ -247,6 +248,32 @@ class P_Mypage extends StatelessWidget {
                                   width: 17, height: 17),
                               const SizedBox(width: 10),
                               const Text('공지사항'),
+                            ],
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.black,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(NoticeWrite());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset("assets/sound.png",
+                                  width: 17, height: 17),
+                              const SizedBox(width: 10),
+                              const Text('공지사항 작성'),
                             ],
                           ),
                           const Icon(

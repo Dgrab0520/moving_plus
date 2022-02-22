@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/find_account_data.dart';
 import 'package:moving_plus/pages/signup_pro_page.dart';
 import 'package:moving_plus/widgets/findResult.dart';
 
@@ -8,8 +9,8 @@ import 'p_login.dart';
 class FindId extends StatelessWidget {
   FindId({Key? key}) : super(key: key);
 
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController pwController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -19,7 +20,7 @@ class FindId extends StatelessWidget {
       )),
       backgroundColor: Colors.white,
       content: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -30,7 +31,7 @@ class FindId extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         Get.back();
-                        Get.dialog(P_Login());
+                        Get.dialog(const P_Login());
                       },
                       child: const Icon(Icons.arrow_back)),
                   InkWell(
@@ -58,9 +59,9 @@ class FindId extends StatelessWidget {
                   fontFamily: 'NanumSquareR',
                 ),
               ),
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               Container(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 8,
                   right: 8,
                 ),
@@ -76,13 +77,13 @@ class FindId extends StatelessWidget {
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
-                    Container(
+                    const SizedBox(height: 7),
+                    SizedBox(
                         width: Get.width,
                         height: 45,
                         child: TextField(
-                          controller: idController,
-                          decoration: InputDecoration(
+                          controller: nameController,
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.only(
                                 top: 10.0, bottom: 10, left: 15),
                             counterStyle: TextStyle(
@@ -112,7 +113,7 @@ class FindId extends StatelessWidget {
                           ),
                           keyboardType: TextInputType.emailAddress,
                         )),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,15 +126,15 @@ class FindId extends StatelessWidget {
                             fontFamily: 'NanumSquareR',
                           ),
                         ),
-                        SizedBox(height: 7),
-                        Container(
+                        const SizedBox(height: 7),
+                        SizedBox(
                             width: Get.width,
                             height: 45,
                             child: TextField(
-                              controller: pwController,
+                              controller: phoneController,
                               keyboardType: TextInputType.number,
                               onSubmitted: (String value) async {},
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                     top: 10.0, bottom: 10, left: 15),
                                 counterStyle: TextStyle(
@@ -164,28 +165,35 @@ class FindId extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InkWell(
                 onTap: () {
-                  Get.back();
-                  Get.dialog(const FindResult(
-                    result: "id",
-                    type: "아이디",
-                  ));
+                  FindAccount.getId(nameController.text, phoneController.text)
+                      .then((value) {
+                    if (value != "") {
+                      Get.back();
+                      Get.dialog(FindResult(
+                        result: value,
+                        type: "아이디",
+                      ));
+                    } else {
+                      Get.snackbar("실패", "일치하는 정보가 없습니다");
+                    }
+                  });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 8, right: 8),
+                  margin: const EdgeInsets.only(left: 8, right: 8),
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Color(0xFF025595),
+                    color: const Color(0xFF025595),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       '찾기',
                       style: TextStyle(
@@ -197,39 +205,35 @@ class FindId extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 25),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '아직 임주 플러스 회원이 아니신가요?',
+              const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    '아직 임주 플러스 회원이 아니신가요?',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'NanumSquareR',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                      Get.to(SignUpPage());
+                      //Get.dialog(P_Signup());
+                    },
+                    child: const Text(
+                      '회원가입 하기',
                       style: TextStyle(
                         fontSize: 10,
-                        fontFamily: 'NanumSquareR',
+                        fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                        Get.to(SignUpPage());
-                        //Get.dialog(P_Signup());
-                      },
-                      child: Container(
-                        child: Text(
-                          '회원가입 하기',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'NanumSquareB',
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 40),
+                ],
               ),
             ],
           ),

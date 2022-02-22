@@ -1,13 +1,19 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/controllers/alarm_settings_controller.dart';
 import 'package:moving_plus/controllers/main_alarm_controller.dart';
+import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/banner_data.dart';
+import 'package:moving_plus/datas/popular_data.dart';
 import 'package:moving_plus/datas/pro_data.dart';
+import 'package:moving_plus/datas/pro_login_data.dart';
+import 'package:moving_plus/models/pro_login_model.dart';
 import 'package:moving_plus/pages/c_mypage.dart';
 import 'package:moving_plus/pages/main_arlim.dart';
 import 'package:moving_plus/pages/p_chat.dart';
@@ -20,10 +26,25 @@ import 'homepage.dart';
 import 'interior_page.dart';
 
 final controller = Get.put(ReactiveController());
-
+// Notification Channel을 디바이스에 생성
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 Future<void> backgroundHandler(RemoteMessage message) async {
-  print(message.data.toString());
-  print(message.notification?.title);
+  final alarmSettingController = Get.put(AlarmSettings());
+  await alarmSettingController.getAlarmSettings();
+  print(alarmSettingController.isPush);
+
+  if (alarmSettingController.isPush) {
+    flutterLocalNotificationsPlugin.show(
+      0,
+      message.data['title'],
+      message.data['body'],
+      const NotificationDetails(
+        android: AndroidNotificationDetails('새로운 메세지', '새로운 메세지가 도착했습니다',
+            priority: Priority.high, importance: Importance.max),
+      ),
+    );
+  }
 }
 
 class Main_Page extends StatefulWidget {
@@ -40,7 +61,7 @@ class _Main_PageState extends State<Main_Page> {
   String? user_id;
   String? profile_image = 'None';
 
-  static final storage = FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
   DateTime currentBackPressTime = DateTime.now();
 
   void moveIndex(int index) {
@@ -62,18 +83,83 @@ class _Main_PageState extends State<Main_Page> {
   final bannerController = Get.put(Banner_Data());
   final proController = Get.put(Pro_Data());
   final mainController = Get.put(MainController());
+  final popularController = Get.put(PopularData());
 
-  @override
-  void initState() {
-    bannerController.getBanner_Main();
-    bannerController.getBanner_Sub();
-    proController.getPro_Alli();
-    proController.getPro_Best();
+  _asyncMethod() async {
+    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
+    //(데이터가 없을때는 null을 반환을 합니다.)
+    String? value = await storage.read(key: "login");
+    print('proInfo?? $value');
+
+    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
+    if (value != null) {
+      print(value.split(" ")[1] + value.split(" ")[3]);
+      List<Pro_Info> pro_info = [];
+      Pro_Login_Data.getPro_Login(value.split(" ")[1], value.split(" ")[3])
+          .then((value) {
+        setState(() {
+          pro_info = value;
+        });
+        if (value.length == 1) {
+          setState(() {
+            AlarmData().alarmCount(pro_info[0].pro_name);
+            FirebaseMessaging.instance.getToken().then((value) =>
+                Pro_Data.updateToken_Pro(pro_info[0].pro_id, value!)
+                    .then((value) {
+                  if (value == 'success') {
+                    print('update token success');
+                  } else {
+                    print('update token fail');
+                  }
+                }));
+          });
+          controller.change(
+              type: 'pro',
+              id: pro_info[0].id,
+              pro_id: pro_info[0].pro_id,
+              pro_pw: pro_info[0].pro_pw,
+              pro_name: pro_info[0].pro_name,
+              pro_phone: pro_info[0].pro_phone,
+              pro_email: pro_info[0].pro_email,
+              com_name: pro_info[0].com_name,
+              profile_img: pro_info[0].profile_img,
+              pro_token: pro_info[0].pro_token);
+          setState(() {});
+        } else {
+          Get.snackbar("로그인 실패", "아이디 또는 비밀번호가 틀렸습니다",
+              backgroundColor: Colors.white, colorText: Colors.black);
+        }
+      });
+    } else {
+      print('false & Again');
+    }
+  }
+
+  channelInit() async {
+    // Android용 새 Notification Channel
+    const AndroidNotificationChannel androidNotificationChannel =
+        AndroidNotificationChannel(
+      'Moving Plus Notification', // 임의의 id
+      '입주플러스', // 설정에 보일 채널명
+      description: '입주플러스의 Notification 채널', // 설정에 보일 채널 설명
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(androidNotificationChannel);
+  }
+
+  firebaseSetting() async {
+    //region
+
     FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging.instance.getToken().then((value) => print(value));
 //firebase message 초기화
 
     FirebaseMessaging.onMessage.listen((message) {
+      print(message.data['title']);
       setState(() {
         if (message.notification!.title == "Alarm") {
           mainController.isAlarm = true;
@@ -85,13 +171,30 @@ class _Main_PageState extends State<Main_Page> {
       });
     });
 //앱 실행중일때
-
     FirebaseMessaging.onMessageOpenedApp.listen((message) {});
 //알람을 클릭했을때
 
     FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 //앱이 백그라운드에서 실행중일때
+
+    //endregion
     /////////firebase
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+    bannerController.getBanner_Main();
+    bannerController.getBanner_Sub();
+    proController.getPro_Alli();
+    proController.getPro_Best();
+    popularController.getPopular();
+
+    channelInit();
+
+    firebaseSetting();
 
     _selectedIndex = widget.index;
     user_id = controller.pro.value.pro_id;
@@ -123,7 +226,14 @@ class _Main_PageState extends State<Main_Page> {
               iconTheme: IconThemeData(color: Color(0xFF025595)),
               elevation: 0,
               backgroundColor: Colors.white,
-              title: Image.asset("assets/logo_3.jpg", width: 65, height: 35),
+              title: InkWell(
+                  onTap: () {
+                    homeScrollController.animateTo(0.0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  },
+                  child:
+                      Image.asset("assets/logo_3.jpg", width: 65, height: 35)),
               centerTitle: true,
               actions: [
                 controller.pro.value.type == 'None'
@@ -315,12 +425,18 @@ class _Main_PageState extends State<Main_Page> {
                                         SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Text(controller.pro.value.pro_id,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontFamily: 'NanumSquareR',
-                                                )),
+                                            Flexible(
+                                              child: FittedBox(
+                                                child: Text(
+                                                    controller.pro.value.pro_id,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontFamily:
+                                                          'NanumSquareR',
+                                                    )),
+                                              ),
+                                            ),
                                             SizedBox(width: 7),
                                             Image.asset("assets/i_partner.png",
                                                 width: 13, height: 13),
