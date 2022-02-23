@@ -36,6 +36,7 @@ class Notice extends StatelessWidget {
         ),
         body: Obx(() => noticeController.isNoticeLoading
             ? ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: noticeController.notice.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(

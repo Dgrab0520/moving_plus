@@ -6,6 +6,8 @@ import 'package:moving_plus/datas/time_calculator.dart';
 import 'package:moving_plus/pages/c_chatlist.dart';
 import 'package:moving_plus/pages/request_received..dart';
 
+import 'notice.dart';
+
 class MainAlarm extends StatelessWidget {
   MainAlarm({Key? key}) : super(key: key);
 
@@ -40,7 +42,7 @@ class MainAlarm extends StatelessWidget {
         () => alarmController.isAlarmLoad
             ? alarmController.alarms.isNotEmpty
                 ? ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: alarmController.alarms.length,
                     itemBuilder: (BuildContext context, int index) {
                       return AlarmBox(
@@ -84,8 +86,10 @@ class AlarmBox extends StatelessWidget {
             Get.off(() =>
                 C_ChatList(mainType: currentAlarm.mainType, orderChat: value!));
           });
-        } else {
+        } else if (currentAlarm.alarmType == "estimate") {
           Get.off(() => const Request_Received());
+        } else if (currentAlarm.alarmType == "notice") {
+          Get.off(() => Notice());
         }
         alarmController.alarmDelete(index);
       },
@@ -107,30 +111,38 @@ class AlarmBox extends StatelessWidget {
                   Image.asset('assets/defaultImage.png', width: 50, height: 50),
                   const SizedBox(width: 12),
                   Flexible(
-                    child: RichText(
-                      text: TextSpan(
-                          style: const TextStyle(
-                              fontSize: 13, color: Colors.black),
-                          children: [
-                            TextSpan(
-                              text: currentAlarm.callerName,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontFamily: 'NanumSquareB',
-                              ),
+                    child: currentAlarm.alarmType == "notice"
+                        ? const Text(
+                            "새로운 공지사항이 있습니다",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'NanumSquareB',
                             ),
-                            TextSpan(
-                                text:
-                                    currentAlarm.alarmType == "estimated price"
-                                        ? '님이 예상 견적을 보냈습니다'
-                                        : '님이 견적서를 요청했습니다.'),
-                          ]),
-                    ),
+                          )
+                        : RichText(
+                            text: TextSpan(
+                                style: const TextStyle(
+                                    fontSize: 13, color: Colors.black),
+                                children: [
+                                  TextSpan(
+                                    text: currentAlarm.callerName,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'NanumSquareB',
+                                    ),
+                                  ),
+                                  TextSpan(
+                                      text: currentAlarm.alarmType ==
+                                              "estimated price"
+                                          ? '님이 예상 견적을 보냈습니다'
+                                          : '님이 견적서를 요청했습니다.'),
+                                ]),
+                          ),
                   )
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(TimeCalculator().getTime(currentAlarm.receptionTime),

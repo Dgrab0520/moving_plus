@@ -24,6 +24,7 @@ class _P_ChatState extends State<P_Chat> {
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen((message) {
+      isLoading = false;
       ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
         // controller.pro.value.pro_id
         print(value);

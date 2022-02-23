@@ -69,7 +69,7 @@ class _P_LoginState extends State<P_Login> {
       if (value.length == 1) {
         setState(() {
           _isLoading = true;
-          AlarmData().alarmCount(pro_info[0].pro_name);
+          AlarmData().alarmCount(pro_info[0].pro_id);
           FirebaseMessaging.instance.getToken().then((value) =>
               Pro_Data.updateToken_Pro(pro_info[0].pro_id, value!)
                   .then((value) {

@@ -60,15 +60,11 @@ class AlarmData extends GetxController {
   //알람 불러오기
   getAlarm() async {
     final controller = Get.put(ReactiveController());
-    String receiverName = controller.pro.value.type == "cus"
-        ? controller.pro.value.pro_id
-        : controller.pro.value.pro_name;
     print(controller.pro.value.pro_id);
-    print(receiverName);
     try {
       var map = <String, dynamic>{};
       map['action'] = LIST_ACTION;
-      map['receiverName'] = receiverName;
+      map['receiverName'] = controller.pro.value.pro_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Alarm Response : ${response.body}');
 

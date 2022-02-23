@@ -172,11 +172,18 @@ class _P_Account_SetState extends State<P_Account_Set> {
                 TextEditingController changePwdCheck = TextEditingController();
                 Get.defaultDialog(
                     title: "비밀번호 변경",
+                    titleStyle: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontFamily: 'NanumSquareB',
+                    ),
                     content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '현재 비밀번호',
                           style: TextStyle(
+                            color: Color(0xFF444444),
                             fontSize: 12,
                             fontFamily: 'NanumSquareR',
                           ),
@@ -187,6 +194,35 @@ class _P_Account_SetState extends State<P_Account_Set> {
                           obscureText: true,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: const TextStyle(fontSize: 10),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 10.0, bottom: 10, left: 15),
+                            counterStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintText: '비밀번호',
+                            labelStyle: TextStyle(color: Color(0xFFACACAC)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 10,
@@ -194,6 +230,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                         Text(
                           '새로운 비밀번호',
                           style: TextStyle(
+                            color: Color(0xFF444444),
                             fontSize: 12,
                             fontFamily: 'NanumSquareR',
                           ),
@@ -204,6 +241,35 @@ class _P_Account_SetState extends State<P_Account_Set> {
                           obscureText: true,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: const TextStyle(fontSize: 10),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 10.0, bottom: 10, left: 15),
+                            counterStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintText: '비밀번호',
+                            labelStyle: TextStyle(color: Color(0xFFACACAC)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 10,
@@ -211,6 +277,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                         Text(
                           '새로운 비밀번호 확인',
                           style: TextStyle(
+                            color: Color(0xFF444444),
                             fontSize: 12,
                             fontFamily: 'NanumSquareR',
                           ),
@@ -221,10 +288,76 @@ class _P_Account_SetState extends State<P_Account_Set> {
                           obscureText: true,
                           enableSuggestions: false,
                           autocorrect: false,
+                          style: const TextStyle(fontSize: 10),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 10.0, bottom: 10, left: 15),
+                            counterStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintStyle: TextStyle(
+                              fontSize: 10,
+                            ),
+                            hintText: '비밀번호',
+                            labelStyle: TextStyle(color: Color(0xFFACACAC)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide(
+                                  width: 1, color: Color(0xFFACACAC)),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    textConfirm: "변경",
+                    confirm: Container(
+                      height: 30,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF025595),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '변경',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontFamily: 'NanumSquareB',
+                          ),
+                        ),
+                      ),
+                    ),
+                    cancel: Container(
+                      height: 30,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFF025595),
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '취소',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: const Color(0xFF025595),
+                            fontFamily: 'NanumSquareB',
+                          ),
+                        ),
+                      ),
+                    ),
                     onConfirm: () {
                       if (currentPwd.text == controller.pro.value.pro_pw) {
                         if (changePwd.text == changePwdCheck.text) {

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:moving_plus/datas/popular_data.dart';
 import 'package:moving_plus/pages/api.dart';
 
+import 'p_login.dart';
+
 class MainPopular extends StatelessWidget {
   MainPopular({Key? key}) : super(key: key);
 
@@ -28,8 +30,10 @@ class MainPopular extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {
-                          Get.toNamed(
-                              '/request_estimage/true?serviceType=${popularController.popular[index]}');
+                          if (controller.pro.value.type == "cus") {
+                            Get.toNamed(
+                                '/request_estimage/true?serviceType=${popularController.popular[index]}');
+                          }
                         },
                         child: Container(
                           alignment: Alignment.bottomLeft,

@@ -182,7 +182,8 @@ class MyPageAlarm extends StatelessWidget {
                                               const SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(TimeOfDay.now()
+                                              Text(alarmSettingsController
+                                                  .selectedTimeFrom
                                                   .format(context)),
                                             ],
                                           ),
@@ -191,14 +192,18 @@ class MyPageAlarm extends StatelessWidget {
                                           width: 30,
                                         ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            alarmSettingsController
+                                                .selectToTime(context);
+                                          },
                                           child: Row(
                                             children: [
                                               Icon(CupertinoIcons.clock),
                                               const SizedBox(
                                                 width: 5,
                                               ),
-                                              Text(TimeOfDay.now()
+                                              Text(alarmSettingsController
+                                                  .selectedTimeTo
                                                   .format(context)),
                                             ],
                                           ),

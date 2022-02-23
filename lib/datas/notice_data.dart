@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:moving_plus/datas/alarm_setting_data.dart';
 
 import '../models/notice_model.dart';
 
@@ -21,7 +23,43 @@ class NoticeData extends GetxController {
 
   final _notice = <Notice>[].obs;
   set notice(value) => _notice.value = value;
-  List<Notice> get notice => _notice.value;
+  List<Notice> get notice => _notice;
+
+  final _isImportant = false.obs;
+  set isImportant(val) => _isImportant.value = val;
+  get isImportant => _isImportant.value;
+
+  //공지사항 쓰기
+  Future<String> putNotice(String title, String content, {File? file}) async {
+    String imageName = getRandomString() + ".gif";
+    try {
+      var url = Uri.parse(ROOT);
+      var request = http.MultipartRequest('POST', url);
+      request.fields['action'] = "NOTICE_INSERT";
+      request.fields['notice_id'] = getRandomString();
+      request.fields['notice_title'] = title;
+      request.fields['notice_content'] = content;
+      request.fields['notice_type'] = isImportant.toString();
+      if (file != null) {
+        request.fields['notice_content_img'] = imageName;
+        request.files
+            .add(await http.MultipartFile.fromPath("noticeImage", file.path));
+      }
+      http.Response response =
+          await http.Response.fromStream(await request.send());
+      print("Notice Write Response : ${response.body}");
+      if (response.statusCode == 200) {
+        AlarmSettingData().sendAlarm();
+        String result = response.body;
+        return result;
+      } else {
+        return "";
+      }
+    } catch (e) {
+      print(e);
+      return "";
+    }
+  }
 
   //공지사항 불러오기
   getNotice() async {

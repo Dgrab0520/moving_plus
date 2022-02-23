@@ -133,8 +133,10 @@ class FindPwd extends StatelessWidget {
                             child: TextField(
                               controller: phoneController,
                               keyboardType: TextInputType.number,
+                              maxLength: 11,
                               onSubmitted: (String value) async {},
                               decoration: InputDecoration(
+                                counterText: "",
                                 contentPadding: EdgeInsets.only(
                                     top: 10.0, bottom: 10, left: 15),
                                 counterStyle: TextStyle(

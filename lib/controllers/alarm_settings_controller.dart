@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/alarm_setting_data.dart';
+import 'package:moving_plus/datas/chat_data.dart';
 
 class AlarmSettings extends GetxController {
   final _isPush = true.obs;
@@ -29,6 +31,25 @@ class AlarmSettings extends GetxController {
       initialTime: selectedTimeFrom,
     );
     selectedTimeFrom = pickedTime;
+    const storage = FlutterSecureStorage();
+    await storage.write(
+        key: "TimeFrom",
+        value: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}");
+    print("${selectedTimeFrom.hour}:${selectedTimeFrom.minute}");
+  }
+
+  selectToTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: selectedTimeTo,
+    );
+    selectedTimeTo = pickedTime;
+
+    const storage = FlutterSecureStorage();
+    await storage.write(
+        key: "TimeTo",
+        value: "${selectedTimeTo.hour}:${selectedTimeTo.minute}");
+    print("${selectedTimeTo.hour}:${selectedTimeTo.minute}");
   }
 
   getAlarmSettings() async {
@@ -55,6 +76,32 @@ class AlarmSettings extends GetxController {
       } else {
         isDisturb = true;
       }
+      if (isDisturb) {
+        String from = "";
+        String to = "";
+        storage.read(key: "TimeFrom").then((value) {
+          if (value != null) {
+            from = value;
+          } else {
+            from = "${DateTime.now().hour}:${DateTime.now().minute}";
+          }
+          print("from : $from");
+          selectedTimeFrom = TimeOfDay(
+              hour: int.parse(from.split(":")[0]),
+              minute: int.parse(from.split(":")[1]));
+        });
+        storage.read(key: "TimeTo").then((value) {
+          if (value != null) {
+            to = value;
+          } else {
+            to = "${DateTime.now().hour}:${DateTime.now().minute}";
+          }
+          print("to : $to");
+          selectedTimeTo = TimeOfDay(
+              hour: int.parse(to.split(":")[0]),
+              minute: int.parse(to.split(":")[1]));
+        });
+      }
     });
     print("isPush : $isPush");
     print("isNotice : $isNotice");
@@ -68,6 +115,8 @@ class AlarmSettings extends GetxController {
         break;
       case "isNotice":
         isNotice = exists;
+        AlarmSettingData().updateAlarmSetting(controller.pro.value.type,
+            controller.pro.value.pro_id, exists ? 1 : 0);
         break;
       case "isDisturb":
         isDisturb = exists;

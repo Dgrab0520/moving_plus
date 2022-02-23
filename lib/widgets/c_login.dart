@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
-import 'package:moving_plus/pages/p_signup.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
 import '../pages/main_page.dart';
@@ -279,45 +277,45 @@ class _C_LoginState extends State<C_Login> {
                   SizedBox(
                     height: 5.0,
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        controller.change(
-                          id: "0",
-                          type: 'cus',
-                          pro_id: 'skstjdtndi12@naver.com',
-                          pro_pw: 'pw',
-                          pro_name: 'user_name',
-                          pro_phone: 'None',
-                          pro_email: 'None',
-                          com_name: 'None',
-                          profile_img: "default_image",
-                          pro_token:
-                              'fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV',
-                        );
-                        AlarmData().alarmCount('skstjdtndi12@naver.com');
-                        // Customer_Data.insertCustomer('skstjdtndi12@naver.com',
-                        //         generateRandomString(8))
-                        //     .then((value) {
-                        //   if (value == "success") {
-                        //     print('Insert Success');
-                        //     FirebaseMessaging.instance.getToken().then(
-                        //         (value) => Customer_Data.updateToken(
-                        //                     'skstjdtndi12@naver.com', value!)
-                        //                 .then((value2) {
-                        //               if (value2 == 'success') {
-                        //                 print('update token success');
-                        //               } else {
-                        //                 print('update token fail');
-                        //               }
-                        //             }));
-                        //     Get.offAll(Main_Page(index: 1));
-                        //   } else {
-                        //     print('$value : Insert Fails');
-                        //   }
-                        // });
-                        Get.offAll(Main_Page(index: 1));
-                      },
-                      child: Text("test")),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       controller.change(
+                  //         id: "0",
+                  //         type: 'cus',
+                  //         pro_id: 'skstjdtndi12@naver.com',
+                  //         pro_pw: 'pw',
+                  //         pro_name: 'user_name',
+                  //         pro_phone: 'None',
+                  //         pro_email: 'None',
+                  //         com_name: 'None',
+                  //         profile_img: "default_image",
+                  //         pro_token:
+                  //             'fr0g8B6AQPi4HZU2dkjw5v:APA91bGiIvr0YomXlFnztd8E9lHvyawJERxgHjCxGMFcib3lU9YEyccNiwAV0ajwwvBOQR7zOeo1nVuj_G_CMW3LnHkMI48eGZ8iECwfLkCq3u5Y1Pb2WBtqv6PqKxcg1Ps2Kld9fEeV',
+                  //       );
+                  //       AlarmData().alarmCount('skstjdtndi12@naver.com');
+                  //       // Customer_Data.insertCustomer('skstjdtndi12@naver.com',
+                  //       //         generateRandomString(8))
+                  //       //     .then((value) {
+                  //       //   if (value == "success") {
+                  //       //     print('Insert Success');
+                  //       //     FirebaseMessaging.instance.getToken().then(
+                  //       //         (value) => Customer_Data.updateToken(
+                  //       //                     'skstjdtndi12@naver.com', value!)
+                  //       //                 .then((value2) {
+                  //       //               if (value2 == 'success') {
+                  //       //                 print('update token success');
+                  //       //               } else {
+                  //       //                 print('update token fail');
+                  //       //               }
+                  //       //             }));
+                  //       //     Get.offAll(Main_Page(index: 1));
+                  //       //   } else {
+                  //       //     print('$value : Insert Fails');
+                  //       //   }
+                  //       // });
+                  //       Get.offAll(Main_Page(index: 1));
+                  //     },
+                  //     child: Text("test")),
                   TextButton(
                       onPressed: () {
                         print('파트너 로그인');
@@ -337,26 +335,26 @@ class _C_LoginState extends State<C_Login> {
               ),
             ),
             SizedBox(height: 40),
-            Container(
-              child: InkWell(
-                onTap: () {
-                  Get.back();
-                  Get.dialog(P_Signup());
-                },
-                child: Container(
-                  child: Center(
-                    child: Text(
-                      '파트너로 회원가입하기',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'NanumSquareB',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
+            // Container(
+            //   child: InkWell(
+            //     onTap: () {
+            //       Get.back();
+            //       Get.dialog(P_Signup());
+            //     },
+            //     child: Container(
+            //       child: Center(
+            //         child: Text(
+            //           '파트너로 회원가입하기',
+            //           style: TextStyle(
+            //             fontSize: 11,
+            //             fontFamily: 'NanumSquareB',
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(height: 20),
           ],
         ),
       ),

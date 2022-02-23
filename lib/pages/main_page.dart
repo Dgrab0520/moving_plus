@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/controllers/alarm_settings_controller.dart';
@@ -35,15 +36,26 @@ Future<void> backgroundHandler(RemoteMessage message) async {
   print(alarmSettingController.isPush);
 
   if (alarmSettingController.isPush) {
-    flutterLocalNotificationsPlugin.show(
-      0,
-      message.data['title'],
-      message.data['body'],
-      const NotificationDetails(
-        android: AndroidNotificationDetails('새로운 메세지', '새로운 메세지가 도착했습니다',
-            priority: Priority.high, importance: Importance.max),
-      ),
-    );
+    var format = DateFormat("HH:mm");
+    var from = format.parse(
+        "${alarmSettingController.selectedTimeFrom.hour}:${alarmSettingController.selectedTimeFrom.minute}");
+    var to = format.parse(
+        "${alarmSettingController.selectedTimeTo.hour}:${alarmSettingController.selectedTimeTo.minute}");
+    var now = format.parse("${DateTime.now().hour}:${DateTime.now().minute}");
+
+    if ((!alarmSettingController.isDisturb) ||
+        (alarmSettingController.isDisturb &&
+            !(now.isAfter(from) && now.isBefore(to)))) {
+      flutterLocalNotificationsPlugin.show(
+        0,
+        message.data['title'],
+        message.data['body'],
+        const NotificationDetails(
+          android: AndroidNotificationDetails('새로운 메세지', '새로운 메세지가 도착했습니다',
+              priority: Priority.high, importance: Importance.max),
+        ),
+      );
+    }
   }
 }
 
@@ -102,7 +114,7 @@ class _Main_PageState extends State<Main_Page> {
         });
         if (value.length == 1) {
           setState(() {
-            AlarmData().alarmCount(pro_info[0].pro_name);
+            AlarmData().alarmCount(pro_info[0].pro_id);
             FirebaseMessaging.instance.getToken().then((value) =>
                 Pro_Data.updateToken_Pro(pro_info[0].pro_id, value!)
                     .then((value) {
@@ -438,8 +450,15 @@ class _Main_PageState extends State<Main_Page> {
                                               ),
                                             ),
                                             SizedBox(width: 7),
-                                            Image.asset("assets/i_partner.png",
-                                                width: 13, height: 13),
+                                            controller.pro.value.type == 'cus'
+                                                ? Image.asset(
+                                                    'assets/kakao.png',
+                                                    width: 13,
+                                                    height: 13)
+                                                : Image.asset(
+                                                    "assets/i_partner.png",
+                                                    width: 13,
+                                                    height: 13),
                                           ],
                                         ),
                                       ],

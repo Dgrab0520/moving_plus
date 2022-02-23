@@ -92,7 +92,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
   void sum() {
     for (int i = 0; i < review.length; i++) {
       print('aa');
-      average += double.parse('${review[i].review_point}');
+      average += double.parse(review[i].review_point);
       print('aa$average');
     }
     average = average / review.length;
@@ -126,6 +126,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
       ),
       body: _isLoading
           ? SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 width: Get.width,
                 child: Column(
@@ -170,6 +171,8 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       if (controller.pro.value.type == "pro") {
                                         Get.to(ProFolio_Page(
                                           pro: pro[0],
+                                          review: review.length.toString(),
+                                          avg: average.toStringAsFixed(1),
                                         ));
                                       } else {
                                         Get.to(ChatPersonal(proId: proId));
@@ -362,7 +365,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text(
                                           '소개글',
                                           style: TextStyle(
@@ -371,146 +374,146 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                             fontFamily: 'NanumSquareB',
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Controller1.text = pro[0].pro_intro;
-                                            Get.defaultDialog(
-                                                radius: 5.0,
-                                                title: "수정하기",
-                                                titleStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15,
-                                                  fontFamily: 'NanumSquareB',
-                                                ),
-                                                content: Container(
-                                                  width: Get.width,
-                                                  child: SingleChildScrollView(
-                                                    child: Column(
-                                                      children: [
-                                                        TextField(
-                                                          controller:
-                                                              Controller1,
-                                                          maxLines: 7,
-                                                          maxLength: 500,
-                                                          style: TextStyle(
-                                                            fontSize: 14.0,
-                                                            color:
-                                                                Colors.black87,
-                                                            fontFamily:
-                                                                'NanumSquareB',
-                                                          ),
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                '파트너 소개를 해주세요',
-                                                            hintStyle: TextStyle(
-                                                                fontSize: 13.0,
-                                                                color: Colors
-                                                                    .black54),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                      width:
-                                                                          0.8,
-                                                                      color: Colors
-                                                                          .grey),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  width: 1.0,
-                                                                  color: Color(
-                                                                      0xFF025595)),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 20.0,
-                                                        ),
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Get.back();
-                                                              },
-                                                              child: Container(
-                                                                width:
-                                                                    Get.width *
-                                                                        0.3,
-                                                                height: 40.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                child: Center(
-                                                                    child: Text(
-                                                                  'Cancel',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'NanumSquareB',
-                                                                  ),
-                                                                )),
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10.0,
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Get.back();
-                                                              },
-                                                              child: Container(
-                                                                width:
-                                                                    Get.width *
-                                                                        0.3,
-                                                                height: 40.0,
-                                                                color: Color(
-                                                                    0xFF025595),
-                                                                child: Center(
-                                                                    child: Text(
-                                                                  'Edit',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontFamily:
-                                                                        'NanumSquareB',
-                                                                  ),
-                                                                )),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ));
-                                          },
-                                          child: Text(
-                                            '수정',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'NanumSquareB',
-                                            ),
-                                          ),
-                                        )
+                                        // TextButton(
+                                        //   onPressed: () {
+                                        //     Controller1.text = pro[0].pro_intro;
+                                        //     Get.defaultDialog(
+                                        //         radius: 5.0,
+                                        //         title: "수정하기",
+                                        //         titleStyle: TextStyle(
+                                        //           color: Colors.grey,
+                                        //           fontSize: 15,
+                                        //           fontFamily: 'NanumSquareB',
+                                        //         ),
+                                        //         content: Container(
+                                        //           width: Get.width,
+                                        //           child: SingleChildScrollView(
+                                        //             child: Column(
+                                        //               children: [
+                                        //                 TextField(
+                                        //                   controller:
+                                        //                       Controller1,
+                                        //                   maxLines: 7,
+                                        //                   maxLength: 500,
+                                        //                   style: TextStyle(
+                                        //                     fontSize: 14.0,
+                                        //                     color:
+                                        //                         Colors.black87,
+                                        //                     fontFamily:
+                                        //                         'NanumSquareB',
+                                        //                   ),
+                                        //                   decoration:
+                                        //                       InputDecoration(
+                                        //                     hintText:
+                                        //                         '파트너 소개를 해주세요',
+                                        //                     hintStyle: TextStyle(
+                                        //                         fontSize: 13.0,
+                                        //                         color: Colors
+                                        //                             .black54),
+                                        //                     enabledBorder:
+                                        //                         OutlineInputBorder(
+                                        //                       borderSide:
+                                        //                           const BorderSide(
+                                        //                               width:
+                                        //                                   0.8,
+                                        //                               color: Colors
+                                        //                                   .grey),
+                                        //                       borderRadius:
+                                        //                           BorderRadius
+                                        //                               .circular(
+                                        //                                   5),
+                                        //                     ),
+                                        //                     focusedBorder:
+                                        //                         OutlineInputBorder(
+                                        //                       borderSide: BorderSide(
+                                        //                           width: 1.0,
+                                        //                           color: Color(
+                                        //                               0xFF025595)),
+                                        //                       borderRadius:
+                                        //                           BorderRadius
+                                        //                               .circular(
+                                        //                                   5),
+                                        //                     ),
+                                        //                   ),
+                                        //                 ),
+                                        //                 SizedBox(
+                                        //                   height: 20.0,
+                                        //                 ),
+                                        //                 Row(
+                                        //                   mainAxisAlignment:
+                                        //                       MainAxisAlignment
+                                        //                           .center,
+                                        //                   children: [
+                                        //                     InkWell(
+                                        //                       onTap: () {
+                                        //                         Get.back();
+                                        //                       },
+                                        //                       child: Container(
+                                        //                         width:
+                                        //                             Get.width *
+                                        //                                 0.3,
+                                        //                         height: 40.0,
+                                        //                         color:
+                                        //                             Colors.grey,
+                                        //                         child: Center(
+                                        //                             child: Text(
+                                        //                           'Cancel',
+                                        //                           style:
+                                        //                               TextStyle(
+                                        //                             color: Colors
+                                        //                                 .white,
+                                        //                             fontSize:
+                                        //                                 13,
+                                        //                             fontFamily:
+                                        //                                 'NanumSquareB',
+                                        //                           ),
+                                        //                         )),
+                                        //                       ),
+                                        //                     ),
+                                        //                     SizedBox(
+                                        //                       width: 10.0,
+                                        //                     ),
+                                        //                     InkWell(
+                                        //                       onTap: () {
+                                        //                         Get.back();
+                                        //                       },
+                                        //                       child: Container(
+                                        //                         width:
+                                        //                             Get.width *
+                                        //                                 0.3,
+                                        //                         height: 40.0,
+                                        //                         color: Color(
+                                        //                             0xFF025595),
+                                        //                         child: Center(
+                                        //                             child: Text(
+                                        //                           'Edit',
+                                        //                           style:
+                                        //                               TextStyle(
+                                        //                             color: Colors
+                                        //                                 .white,
+                                        //                             fontSize:
+                                        //                                 13,
+                                        //                             fontFamily:
+                                        //                                 'NanumSquareB',
+                                        //                           ),
+                                        //                         )),
+                                        //                       ),
+                                        //                     )
+                                        //                   ],
+                                        //                 )
+                                        //               ],
+                                        //             ),
+                                        //           ),
+                                        //         ));
+                                        //   },
+                                        //   child: Text(
+                                        //     '수정',
+                                        //     style: TextStyle(
+                                        //       fontSize: 14,
+                                        //       fontFamily: 'NanumSquareB',
+                                        //     ),
+                                        //   ),
+                                        // )
                                       ],
                                     ),
                                     SizedBox(
@@ -1116,7 +1119,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                               width: 10.0,
                                             ),
                                             Text(
-                                              '${average.toStringAsFixed(2)}',
+                                              average.toStringAsFixed(2),
                                               style: TextStyle(
                                                 color: Colors.black87,
                                                 fontWeight: FontWeight.w600,
@@ -1146,113 +1149,108 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              Container(
-                                width: Get.width,
-                                height: Get.height * 0.5,
-                                child: ListView.builder(
-                                    itemCount:
-                                        review.length > 5 ? 5 : review.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Container(
-                                        width: Get.width,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25.0, vertical: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  '${review[index].cus_id}'
-                                                      .split('@')[0],
-                                                  style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
+                              Column(
+                                children: review
+                                    .map((e) => Container(
+                                          width: Get.width,
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 25.0, vertical: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    e.cus_id.split('@')[0],
+                                                    style: TextStyle(
+                                                      color: Colors.black87,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Container(
-                                                  width: double.parse(
-                                                              review[index]
-                                                                  .review_point)
-                                                          .toInt() *
-                                                      15,
-                                                  height: 20.0,
-                                                  child: ListView.builder(
-                                                    itemCount: double.parse(
-                                                            review[index]
-                                                                .review_point)
-                                                        .toInt(),
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    itemBuilder:
-                                                        (_, int index) {
-                                                      return Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.star,
-                                                            color: Color(
-                                                                0xFFFFC107),
-                                                            size: 14.0,
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
+                                                  SizedBox(
+                                                    width: 10.0,
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5.0,
-                                                ),
-                                                Text(
-                                                  '${review[index].register_date}'
-                                                      .split(" ")[0],
-                                                  style: TextStyle(
-                                                    color: Colors.black54,
-                                                    fontSize: 12,
+                                                  Container(
+                                                    width: double.parse(
+                                                                e.review_point)
+                                                            .toInt() *
+                                                        15,
+                                                    height: 20.0,
+                                                    child: ListView.builder(
+                                                      itemCount: double.parse(
+                                                              e.review_point)
+                                                          .toInt(),
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemBuilder:
+                                                          (_, int index) {
+                                                        return Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              Icons.star,
+                                                              color: Color(
+                                                                  0xFFFFC107),
+                                                              size: 14.0,
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
-                                            Text(
-                                              '${review[index].review_content}',
-                                              style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 13,
+                                                  SizedBox(
+                                                    width: 5.0,
+                                                  ),
+                                                  Text(
+                                                    e.register_date
+                                                        .split(" ")[0],
+                                                    style: TextStyle(
+                                                      color: Colors.black54,
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              maxLines: 4,
-                                              softWrap: false,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.start,
-                                            ),
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
-                                            Divider(
-                                              thickness: 0.5,
-                                              height: 1.0,
-                                              color: Color(0xFFe6e6e6),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
+                                              SizedBox(
+                                                height: 5.0,
+                                              ),
+                                              Text(
+                                                e.review_content,
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 13,
+                                                ),
+                                                maxLines: 4,
+                                                softWrap: false,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                              ),
+                                              SizedBox(
+                                                height: 5.0,
+                                              ),
+                                              Divider(
+                                                thickness: 0.5,
+                                                height: 1.0,
+                                                color: Color(0xFFe6e6e6),
+                                              ),
+                                            ],
+                                          ),
+                                        ))
+                                    .toList(),
+                              ),
+                              SizedBox(
+                                height: 20.0,
                               ),
                             ],
                           ),
@@ -1461,7 +1459,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                 ),
               ),
             )
-          : Center(
+          : const Center(
               child: CircularProgressIndicator(),
             ),
     );

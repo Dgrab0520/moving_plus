@@ -63,7 +63,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
     print("token : $token");
     final tempController = Get.put(ReactiveController());
     AlarmData.putChat(
-        tempController.pro.value.pro_name, [customer_id], "estimated price",
+        tempController.pro.value.pro_id, [customer_id], "estimated price",
         order_id: order_id, mainType: service_type);
 
     final HttpsCallableResult result = await callable.call(

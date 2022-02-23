@@ -10,14 +10,17 @@ import '../datas/pro_data_update.dart';
 import '../models/pro_intro_model.dart';
 
 class ProFolio_Page extends StatefulWidget {
-  const ProFolio_Page({Key? key, required this.pro}) : super(key: key);
+  const ProFolio_Page(
+      {Key? key, required this.pro, required this.review, required this.avg})
+      : super(key: key);
   final Pro_Intro pro;
+  final String review;
+  final String avg;
   @override
   _ProFolio_PageState createState() => _ProFolio_PageState();
 }
 
 class _ProFolio_PageState extends State<ProFolio_Page> {
-  bool _isBtn = true; //파트너 정보
   late Pro_Intro pro;
   String serviceText = "";
   String areaText = "";
@@ -429,7 +432,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text(
+          title: const Text(
             '포트폴리오',
             style: TextStyle(
               color: Colors.white,
@@ -438,12 +441,12 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color(0xFF025595),
+          backgroundColor: const Color(0xFF025595),
           leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
               )),
@@ -452,17 +455,18 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
           children: [
             Expanded(
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
                       width: Get.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom:
                               BorderSide(width: 1.0, color: Color(0xFFcccccc)),
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 20.0),
                       child: Row(
                         children: <Widget>[
@@ -472,7 +476,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                             backgroundImage: NetworkImage(
                                 'http://211.110.44.91/plus/pro_profile/${pro.profile_img}'),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20.0,
                           ),
                           Column(
@@ -481,45 +485,45 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                             children: <Widget>[
                               Text(
                                 pro.com_name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18.0,
                                   fontFamily: 'NanumSquareEB',
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               Text(
-                                '총 공사 20건',
-                                style: TextStyle(
+                                '받은 견적서 ${pro.estimateCount}개',
+                                style: const TextStyle(
                                     fontSize: 15.0, color: Colors.black87),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 2.0,
                               ),
                               Row(
                                 children: <Widget>[
-                                  Icon(
+                                  const Icon(
                                     Icons.star,
                                     color: Color(0xFFFFC107),
                                     size: 15.0,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 1.0,
                                   ),
                                   Text(
-                                    '4.7',
-                                    style: TextStyle(
+                                    widget.avg,
+                                    style: const TextStyle(
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black87),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 1.0,
                                   ),
                                   Text(
-                                    '(10개)',
-                                    style: TextStyle(
+                                    '(${widget.review}개)',
+                                    style: const TextStyle(
                                         fontSize: 12.0, color: Colors.black87),
                                   ),
                                 ],
@@ -529,63 +533,77 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     InkWell(
                       onTap: () {
                         TextEditingController intro = TextEditingController();
                         intro.text = pro.pro_intro;
                         Get.defaultDialog(
-                            title: "소개글",
-                            titleStyle: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'NanumSquareEB',
+                          title: "소개글",
+                          titleStyle: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: 'NanumSquareEB',
+                          ),
+                          content: TextField(
+                            controller: intro,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 4,
+                            minLines: 1,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
                             ),
-                            content: TextField(
-                              controller: intro,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: 4,
-                              minLines: 1,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                            ),
-                            textConfirm: "확인",
-                            textCancel: "취소",
-                            onConfirm: () {
+                          ),
+                          confirm: ElevatedButton(
+                            onPressed: () {
                               setState(() {
                                 pro.pro_intro = intro.text;
                               });
                               Get.back();
-                            });
+                            },
+                            child: const Text("확인"),
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFF025595),
+                            ),
+                          ),
+                          cancel: ElevatedButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: const Text("취소"),
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFF025595),
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
-                        padding:
-                            EdgeInsets.only(left: 15.0, right: 15, bottom: 30),
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15, bottom: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               '소개글',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'NanumSquareEB',
                               ),
                             ),
-                            SizedBox(height: 7),
+                            const SizedBox(height: 7),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
                                   child: Text(
                                     pro.pro_intro,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black54,
                                       fontSize: 14.0,
                                     ),
                                   ),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_ios,
                                   color: Colors.black,
                                   size: 18,
@@ -614,7 +632,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                         flex: 2,
                                         child: Text(
                                           '대표자',
@@ -629,20 +647,20 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 3,
                                           minLines: 1,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                           ),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 13,
                                               fontFamily: 'NanumSquareB'),
                                         )),
-                                    Expanded(flex: 1, child: Text('')),
+                                    Expanded(flex: 1, child: Container()),
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                         flex: 2,
                                         child: Text(
                                           '전문분야',
@@ -658,67 +676,63 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: <Widget>[
-                                              Container(
-                                                padding: EdgeInsets.symmetric(),
-                                                child: MultiSelectFormField(
-                                                  autovalidate:
-                                                      AutovalidateMode.always,
-                                                  chipBackGroundColor:
-                                                      Color(0xFF025595),
-                                                  chipLabelStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white,
-                                                      fontSize: 12.0),
-                                                  dialogTextStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12.0),
-                                                  checkBoxActiveColor:
-                                                      Colors.blue,
-                                                  checkBoxCheckColor:
-                                                      Colors.white,
-                                                  dialogShapeBorder:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      12.0))),
-                                                  title: Text(
-                                                    "나의 서비스",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                  validator: (value) {
-                                                    if (value == null ||
-                                                        value.length == 0) {
-                                                      return '제공 가능한 서비스를 한개 이상 선택해주세요';
-                                                    } else if (value.length >
-                                                        5) {
-                                                      return '최대 5개까지 선택 할 수 있습니다';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  dataSource: myService,
-                                                  textField: 'display',
-                                                  valueField: 'value',
-                                                  okButtonLabel: 'OK',
-                                                  cancelButtonLabel: 'CANCEL',
-                                                  hintWidget: Text(
-                                                    '',
-                                                    style: TextStyle(
+                                              MultiSelectFormField(
+                                                autovalidate:
+                                                    AutovalidateMode.always,
+                                                chipBackGroundColor:
+                                                    const Color(0xFF025595),
+                                                chipLabelStyle: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 12.0),
+                                                dialogTextStyle:
+                                                    const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 12.0),
-                                                  ),
-                                                  initialValue: _myServices,
-                                                  onSaved: (value) {
-                                                    if (value.length <= 5) {
-                                                      setState(() {
-                                                        _myServices = value;
-                                                        print(_myServices);
-                                                      });
-                                                    }
-                                                  },
+                                                checkBoxActiveColor:
+                                                    Colors.blue,
+                                                checkBoxCheckColor:
+                                                    Colors.white,
+                                                dialogShapeBorder:
+                                                    const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    12.0))),
+                                                title: const Text(
+                                                  "나의 서비스",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.length == 0) {
+                                                    return '제공 가능한 서비스를 한개 이상 선택해주세요';
+                                                  } else if (value.length > 5) {
+                                                    return '최대 5개까지 선택 할 수 있습니다';
+                                                  }
+                                                  return null;
+                                                },
+                                                dataSource: myService,
+                                                textField: 'display',
+                                                valueField: 'value',
+                                                okButtonLabel: 'OK',
+                                                cancelButtonLabel: 'CANCEL',
+                                                hintWidget: const Text(
+                                                  '',
+                                                  style:
+                                                      TextStyle(fontSize: 12.0),
+                                                ),
+                                                initialValue: _myServices,
+                                                onSaved: (value) {
+                                                  if (value.length <= 5) {
+                                                    setState(() {
+                                                      _myServices = value;
+                                                      print(_myServices);
+                                                    });
+                                                  }
+                                                },
                                               ),
                                             ],
                                           ),
@@ -729,10 +743,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                         flex: 2,
                                         child: Text(
                                           '시공지역',
@@ -748,67 +762,63 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: <Widget>[
-                                              Container(
-                                                padding: EdgeInsets.symmetric(),
-                                                child: MultiSelectFormField(
-                                                  autovalidate:
-                                                      AutovalidateMode.always,
-                                                  chipBackGroundColor:
-                                                      Color(0xFF025595),
-                                                  chipLabelStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.white,
-                                                      fontSize: 12.0),
-                                                  dialogTextStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12.0),
-                                                  checkBoxActiveColor:
-                                                      Colors.blue,
-                                                  checkBoxCheckColor:
-                                                      Colors.white,
-                                                  dialogShapeBorder:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      12.0))),
-                                                  title: Text(
-                                                    "서비스 가능 지역",
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                  validator: (value) {
-                                                    if (value == null ||
-                                                        value.length == 0) {
-                                                      return '서비스 가능 지역을 한개 이상 선택해주세요';
-                                                    } else if (value.length >
-                                                        3) {
-                                                      return '최대 3개까지 선택 할 수 있습니다';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  dataSource: myArea,
-                                                  textField: 'display',
-                                                  valueField: 'value',
-                                                  okButtonLabel: 'OK',
-                                                  cancelButtonLabel: 'CANCEL',
-                                                  hintWidget: Text(
-                                                    '',
-                                                    style: TextStyle(
+                                              MultiSelectFormField(
+                                                autovalidate:
+                                                    AutovalidateMode.always,
+                                                chipBackGroundColor:
+                                                    const Color(0xFF025595),
+                                                chipLabelStyle: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 12.0),
+                                                dialogTextStyle:
+                                                    const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 12.0),
-                                                  ),
-                                                  initialValue: _myAreas,
-                                                  onSaved: (value) {
-                                                    if (value.length <= 5) {
-                                                      setState(() {
-                                                        _myAreas = value;
-                                                        print(_myAreas);
-                                                      });
-                                                    }
-                                                  },
+                                                checkBoxActiveColor:
+                                                    Colors.blue,
+                                                checkBoxCheckColor:
+                                                    Colors.white,
+                                                dialogShapeBorder:
+                                                    const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    12.0))),
+                                                title: const Text(
+                                                  "서비스 가능 지역",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.length == 0) {
+                                                    return '서비스 가능 지역을 한개 이상 선택해주세요';
+                                                  } else if (value.length > 3) {
+                                                    return '최대 3개까지 선택 할 수 있습니다';
+                                                  }
+                                                  return null;
+                                                },
+                                                dataSource: myArea,
+                                                textField: 'display',
+                                                valueField: 'value',
+                                                okButtonLabel: 'OK',
+                                                cancelButtonLabel: 'CANCEL',
+                                                hintWidget: const Text(
+                                                  '',
+                                                  style:
+                                                      TextStyle(fontSize: 12.0),
+                                                ),
+                                                initialValue: _myAreas,
+                                                onSaved: (value) {
+                                                  if (value.length <= 5) {
+                                                    setState(() {
+                                                      _myAreas = value;
+                                                      print(_myAreas);
+                                                    });
+                                                  }
+                                                },
                                               ),
                                             ],
                                           ),
@@ -819,10 +829,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                         flex: 2,
                                         child: Text(
                                           '경력',
@@ -837,10 +847,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 3,
                                           minLines: 1,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                           ),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 13,
                                               fontFamily: 'NanumSquareB'),
                                         )),
@@ -850,10 +860,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                         flex: 2,
                                         child: Text(
                                           '결제',
@@ -868,10 +878,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 3,
                                           minLines: 1,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                           ),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 13,
                                               fontFamily: 'NanumSquareB'),
                                         )),
@@ -886,12 +896,12 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {},
-                                      child: Text("취소"),
+                                      child: const Text("취소"),
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color(0xFF025595),
+                                        primary: const Color(0xFF025595),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     ElevatedButton(
@@ -904,32 +914,38 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                           pro.pro_service4 = "";
                                           pro.pro_service5 = "";
                                           pro.pro_service1 = _myServices[0];
-                                          if (_myServices.length > 1)
+                                          if (_myServices.length > 1) {
                                             pro.pro_service2 = _myServices[1];
-                                          if (_myServices.length > 2)
+                                          }
+                                          if (_myServices.length > 2) {
                                             pro.pro_service3 = _myServices[2];
-                                          if (_myServices.length > 3)
+                                          }
+                                          if (_myServices.length > 3) {
                                             pro.pro_service4 = _myServices[3];
-                                          if (_myServices.length > 4)
+                                          }
+                                          if (_myServices.length > 4) {
                                             pro.pro_service5 = _myServices[4];
+                                          }
 
                                           pro.pro_area1 = "";
                                           pro.pro_area2 = "";
                                           pro.pro_area3 = "";
                                           pro.pro_area1 = _myAreas[0];
-                                          if (_myAreas.length > 1)
+                                          if (_myAreas.length > 1) {
                                             pro.pro_area2 = _myAreas[1];
-                                          if (_myAreas.length > 2)
+                                          }
+                                          if (_myAreas.length > 2) {
                                             pro.pro_area3 = _myAreas[2];
+                                          }
 
                                           pro.pro_career = career.text;
                                           pro.pro_pay = pay.text;
                                         });
                                         Get.back();
                                       },
-                                      child: Text("확인"),
+                                      child: const Text("확인"),
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color(0xFF025595),
+                                        primary: const Color(0xFF025595),
                                       ),
                                     )
                                   ],
@@ -941,22 +957,22 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                       },
                       child: Container(
                         width: Get.width,
-                        padding: EdgeInsets.only(left: 15.0, right: 15),
+                        padding: const EdgeInsets.only(left: 15.0, right: 15),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               '기본정보',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: 'NanumSquareEB',
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                     flex: 2,
                                     child: Text(
                                       '대표자',
@@ -968,17 +984,17 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                     flex: 6,
                                     child: Text(
                                       pro.pro_name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB'),
                                     )),
-                                Expanded(flex: 1, child: Text('')),
+                                Expanded(flex: 1, child: Container()),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                     flex: 2,
                                     child: Text(
                                       '전문분야',
@@ -1006,7 +1022,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                               ? ''
                                               : " / ") +
                                           pro.pro_service5,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB'),
                                     )),
@@ -1016,10 +1032,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                     flex: 2,
                                     child: Text(
                                       '시공지역',
@@ -1035,11 +1051,11 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                           pro.pro_area2 +
                                           ((pro.pro_area3 == '') ? '' : " / ") +
                                           pro.pro_area3,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB'),
                                     )),
-                                Expanded(
+                                const Expanded(
                                   flex: 1,
                                   child: Align(
                                       alignment: Alignment.centerRight,
@@ -1051,10 +1067,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                     flex: 2,
                                     child: Text(
                                       '경력',
@@ -1068,20 +1084,20 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                       pro.pro_career == ""
                                           ? "신입"
                                           : pro.pro_career,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB'),
                                     )),
                                 Expanded(
                                   flex: 1,
-                                  child: Text(''),
+                                  child: Container(),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                     flex: 2,
                                     child: Text(
                                       '결제',
@@ -1093,13 +1109,13 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                     flex: 6,
                                     child: Text(
                                       pro.pro_pay,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB'),
                                     )),
                                 Expanded(
                                   flex: 1,
-                                  child: Text(''),
+                                  child: Container(),
                                 ),
                               ],
                             ),
@@ -1107,22 +1123,22 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Container(
                       width: Get.width,
-                      padding: EdgeInsets.only(left: 15.0, right: 15),
+                      padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             '제공 서비스',
                             style: TextStyle(
                               fontSize: 13,
                               fontFamily: 'NanumSquareEB',
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -1132,19 +1148,19 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                   child: Container(
                                     width: 85,
                                     height: 25,
-                                    margin: EdgeInsets.only(right: 5),
+                                    margin: const EdgeInsets.only(right: 5),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      color: Color(0xFFF9F9F9),
+                                      color: const Color(0xFFF9F9F9),
                                       border: Border.all(
                                         width: 1,
-                                        color: Color(0xFFcccccc),
+                                        color: const Color(0xFFcccccc),
                                       ),
                                     ),
                                     child: Center(
                                       child: Text(
                                         pro.pro_service1,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
@@ -1158,20 +1174,21 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                         child: Container(
                                           width: 85,
                                           height: 25,
-                                          margin: EdgeInsets.only(right: 5),
+                                          margin:
+                                              const EdgeInsets.only(right: 5),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            color: Color(0xFFF9F9F9),
+                                            color: const Color(0xFFF9F9F9),
                                             border: Border.all(
                                               width: 1,
-                                              color: Color(0xFFcccccc),
+                                              color: const Color(0xFFcccccc),
                                             ),
                                           ),
                                           child: Center(
                                             child: Text(
                                               pro.pro_service2,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1185,20 +1202,21 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                         child: Container(
                                           width: 85,
                                           height: 25,
-                                          margin: EdgeInsets.only(right: 5),
+                                          margin:
+                                              const EdgeInsets.only(right: 5),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            color: Color(0xFFF9F9F9),
+                                            color: const Color(0xFFF9F9F9),
                                             border: Border.all(
                                               width: 1,
-                                              color: Color(0xFFcccccc),
+                                              color: const Color(0xFFcccccc),
                                             ),
                                           ),
                                           child: Center(
                                             child: Text(
                                               pro.pro_service3,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1212,20 +1230,21 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                         child: Container(
                                           width: 85,
                                           height: 25,
-                                          margin: EdgeInsets.only(right: 5),
+                                          margin:
+                                              const EdgeInsets.only(right: 5),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            color: Color(0xFFF9F9F9),
+                                            color: const Color(0xFFF9F9F9),
                                             border: Border.all(
                                               width: 1,
-                                              color: Color(0xFFcccccc),
+                                              color: const Color(0xFFcccccc),
                                             ),
                                           ),
                                           child: Center(
                                             child: Text(
                                               pro.pro_service4,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1239,20 +1258,21 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                         child: Container(
                                           width: 85,
                                           height: 25,
-                                          margin: EdgeInsets.only(right: 5),
+                                          margin:
+                                              const EdgeInsets.only(right: 5),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            color: Color(0xFFF9F9F9),
+                                            color: const Color(0xFFF9F9F9),
                                             border: Border.all(
                                               width: 1,
-                                              color: Color(0xFFcccccc),
+                                              color: const Color(0xFFcccccc),
                                             ),
                                           ),
                                           child: Center(
                                             child: Text(
                                               pro.pro_service5,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1265,25 +1285,25 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Container(
                       width: Get.width,
-                      padding:
-                          EdgeInsets.only(left: 15.0, right: 15, bottom: 30),
+                      padding: const EdgeInsets.only(
+                          left: 15.0, right: 15, bottom: 30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text(
+                              const Text(
                                 '사진 및 동영상',
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'NanumSquareEB',
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               TextButton(
@@ -1316,10 +1336,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                       print(types);
                                     }
                                   },
-                                  child: Text("사진 추가")),
+                                  child: const Text("사진 추가")),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           SizedBox(
                             height: 90,
                             child: ListView.builder(
@@ -1329,7 +1349,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                   return Container(
                                     width: 90,
                                     height: 90,
-                                    margin: EdgeInsets.only(right: 7),
+                                    margin: const EdgeInsets.only(right: 7),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
@@ -1372,13 +1392,13 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
               child: Container(
                 width: 300,
                 height: 45,
-                padding: EdgeInsets.only(left: 15.0, right: 15),
+                padding: const EdgeInsets.only(left: 15.0, right: 15),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: Color(0xFF025595),
+                    color: const Color(0xFF025595),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       '저장하기',
                       style: TextStyle(
@@ -1391,7 +1411,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
           ],
         ));
   }

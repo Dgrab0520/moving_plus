@@ -104,7 +104,7 @@ class C_Mypage extends StatelessWidget {
                                       fontFamily: 'NanumSquareR',
                                     )),
                                 const SizedBox(width: 7),
-                                Image.asset("assets/i_partner2.png",
+                                Image.asset('assets/kakao_b.png',
                                     width: 15, height: 15),
                               ],
                             ),
