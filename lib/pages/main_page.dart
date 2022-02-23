@@ -21,6 +21,7 @@ import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_mypage.dart';
 import 'package:moving_plus/pages/receive_estimate.dart';
 import 'package:moving_plus/pages/request_received..dart';
+import 'package:moving_plus/widgets/c_login.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
 import 'homepage.dart';
@@ -251,7 +252,7 @@ class _Main_PageState extends State<Main_Page> {
                 controller.pro.value.type == 'None'
                     ? InkWell(
                         onTap: () {
-                          Get.dialog(P_Login());
+                          Get.dialog(C_Login(index: 0));
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -491,7 +492,9 @@ class _Main_PageState extends State<Main_Page> {
                       ? GestureDetector(
                           onTap: () {
                             print('로그인');
-                            Get.dialog(P_Login());
+                            Get.dialog(C_Login(
+                              index: 0,
+                            ));
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(
@@ -675,7 +678,7 @@ class _Main_PageState extends State<Main_Page> {
             if (index == 2) {
               mainController.isChat = false;
               if (controller.pro.value.pro_id == "None") {
-                Get.dialog(const P_Login());
+                Get.dialog(const C_Login(index: 0));
               } else if (controller.pro.value.type == "pro") {
                 _widgetOptions = [
                   const Interior_Page(categoryTitle: 0),

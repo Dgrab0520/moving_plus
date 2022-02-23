@@ -260,34 +260,34 @@ class P_Mypage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  controller.pro.value.pro_id != "admin"
-                      ? Container()
-                      : InkWell(
-                          onTap: () {
-                            Get.to(NoticeWrite());
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset("assets/sound.png",
-                                        width: 17, height: 17),
-                                    const SizedBox(width: 10),
-                                    const Text('공지사항 작성'),
-                                  ],
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.black,
-                                  size: 18,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                  // controller.pro.value.pro_id != "admin"
+                  //     ? Container()
+                  //     : InkWell(
+                  //         onTap: () {
+                  //           Get.to(NoticeWrite());
+                  //         },
+                  //         child: Container(
+                  //           padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  //           child: Row(
+                  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //             children: [
+                  //               Row(
+                  //                 children: [
+                  //                   Image.asset("assets/sound.png",
+                  //                       width: 17, height: 17),
+                  //                   const SizedBox(width: 10),
+                  //                   const Text('공지사항 작성'),
+                  //                 ],
+                  //               ),
+                  //               const Icon(
+                  //                 Icons.arrow_forward_ios,
+                  //                 color: Colors.black,
+                  //                 size: 18,
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
                 ],
               ),
             ),
