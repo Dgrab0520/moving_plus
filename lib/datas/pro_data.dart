@@ -27,11 +27,16 @@ class Pro_Data extends GetxController {
   final _pro = <Pro>[].obs;
   final _isProLoading = false.obs;
 
-  List<Pro> get pro => _pro.value;
+  List<Pro> get pro => _pro;
   set pro(val) => _pro.value = val;
 
-  get isProLoading => _isProLoading.value;
+  bool get isProLoading => _isProLoading.value;
   set isProLoading(val) => _isProLoading.value = val;
+
+  final _heart = <bool>[].obs;
+
+  get heart => _heart;
+  set heart(val) => _heart.value = val;
 
   //제휴 파트너(인기 Badge) -> 일반 전문가 순으로 모든 전문가 조회
   get_Pro(String condition) async {

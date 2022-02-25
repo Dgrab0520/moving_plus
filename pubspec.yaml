@@ -48,7 +48,7 @@ dependencies:
   mime: ^1.0.1
   file_picker: ^4.3.0
   bubble: ^1.2.1
-  vertical_scrollable_tabview: ^0.0.4
+  vertical_scrollable_tabview: 0.0.4
   flutter_data: ^1.0.1
 
   carousel_slider: ^4.0.0

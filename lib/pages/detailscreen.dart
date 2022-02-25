@@ -1,28 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key, required this.path}) : super(key: key);
-
   final String path;
-  @override
-  _DetailScreenState createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
+      backgroundColor: Colors.white,
       body: GestureDetector(
         child: Center(
           child: PhotoView(
+            backgroundDecoration: const BoxDecoration(color: Colors.white),
             minScale: 0.1,
-            imageProvider: NetworkImage(widget.path),
+            imageProvider: NetworkImage(path),
           ),
         ),
         onTap: () {

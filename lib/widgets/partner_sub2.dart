@@ -176,44 +176,45 @@ class Partner_Sub2 extends StatelessWidget {
                                             ),
                                           )
                                         : Container(),
-                                    controller.proBest[index].pro_service3 != ""
-                                        ? SizedBox(width: 3)
-                                        : SizedBox(width: 0),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.only(left: 7, right: 7),
-                                      height: 17,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF031D63),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text('카드결제',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 7,
-                                              fontFamily: 'NanumSquareR',
-                                            )),
-                                      ),
-                                    ),
-                                    SizedBox(width: 3),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.only(left: 7, right: 7),
-                                      height: 17,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF031D63),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text('현금영수증',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 7,
-                                              fontFamily: 'NanumSquareR',
-                                            )),
-                                      ),
-                                    ),
+
+                                    // controller.proBest[index].pro_service3 != ""
+                                    //     ? SizedBox(width: 3)
+                                    //     : SizedBox(width: 0),
+                                    // Container(
+                                    //   padding:
+                                    //       EdgeInsets.only(left: 7, right: 7),
+                                    //   height: 17,
+                                    //   decoration: BoxDecoration(
+                                    //     color: Color(0xFF031D63),
+                                    //     borderRadius: BorderRadius.circular(15),
+                                    //   ),
+                                    //   child: Center(
+                                    //     child: Text('카드결제',
+                                    //         style: TextStyle(
+                                    //           color: Colors.white,
+                                    //           fontSize: 7,
+                                    //           fontFamily: 'NanumSquareR',
+                                    //         )),
+                                    //   ),
+                                    // ),
+                                    // SizedBox(width: 3),
+                                    // Container(
+                                    //   padding:
+                                    //       EdgeInsets.only(left: 7, right: 7),
+                                    //   height: 17,
+                                    //   decoration: BoxDecoration(
+                                    //     color: Color(0xFF031D63),
+                                    //     borderRadius: BorderRadius.circular(15),
+                                    //   ),
+                                    //   child: Center(
+                                    //     child: Text('현금영수증',
+                                    //         style: TextStyle(
+                                    //           color: Colors.white,
+                                    //           fontSize: 7,
+                                    //           fontFamily: 'NanumSquareR',
+                                    //         )),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               )

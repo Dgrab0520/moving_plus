@@ -157,7 +157,7 @@ class _Interior_PageState extends State<Interior_Page>
                 ),
               ],
             )
-          : CircularProgressIndicator(),
+          : const CircularProgressIndicator(),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
