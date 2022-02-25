@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/pages/notice_write.dart';
 import 'package:moving_plus/pages/p_account_set.dart';
 import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/p_transcation_breakdown.dart';
