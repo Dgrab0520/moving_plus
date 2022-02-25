@@ -596,56 +596,56 @@ class _Partner_SearchState extends State<Partner_Search> {
                                                         ),
                                                       )
                                                     : Container(),
-                                                controller.pro[index]
-                                                            .pro_service3 !=
-                                                        ""
-                                                    ? const SizedBox(width: 3)
-                                                    : const SizedBox(width: 0),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7, right: 7),
-                                                  height: 17,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFF031D63),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: const Center(
-                                                    child: Text('카드결제',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontFamily:
-                                                              'NanumSquareR',
-                                                        )),
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 3),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 7, right: 7),
-                                                  height: 17,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFF031D63),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  ),
-                                                  child: const Center(
-                                                    child: Text('현금영수증',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontFamily:
-                                                              'NanumSquareR',
-                                                        )),
-                                                  ),
-                                                ),
+                                                // controller.pro[index]
+                                                //             .pro_service3 !=
+                                                //         ""
+                                                //     ? const SizedBox(width: 3)
+                                                //     : const SizedBox(width: 0),
+                                                // Container(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 7, right: 7),
+                                                //   height: 17,
+                                                //   decoration: BoxDecoration(
+                                                //     color:
+                                                //         const Color(0xFF031D63),
+                                                //     borderRadius:
+                                                //         BorderRadius.circular(
+                                                //             15),
+                                                //   ),
+                                                //   child: const Center(
+                                                //     child: Text('카드결제',
+                                                //         style: TextStyle(
+                                                //           color: Colors.white,
+                                                //           fontSize: 7,
+                                                //           fontFamily:
+                                                //               'NanumSquareR',
+                                                //         )),
+                                                //   ),
+                                                // ),
+                                                // const SizedBox(width: 3),
+                                                // Container(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           left: 7, right: 7),
+                                                //   height: 17,
+                                                //   decoration: BoxDecoration(
+                                                //     color:
+                                                //         const Color(0xFF031D63),
+                                                //     borderRadius:
+                                                //         BorderRadius.circular(
+                                                //             15),
+                                                //   ),
+                                                //   child: const Center(
+                                                //     child: Text('현금영수증',
+                                                //         style: TextStyle(
+                                                //           color: Colors.white,
+                                                //           fontSize: 7,
+                                                //           fontFamily:
+                                                //               'NanumSquareR',
+                                                //         )),
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           )
@@ -669,7 +669,8 @@ class _Partner_SearchState extends State<Partner_Search> {
                                               StackTrace? stackTrace) {
                                             return Container(
                                               decoration: BoxDecoration(
-                                                  color: Color(0xFFE6E5E5),
+                                                  color:
+                                                      const Color(0xFFE6E5E5),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15)),
