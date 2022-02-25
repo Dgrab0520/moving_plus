@@ -326,7 +326,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
               //     ),
               //   ),
               // ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Container(
                 width: Get.width,
                 padding: EdgeInsets.only(left: 15, right: 15),
@@ -664,9 +664,15 @@ class _Request_EstimateState extends State<Request_Estimate> {
                       ),
                       child: TextField(
                         controller: phController,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
+                        maxLength: 11,
+                        style: TextStyle(fontSize: 13.0, color: Colors.black87),
                         onChanged: (text) {},
                         decoration: InputDecoration(
+                          counterText: "",
+                          hintText: '"-"를 뺀 전화번호를 입력해주세요.',
+                          hintStyle:
+                              TextStyle(fontSize: 13.0, color: Colors.black54),
                           border: InputBorder.none,
                         ),
                       ),
@@ -677,35 +683,42 @@ class _Request_EstimateState extends State<Request_Estimate> {
               SizedBox(height: 40),
               InkWell(
                 onTap: () {
-                  storage.write(
-                      key: "order",
-                      value: "address/" +
-                          addressJSON +
-                          "/" +
-                          "addressDetail/" +
-                          addressController.text.toString() +
-                          "/" +
-                          "area/" +
-                          areaController.text.toString() +
-                          "/" +
-                          "_gongan5/" +
-                          _gongan5.toString() +
-                          "/" +
-                          "_gongan6/" +
-                          _gongan6.toString() +
-                          "/" +
-                          "_buttonPressed/" +
-                          _buttonPressed.toString() +
-                          "/" +
-                          "_buttonPressed2/" +
-                          _buttonPressed2.toString() +
-                          "/" +
-                          "name/" +
-                          nameController!.text.toString() +
-                          "/" +
-                          "ph/" +
-                          phController.text.toString());
-                  updateOrder();
+                  if (addressJSON == "" ||
+                      areaController.text == "" ||
+                      nameController?.text == "" ||
+                      phController.text == "") {
+                    Get.snackbar("실패", "빈칸이 있습니다");
+                  } else {
+                    storage.write(
+                        key: "order",
+                        value: "address/" +
+                            addressJSON +
+                            "/" +
+                            "addressDetail/" +
+                            addressController.text.toString() +
+                            "/" +
+                            "area/" +
+                            areaController.text.toString() +
+                            "/" +
+                            "_gongan5/" +
+                            _gongan5.toString() +
+                            "/" +
+                            "_gongan6/" +
+                            _gongan6.toString() +
+                            "/" +
+                            "_buttonPressed/" +
+                            _buttonPressed.toString() +
+                            "/" +
+                            "_buttonPressed2/" +
+                            _buttonPressed2.toString() +
+                            "/" +
+                            "name/" +
+                            nameController!.text.toString() +
+                            "/" +
+                            "ph/" +
+                            phController.text.toString());
+                    updateOrder();
+                  }
                 },
                 child: Align(
                   alignment: Alignment.center,

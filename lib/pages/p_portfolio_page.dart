@@ -895,7 +895,9 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.back();
+                                      },
                                       child: const Text("취소"),
                                       style: ElevatedButton.styleFrom(
                                         primary: const Color(0xFF025595),
@@ -1384,6 +1386,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                   if (value == "success") {
                     ProDataPortfolioFile.changePortfolioImage(files, types)
                         .then((value) {
+                      Get.back(result: true);
                       Get.snackbar("성공", "프토폴리오를 수정했습니다");
                     });
                   }

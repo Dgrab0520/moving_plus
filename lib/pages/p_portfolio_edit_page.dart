@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/alarm_setting_data.dart';
 import 'package:moving_plus/datas/pro_data_portfolio_file.dart';
 import 'package:moving_plus/datas/pro_intro_data.dart';
 import 'package:moving_plus/datas/review_data.dart';
@@ -9,7 +10,7 @@ import 'package:moving_plus/models/portfolio_file_model.dart';
 import 'package:moving_plus/models/pro_intro_model.dart';
 import 'package:moving_plus/models/review_model.dart';
 import 'package:moving_plus/pages/chat_personal.dart';
-import 'package:moving_plus/pages/detailscreen.dart';
+import 'package:moving_plus/pages/detailscreen_gallery.dart';
 import 'package:moving_plus/pages/p_portfolio_page.dart';
 
 final controller = Get.put(ReactiveController());
@@ -29,6 +30,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
   bool _isLoading2 = false;
 
   List<PortfolioFile> files = [];
+  String area = '|   ';
 
   TextEditingController Controller1 = TextEditingController();
 
@@ -38,6 +40,8 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
   double width_user_star = 0.0;
 
   String proId = Get.arguments;
+
+  final heartController = Get.put(AlarmSettingData());
 
   @override
   void initState() {
@@ -62,6 +66,11 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
     ProIntro_Data.getProIntro(proId).then((value) {
       setState(() {
         pro = value;
+        area += pro[0].pro_area1;
+        if (pro[0].pro_area2 != "") area += " / ${pro[0].pro_area2}";
+        if (pro[0].pro_area3 != "") area += " / ${pro[0].pro_area3}";
+        if (pro[0].pro_area4 != "") area += " / ${pro[0].pro_area4}";
+        if (pro[0].pro_area5 != "") area += " / ${pro[0].pro_area5}";
       });
       if (value.isEmpty) {
         setState(() {
@@ -167,13 +176,20 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                             controller.pro.value.pro_id == pro[0].pro_id ||
                                     controller.pro.value.type == 'cus'
                                 ? InkWell(
-                                    onTap: () {
+                                    onTap: () async {
                                       if (controller.pro.value.type == "pro") {
-                                        Get.to(ProFolio_Page(
+                                        var result = await Get.to(ProFolio_Page(
                                           pro: pro[0],
                                           review: review.length.toString(),
                                           avg: average.toStringAsFixed(1),
                                         ));
+                                        print("result : $result");
+                                        if (result != null) {
+                                          pro = [];
+                                          files = [];
+                                          getPro_Detail();
+                                          getProPhotos();
+                                        }
                                       } else {
                                         Get.to(ChatPersonal(proId: proId));
                                       }
@@ -567,7 +583,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         Expanded(
                                           flex: 9,
                                           child: Text(
-                                            '|   ${pro[0].pro_area1} / ${pro[0].pro_area2} / ${pro[0].pro_area3} / ${pro[0].pro_area4} / ${pro[0].pro_area5}',
+                                            area,
                                             softWrap: false,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
@@ -812,15 +828,20 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 10),
                                       child: ListView.builder(
+                                          physics:
+                                              const BouncingScrollPhysics(),
                                           scrollDirection: Axis.horizontal,
                                           itemCount: files.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return InkWell(
                                               onTap: () {
-                                                Get.to(DetailScreen(
-                                                    path:
-                                                        "http://211.110.44.91/plus/portfolio_file/${files[index].fileName}${files[index].fileType}"));
+                                                Get.to(DetailScreenGallery(
+                                                  files: files,
+                                                  pageController:
+                                                      PageController(
+                                                          initialPage: index),
+                                                ));
                                               },
                                               child: Container(
                                                 width: 80.0,
@@ -834,6 +855,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                 child: Image.network(
                                                   "http://211.110.44.91/plus/portfolio_file/${files[index].fileName}${files[index].fileType}",
                                                   fit: BoxFit.cover,
+                                                  errorBuilder: (BuildContext
+                                                          context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace) {
+                                                    return Container(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             );

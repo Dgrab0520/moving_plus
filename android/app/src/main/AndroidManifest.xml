@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.moving_plus">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="moving_plus"
+        android:label="입주플러스"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
 

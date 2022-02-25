@@ -33,6 +33,12 @@ class MainPopular extends StatelessWidget {
                           if (controller.pro.value.type == "cus") {
                             Get.toNamed(
                                 '/request_estimage/true?serviceType=${popularController.popular[index]}');
+                          } else {
+                            Get.snackbar(
+                              "로그인",
+                              "고객 로그인 후 이용해주세요",
+                              duration: const Duration(milliseconds: 750),
+                            );
                           }
                         },
                         child: Container(

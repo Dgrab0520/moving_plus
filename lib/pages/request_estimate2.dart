@@ -125,118 +125,118 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       if (value == "success") {
         sendAlarm();
         Get.dialog(
-            AlertDialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 20),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "신청완료",
-                  style: TextStyle(
-                    fontFamily: 'NanumSquareB',
-                    color: Colors.black,
-                    fontSize: 16,
+          AlertDialog(
+              insetPadding: EdgeInsets.symmetric(horizontal: 20),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "신청완료",
+                    style: TextStyle(
+                      fontFamily: 'NanumSquareB',
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    CupertinoIcons.xmark,
-                    size: 16,
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Icon(
+                      CupertinoIcons.xmark,
+                      size: 16,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  '견적 신청이 완료되었습니다',
-                  style: TextStyle(
-                    fontFamily: 'NanumSquareB',
-                    color: Colors.black,
-                    fontSize: 18,
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    '견적 신청이 완료되었습니다',
+                    style: TextStyle(
+                      fontFamily: 'NanumSquareB',
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  '추가 견적 의뢰가 있을 경우 \n계속하기 버튼을 클릭하여 진행해주세요',
-                  style: TextStyle(
-                    fontFamily: 'NanumSquareL',
-                    color: Colors.black54,
-                    fontSize: 15,
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: () {
-                          Get.off(Interior_Page(
-                            categoryTitle: 0,
-                          ));
-                        },
-                        child: Container(
-                            height: 35.0,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: Border.all(
-                                    width: 1.0, color: Color(0xffd0d0d0))),
-                            child: Center(
-                              child: Text(
-                                '계속하기',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400,
+                  Text(
+                    '추가 견적 의뢰가 있을 경우 \n계속하기 버튼을 클릭하여 진행해주세요',
+                    style: TextStyle(
+                      fontFamily: 'NanumSquareL',
+                      color: Colors.black54,
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            Get.off(Interior_Page(
+                              categoryTitle: 0,
+                            ));
+                          },
+                          child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: Border.all(
+                                      width: 1.0, color: Color(0xffd0d0d0))),
+                              child: Center(
+                                child: Text(
+                                  '계속하기',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            )),
+                              )),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: () {
-                          Get.off(Main_Page(
-                            index: 1,
-                          ));
-                        },
-                        child: Container(
-                            height: 35.0,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
-                                border: Border.all(
-                                    width: 1.0, color: Color(0xffd0d0d0))),
-                            child: Center(
-                              child: Text(
-                                '완료하기',
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400,
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: InkWell(
+                          onTap: () {
+                            Get.off(Main_Page(
+                              index: 1,
+                            ));
+                          },
+                          child: Container(
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  border: Border.all(
+                                      width: 1.0, color: Color(0xffd0d0d0))),
+                              child: Center(
+                                child: Text(
+                                  '완료하기',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            )),
+                              )),
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            )),
+                    ],
+                  )
+                ],
+              )),
           barrierDismissible: false,
         );
         print('Update Success');
@@ -7247,7 +7247,11 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
               //확인 BTN
               InkWell(
                 onTap: () {
-                  updateOrder();
+                  if (time != "") {
+                    updateOrder();
+                  } else {
+                    Get.snackbar("실패", "방문 시간을 설정해주세요");
+                  }
                 },
                 child: Align(
                   alignment: Alignment.center,

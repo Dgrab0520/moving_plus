@@ -55,7 +55,7 @@ class C_Mypage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 10.0,
                       ),
                       Container(
