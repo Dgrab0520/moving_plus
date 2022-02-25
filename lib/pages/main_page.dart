@@ -235,52 +235,405 @@ class _Main_PageState extends State<Main_Page> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        return Future.value(false);
-      },
-      child: Scaffold(
-        appBar: _selectedIndex == 1
-            ? AppBar(
-                iconTheme: IconThemeData(color: Color(0xFF025595)),
-                elevation: 0,
-                backgroundColor: Colors.white,
-                title: InkWell(
-                    onTap: () {
-                      homeScrollController.animateTo(0.0,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut);
-                    },
-                    child: Image.asset("assets/logo_3.jpg",
-                        width: 65, height: 35)),
-                centerTitle: true,
-                actions: [
+        onWillPop: () {
+      return Future.value(false);
+    },
+    child: Scaffold(
+      appBar: _selectedIndex == 1
+          ? AppBar(
+              iconTheme: IconThemeData(color: Color(0xFF025595)),
+              elevation: 0,
+              backgroundColor: Colors.white,
+              title: InkWell(
+                  onTap: () {
+                    homeScrollController.animateTo(0.0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  },
+                  child:
+                      Image.asset("assets/logo_3.jpg", width: 65, height: 35)),
+              centerTitle: true,
+              actions: [
+                controller.pro.value.type == 'None'
+                    ? InkWell(
+                        onTap: () {
+    Get.dialog(C_Login(index: 0));
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(
+                              top: 15.0, bottom: 15, left: 2, right: 5),
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF025595),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            '로그인',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : InkWell(
+                        onTap: () {
+                          storage.delete(key: "login");
+                          setState(() {
+                            controller.change(
+                              type: 'None',
+                              id: 'None',
+                              pro_id: 'None',
+                              pro_pw: 'None',
+                              pro_name: 'None',
+                              pro_phone: 'None',
+                              pro_email: 'None',
+                              com_name: 'None',
+                              profile_img: 'None',
+                              pro_token: 'None',
+                            );
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(
+                              top: 15.0, bottom: 15, left: 2, right: 5),
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF025595),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            '로그아웃',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                SizedBox(width: 8),
+                Container(
+                  padding: EdgeInsets.only(right: 15),
+                  child: InkWell(
+                      onTap: () {
+                        if (controller.pro.value.type != "None") {
+                          mainController.isAlarm = false;
+                          Get.to(() => MainAlarm());
+                        } else {
+                          Get.snackbar("로그인", "로그인을 해주세요");
+                        }
+                      },
+                      child: Stack(
+                        children: [
+                          Obx(
+                            () => Positioned(
+                                top: 15,
+                                child: CircleAvatar(
+                                  radius: mainController.isAlarm ? 3 : 0,
+                                  backgroundColor: Color(0xFF025595),
+                                )),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Icon(Icons.notifications,
+                                color: Color(0xFF025595), size: 22),
+                          ),
+                        ],
+                      )),
+                ),
+              ],
+            )
+          : _selectedIndex == 0
+              ? AppBar(
+                  elevation: 0,
+                  title: Text(
+                    '견적 신청',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontFamily: 'NanumSquareB',
+                    ),
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Color(0xFF025595),
+                  leading: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      )),
+                )
+              : null,
+      drawer: _selectedIndex == 1
+          ? Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  Container(
+                    width: Get.width,
+                    color: Color(0xFF025595),
+                    height: 150,
+                    child: DrawerHeader(
+                        child: controller.pro.value.type == 'None'
+                            ? Container(
+                                child: Center(
+                                  child: Text(
+                                    '로그인 후 이용해주세요',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NanumSquareB',
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                children: [
+                                  Expanded(
+                                      flex: 2,
+                                      child: controller.pro.value.type == 'cus'
+                                          ? controller.pro.value.profile_img ==
+                                                  'default_image'
+                                              ? Image.asset(
+                                                  'assets/defaultImage.png',
+                                                  width: 70,
+                                                  height: 70)
+                                              : Container(
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                          controller.pro.value
+                                                              .profile_img,
+                                                        ),
+                                                        fit: BoxFit.fill,
+                                                      )),
+                                                )
+                                          // Image.network(controller.pro.value.profile_img, width:70,height:70)
+                                          : CircleAvatar(
+                                              radius: 35,
+                                              backgroundColor: Colors.white,
+                                              foregroundImage: NetworkImage(
+                                                  "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}"),
+                                            )),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    flex: 5,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          controller.pro.value.type == 'cus'
+                                              ? controller.pro.value.pro_name
+                                              : controller.pro.value.com_name,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontFamily: 'NanumSquareB',
+                                          ),
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          children: [
+                                            Flexible(
+                                              child: FittedBox(
+                                                child: Text(
+                                                    controller.pro.value.pro_id,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontFamily:
+                                                          'NanumSquareR',
+                                                    )),
+                                              ),
+                                            ),
+                                            SizedBox(width: 7),
+                                            controller.pro.value.type == 'cus'
+                                                ? Image.asset(
+                                                    'assets/kakao.png',
+                                                    width: 13,
+                                                    height: 13)
+                                                : Image.asset(
+                                                    "assets/i_partner.png",
+                                                    width: 13,
+                                                    height: 13),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                                print('ss');
+                                              },
+                                              child: Icon(
+                                                CupertinoIcons.clear,
+                                                size: 18.0,
+                                                color: Colors.white,
+                                              )),
+                                        ],
+                                      )),
+                                ],
+                              )),
+                  ),
                   controller.pro.value.type == 'None'
-                      ? InkWell(
+                      ? GestureDetector(
                           onTap: () {
-                            Get.dialog(P_Login());
+                            print('로그인');
+                            Get.dialog(C_Login(
+    index: 0,
+    ));
                           },
                           child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 2, right: 5),
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 100.0, horizontal: 80.0),
+                            height: 30.0,
+                            width: 30.0,
                             decoration: BoxDecoration(
-                              color: Color(0xFF025595),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              '로그인',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
+                                borderRadius: BorderRadius.circular(5.0),
+                                border: Border.all(
+                                    width: 1.0, color: Color(0xFF025595))),
+                            child: Center(
+                              child: Text(
+                                '로그인',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'NanumSquareB',
+                                ),
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         )
+                      : Column(
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () {
+                                Get.to(Request_Received());
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 25, left: 25.0, bottom: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset("assets/list_g.png",
+                                        width: 18, height: 18),
+                                    SizedBox(width: 15),
+                                    Text(
+                                        controller.pro.value.type == 'cus'
+                                            ? '보낸 요청서'
+                                            : '받은 요청서', //
+                                        style: TextStyle(
+                                          fontFamily: 'NanumSquareB',
+                                          fontSize: 14,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                if (controller.pro.value.type == "pro") {
+                                  Get.to(P_Chat());
+                                } else {
+                                  Get.to(Receive_Estimate(
+                                    isMain: false,
+                                  ));
+                                }
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, left: 25.0, bottom: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset("assets/chat_g.png",
+                                        width: 18, height: 18),
+                                    // Icon(Icons.speaker_notes_rounded,
+                                    //   color: Color(0xFf444444),
+                                    // ),
+                                    SizedBox(width: 15),
+                                    Text('채팅',
+                                        style: TextStyle(
+                                          fontFamily: 'NanumSquareB',
+                                          fontSize: 14,
+                                        )),
+                                    SizedBox(width: 5),
+                                    // Container(
+                                    //   width: 20,
+                                    //   height: 15,
+                                    //   decoration: BoxDecoration(
+                                    //     color: Color(0xFF025595),
+                                    //     borderRadius: BorderRadius.circular(3),
+                                    //   ),
+                                    //   child: Center(
+                                    //     child: Text(
+                                    //       'N',
+                                    //       style: TextStyle(
+                                    //         color: Colors.white,
+                                    //         fontSize: 12,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                if (controller.pro.value.type == "pro") {
+                                  await Get.to(P_Mypage());
+                                  setState(() {});
+                                } else {
+                                  Get.to(C_Mypage());
+                                }
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 10, left: 25.0, bottom: 15),
+                                child: Row(
+                                  children: [
+                                    Image.asset("assets/user_g.png",
+                                        width: 18, height: 18),
+                                    SizedBox(width: 14),
+                                    Text('마이페이지',
+                                        style: TextStyle(
+                                          fontFamily: 'NanumSquareB',
+                                          fontSize: 14,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                  Divider(
+                    thickness: 3.0,
+                    height: 1.0,
+                    color: Color(0xFFf1f1f1),
+                  ),
+                  SizedBox(height: 10.0),
+                  controller.pro.value.type == 'None'
+                      ? Container()
                       : InkWell(
                           onTap: () {
-                            storage.delete(key: "login");
+                            print('로그아웃');
                             setState(() {
                               controller.change(
                                 type: 'None',
@@ -297,488 +650,133 @@ class _Main_PageState extends State<Main_Page> {
                             });
                           },
                           child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 2, right: 5),
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF025595),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              '로그아웃',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                              ),
-                              textAlign: TextAlign.center,
+                            padding: EdgeInsets.only(
+                                top: 10, left: 25.0, bottom: 15),
+                            child: Row(
+                              children: [
+                                Image.asset("assets/logout-(1)_g@2x.png",
+                                    width: 18, height: 18),
+                                SizedBox(width: 15),
+                                Text('로그아웃',
+                                    style: TextStyle(
+                                      fontFamily: 'NanumSquareB',
+                                      fontSize: 14,
+                                    )),
+                              ],
                             ),
                           ),
                         ),
-                  SizedBox(width: 8),
-                  Container(
-                    padding: EdgeInsets.only(right: 15),
-                    child: InkWell(
-                        onTap: () {
-                          if (controller.pro.value.type != "None") {
-                            mainController.isAlarm = false;
-                            Get.to(() => MainAlarm());
-                          } else {
-                            Get.snackbar("로그인", "로그인을 해주세요");
-                          }
-                        },
-                        child: Stack(
-                          children: [
-                            Obx(
-                              () => Positioned(
-                                  top: 15,
-                                  child: CircleAvatar(
-                                    radius: mainController.isAlarm ? 3 : 0,
-                                    backgroundColor: Color(0xFF025595),
-                                  )),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Icon(Icons.notifications,
-                                  color: Color(0xFF025595), size: 22),
-                            ),
-                          ],
-                        )),
-                  ),
                 ],
-              )
-            : _selectedIndex == 0
-                ? AppBar(
-                    elevation: 0,
-                    title: Text(
-                      '견적 신청',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontFamily: 'NanumSquareB',
-                      ),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: Color(0xFF025595),
-                    leading: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        )),
-                  )
-                : null,
-        drawer: _selectedIndex == 1
-            ? Drawer(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    Container(
-                      width: Get.width,
-                      color: Color(0xFF025595),
-                      height: 150,
-                      child: DrawerHeader(
-                          child: controller.pro.value.type == 'None'
-                              ? Container(
-                                  child: Center(
-                                    child: Text(
-                                      '로그인 후 이용해주세요',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'NanumSquareB',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Row(
-                                  children: [
-                                    Expanded(
-                                        flex: 2,
-                                        child: controller.pro.value.type ==
-                                                'cus'
-                                            ? controller.pro.value
-                                                        .profile_img ==
-                                                    'default_image'
-                                                ? Image.asset(
-                                                    'assets/defaultImage.png',
-                                                    width: 70,
-                                                    height: 70)
-                                                : Container(
-                                                    decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        image: DecorationImage(
-                                                          image: NetworkImage(
-                                                            controller.pro.value
-                                                                .profile_img,
-                                                          ),
-                                                          fit: BoxFit.fill,
-                                                        )),
-                                                  )
-                                            // Image.network(controller.pro.value.profile_img, width:70,height:70)
-                                            : CircleAvatar(
-                                                radius: 35,
-                                                backgroundColor: Colors.white,
-                                                foregroundImage: NetworkImage(
-                                                    "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}"),
-                                              )),
-                                    SizedBox(width: 10),
-                                    Expanded(
-                                      flex: 5,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            controller.pro.value.type == 'cus'
-                                                ? controller.pro.value.pro_name
-                                                : controller.pro.value.com_name,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontFamily: 'NanumSquareB',
-                                            ),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Row(
-                                            children: [
-                                              Flexible(
-                                                child: FittedBox(
-                                                  child: Text(
-                                                      controller
-                                                          .pro.value.pro_id,
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontFamily:
-                                                            'NanumSquareR',
-                                                      )),
-                                                ),
-                                              ),
-                                              SizedBox(width: 7),
-                                              controller.pro.value.type == 'cus'
-                                                  ? Image.asset(
-                                                      'assets/kakao.png',
-                                                      width: 13,
-                                                      height: 13)
-                                                  : Image.asset(
-                                                      "assets/i_partner.png",
-                                                      width: 13,
-                                                      height: 13),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            InkWell(
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                  print('ss');
-                                                },
-                                                child: Icon(
-                                                  CupertinoIcons.clear,
-                                                  size: 18.0,
-                                                  color: Colors.white,
-                                                )),
-                                          ],
-                                        )),
-                                  ],
-                                )),
-                    ),
-                    controller.pro.value.type == 'None'
-                        ? GestureDetector(
-                            onTap: () {
-                              print('로그인');
-                              Get.dialog(P_Login());
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 100.0, horizontal: 80.0),
-                              height: 30.0,
-                              width: 30.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  border: Border.all(
-                                      width: 1.0, color: Color(0xFF025595))),
-                              child: Center(
-                                child: Text(
-                                  '로그인',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Column(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {
-                                  Get.to(Request_Received());
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 25, left: 25.0, bottom: 15),
-                                  child: Row(
-                                    children: [
-                                      Image.asset("assets/list_g.png",
-                                          width: 18, height: 18),
-                                      SizedBox(width: 15),
-                                      Text(
-                                          controller.pro.value.type == 'cus'
-                                              ? '보낸 요청서'
-                                              : '받은 요청서', //
-                                          style: TextStyle(
-                                            fontFamily: 'NanumSquareB',
-                                            fontSize: 14,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  if (controller.pro.value.type == "pro") {
-                                    Get.to(P_Chat());
-                                  } else {
-                                    Get.to(Receive_Estimate(
-                                      isMain: false,
-                                    ));
-                                  }
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, left: 25.0, bottom: 15),
-                                  child: Row(
-                                    children: [
-                                      Image.asset("assets/chat_g.png",
-                                          width: 18, height: 18),
-                                      // Icon(Icons.speaker_notes_rounded,
-                                      //   color: Color(0xFf444444),
-                                      // ),
-                                      SizedBox(width: 15),
-                                      Text('채팅',
-                                          style: TextStyle(
-                                            fontFamily: 'NanumSquareB',
-                                            fontSize: 14,
-                                          )),
-                                      SizedBox(width: 5),
-                                      // Container(
-                                      //   width: 20,
-                                      //   height: 15,
-                                      //   decoration: BoxDecoration(
-                                      //     color: Color(0xFF025595),
-                                      //     borderRadius: BorderRadius.circular(3),
-                                      //   ),
-                                      //   child: Center(
-                                      //     child: Text(
-                                      //       'N',
-                                      //       style: TextStyle(
-                                      //         color: Colors.white,
-                                      //         fontSize: 12,
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () async {
-                                  if (controller.pro.value.type == "pro") {
-                                    await Get.to(P_Mypage());
-                                    setState(() {});
-                                  } else {
-                                    Get.to(C_Mypage());
-                                  }
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      top: 10, left: 25.0, bottom: 15),
-                                  child: Row(
-                                    children: [
-                                      Image.asset("assets/user_g.png",
-                                          width: 18, height: 18),
-                                      SizedBox(width: 14),
-                                      Text('마이페이지',
-                                          style: TextStyle(
-                                            fontFamily: 'NanumSquareB',
-                                            fontSize: 14,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                    Divider(
-                      thickness: 3.0,
-                      height: 1.0,
-                      color: Color(0xFFf1f1f1),
-                    ),
-                    SizedBox(height: 10.0),
-                    controller.pro.value.type == 'None'
-                        ? Container()
-                        : InkWell(
-                            onTap: () {
-                              print('로그아웃');
-                              setState(() {
-                                controller.change(
-                                  type: 'None',
-                                  id: 'None',
-                                  pro_id: 'None',
-                                  pro_pw: 'None',
-                                  pro_name: 'None',
-                                  pro_phone: 'None',
-                                  pro_email: 'None',
-                                  com_name: 'None',
-                                  profile_img: 'None',
-                                  pro_token: 'None',
-                                );
-                              });
-                            },
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 10, left: 25.0, bottom: 15),
-                              child: Row(
-                                children: [
-                                  Image.asset("assets/logout-(1)_g@2x.png",
-                                      width: 18, height: 18),
-                                  SizedBox(width: 15),
-                                  Text('로그아웃',
-                                      style: TextStyle(
-                                        fontFamily: 'NanumSquareB',
-                                        fontSize: 14,
-                                      )),
-                                ],
-                              ),
-                            ),
-                          ),
-                  ],
-                ),
-              )
-            : null,
-        extendBody: true,
-        bottomNavigationBar: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Color(0xFF025595),
-            unselectedFontSize: 11,
-            currentIndex: _selectedIndex, //현재 선택된 Index
-            onTap: (int index) {
-              if (index == 2) {
-                mainController.isChat = false;
-                if (controller.pro.value.pro_id == "None") {
-                  Get.dialog(const P_Login());
-                } else if (controller.pro.value.type == "pro") {
-                  _widgetOptions = [
-                    const Interior_Page(categoryTitle: 0),
-                    const HomePage(),
-                    const P_Chat(),
-                  ];
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                } else {
-                  _widgetOptions = [
-                    const Interior_Page(categoryTitle: 0),
-                    const HomePage(),
-                    const Receive_Estimate(
-                      isMain: true,
-                    ),
-                  ];
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                }
-              } else if (index == 0) {
-                Get.to(
+              ),
+            )
+          : null,
+      extendBody: true,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color(0xFF025595),
+          unselectedFontSize: 11,
+          currentIndex: _selectedIndex, //현재 선택된 Index
+          onTap: (int index) {
+            if (index == 2) {
+              mainController.isChat = false;
+              if (controller.pro.value.pro_id == "None") {
+                Get.dialog(const C_Login(index: 0));
+              } else if (controller.pro.value.type == "pro") {
+                _widgetOptions = [
                   const Interior_Page(categoryTitle: 0),
-                );
+                  const HomePage(),
+                  const P_Chat(),
+                ];
+                setState(() {
+                  _selectedIndex = index;
+                });
               } else {
+                _widgetOptions = [
+                  const Interior_Page(categoryTitle: 0),
+                  const HomePage(),
+                  const Receive_Estimate(
+                    isMain: true,
+                  ),
+                ];
                 setState(() {
                   _selectedIndex = index;
                 });
               }
-            },
+            } else if (index == 0) {
+              Get.to(
+                const Interior_Page(categoryTitle: 0),
+              );
+            } else {
+              setState(() {
+                _selectedIndex = index;
+              });
+            }
+          },
 
-            selectedLabelStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 11,
-            ),
-            unselectedLabelStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-            ),
-            unselectedItemColor: Colors.white,
-            selectedItemColor: Colors.white,
-            items: [
-              BottomNavigationBarItem(
-                label: '견적신청',
-                icon: Image.asset(
-                  "assets/notice.png",
-                  width: 22,
-                  height: 20,
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: '홈',
-                icon: Image.asset(
-                  "assets/home.png",
-                  width: 22,
-                  height: 20,
-                ),
-              ),
-              BottomNavigationBarItem(
-                  label: '채팅',
-                  icon: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Stack(
-                      children: [
-                        Obx(
-                          () => Positioned(
-                            child: CircleAvatar(
-                              radius: mainController.isChat ? 2 : 0,
-                              backgroundColor: Colors.white,
-                            ),
-                            top: 0,
-                            right: 0,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            "assets/chat.png",
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-            ],
+          selectedLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 11,
           ),
+          unselectedLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+          ),
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+              label: '견적신청',
+              icon: Image.asset(
+                "assets/notice.png",
+                width: 22,
+                height: 20,
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: '홈',
+              icon: Image.asset(
+                "assets/home.png",
+                width: 22,
+                height: 20,
+              ),
+            ),
+            BottomNavigationBarItem(
+                label: '채팅',
+                icon: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: Stack(
+                    children: [
+                      Obx(
+                        () => Positioned(
+                          child: CircleAvatar(
+                            radius: mainController.isChat ? 2 : 0,
+                            backgroundColor: Colors.white,
+                          ),
+                          top: 0,
+                          right: 0,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.asset(
+                          "assets/chat.png",
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ],
         ),
-        backgroundColor: Color(0xFF616CA1),
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+      ),
+      backgroundColor: Color(0xFF616CA1),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
   }

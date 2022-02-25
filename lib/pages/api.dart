@@ -65,10 +65,10 @@ class Api {
       "시스템 행거",
       "펜트리 선반 설치",
       "매트리스 케어",
-      "쇼파 천갈이",
+      "쇼파천갈이",
       "보일러 설치",
       "배관수리 및 청소",
-      "기타 가전/가구"
+      "기타 가전 & 가구"
     ],
     "렌탈": [
       "정수기 렌탈",
@@ -86,7 +86,7 @@ class Api {
       "공기 청정기 렌탈",
       "기타 렌탈"
     ],
-    "기타": ["사전점검", "소독 / 방역", "기타 서비스"],
+    "기타": ["사전점검", "소독 & 방역", "기타 서비스"],
   };
 
   Map<String, String> categoryImages = {
@@ -138,7 +138,7 @@ class Api {
     "시스템 행거": "assets/g_8.jpg",
     "펜트리 선반 설치": "assets/g_9.jpg",
     "매트리스 케어": "assets/g_10.jpg",
-    "쇼파 천갈이": "assets/g_11.jpg",
+    "쇼파천갈이": "assets/g_11.jpg",
     "보일러 설치": "assets/heater.jpg",
     "배관수리 및 청소": "assets/plumbing.jpg",
     "기타 가전/가구": "assets/g_12.jpg",
@@ -157,8 +157,8 @@ class Api {
     "공기 청정기 렌탈": "assets/l_13.jpg",
     "기타 렌탈": "assets/rental.jpg",
     "사전점검": "assets/e_1.jpg",
-    "소독 / 방역": "assets/e_2.jpg",
-    "기타 서비스": "assets/etc.jpg",
+    "소독 & 방역": "assets/e_2.jpg",
+    "기타 가전 & 가구": "assets/etc.jpg",
   };
 
   String findMainCategory(String category) {
@@ -460,7 +460,7 @@ const List<CategorySub> careList = [
       category2: '가전/가구 케어'),
   CategorySub(
       image: 'assets/g_11.jpg',
-      title: '쇼파 천갈이',
+      title: '쇼파천갈이',
       content: " 노후나 스크래치 등으로 손상된 천이나\n가죽 등을 교체 / 보건 해 주는\n케어 서비스",
       category: '가전/가구 케어',
       image2: 'assets/heater.jpg',
@@ -550,7 +550,7 @@ const List<CategorySub> etcList = [
           "신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
       category: '기타',
       image2: 'assets/e_2.jpg',
-      title2: '소독 / 방역',
+      title2: '소독 & 방역',
       content2:
           " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'),

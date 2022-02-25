@@ -376,7 +376,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
     } else if (_serviceType == "기타 청소" ||
         _serviceType == "기타 인테리어" ||
         _serviceType == "곰팡이 제거" ||
-        _serviceType == "기타 인테리어" ||
         _serviceType == "페인트" ||
         _serviceType == "중문" ||
         _serviceType == "타일 교체") {
@@ -399,7 +398,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       //   setState(() {
       //     _serviceForm = '14';
       //   });
-    } else if (_serviceType == "도배" || _serviceType == "장판 ") {
+    } else if (_serviceType == "도배" || _serviceType == "장판 & 마루") {
       setState(() {
         _serviceForm = '15';
       });
@@ -418,7 +417,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       setState(() {
         _serviceForm = '18';
       });
-    } else if (_serviceType == "커튼 " || _serviceType == "바닥 매트") {
+    } else if (_serviceType == "커튼 & 블라인드" || _serviceType == "바닥 매트") {
       setState(() {
         _serviceForm = '19';
       });
@@ -466,7 +465,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       setState(() {
         _serviceForm = '30';
       });
-    } else if (_serviceType == "쇼파 천갈이") {
+    } else if (_serviceType == "쇼파천갈이") {
       setState(() {
         _serviceForm = '31';
       });
@@ -474,7 +473,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       setState(() {
         _serviceForm = '33';
       });
-    } else if (_serviceType == "사전점검" || _serviceType == "소독 / 방역") {
+    } else if (_serviceType == "사전점검" || _serviceType == "소독 & 방역") {
       setState(() {
         _serviceForm = '34';
       });
@@ -6511,7 +6510,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                                                                                                         )
                                                                                                                       : _serviceForm == '31'
                                                                                                                           ?
-                                                                                                                          //쇼파 천갈이
+                                                                                                                          //쇼파천갈이
                                                                                                                           Column(
                                                                                                                               children: [
                                                                                                                                 Container(

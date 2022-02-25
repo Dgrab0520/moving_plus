@@ -1142,10 +1142,6 @@ class _SignUp_PageState extends State<SignUpPage> {
 
   List myService = [
     {
-      "display": "청소 전체",
-      "value": "청소",
-    },
-    {
       "display": "입주청소",
       "value": "입주 청소",
     },
@@ -1334,8 +1330,8 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "펜트리 선반 설치",
     },
     {
-      "display": "메트리스케어",
-      "value": "메트리스 케어",
+      "display": "매트리스케어",
+      "value": "매트리스 케어",
     },
     {
       "display": "쇼파천갈이",
@@ -1366,8 +1362,8 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "비데 렌탈",
     },
     {
-      "display": "메트리스렌탈",
-      "value": "메트리스 렌탈",
+      "display": "매트리스렌탈",
+      "value": "매트리스 렌탈",
     },
     {
       "display": "쇼파렌탈",
@@ -1414,12 +1410,12 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "사전점검",
     },
     {
-      "display": "소독 / 방역",
+      "display": "소독 & 방역",
       "value": "소독 & 방역",
     },
     {
       "display": "기타서비스",
-      "value": "기타 서비",
+      "value": "기타 서비스",
     },
   ];
 }

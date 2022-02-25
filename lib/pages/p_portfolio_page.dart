@@ -298,8 +298,8 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "펜트리 선반 설치",
     },
     {
-      "display": "메트리스케어",
-      "value": "메트리스 케어",
+      "display": "매트리스케어",
+      "value": "매트리스 케어",
     },
     {
       "display": "쇼파천갈이",
@@ -330,8 +330,8 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "비데 렌탈",
     },
     {
-      "display": "메트리스렌탈",
-      "value": "메트리스 렌탈",
+      "display": "매트리스렌탈",
+      "value": "매트리스 렌탈",
     },
     {
       "display": "쇼파렌탈",
@@ -378,12 +378,12 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "사전점검",
     },
     {
-      "display": "소독 / 방역",
+      "display": "소독 & 방역",
       "value": "소독 & 방역",
     },
     {
       "display": "기타서비스",
-      "value": "기타 서비",
+      "value": "기타 서비스",
     },
   ];
   //endregion
