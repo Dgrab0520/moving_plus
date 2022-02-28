@@ -320,13 +320,13 @@ class _Partner_SearchState extends State<Partner_Search> {
                         print('selected2');
                         setState(() {
                           condition =
-                              "WHERE pro_service1 = '$selectedValue2' OR pro_service2 = '$selectedValue2' OR pro_service3 = '$selectedValue2' OR pro_service4 = '$selectedValue2' OR pro_service5 = '$selectedValue2'";
+                              "WHERE '$selectedValue2' REGEXP pro_service1 OR '$selectedValue2' REGEXP pro_service2 OR '$selectedValue2' REGEXP pro_service3 OR '$selectedValue2' REGEXP pro_service4 OR '$selectedValue2' REGEXP pro_service5";
                         });
                       } else if (selectedValue2 != "" && selectedValue1 != "") {
                         print('selected1 & selected2');
                         setState(() {
                           condition =
-                              "WHERE (pro_service1 = '$selectedValue2' OR pro_service2 = '$selectedValue2' OR pro_service3 = '$selectedValue2' OR pro_service4 = '$selectedValue2' OR pro_service5 = '$selectedValue2') AND (pro_area1 = '$selectedValue1' OR pro_area2 = '$selectedValue1' OR pro_area3 = '$selectedValue1')";
+                              "WHERE ('$selectedValue2' REGEXP pro_service1 OR '$selectedValue2' REGEXP pro_service2 OR '$selectedValue2' REGEXP pro_service3 OR '$selectedValue2' REGEXP pro_service4 OR '$selectedValue2' REGEXP pro_service5) AND (pro_area1 = '$selectedValue1' OR pro_area2 = '$selectedValue1' OR pro_area3 = '$selectedValue1')";
                         });
                       }
                       controller.get_Pro(condition);

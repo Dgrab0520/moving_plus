@@ -433,7 +433,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               color: Color(0xfff3f3f3),
               width: Get.width,
-              height: 250.0,
+              height: 300.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -451,6 +451,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
@@ -462,6 +464,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -479,6 +483,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
@@ -490,6 +496,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -507,6 +515,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
@@ -518,6 +528,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -535,6 +547,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
@@ -546,6 +560,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -563,6 +579,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
@@ -574,6 +592,8 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -591,22 +611,28 @@ class _HomePageState extends State<HomePage> {
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
                         flex: 5,
                         child: Text(
-                          '|   no200chs@naver.com',
+                          '|   no2000chs@naver.com',
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
                             fontSize: 12,
                           ),
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
                   Spacer(),
+
+
                   Spacer(),
                   Row(
                     children: [
@@ -738,6 +764,20 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  Spacer(),
+                  Text(
+                    '입주플러스에서는 모든 중개 계약에 대한 취소 또는 계약 불이행에 따른 환불 및 민원등의 처리를 입주플러스(케이에스하우스매니지먼트)에서 진행합니다.\n민원 담당자 : 최현성 (1533-1196)',
+                    style: TextStyle(
+                      color: Colors.black38,
+                      fontFamily: 'NanumSquareR',
+                      fontSize: 10,
+                    ),
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                  ),
+
                   SizedBox(
                     height: 5.0,
                   ),
@@ -752,6 +792,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  Spacer(),
                 ],
               )),
           SizedBox(

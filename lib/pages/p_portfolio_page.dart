@@ -110,6 +110,10 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
 //region
   List myService = [
     {
+      "display": "청소 전체",
+      "value": "청소",
+    },
+    {
       "display": "입주청소",
       "value": "입주 청소",
     },

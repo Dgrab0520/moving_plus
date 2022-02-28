@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
@@ -71,6 +72,8 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   String? value4 = '';
   String? value5 = '';
 
+  int strYear = 2023;
+
   String img_no = '0';
   PickedFile? _image1;
   PickedFile? _image2;
@@ -108,6 +111,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
   TextEditingController? c_Controller = TextEditingController();
   TextEditingController? d_Controller = TextEditingController();
   TextEditingController? detail_Controller = TextEditingController();
+
+  //기준 년/월 불러오기
+  // int getToday() {
+  //   DateTime now = DateTime.now();
+  //   DateFormat formatter = DateFormat('yyyy-MM-dd / EE');
+  //
+  //   strYear = int.parse(formatter.format(now).split("-")[0]);
+  //   return strYear!;
+  // }
 
   updateOrder() {
     OrderData.updateDetail(
@@ -251,7 +263,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       context: context,
       initialDate: selectedDate, // Refer step 1
       firstDate: DateTime(2022),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2999),
     );
     if (picked != null && picked != selectedDate)
       setState(() {
@@ -264,7 +276,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       context: context,
       initialDate: selectedDate2, // Refer step 1
       firstDate: DateTime(2022),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2999),
     );
     if (picked != null && picked != selectedDate2)
       setState(() {
@@ -333,6 +345,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
 
   @override
   void initState() {
+    // getToday();
     print('pop$orderId');
     if (_serviceType == "입주 청소" ||
         _serviceType == "이사 청소" ||
@@ -516,120 +529,6 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //TimeLine
-              // Container(
-              //   padding:
-              //       EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
-              //   width: Get.width,
-              //   decoration: BoxDecoration(
-              //     border: Border(
-              //       bottom: BorderSide(width: 1, color: Color(0xFFcccccc)),
-              //     ),
-              //   ),
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       SizedBox(
-              //         height: 100.0,
-              //         width: Get.width,
-              //         child: Timeline.tileBuilder(
-              //           theme: TimelineThemeData(
-              //               direction: Axis.horizontal,
-              //               connectorTheme: ConnectorThemeData(
-              //                   space: 15.0, thickness: 3.0)),
-              //           builder: TimelineTileBuilder.connected(
-              //             connectionDirection: ConnectionDirection.before,
-              //             itemExtentBuilder: (_, __) =>
-              //                 MediaQuery.of(context).size.width /
-              //                 _processes.length,
-              //             contentsBuilder: (context, index) {
-              //               return Padding(
-              //                 padding: const EdgeInsets.only(top: 8.0),
-              //                 child: Text(
-              //                   _processes[index],
-              //                   style: TextStyle(
-              //                     fontWeight: FontWeight.bold,
-              //                     fontSize: 11.0,
-              //                     color: index == stage
-              //                         ? inProgressColor
-              //                         : completeColor,
-              //                   ),
-              //                 ),
-              //               );
-              //             },
-              //             indicatorBuilder: (_, index) {
-              //               var color;
-              //               var child;
-              //               if (index == stage) {
-              //                 color = Color(0xff5ec792);
-              //                 child = Padding(
-              //                     padding: const EdgeInsets.all(8.0),
-              //                     child: Container(
-              //                       decoration: BoxDecoration(
-              //                         shape: BoxShape.circle,
-              //                         border: Border.all(
-              //                             width: 2.5, color: Colors.white),
-              //                         color: Color(0xff5ec792),
-              //                       ),
-              //                     ));
-              //               } else {
-              //                 color = completeColor;
-              //               }
-              //
-              //               if (index <= 2) {
-              //                 return Stack(
-              //                   children: [
-              //                     CustomPaint(
-              //                       size: Size(30.0, 30.0),
-              //                     ),
-              //                     DotIndicator(
-              //                       size: 30.0,
-              //                       color: color,
-              //                       child: child,
-              //                     ),
-              //                   ],
-              //                 );
-              //               } else {
-              //                 return Stack(
-              //                   children: [
-              //                     CustomPaint(
-              //                       size: Size(15.0, 15.0),
-              //                     ),
-              //                     OutlinedDotIndicator(
-              //                       borderWidth: 4.0,
-              //                       color: Colors.pink,
-              //                     ),
-              //                   ],
-              //                 );
-              //               }
-              //             },
-              //             connectorBuilder: (_, index, type) {
-              //               if (index > 0) {
-              //                 if (index == 2) {
-              //                   final prevColor = getColor(index - 1);
-              //                   final color = getColor(index);
-              //
-              //                   return const DecoratedLineConnector(
-              //                     decoration:
-              //                         BoxDecoration(color: Color(0xff071039)),
-              //                   );
-              //                 } else {
-              //                   return const SolidLineConnector(
-              //                     color: Color(0xff071039),
-              //                   );
-              //                 }
-              //               } else {
-              //                 return null;
-              //               }
-              //             },
-              //             itemCount: _processes.length,
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               SizedBox(height: 30),
 
               //희망일정
@@ -641,7 +540,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '희망 시공 일정',
+                      '희망 시공 일정 [최대 6개월 이내]',
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'NanumSquareB',

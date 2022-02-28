@@ -11,6 +11,7 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/final_order_data.dart';
 import 'package:moving_plus/models/payment_model.dart';
 import 'package:moving_plus/pages/main_page.dart';
+import 'package:moving_plus/pages/transaction_breakdown.dart';
 
 final controller_Getx = Get.put(ReactiveController());
 
@@ -968,7 +969,7 @@ class Payment_IMP extends StatelessWidget {
     FinalOrder_Data.updateStatus(estimate_id).then((value) {
       if (value == 'success') {
         print('Update Status Success');
-        Get.offAll(Main_Page(index: 1));
+        Get.offAll(TransactionBreakdown());
       } else {
         print('Update Status Fail');
       }

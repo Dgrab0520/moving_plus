@@ -1142,6 +1142,10 @@ class _SignUp_PageState extends State<SignUpPage> {
 
   List myService = [
     {
+      "display": "청소 전체",
+      "value": "청소",
+    },
+    {
       "display": "입주청소",
       "value": "입주 청소",
     },
