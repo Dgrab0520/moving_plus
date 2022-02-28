@@ -34,11 +34,12 @@ class MainPopular extends StatelessWidget {
                             Get.toNamed(
                                 '/request_estimage/true?serviceType=${popularController.popular[index]}');
                           } else {
-                            Get.snackbar(
-                              "로그인",
-                              "고객 로그인 후 이용해주세요",
-                              duration: const Duration(milliseconds: 750),
-                            );
+                            if (!Get.isSnackbarOpen) {
+                              Get.snackbar(
+                                "로그인",
+                                "고객 로그인 후 이용해주세요",
+                              );
+                            }
                           }
                         },
                         child: Container(
