@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
   flutter:
     sdk: flutter
 
@@ -70,6 +71,7 @@ dependencies:
   checkbox_grouped: ^1.7.1
   group_button: ^4.5.0
   flutter_local_notifications: ^9.3.2
+
 
 dev_dependencies:
   flutter_test:

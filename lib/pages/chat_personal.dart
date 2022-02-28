@@ -593,38 +593,20 @@ class _ChatPersonalState extends State<ChatPersonal> {
           chat.createAt = value[0];
           chat.image = value[1];
 
-          if (isPro == 1) {
-            chatRoom[chatRoomIndex].lastChat = chat.image;
-            chatRoom[chatRoomIndex].chatType = "image";
-            chatRoom[chatRoomIndex].createAt = chat.createAt;
-          } else {
-            userChatRooms[chatRoomIndex].lastChat = chat.image;
-            userChatRooms[chatRoomIndex].chatType = "image";
-            userChatRooms[chatRoomIndex].createAt = chat.createAt;
-            print(userChatRooms[chatRoomIndex].lastChat);
-            print(userChatRooms[chatRoomIndex].chatType);
-            print(userChatRooms[chatRoomIndex].createAt);
-          }
+          // if (isPro == 1) {
+          //   chatRoom[chatRoomIndex].lastChat = chat.image;
+          //   chatRoom[chatRoomIndex].chatType = "image";
+          //   chatRoom[chatRoomIndex].createAt = chat.createAt;
+          // } else {
+          //   userChatRooms[chatRoomIndex].lastChat = chat.image;
+          //   userChatRooms[chatRoomIndex].chatType = "image";
+          //   userChatRooms[chatRoomIndex].createAt = chat.createAt;
+          //   print(userChatRooms[chatRoomIndex].lastChat);
+          //   print(userChatRooms[chatRoomIndex].chatType);
+          //   print(userChatRooms[chatRoomIndex].createAt);
+          // }
 
           setState(() {
-            DateTime currentDate = DateTime.now();
-            DateTime pastDate = DateTime.parse(chatting[0].createAt);
-
-            if ((currentDate.difference(pastDate).inHours / 24).round() > 0) {
-              print(currentDate);
-              print(pastDate);
-              chatting.insert(
-                  0,
-                  Chat(
-                      id: 0,
-                      estimateId: "0",
-                      text: "",
-                      image: "",
-                      estimatePrice: 0,
-                      finalPrice: 0,
-                      isPro: 3,
-                      createAt: DateTime.now().toString()));
-            }
             chatting.insert(0, chat);
             isSelect = false;
             Timer(

@@ -312,10 +312,10 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     flex: 1,
                                     child: InkWell(
                                       onTap: () {
-                                        if(idController.text != ""){
+                                        if (idController.text != "") {
                                           print('중복확인');
                                           idCheck(idController.text);
-                                        } else{
+                                        } else {
                                           Get.snackbar("실패", "아이디를 입력해주세요");
                                         }
                                       },
@@ -553,7 +553,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           Radius.circular(5.0)),
                                     ),
                                   ),
-                                  keyboardType: TextInputType.visiblePassword,
+                                  keyboardType: TextInputType.text,
                                 )),
                           ],
                         ),
@@ -667,7 +667,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           Radius.circular(5.0)),
                                     ),
                                   ),
-                                  keyboardType: TextInputType.visiblePassword,
+                                  keyboardType: TextInputType.text,
                                 )),
                           ],
                         ),

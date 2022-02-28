@@ -109,6 +109,7 @@ class _Request_EstimateState extends State<Request_Estimate> {
             com_name: 'None',
             profile_img: controller.pro.value.profile_img,
             pro_token: customer[0].cus_token,
+            recom: customer[0].cus_recom,
           );
         }
       });

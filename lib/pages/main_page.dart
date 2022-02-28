@@ -126,16 +126,18 @@ class _Main_PageState extends State<Main_Page> {
                 }));
           });
           controller.change(
-              type: 'pro',
-              id: pro_info[0].id,
-              pro_id: pro_info[0].pro_id,
-              pro_pw: pro_info[0].pro_pw,
-              pro_name: pro_info[0].pro_name,
-              pro_phone: pro_info[0].pro_phone,
-              pro_email: pro_info[0].pro_email,
-              com_name: pro_info[0].com_name,
-              profile_img: pro_info[0].profile_img,
-              pro_token: pro_info[0].pro_token);
+            type: 'pro',
+            id: pro_info[0].id,
+            pro_id: pro_info[0].pro_id,
+            pro_pw: pro_info[0].pro_pw,
+            pro_name: pro_info[0].pro_name,
+            pro_phone: pro_info[0].pro_phone,
+            pro_email: pro_info[0].pro_email,
+            com_name: pro_info[0].com_name,
+            profile_img: pro_info[0].profile_img,
+            pro_token: pro_info[0].pro_token,
+            recom: pro_info[0].pro_recom,
+          );
           setState(() {});
         } else {
           Get.snackbar("로그인 실패", "아이디 또는 비밀번호가 틀렸습니다",
@@ -293,6 +295,7 @@ class _Main_PageState extends State<Main_Page> {
                                 com_name: 'None',
                                 profile_img: 'None',
                                 pro_token: 'None',
+                                recom: "None",
                               );
                             });
                           },
@@ -649,6 +652,7 @@ class _Main_PageState extends State<Main_Page> {
                                   com_name: 'None',
                                   profile_img: 'None',
                                   pro_token: 'None',
+                                  recom: "None",
                                 );
                               });
                             },

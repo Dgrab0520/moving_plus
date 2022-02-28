@@ -249,7 +249,7 @@ class _P_SignupState extends State<P_Signup> {
                                       BorderRadius.all(Radius.circular(5.0)),
                                 ),
                               ),
-                              keyboardType: TextInputType.visiblePassword,
+                              keyboardType: TextInputType.name,
                             )),
                       ],
                     ),

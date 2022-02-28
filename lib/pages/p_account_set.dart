@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/delete_account_data.dart';
@@ -444,6 +445,44 @@ class _P_Account_SetState extends State<P_Account_Set> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                Clipboard.setData(
+                    ClipboardData(text: controller.pro.value.recom));
+                Get.snackbar("복사", "추천인 코드가 복사되었습니다");
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '추천인 코드',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'NanumSquareR',
+                      ),
+                    ),
+                    SizedBox(height: 7),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          controller.pro.value.recom,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'NanumSquareB',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(height: 70),
             Divider(
               thickness: 0.6,
@@ -481,6 +520,7 @@ class _P_Account_SetState extends State<P_Account_Set> {
                               com_name: 'None',
                               profile_img: 'None',
                               pro_token: 'None',
+                              recom: "None",
                             );
                             Get.offAll(const Main_Page(index: 1));
 

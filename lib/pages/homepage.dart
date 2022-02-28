@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
             com_name: 'None',
             profile_img: controller.pro.value.profile_img,
             pro_token: customer[0].cus_token,
+            recom: customer[0].cus_recom,
           );
         }
       });
@@ -631,8 +632,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Spacer(),
-
-
                   Spacer(),
                   Row(
                     children: [
@@ -777,7 +776,6 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 3,
                     textAlign: TextAlign.center,
                   ),
-
                   SizedBox(
                     height: 5.0,
                   ),

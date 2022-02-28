@@ -145,6 +145,7 @@ class _C_LoginState extends State<C_Login> {
         com_name: 'None',
         profile_img: _default_Image ? "default_image" : profile_image,
         pro_token: 'None',
+        recom: "None",
       );
       if (customer.isEmpty) {
         insertCus();
@@ -298,6 +299,7 @@ class _C_LoginState extends State<C_Login> {
                                     com_name: 'None',
                                     profile_img: "default_image",
                                     pro_token: value2,
+                                    recom: "TEST",
                                   );
                                   Get.offAll(Main_Page(index: 1));
                                   print(value2);

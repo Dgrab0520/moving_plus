@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:moving_plus/models/customer_model.dart';
 
+import 'chat_data.dart';
+
 class Customer_Data {
   static const ROOT = "http://211.110.44.91/plus/plus_customer.php";
   static const CUSTOMER_SELECT_ACTION = "CUSTOMER_SELECT";
   static const CUSTOMER_INSERT_ACTION = "CUSTOMER_INSERT";
   static const CUSTOMER_TOKEN_ACTION = "CUSTOMER_TOKEN";
   static const SELECT_TOKEN_ACTION = "SELECT_TOKEN";
+  static const SELECT_POINT_ACTION = "SELECT_POINT";
 
   //고객 정보 조회
   static Future<List<Customer>> get_Customer(String user_id) async {
@@ -90,6 +93,53 @@ class Customer_Data {
     } catch (e) {
       print("exception : $e");
       return "";
+    }
+  }
+
+  //고객 포인트 불러오기
+  static Future<String> getCustomerPoint(String cus_id) async {
+    print(cus_id);
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = SELECT_POINT_ACTION;
+      map['cus_id'] = cus_id;
+      print(map);
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Select Point Response : ${response.body}');
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        print(response.reasonPhrase);
+        return "";
+      }
+    } catch (e) {
+      print("exception : $e");
+      return "";
+    }
+  }
+
+  //추천인 등록
+  static Future<bool> usePoint(String point) async {
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "USE_POINT";
+      map['point'] = point;
+      map['cus_id'] = controller.pro.value.pro_id;
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print('Use Point Response : ${response.body}');
+      if (200 == response.statusCode) {
+        if (response.body == "success") {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("exception : $e");
+      return false;
     }
   }
 

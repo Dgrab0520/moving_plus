@@ -11,6 +11,7 @@ class Pro_Getx {
   String com_name;
   String profile_img;
   String pro_token;
+  String recom;
 
   Pro_Getx({
     required String type,
@@ -23,6 +24,7 @@ class Pro_Getx {
     required String com_name,
     required String profile_img,
     required String pro_token,
+    required String recom,
   })  : this.type = type,
         this.id = id,
         this.pro_id = pro_id,
@@ -32,7 +34,8 @@ class Pro_Getx {
         this.pro_email = pro_email,
         this.com_name = com_name,
         this.profile_img = profile_img,
-        this.pro_token = pro_token;
+        this.pro_token = pro_token,
+        this.recom = recom;
 }
 
 class ReactiveController extends GetxController {
@@ -47,6 +50,7 @@ class ReactiveController extends GetxController {
     com_name: 'None',
     profile_img: 'None',
     pro_token: 'None',
+    recom: "None",
   ).obs;
 
   setProfile(String profile) {
@@ -70,6 +74,7 @@ class ReactiveController extends GetxController {
     required String com_name,
     required String profile_img,
     required String pro_token,
+    required String recom,
   }) {
     pro.update((val) {
       val!.type = type;
@@ -82,6 +87,7 @@ class ReactiveController extends GetxController {
       val.com_name = com_name;
       val.profile_img = profile_img;
       val.pro_token = pro_token;
+      val.recom = recom;
     });
   }
 }

@@ -92,16 +92,18 @@ class _P_LoginState extends State<P_Login> {
           }
         });
         controller.change(
-            type: 'pro',
-            id: pro_info[0].id,
-            pro_id: pro_info[0].pro_id,
-            pro_pw: pro_info[0].pro_pw,
-            pro_name: pro_info[0].pro_name,
-            pro_phone: pro_info[0].pro_phone,
-            pro_email: pro_info[0].pro_email,
-            com_name: pro_info[0].com_name,
-            profile_img: pro_info[0].profile_img,
-            pro_token: pro_info[0].pro_token);
+          type: 'pro',
+          id: pro_info[0].id,
+          pro_id: pro_info[0].pro_id,
+          pro_pw: pro_info[0].pro_pw,
+          pro_name: pro_info[0].pro_name,
+          pro_phone: pro_info[0].pro_phone,
+          pro_email: pro_info[0].pro_email,
+          com_name: pro_info[0].com_name,
+          profile_img: pro_info[0].profile_img,
+          pro_token: pro_info[0].pro_token,
+          recom: pro_info[0].pro_recom,
+        );
         Get.offAll(Main_Page(index: 1));
       } else {
         setState(() {
