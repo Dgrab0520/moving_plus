@@ -5,7 +5,8 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_room_model.dart';
 import 'package:moving_plus/pages/chat_estimate.dart';
-import 'package:moving_plus/pages/main_page.dart';
+
+import 'main_page.dart';
 
 final controller = Get.put(ReactiveController());
 

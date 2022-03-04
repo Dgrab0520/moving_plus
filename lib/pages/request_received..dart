@@ -137,11 +137,23 @@ class _Request_ReceivedState extends State<Request_Received> {
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  '${order[index].service_type}',
+                                  order[index].service_type,
                                   style: TextStyle(
                                     fontFamily: 'NanumSquareB',
                                   ),
                                 ),
+                                controller.pro.value.type == 'pro'
+                                    ? order[index].isOrder != "None"
+                                        ? const Text(
+                                            "   이미 보낸 견적",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 10,
+                                              fontFamily: 'NanumSquareB',
+                                            ),
+                                          )
+                                        : Container()
+                                    : Container(),
                               ],
                             ),
                             Text(

@@ -22,6 +22,7 @@ class Order {
   String request_img3;
   String order_date;
   String index;
+  String isOrder;
 
   Order({
     required this.order_id,
@@ -47,6 +48,7 @@ class Order {
     required this.request_img3,
     required this.order_date,
     required this.index,
+    required this.isOrder,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -87,6 +89,7 @@ class Order {
       order_date:
           json['order_date'] == null ? "" : json['order_date'] as String,
       index: json['index'] == null ? "" : json['index'] as String,
+      isOrder: json['isOrder'] == null ? "None" : json['isOrder'] as String,
     );
   }
 }

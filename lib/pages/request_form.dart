@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/estimate_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
 import 'package:moving_plus/models/estimate_model.dart';
+import 'package:moving_plus/models/order_chat_model.dart';
 import 'package:moving_plus/models/order_model.dart';
+import 'package:moving_plus/pages/api.dart';
+import 'package:moving_plus/pages/c_chatlist.dart';
 
 import '../main.dart';
 import 'detailscreen.dart';
@@ -259,13 +263,32 @@ class _RequestFormState extends State<RequestForm> {
                                             fontSize: 12,
                                           ),
                                         ),
-                                        Text(
-                                          _isLoading2
-                                              ? ' $_countEstimate개'
-                                              : ' 0개',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Color(0xFF025595)),
+                                        InkWell(
+                                          onTap: () {
+                                            var orderChat = OrderChat(
+                                                order_id: order[0].order_id,
+                                                address: order[0].address,
+                                                service_type:
+                                                    order[0].service_type,
+                                                order_status: "",
+                                                order_date: DateFormat(
+                                                        "yyyy.MM.dd")
+                                                    .format(DateTime.parse(
+                                                        order[0].order_date)));
+                                            Get.to(C_ChatList(
+                                                mainType: Api()
+                                                    .findMainCategory(
+                                                        order[0].service_type),
+                                                orderChat: orderChat));
+                                          },
+                                          child: Text(
+                                            _isLoading2
+                                                ? ' $_countEstimate개'
+                                                : ' 0개',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Color(0xFF025595)),
+                                          ),
                                         ),
                                       ],
                                     ),

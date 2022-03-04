@@ -93,8 +93,33 @@ class _P_Account_SetState extends State<P_Account_Set> {
                   Positioned(
                       right: 0,
                       bottom: 0,
-                      child: Image.asset("assets/photo-camera2.png",
-                          width: 30, height: 30)),
+                      child: InkWell(
+                        onTap: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles(
+                                  type: FileType.image,
+                                  allowMultiple: false,
+                                  onFileLoading: (value) {
+                                    debugPrint(value.toString());
+                                  });
+                          if (result != null) {
+                            File file = File(result.files.single.path!);
+                            setState(() {
+                              accountImage = FileImage(file);
+                            });
+                            ProDataUpdate.changeProfileImage(file)
+                                .then((value) {
+                              if (value == "success") {
+                                Get.snackbar("성공", "프로필 이미지 변경 성공");
+                              } else {
+                                Get.snackbar("실패", "프로필 이미지 변경 실패");
+                              }
+                            });
+                          }
+                        },
+                        child: Image.asset("assets/photo-camera2.png",
+                            width: 30, height: 30),
+                      )),
                 ],
               ),
             ),

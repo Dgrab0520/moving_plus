@@ -176,7 +176,7 @@ class FindId extends StatelessWidget {
                 onTap: () {
                   FindAccount.getId(nameController.text, phoneController.text)
                       .then((value) {
-                    if (value != "") {
+                    if (value.isNotEmpty) {
                       Get.back();
                       Get.dialog(FindResult(
                         result: value,

@@ -6,7 +6,7 @@ class FindAccount {
   static const ROOT = "http://211.110.44.91/plus/plus_find_account.php";
 
   //아이디 찾기
-  static Future<String> getId(String name, String phone) async {
+  static Future<List<dynamic>> getId(String name, String phone) async {
     try {
       var map = <String, dynamic>{};
       map['action'] = "ID";
@@ -16,13 +16,14 @@ class FindAccount {
       print('Pro Find Id Response : ${response.body}');
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        List<dynamic> result = jsonDecode(response.body)['id'];
+        return result;
       } else {
-        return "";
+        return [];
       }
     } catch (e) {
       print(e);
-      return "";
+      return [];
     }
   }
 

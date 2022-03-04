@@ -42,21 +42,15 @@ class _Carousel_SubState extends State<Carousel_Sub> {
                 ),
                 items: controller.bannerSub.map((item) {
                   return SizedBox(
+                    height: 96.0,
+                    child: Center(
+                        child: Image.network(
+                      'http://211.110.44.91/plus/banner/${item.banner_img}',
+                      fit: BoxFit.cover,
+                      width: Get.width,
                       height: 96.0,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 96.0,
-                            child: Center(
-                                child: Image.network(
-                              'http://211.110.44.91/plus/banner/${item.banner_img}',
-                              fit: BoxFit.fill,
-                              width: Get.width,
-                              height: 96.0,
-                            )),
-                          ),
-                        ],
-                      ));
+                    )),
+                  );
                 }).toList(),
               ),
             ],

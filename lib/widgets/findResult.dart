@@ -5,7 +5,7 @@ import 'package:moving_plus/pages/signup_pro_page.dart';
 class FindResult extends StatelessWidget {
   const FindResult({Key? key, required this.result, required this.type})
       : super(key: key);
-  final String result;
+  final List<dynamic> result;
   final String type;
   @override
   Widget build(BuildContext context) {
@@ -53,14 +53,39 @@ class FindResult extends StatelessWidget {
                   left: 8,
                   right: 8,
                 ),
-                child: Text(
-                  "$type : $result",
-                  style: const TextStyle(
-                    color: Color(0xFF444444),
-                    fontSize: 15,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                ),
+                child: type == "비밀번호"
+                    ? Text(
+                        "$type : ${result[0]}",
+                        style: const TextStyle(
+                          color: Color(0xFF444444),
+                          fontSize: 15,
+                          fontFamily: 'NanumSquareB',
+                        ),
+                      )
+                    : Wrap(
+                        children: [
+                          Text(
+                            "$type : ",
+                            style: const TextStyle(
+                              color: Color(0xFF444444),
+                              fontSize: 15,
+                              fontFamily: 'NanumSquareB',
+                            ),
+                          ),
+                          Wrap(
+                            children: result
+                                .map((e) => Text(
+                                      "[$e] ",
+                                      style: const TextStyle(
+                                        color: Color(0xFF444444),
+                                        fontSize: 15,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ))
+                                .toList(),
+                          )
+                        ],
+                      ),
               ),
               const SizedBox(height: 20),
               InkWell(

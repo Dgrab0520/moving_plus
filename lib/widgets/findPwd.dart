@@ -179,7 +179,7 @@ class FindPwd extends StatelessWidget {
                     if (value != "") {
                       Get.back();
                       Get.dialog(FindResult(
-                        result: value,
+                        result: [value],
                         type: "비밀번호",
                       ));
                     } else {

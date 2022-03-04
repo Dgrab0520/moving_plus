@@ -44,28 +44,33 @@ class _Carousel_MainState extends State<Carousel_Main> {
                       });
                     }),
                 items: controller.bannerMain.map((item) {
-                  return Column(
-                    children: <Widget>[
-                      Center(
-                          child: Image.network(
-                        'http://211.110.44.91/plus/banner/${item.banner_img}',
-                        fit: BoxFit.fitWidth,
-                        width: Get.width,
-                      )),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        item.banner_title,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF0e0e0e),
-                          fontSize: 15.0,
-                          fontFamily: 'Gmarket_Medium',
-                          fontWeight: FontWeight.bold,
+                  return SizedBox(
+                    height: 162,
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Center(
+                              child: Image.network(
+                            'http://211.110.44.91/plus/banner/${item.banner_img}',
+                            fit: BoxFit.fitHeight,
+                            width: Get.width,
+                          )),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Text(
+                          item.banner_title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF0e0e0e),
+                            fontSize: 15.0,
+                            fontFamily: 'Gmarket_Medium',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 }).toList(),
               ),

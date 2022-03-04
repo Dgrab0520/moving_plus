@@ -295,6 +295,7 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
             ),
             SizedBox(height: 2),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   '${orderChat.service_type} | ${orderChat.address.substring(0, 2)}',
@@ -303,6 +304,13 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
                     fontFamily: 'NanumSquareR',
                   ),
                 ),
+                Text(
+                  "보낸 업체 : ${profile.length}개",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontFamily: 'NanumSquareR',
+                      color: Colors.blue),
+                )
               ],
             ),
             SizedBox(height: 10),

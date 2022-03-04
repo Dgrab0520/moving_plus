@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
@@ -262,12 +261,15 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate, // Refer step 1
-      firstDate: DateTime(2022),
+      firstDate: selectedDate.subtract(Duration(days: 0)),
       lastDate: DateTime(2999),
     );
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
+        if(selectedDate2.compareTo(selectedDate) <1){
+          selectedDate2 = selectedDate;
+        }
       });
   }
 
@@ -275,7 +277,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate2, // Refer step 1
-      firstDate: DateTime(2022),
+      firstDate: selectedDate2.subtract(Duration(days: 0)),
       lastDate: DateTime(2999),
     );
     if (picked != null && picked != selectedDate2)
