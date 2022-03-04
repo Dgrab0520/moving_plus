@@ -134,508 +134,501 @@ class _P_Detail_EstimateState extends State<P_Detail_Estimate> {
                               Container(
                                 height: 20,
                                 child: IconButton(
-                                    onPressed: () {
-                                      Get.defaultDialog(
-                                          radius: 5.0,
-                                          title: '수수료 요율표',
-                                          titleStyle: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'NanumSquareB',
-                                          ),
-                                          content: Container(
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: Get.width,
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 20.0,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '전체 비용',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '계약 수수료',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '1~150,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '15,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '150,001~499,999 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '전체 비용 10%',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '500,000~1,000,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '50,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '1,000,001~1,500,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '60,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '1,500,001~2,000,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '70,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '2,000,001~2,500,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '80,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '2,500,000~3,000,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '90,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 3,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '3,000,001~ 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB'),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              height: 25.0,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width:
-                                                                          0.5,
-                                                                      color: Colors
-                                                                          .black54)),
-                                                              child: Center(
-                                                                child: Text(
-                                                                  '100,000 원',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontFamily:
-                                                                          'NanumSquareB',
-                                                                      color: Colors
-                                                                          .deepOrange),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 20.0,
-                                                      ),
-                                                      InkWell(
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
+                                  onPressed: () {
+                                    Get.defaultDialog(
+                                        radius: 5.0,
+                                        title: '수수료 요율표',
+                                        titleStyle: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: 'NanumSquareB',
+                                        ),
+                                        content: Container(
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                width: Get.width,
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 20.0,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
                                                           child: Container(
-                                                            width: 100.0,
-                                                            height: 35.0,
-                                                            color: Color(
-                                                                0xFF025595),
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
                                                             child: Center(
-                                                                child: Text(
-                                                              '확인',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      13.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
-                                                            )),
-                                                          ))
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ));
-                                    },
-                                    icon: Icon(CupertinoIcons.question_circle,
-                                        size: 20.0)),
+                                                              child: Text(
+                                                                '전체 비용',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '계약 수수료',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '1~150,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '15,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '150,001~499,999 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '전체 비용 10%',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '500,000~1,000,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '50,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '1,000,001~1,500,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '60,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '1,500,001~2,000,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '70,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '2,000,001~2,500,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '80,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '2,500,000~3,000,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '90,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '3,000,001~ 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB'),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Container(
+                                                            height: 25.0,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .black54)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                '100,000 원',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        'NanumSquareB',
+                                                                    color: Colors
+                                                                        .deepOrange),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20.0,
+                                                    ),
+                                                    InkWell(
+                                                        onTap: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Container(
+                                                          width: 100.0,
+                                                          height: 35.0,
+                                                          color:
+                                                              Color(0xFF025595),
+                                                          child: Center(
+                                                              child: Text(
+                                                            '확인',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 13.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                          )),
+                                                        ))
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ));
+                                  },
+                                  icon: Row(
+                                    children: [
+                                      Text(
+                                        '계약금 요율표',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      SizedBox(width: 2),
+                                      Icon(CupertinoIcons.question_circle,
+                                          size: 17.0),
+                                    ],
+                                  ),
+                                ),
                               )
                             ],
                           ),

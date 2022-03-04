@@ -47,14 +47,16 @@ class _RequestFormState extends State<RequestForm> {
     });
   }
 
-  updateIndex(){
+  updateIndex() {
     getOrder();
-    OrderList_Data.updateIndex(order_id!, '${int.parse('${order[0].index}') + 1}').then((value){
+    OrderList_Data.updateIndex(
+            order_id!, '${int.parse('${order[0].index}') + 1}')
+        .then((value) {
       print('${index! + 1}');
-      if(value == 'success'){
+      if (value == 'success') {
         print('Update Index Success');
         Get.back();
-      }else{
+      } else {
         print('Update Index Fail');
       }
     });
@@ -89,106 +91,123 @@ class _RequestFormState extends State<RequestForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          '요청서',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-            fontFamily: 'NanumSquareB',
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF025595),
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
+          elevation: 0,
+          title: Text(
+            '요청서',
+            style: TextStyle(
               color: Colors.white,
-            )),
-
-        actions: [
-          controller.pro.value.type == 'cus'?
-          IconButton(
-            onPressed: (){
-              Get.defaultDialog(
-                radius: 5.0,
-                title: '추가 견적 받기',
-                titleStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 15,
-                  fontFamily: 'NanumSquareB',
-                ),
-                content: Container(
-                  width: Get.width,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Text('추가 견적을 받으시겠습니까?',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontFamily: 'NanumSquareB',
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20.0,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: (){
-                                Get.back();
-                              },
-                              child: Container(
-                                width: Get.width*0.3,
-                                height: 40.0,
-                                color: Colors.grey,
-                                child: Center(child: Text('Cancel',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                )),
-                              ),
-                            ),
-                            SizedBox(width: 10.0,),
-                            InkWell(
-                              onTap: (){
-                                updateIndex();
-                              },
-                              child: Container(
-                                width: Get.width*0.3,
-                                height: 40.0,
-                                color: Color(0xFF025595),
-                                child: Center(child: Text('Ok',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'NanumSquareB',
-                                  ),
-                                )),
-                              ),
-                            )
-
-                          ],
-                        )
-
-                      ],
-                    ),
-                  ),
-                )
-              );
-
+              fontSize: 17,
+              fontFamily: 'NanumSquareB',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Color(0xFF025595),
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
               },
-            icon: Icon(Icons.refresh, color: Colors.white,)
-          ) : SizedBox(),
-        ]
-      ),
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
+          actions: [
+            controller.pro.value.type == 'cus'
+                ? IconButton(
+                    onPressed: () {
+                      Get.defaultDialog(
+                          radius: 5.0,
+                          title: '추가 견적 받기',
+                          titleStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontFamily: 'NanumSquareB',
+                          ),
+                          content: Container(
+                            width: Get.width,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      '10명의 시공 파트너로 부터',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Center(
+                                    child: Text(
+                                      '추가 견적을 받으시겠습니까?',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Container(
+                                          width: Get.width * 0.3,
+                                          height: 40.0,
+                                          color: Colors.grey,
+                                          child: Center(
+                                              child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontFamily: 'NanumSquareB',
+                                            ),
+                                          )),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          updateIndex();
+                                        },
+                                        child: Container(
+                                          width: Get.width * 0.3,
+                                          height: 40.0,
+                                          color: Color(0xFF025595),
+                                          child: Center(
+                                              child: Text(
+                                            'Ok',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontFamily: 'NanumSquareB',
+                                            ),
+                                          )),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ));
+                    },
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                    ))
+                : SizedBox(),
+          ]),
       body: _isLoading
           ? Container(
               child: Column(

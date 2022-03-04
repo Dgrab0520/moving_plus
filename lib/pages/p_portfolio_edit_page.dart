@@ -813,7 +813,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       height: 35.0,
                                     ),
                                     Text(
-                                      '사진 및 동영상',
+                                      '사진',
                                       style: TextStyle(
                                         color: Colors.black87,
                                         fontSize: 15,

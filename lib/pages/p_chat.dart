@@ -5,6 +5,7 @@ import 'package:moving_plus/controllers/Getx_ProController.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_room_model.dart';
 import 'package:moving_plus/pages/chat_estimate.dart';
+import 'package:moving_plus/pages/main_page.dart';
 
 final controller = Get.put(ReactiveController());
 
@@ -75,16 +76,17 @@ class _P_ChatState extends State<P_Chat> {
           ),
           centerTitle: true,
           backgroundColor: const Color(0xFF025595),
-          leading: controller.pro.value.type == "pro"
-              ? null
-              : IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
+          leading: IconButton(
+              onPressed: () {
+                if (controller.pro.value.type == "pro") {
+                  Get.offAll(Main_Page(index: 1));
+                } else
+                  Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
         ),
         body: Column(
           children: [

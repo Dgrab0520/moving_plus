@@ -1303,7 +1303,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                           Row(
                             children: [
                               const Text(
-                                '사진 및 동영상',
+                                '사진',
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'NanumSquareEB',

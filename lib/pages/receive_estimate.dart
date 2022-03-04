@@ -61,16 +61,18 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF025595),
-          leading: widget.isMain
-              ? Icon(Icons.menu, color: Color(0xFF025595))
-              : IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
+          leading: IconButton(
+              onPressed: () {
+                if (widget.isMain) {
+                  Get.offAll(Main_Page(index: 1));
+                } else {
+                  Get.back();
+                }
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
         ),
         body: Column(
           children: [

@@ -450,7 +450,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -463,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -482,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -495,7 +495,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -514,7 +514,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -527,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -546,7 +546,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -559,7 +559,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -578,7 +578,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -591,7 +591,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -610,7 +610,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -623,7 +623,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'NanumSquareR',
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
@@ -631,7 +631,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Spacer(),
                   Spacer(),
                   Row(
                     children: [
@@ -859,28 +858,32 @@ class _HomePageState extends State<HomePage> {
 
 제13조(개인정보 처리방침 변경) ① 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다.""";
 
-  String use =
-      """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.\n2. 계약금 이외  착수금 및 선금은 계약 고객과 별도 협의 바랍니다.
+  String use = """1. 계약금 이외  착수금 및 선금은 계약 고객과 파트너 별도 협의 바랍니다.
 
-                            \n3. 계약을 위한  무리한 가격인하는 자제하여 주시고, 합리적은 시공 견적을 제시하여 주시기 바랍니다.
+                            \n2. 현장 추가 요금 발생 항목은 문의 고객에게 사전 고지 바랍니다.
 
-                            \n4. 현장 추가 요금 발생 항목은 문의 고객에게 사전 고지 바랍니다.
-
-                            \n5. 계약 불이행 및 일정, 견적 금액 변경은 계약 고객에게 사전 고지 및 협의 바랍니다.
+                            \n3. 계약 불이행 및 일정, 견적 금액 변경은 계약 고객에게 사전 고지 및 협의 바랍니다.
   
-                            \n6. 타 시공과 일정이 겹치지 않도록 사전에 고객에게 다른 시공 여부를 확인바랍니다.
+                            \n4. 타 시공과 일정이 겹치지 않도록 사전에 고객에게 다른 시공 여부를 확인바랍니다.
   
-                            \n7. 상기 1~6번 항목 불성실 이행시, 계정 정지 및 삭제 등의 불이익이 발생 할 수 있습니다.
+                            \n5. 상기 1~6번 항목 불성실 이행시, 계정 정지 및 삭제 등의 불이익이 발생 할 수 있습니다.
 
-                            \n8. 입주플러스 직영 파트너  가입을 희망하시면, 담당자에게 별도 문의 부탁드립니다.
-                            \n\n(담당자 1533-1196)
-                            \n직영 파트너는 앱 이용 별도 혜택 외 명함, 팀조끼, 차량 홍보스티커(자석형) 등을 별도 제공해 드립니다.\n직영 파트너는 30만원  보증금이 있습니다.(1년 후 연장 의사가 없으면 전액 돌려드립니다.)""";
+                            \n6. 입주플러스 직영 파트너  가입을 희망하시면, 담당자에게 별도 문의 부탁드립니다.
+                            \n\n(담당자 1533-1196)""";
 
   String return_service = """
-  - 입주플러스는 입주 파트너와 고객간의 서비스 중개를 진행하며, 이에 대한 수수료다(이하 '계약금')가 발생합니다.\n\n
+  - 입주플러스는 입주 파트너와 고객간의 서비스 중개를 진행하며, 중개 계약에 따른 계약금(이하 '계약금')가 발생합니다.\n\n
   - 이미 진행한 서비시의 경우 환불 진행이 불가합니다.\n\n
   - 서비스 이용 전 환불을 진행할 경우 서비스까지 남은 일정에 따라 수수료가 부과될 수 있습니다.\n\n
   - 파트너(고객)과 협의하지 않고 한쪽의 일반적인 서비스 취소 시 계약금 환불은 불가합니다.\n\n
   - 환불 절차는 고객센터를 통해 문의해주세요. \n\n
+  => 환불정보 \n
+  ※ 고객 귀책에 의한 취소\n
+    - 3일전 취소 = 계약금 50% 환불
+    - 2일전 취소 = 계약금 25% 환불
+    - 1일전 취소 = 계약금 미환불\n
+   ※ 시공사 귀책에 의한 취소\n
+     - 계약금 100% 환불
+  
   """;
 }

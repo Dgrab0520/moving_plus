@@ -981,7 +981,7 @@ class FinalPrice extends StatelessWidget {
                               onTap: () {
                                 Get.defaultDialog(
                                     radius: 5.0,
-                                    title: '수수료 요율표',
+                                    title: '계약금',
                                     titleStyle: TextStyle(
                                       fontSize: 16,
                                       fontFamily: 'NanumSquareB',
@@ -1439,8 +1439,19 @@ class FinalPrice extends StatelessWidget {
                                       ),
                                     ));
                               },
-                              child: Icon(CupertinoIcons.question_circle,
-                                  size: 23.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '계약금 요율표',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  Icon(CupertinoIcons.question_circle,
+                                      size: 17.0),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -1634,7 +1645,7 @@ class EstimatePrice extends StatelessWidget {
                                   onTap: () {
                                     Get.defaultDialog(
                                         radius: 5.0,
-                                        title: '수수료 요율표',
+                                        title: '계약금',
                                         titleStyle: TextStyle(
                                           fontSize: 16,
                                           fontFamily: 'NanumSquareB',
@@ -2112,8 +2123,19 @@ class EstimatePrice extends StatelessWidget {
                                           ),
                                         ));
                                   },
-                                  child: Icon(CupertinoIcons.question_circle,
-                                      size: 23.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '계약금 요율표',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      SizedBox(width: 2),
+                                      Icon(CupertinoIcons.question_circle,
+                                          size: 17.0),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
