@@ -11,6 +11,7 @@ import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
+import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/chat_data.dart';
 import 'package:moving_plus/models/chat_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
@@ -108,6 +109,7 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
 
   @override
   void initState() {
+    print(widget.serviceType);
     getChat();
     FirebaseMessaging.onMessage.listen((message) {
       getChat();
@@ -157,6 +159,89 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               Icons.arrow_back,
               color: Colors.white,
             )),
+        actions: [
+          isPro == 0
+              ? Container()
+              : widget.serviceType == "개인 문의"
+                  ? Container()
+                  : InkWell(
+                      onTap: () async {
+                        var result =
+                            await Get.to(P_Detail_Estimate(), arguments: {
+                          "estimateId": widget.estimateId,
+                          "serviceType": widget.serviceType,
+                        });
+                        print(result);
+                        setState(() {
+                          isSelect = false;
+
+                          Chat chat = Chat(
+                              id: 0,
+                              estimateId: widget.estimateId,
+                              text: "",
+                              image: "",
+                              estimatePrice: 0,
+                              finalPrice: result,
+                              isPro: isPro,
+                              createAt: "");
+                          ChatData.putChat(chat, "final").then((value) async {
+                            if (value.isNotEmpty) {
+                              print(value);
+                              chat.createAt = value[0];
+
+                              if (isPro == 1) {
+                                chatRoom[widget.chatRoomIndex].lastChat =
+                                    chat.finalPrice.toString();
+                                chatRoom[widget.chatRoomIndex].chatType =
+                                    "final";
+                                chatRoom[widget.chatRoomIndex].createAt =
+                                    chat.createAt;
+                              } else {
+                                userChatRooms[widget.chatRoomIndex].lastChat =
+                                    chat.finalPrice.toString();
+                                userChatRooms[widget.chatRoomIndex].chatType =
+                                    "final";
+                                userChatRooms[widget.chatRoomIndex].createAt =
+                                    chat.createAt;
+                              }
+
+                              setState(() {
+                                chatting.insert(0, chat);
+                                isSelect = false;
+                                Timer(
+                                    Duration(milliseconds: 200),
+                                    () => scrollController.animateTo(0.0,
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.easeInOut));
+                              });
+                              final HttpsCallableResult result =
+                                  await callable.call(
+                                <String, dynamic>{
+                                  "token": token,
+                                  "title": controller.pro.value.pro_name,
+                                  "body": "최종 견적",
+                                },
+                              );
+                            }
+                          });
+                          Timer(
+                              Duration(milliseconds: 200),
+                              () => scrollController.animateTo(0.0,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut));
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(right: 8),
+                        width: 29,
+                        height: 29,
+                        child: Image.asset(
+                          'assets/write_fill.png',
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+        ],
       ),
       body: Column(
         children: [
@@ -242,20 +327,13 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               children: [
                 InkWell(
                   onTap: () {
-                    if (!(isPro == 1 && chatting.length == 1)) {
-                      setState(() {
-                        isSelect = !isSelect;
-                      });
-                      Timer(
-                          Duration(milliseconds: 300),
-                          () => scrollController.animateTo(0.0,
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.easeInOut));
-
-                      FocusScope.of(context).unfocus();
-                    }
+                    getFile();
                   },
-                  child: Icon(Icons.menu, size: 25, color: Color(0xFF444444)),
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    child: Image.asset('assets/gg.png'),
+                  ),
                 ),
                 SizedBox(width: 10),
                 Expanded(
@@ -329,6 +407,14 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                           Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다',
                               backgroundColor: Colors.white);
                         } else {
+                          if (chatting.length == 1) {
+                            AlarmData.putChat(
+                                controller.pro.value.pro_id,
+                                [userChatRooms[widget.chatRoomIndex].proId],
+                                "first chat",
+                                order_id: "",
+                                mainType: widget.serviceType);
+                          }
                           if (chatTextController.text != "") {
                             Chat chat = Chat(
                                 id: 0,
@@ -433,157 +519,6 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               ],
             ),
           ),
-          AnimatedContainer(
-            width: Get.width,
-            height: isSelect ? 150 : 0,
-            color: Color(0xFFf9f9f9),
-            duration: Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            child: isSelect
-                ? SingleChildScrollView(
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            getFile();
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: 10, left: 10, right: 10, bottom: 3),
-                                padding: EdgeInsets.all(6),
-                                width: 45,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Color(0xFFcccccc),
-                                  ),
-                                ),
-                                child: Image.asset('assets/gg.png'),
-                              ),
-                              Text(
-                                '이미지',
-                                style: TextStyle(
-                                    fontSize: 11, fontFamily: 'NanumSquareB'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        isPro == 0
-                            ? Container()
-                            : InkWell(
-                                onTap: () async {
-                                  var result = await Get.to(P_Detail_Estimate(),
-                                      arguments: {
-                                        "estimateId": widget.estimateId,
-                                        "serviceType": widget.serviceType,
-                                      });
-                                  print(result);
-                                  setState(() {
-                                    isSelect = false;
-
-                                    Chat chat = Chat(
-                                        id: 0,
-                                        estimateId: widget.estimateId,
-                                        text: "",
-                                        image: "",
-                                        estimatePrice: 0,
-                                        finalPrice: result,
-                                        isPro: isPro,
-                                        createAt: "");
-                                    ChatData.putChat(chat, "final")
-                                        .then((value) async {
-                                      if (value.isNotEmpty) {
-                                        print(value);
-                                        chat.createAt = value[0];
-
-                                        if (isPro == 1) {
-                                          chatRoom[widget.chatRoomIndex]
-                                                  .lastChat =
-                                              chat.finalPrice.toString();
-                                          chatRoom[widget.chatRoomIndex]
-                                              .chatType = "final";
-                                          chatRoom[widget.chatRoomIndex]
-                                              .createAt = chat.createAt;
-                                        } else {
-                                          userChatRooms[widget.chatRoomIndex]
-                                                  .lastChat =
-                                              chat.finalPrice.toString();
-                                          userChatRooms[widget.chatRoomIndex]
-                                              .chatType = "final";
-                                          userChatRooms[widget.chatRoomIndex]
-                                              .createAt = chat.createAt;
-                                        }
-
-                                        setState(() {
-                                          chatting.insert(0, chat);
-                                          isSelect = false;
-                                          Timer(
-                                              Duration(milliseconds: 200),
-                                              () => scrollController.animateTo(
-                                                  0.0,
-                                                  duration: Duration(
-                                                      milliseconds: 300),
-                                                  curve: Curves.easeInOut));
-                                        });
-                                        final HttpsCallableResult result =
-                                            await callable.call(
-                                          <String, dynamic>{
-                                            "token": token,
-                                            "title":
-                                                controller.pro.value.pro_name,
-                                            "body": "최종 견적",
-                                          },
-                                        );
-                                      }
-                                    });
-                                    Timer(
-                                        Duration(milliseconds: 200),
-                                        () => scrollController.animateTo(0.0,
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.easeInOut));
-                                  });
-                                },
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 10,
-                                          left: 10,
-                                          right: 10,
-                                          bottom: 3),
-                                      padding: EdgeInsets.all(8),
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Color(0xFFcccccc),
-                                        ),
-                                      ),
-                                      child: Image.asset('assets/list.png'),
-                                    ),
-                                    Text(
-                                      '최종 견적',
-                                      style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: 'NanumSquareB'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                      ],
-                    ),
-                  )
-                : null,
-          )
         ],
       ),
     );

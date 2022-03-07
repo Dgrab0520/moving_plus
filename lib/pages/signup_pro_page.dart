@@ -695,7 +695,9 @@ class _SignUp_PageState extends State<SignUpPage> {
                                 height: 45,
                                 child: TextField(
                                   controller: phoneController,
+                                  maxLength: 11,
                                   decoration: InputDecoration(
+                                    counterText: "",
                                     contentPadding: EdgeInsets.only(
                                         top: 10.0, bottom: 10, left: 15),
                                     counterStyle: TextStyle(

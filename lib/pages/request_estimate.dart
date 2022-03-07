@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
@@ -11,6 +12,7 @@ import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 final _processes = [
   '필수정보',
@@ -351,6 +353,9 @@ class _Request_EstimateState extends State<Request_Estimate> {
                           SizedBox(height: 10),
                           GestureDetector(
                               onTap: () async {
+                                if (Platform.isAndroid) {
+                                  WebView.platform = SurfaceAndroidWebView();
+                                }
                                 KopoModel model = await Navigator.push(
                                   context,
                                   CupertinoPageRoute(

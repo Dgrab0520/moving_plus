@@ -4,6 +4,7 @@ import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
 import 'package:moving_plus/datas/time_calculator.dart';
 import 'package:moving_plus/pages/c_chatlist.dart';
+import 'package:moving_plus/pages/p_chat.dart';
 import 'package:moving_plus/pages/request_received..dart';
 
 import 'notice.dart';
@@ -90,6 +91,8 @@ class AlarmBox extends StatelessWidget {
           Get.off(() => const Request_Received());
         } else if (currentAlarm.alarmType == "notice") {
           Get.off(() => Notice());
+        } else if (currentAlarm.alarmType == "first chat") {
+          Get.off(() => const P_Chat());
         }
         alarmController.alarmDelete(index);
       },
@@ -132,10 +135,13 @@ class AlarmBox extends StatelessWidget {
                                     ),
                                   ),
                                   TextSpan(
-                                      text: currentAlarm.alarmType ==
-                                              "estimated price"
-                                          ? '님이 예상 견적을 보냈습니다'
-                                          : '님이 견적서를 요청했습니다.'),
+                                      text:
+                                          currentAlarm.alarmType == "first chat"
+                                              ? "님이 견적서 응답했습니다"
+                                              : currentAlarm.alarmType ==
+                                                      "estimated price"
+                                                  ? '님이 예상 견적을 보냈습니다'
+                                                  : '님이 견적서를 요청했습니다.'),
                                 ]),
                           ),
                   )
