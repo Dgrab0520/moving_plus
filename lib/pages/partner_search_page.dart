@@ -52,13 +52,13 @@ class _Partner_SearchState extends State<Partner_Search> {
     "필름 인테리어",
     "탄성 코트",
     "도배",
-    "장판 & 마루",
+    "장판/마루",
     "페인트",
     "방충망 교체",
     "욕실 인테리어",
     "타일 교체",
     "중문",
-    "커튼 & 블라인드",
+    "커튼/블라인드",
     "바닥 매트",
     "기타 인테리어",
     "줄눈",
@@ -85,7 +85,7 @@ class _Partner_SearchState extends State<Partner_Search> {
     "쇼파천갈이",
     "보일러 설치",
     "배관수리 및 청소",
-    "기타 가전 & 가구",
+    "기타 가전/가구",
     "정수기 렌탈",
     "에어컨 렌탈",
     "비데 렌탈",
@@ -100,6 +100,10 @@ class _Partner_SearchState extends State<Partner_Search> {
     "청소기 렌탈",
     "공기 청정기 렌탈",
     "기타 렌탈",
+    "사전점검",
+    "소독/방역",
+    "기타 서비스",
+
   ];
 
   String selectedValue1 = "";

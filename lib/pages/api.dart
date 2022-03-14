@@ -31,13 +31,13 @@ class Api {
       "필름 인테리어",
       "탄성 코트",
       "도배",
-      "장판 & 마루",
+      "장판/마루",
       "페인트",
       "방충망 교체",
       "욕실 인테리어",
       "타일 교체",
       "중문",
-      "커튼 & 블라인드",
+      "커튼/블라인드",
       "바닥 매트",
       "기타 인테리어"
     ],
@@ -68,7 +68,7 @@ class Api {
       "쇼파천갈이",
       "보일러 설치",
       "배관수리 및 청소",
-      "기타 가전 & 가구"
+      "기타 가전/가구"
     ],
     "렌탈": [
       "정수기 렌탈",
@@ -86,7 +86,7 @@ class Api {
       "공기 청정기 렌탈",
       "기타 렌탈"
     ],
-    "기타": ["사전점검", "소독 & 방역", "기타 서비스"],
+    "기타": ["사전점검", "소독/방역", "기타 서비스"],
   };
 
   Map<String, String> categoryImages = {
@@ -108,13 +108,13 @@ class Api {
     "필름 인테리어": "assets/img2.jpg",
     "탄성 코트": "assets/img3.jpg",
     "도배": "assets/img4.jpg",
-    "장판 & 마루": "assets/img5.jpg",
+    "장판/마루": "assets/img5.jpg",
     "페인트": "assets/img6.jpg",
     "방충망 교체": "assets/img7.jpg",
     "욕실 인테리어": "assets/img8.jpg",
     "타일 교체": "assets/img9.jpg",
     "중문": "assets/img10.jpg",
-    "커튼 & 블라인드": "assets/img11.jpg",
+    "커튼/블라인드": "assets/img11.jpg",
     "바닥 매트": "assets/mat.jpg",
     "기타 인테리어": "assets/img12.jpg",
     "줄눈": "assets/h_1.jpg",
@@ -157,8 +157,8 @@ class Api {
     "공기 청정기 렌탈": "assets/l_13.jpg",
     "기타 렌탈": "assets/rental.jpg",
     "사전점검": "assets/e_1.jpg",
-    "소독 & 방역": "assets/e_2.jpg",
-    "기타 가전 & 가구": "assets/etc.jpg",
+    "소독/방역": "assets/e_2.jpg",
+    "기타 서비스": "assets/etc.jpg",
   };
 
   String findMainCategory(String category) {
@@ -303,7 +303,7 @@ const List<CategorySub> interiorList = [
       category2: '인테리어'),
   CategorySub(
       image: 'assets/img4.jpg',
-      title: '장판 & 마루',
+      title: '장판/마루',
       content: "가정이나 오피스의 바닥을 마무리하며 붙이는 서비스",
       category: '인테리어',
       image2: 'assets/img5.jpg',
@@ -333,7 +333,7 @@ const List<CategorySub> interiorList = [
       category2: '인테리어'),
   CategorySub(
       image: 'assets/img11.jpg',
-      title: '커튼 & 블라인드',
+      title: '커튼/블라인드',
       content:
           "건물의 창이나 출입구에 설치라거나\n 칸막이로 사용되는 천으로 이루어진 \n 막이나 아크릴, 나무 등으로 분위기 연출이 가능한 설치 서비스",
       category: '인테리어',
@@ -550,7 +550,7 @@ const List<CategorySub> etcList = [
           "신축이나 구축 등 새로운 장소에\n 입주 전 하자나 개/보수가 필요한\n 부분을사전에 점검하여 주는\n 대행 서비스",
       category: '기타',
       image2: 'assets/e_2.jpg',
-      title2: '소독 & 방역',
+      title2: '소독/방역',
       content2:
           " 유해 물질, 바이러스, 악취, 공기 질 개선, 해충 박멸 등을 통해\n 쾌적한 환경을 유지하고 내부 오염을\n방지하기 위한 케어 서비스",
       category2: '기타'),

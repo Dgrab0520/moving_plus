@@ -114,59 +114,59 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "청소",
     },
     {
-      "display": "입주청소",
+      "display": "  ㄴ 입주청소",
       "value": "입주 청소",
     },
     {
-      "display": "이사청소",
+      "display": "  ㄴ 이사청소",
       "value": "이사 청소",
     },
     {
-      "display": "인테리어청소",
+      "display": "  ㄴ 인테리어청소",
       "value": "인테리어 청소",
     },
     {
-      "display": "거주청소",
+      "display": "  ㄴ 거주청소",
       "value": "거주 청소",
     },
     {
-      "display": "준공청소",
+      "display": "  ㄴ 준공청소",
       "value": "준공 청소",
     },
     {
-      "display": "정기청소",
+      "display": "  ㄴ 정기청소",
       "value": "정기 청소",
     },
     {
-      "display": "화재청소",
+      "display": "  ㄴ 화재청소",
       "value": "화재 청소",
     },
     {
-      "display": "쓰레기집청소",
+      "display": "  ㄴ 쓰레기집청소",
       "value": "쓰레기집 청소",
     },
     {
-      "display": "간판청소",
+      "display": "  ㄴ 간판청소",
       "value": "간판 청소",
     },
     {
-      "display": "외벽청소",
+      "display": "  ㄴ 외벽청소",
       "value": "외벽 청소",
     },
     {
-      "display": "학교 / 관공서청소",
+      "display": "  ㄴ 학교 / 관공서청소",
       "value": "학교/관공서 청소",
     },
     {
-      "display": "상가청소",
+      "display": "  ㄴ 상가청소",
       "value": "상가 청소",
     },
     {
-      "display": "주방후드청소",
+      "display": "  ㄴ 주방후드청소",
       "value": "주방후드 청소",
     },
     {
-      "display": "기타청소",
+      "display": "  ㄴ 기타청소",
       "value": "기타 청소",
     },
     {
@@ -187,7 +187,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
     },
     {
       "display": "장판 / 마루",
-      "value": "장판 & 마루",
+      "value": "장판/마루",
     },
     {
       "display": "페인트",
@@ -211,7 +211,7 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
     },
     {
       "display": "커튼 / 블라인드",
-      "value": "커튼 & 블라인드",
+      "value": "커튼/블라인드",
     },
     {
       "display": "바닥매트",
@@ -318,8 +318,8 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "배관수리 및 청소",
     },
     {
-      "display": "기타 가전 & 가구",
-      "value": "기타 가전 & 가구",
+      "display": "기타 가전 / 가구",
+      "value": "기타 가전/가구",
     },
     {
       "display": "정수기렌탈",
@@ -382,8 +382,8 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
       "value": "사전점검",
     },
     {
-      "display": "소독 & 방역",
-      "value": "소독 & 방역",
+      "display": "소독 / 방역",
+      "value": "소독/방역",
     },
     {
       "display": "기타서비스",
@@ -1014,19 +1014,19 @@ class _ProFolio_PageState extends State<ProFolio_Page> {
                                       pro.pro_service1 +
                                           ((pro.pro_service2 == '')
                                               ? ''
-                                              : " / ") +
+                                              : " & ") +
                                           pro.pro_service2 +
                                           ((pro.pro_service3 == '')
                                               ? ''
-                                              : " / ") +
+                                              : " & ") +
                                           pro.pro_service3 +
                                           ((pro.pro_service4 == '')
                                               ? ''
-                                              : " / ") +
+                                              : " & ") +
                                           pro.pro_service4 +
                                           ((pro.pro_service5 == '')
                                               ? ''
-                                              : " / ") +
+                                              : " & ") +
                                           pro.pro_service5,
                                       style: const TextStyle(
                                           fontSize: 13,

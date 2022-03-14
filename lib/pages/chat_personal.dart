@@ -150,82 +150,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-            )),
-        // actions: [
-        //   isPro == 0
-        //       ? Container()
-        //       : InkWell(
-        //           onTap: () async {
-        //             var result = await Get.to(P_Detail_Estimate(),
-        //                 arguments: estimateId);
-        //             print(result);
-        //             setState(() {
-        //               isSelect = false;
-        //
-        //               Chat chat = Chat(
-        //                   id: 0,
-        //                   estimateId: estimateId,
-        //                   text: "",
-        //                   image: "",
-        //                   estimatePrice: 0,
-        //                   finalPrice: result,
-        //                   isPro: isPro,
-        //                   createAt: "");
-        //               ChatData.putChat(chat, "final").then((value) async {
-        //                 if (value.isNotEmpty) {
-        //                   print(value);
-        //                   chat.createAt = value[0];
-        //
-        //                   if (isPro == 1) {
-        //                     chatRoom[chatRoomIndex].lastChat =
-        //                         chat.finalPrice.toString();
-        //                     chatRoom[chatRoomIndex].chatType = "final";
-        //                     chatRoom[chatRoomIndex].createAt = chat.createAt;
-        //                   } else {
-        //                     userChatRooms[chatRoomIndex].lastChat =
-        //                         chat.finalPrice.toString();
-        //                     userChatRooms[chatRoomIndex].chatType = "final";
-        //                     userChatRooms[chatRoomIndex].createAt =
-        //                         chat.createAt;
-        //                   }
-        //
-        //                   setState(() {
-        //                     chatting.insert(0, chat);
-        //                     isSelect = false;
-        //                     Timer(
-        //                         Duration(milliseconds: 200),
-        //                         () => scrollController.animateTo(0.0,
-        //                             duration: Duration(milliseconds: 300),
-        //                             curve: Curves.easeInOut));
-        //                   });
-        //                   final HttpsCallableResult result =
-        //                       await callable.call(
-        //                     <String, dynamic>{
-        //                       "token": token,
-        //                       "title": controller.pro.value.pro_name,
-        //                       "body": "최종 견적",
-        //                     },
-        //                   );
-        //                 }
-        //               });
-        //               Timer(
-        //                   Duration(milliseconds: 200),
-        //                   () => scrollController.animateTo(0.0,
-        //                       duration: Duration(milliseconds: 300),
-        //                       curve: Curves.easeInOut));
-        //             });
-        //           },
-        //           child: Container(
-        //             padding: EdgeInsets.only(right: 8),
-        //             width: 29,
-        //             height: 29,
-        //             child: Image.asset(
-        //               'assets/write_fill.png',
-        //               color: Colors.white,
-        //             ),
-        //           ),
-        //         ),
-        // ],
+            )
+        ),
       ),
       body: Column(
         children: [

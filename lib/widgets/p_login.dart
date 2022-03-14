@@ -127,7 +127,7 @@ class _P_LoginState extends State<P_Login> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-        Radius.circular(32),
+        Radius.circular(0),
       )),
       backgroundColor: Colors.white,
       content: SingleChildScrollView(
@@ -387,21 +387,47 @@ class _P_LoginState extends State<P_Login> {
                   ),
                 ),
               ),
-              TextButton(
-                  onPressed: () {
+              SizedBox(height: 10.0,),
+              InkWell(
+                  onTap: () {
                     print('고객 로그인');
                     Get.back();
                     Get.dialog(C_Login(
                       index: 0,
                     ));
                   },
-                  child: Text(
-                    '고객 로그인하기',
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        fontFamily: 'NanumSquareB',
-                        color: Colors.black87),
-                  )),
+                  child: Container(
+                    margin: EdgeInsets.only(left: 8, right: 8),
+                    width: double.infinity,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFD800),
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 10.0,),
+                        Expanded(
+                          flex: 1,
+                          child: Image.asset("assets/kakao_b.png", width: 17, height: 17),
+                        ),
+                        Expanded(
+                            flex: 8,
+                            child: Center(
+                              child: Text(
+                                '고객 로그인하기',
+                                style: TextStyle(
+                                  color: Color(0xFF3E2723),
+                                  fontSize: 14,
+                                  fontFamily: 'NanumSquareR',
+                                ),
+                              ),
+                            )
+                        ),
+                        SizedBox(width: 10.0,),
+                      ],
+                    ),
+                  ),
+              ),
               SizedBox(height: 25),
               Container(
                 child: Row(

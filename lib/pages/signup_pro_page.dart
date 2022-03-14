@@ -33,34 +33,64 @@ class _SignUp_PageState extends State<SignUpPage> {
   bool _idChecked = false;
   bool _isChecked1 = false;
   bool _isChecked2 = false;
+  bool _isChecked3 = false;
 
   insertSignUp() {
-    SignUp_Data.insertSignUp(
-      idController.text,
-      pwController.text,
-      generateRandomString(8),
-      comController.text,
-      comNoController.text,
-      nameController.text,
-      phoneController.text,
-      _myServices!.length >= 1 ? _myServices![0] : '',
-      _myServices!.length >= 2 ? _myServices![1] : '',
-      _myServices!.length >= 3 ? _myServices![2] : '',
-      _myServices!.length >= 4 ? _myServices![3] : '',
-      _myServices!.length >= 5 ? _myServices![4] : '',
-      _myAreas!.length >= 1 ? _myAreas![0] : '',
-      _myAreas!.length >= 2 ? _myAreas![1] : '',
-      _myAreas!.length >= 3 ? _myAreas![2] : '',
-    ).then((value) {
-      if (value == 'success') {
-        print('Insert Sign Up Success');
-        Get.offAll(Main_Page(index: 1));
-      } else {
-        print('Insert Sign Up Fail');
-        Get.snackbar("회원가입 실패", "네트워크 상태를 확인해주세요",
-            backgroundColor: Color(0xBC000000), colorText: Colors.white);
-      }
-    });
+    if(_isChecked3){
+      SignUp_Data.insertSignUp(
+        idController.text,
+        pwController.text,
+        generateRandomString(8),
+        comController.text,
+        '사업자번호 등록 필요',
+        nameController.text,
+        phoneController.text,
+        _myServices!.length >= 1 ? _myServices![0] : '',
+        _myServices!.length >= 2 ? _myServices![1] : '',
+        _myServices!.length >= 3 ? _myServices![2] : '',
+        _myServices!.length >= 4 ? _myServices![3] : '',
+        _myServices!.length >= 5 ? _myServices![4] : '',
+        _myAreas!.length >= 1 ? _myAreas![0] : '',
+        _myAreas!.length >= 2 ? _myAreas![1] : '',
+        _myAreas!.length >= 3 ? _myAreas![2] : '',
+      ).then((value) {
+        if (value == 'success') {
+          print('Insert Sign Up Success');
+          Get.offAll(Main_Page(index: 1));
+        } else {
+          print('Insert Sign Up Fail');
+          Get.snackbar("회원가입 실패", "네트워크 상태를 확인해주세요",
+              backgroundColor: Color(0xBC000000), colorText: Colors.white);
+        }
+      });
+    }else{
+      SignUp_Data.insertSignUp(
+        idController.text,
+        pwController.text,
+        generateRandomString(8),
+        comController.text,
+        comNoController.text,
+        nameController.text,
+        phoneController.text,
+        _myServices!.length >= 1 ? _myServices![0] : '',
+        _myServices!.length >= 2 ? _myServices![1] : '',
+        _myServices!.length >= 3 ? _myServices![2] : '',
+        _myServices!.length >= 4 ? _myServices![3] : '',
+        _myServices!.length >= 5 ? _myServices![4] : '',
+        _myAreas!.length >= 1 ? _myAreas![0] : '',
+        _myAreas!.length >= 2 ? _myAreas![1] : '',
+        _myAreas!.length >= 3 ? _myAreas![2] : '',
+      ).then((value) {
+        if (value == 'success') {
+          print('Insert Sign Up Success');
+          Get.offAll(Main_Page(index: 1));
+        } else {
+          print('Insert Sign Up Fail');
+          Get.snackbar("회원가입 실패", "네트워크 상태를 확인해주세요",
+              backgroundColor: Color(0xBC000000), colorText: Colors.white);
+        }
+      });
+    }
   }
 
   //OrderId Random 생성
@@ -86,14 +116,14 @@ class _SignUp_PageState extends State<SignUpPage> {
               children: [
                 Container(
                     child: Text(
-                  '입력하신 아이디 \n${idController.text}은(는)\n$aa',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.blueAccent,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                  textAlign: TextAlign.center,
-                )),
+                      '입력하신 아이디 \n${idController.text}은(는)\n$aa',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.blueAccent,
+                        fontFamily: 'NanumSquareB',
+                      ),
+                      textAlign: TextAlign.center,
+                    )),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -132,14 +162,14 @@ class _SignUp_PageState extends State<SignUpPage> {
               children: [
                 Container(
                     child: Text(
-                  '입력하신 아이디 \n${idController.text}은(는)\n$aa',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.deepOrange,
-                    fontFamily: 'NanumSquareB',
-                  ),
-                  textAlign: TextAlign.center,
-                )),
+                      '입력하신 아이디 \n${idController.text}은(는)\n$aa',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.deepOrange,
+                        fontFamily: 'NanumSquareB',
+                      ),
+                      textAlign: TextAlign.center,
+                    )),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -302,7 +332,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           ),
                                         ),
                                         keyboardType:
-                                            TextInputType.emailAddress,
+                                        TextInputType.emailAddress,
                                       )),
                                 ),
                                 SizedBox(
@@ -327,7 +357,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                             color: Color(0xFF025595),
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(5.0),
+                                          BorderRadius.circular(5.0),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -394,7 +424,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '비밀번호를 입력해주세요',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -465,7 +495,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '비밀번호를 한번 더 입력해주세요.',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -487,17 +517,17 @@ class _SignUp_PageState extends State<SignUpPage> {
                                 )),
                             _pwChecked
                                 ? Text(
-                                    '비밀번호가 일치합니다',
-                                    style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: Colors.blueAccent),
-                                  )
+                              '비밀번호가 일치합니다',
+                              style: TextStyle(
+                                  fontSize: 10.0,
+                                  color: Colors.blueAccent),
+                            )
                                 : Text(
-                                    '비밀번호가 일치하지 않습니다',
-                                    style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: Colors.deepOrange),
-                                  ),
+                              '비밀번호가 일치하지 않습니다',
+                              style: TextStyle(
+                                  fontSize: 10.0,
+                                  color: Colors.deepOrange),
+                            ),
                           ],
                         ),
                       ),
@@ -535,7 +565,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -592,7 +622,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -612,6 +642,35 @@ class _SignUp_PageState extends State<SignUpPage> {
                                   ),
                                   keyboardType: TextInputType.visiblePassword,
                                 )),
+                            SizedBox(height: 7),
+                            Row(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      height: 15.0,
+                                      child: Checkbox(
+                                        value: _isChecked3,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _isChecked3 = value!;
+                                            comNoController.text == '사업자 번호 등록 필요';
+                                          });
+                                        },
+                                        activeColor: Color(0xFF025595),
+                                      ),
+                                    )
+                                ),
+                                Expanded(
+                                  flex: 7,
+                                  child: Text(
+                                    '사업자 번호 없음[추후 등록 필요]',
+                                    style: TextStyle(fontSize: 10.0),
+                                  ),
+                                ),
+
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -649,7 +708,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -695,9 +754,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                 height: 45,
                                 child: TextField(
                                   controller: phoneController,
-                                  maxLength: 11,
                                   decoration: InputDecoration(
-                                    counterText: "",
                                     contentPadding: EdgeInsets.only(
                                         top: 10.0, bottom: 10, left: 15),
                                     counterStyle: TextStyle(
@@ -708,7 +765,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                        TextStyle(color: Color(0xFFACACAC)),
+                                    TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -805,7 +862,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           Get.snackbar(
                                               '등록실패', '최대 5개의 서비스를 선택할 수 있습니다',
                                               backgroundColor:
-                                                  Color(0xBC000000),
+                                              Color(0xBC000000),
                                               colorText: Colors.white);
                                         }
                                       },
@@ -866,9 +923,9 @@ class _SignUp_PageState extends State<SignUpPage> {
                                         checkBoxActiveColor: Colors.blue,
                                         checkBoxCheckColor: Colors.white,
                                         dialogShapeBorder:
-                                            RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12.0))),
+                                        RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12.0))),
                                         title: Text(
                                           "서비스 가능 지역",
                                           style: TextStyle(fontSize: 12),
@@ -903,7 +960,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                             Get.snackbar(
                                                 '등록실패', '최대 3개의 지역을 선택할 수 있습니다',
                                                 backgroundColor:
-                                                    Color(0xBC000000),
+                                                Color(0xBC000000),
                                                 colorText: Colors.white);
                                           }
                                         },
@@ -1064,7 +1121,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                     } else if (idController.text.isEmpty ||
                         pwController.text.isEmpty ||
                         comController.text.isEmpty ||
-                        comNoController.text.isEmpty ||
+                        !(comNoController.text.isNotEmpty || _isChecked3) ||
                         nameController.text.isEmpty ||
                         phoneController.text.isEmpty) {
                       Get.snackbar("회원가입 실패", "입력하지 않은 항목이 있습니다",
@@ -1180,59 +1237,59 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "청소",
     },
     {
-      "display": "입주청소",
+      "display": "  ㄴ 입주청소",
       "value": "입주 청소",
     },
     {
-      "display": "이사청소",
+      "display": "  ㄴ 이사청소",
       "value": "이사 청소",
     },
     {
-      "display": "인테리어청소",
+      "display": "  ㄴ 인테리어청소",
       "value": "인테리어 청소",
     },
     {
-      "display": "거주청소",
+      "display": "  ㄴ 거주청소",
       "value": "거주 청소",
     },
     {
-      "display": "준공청소",
+      "display": "  ㄴ 준공청소",
       "value": "준공 청소",
     },
     {
-      "display": "정기청소",
+      "display": "  ㄴ 정기청소",
       "value": "정기 청소",
     },
     {
-      "display": "화재청소",
+      "display": "  ㄴ 화재청소",
       "value": "화재 청소",
     },
     {
-      "display": "쓰레기집청소",
+      "display": "  ㄴ 쓰레기집청소",
       "value": "쓰레기집 청소",
     },
     {
-      "display": "간판청소",
+      "display": "  ㄴ 간판청소",
       "value": "간판 청소",
     },
     {
-      "display": "외벽청소",
+      "display": "  ㄴ 외벽청소",
       "value": "외벽 청소",
     },
     {
-      "display": "학교 / 관공서청소",
+      "display": "  ㄴ 학교 / 관공서청소",
       "value": "학교/관공서 청소",
     },
     {
-      "display": "상가청소",
+      "display": "  ㄴ 상가청소",
       "value": "상가 청소",
     },
     {
-      "display": "주방후드청소",
+      "display": "  ㄴ 주방후드청소",
       "value": "주방후드 청소",
     },
     {
-      "display": "기타청소",
+      "display": "  ㄴ 기타청소",
       "value": "기타 청소",
     },
     {
@@ -1253,7 +1310,7 @@ class _SignUp_PageState extends State<SignUpPage> {
     },
     {
       "display": "장판 / 마루",
-      "value": "장판 & 마루",
+      "value": "장판/마루",
     },
     {
       "display": "페인트",
@@ -1277,7 +1334,7 @@ class _SignUp_PageState extends State<SignUpPage> {
     },
     {
       "display": "커튼 / 블라인드",
-      "value": "커튼 & 블라인드",
+      "value": "커튼/블라인드",
     },
     {
       "display": "바닥매트",
@@ -1384,8 +1441,8 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "배관수리 및 청소",
     },
     {
-      "display": "기타 가전 & 가구",
-      "value": "기타 가전 & 가구",
+      "display": "기타 가전 / 가구",
+      "value": "기타 가전/가구",
     },
     {
       "display": "정수기렌탈",
@@ -1448,8 +1505,8 @@ class _SignUp_PageState extends State<SignUpPage> {
       "value": "사전점검",
     },
     {
-      "display": "소독 & 방역",
-      "value": "소독 & 방역",
+      "display": "소독 / 방역",
+      "value": "소독/방역",
     },
     {
       "display": "기타서비스",
@@ -1457,7 +1514,7 @@ class _SignUp_PageState extends State<SignUpPage> {
     },
   ];
   String privacy =
-      """<입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
+  """<입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
 
 
 제1조(개인정보의 처리 목적) <입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다. 
@@ -1515,7 +1572,7 @@ class _SignUp_PageState extends State<SignUpPage> {
 제13조(개인정보 처리방침 변경) ① 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다.""";
 
   String use =
-      """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.
+  """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.
       
                             \n2. 계약금 이외  착수금 및 선금은 계약 고객과 별도 협의 바랍니다.
 
