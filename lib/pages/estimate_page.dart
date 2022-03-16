@@ -57,7 +57,9 @@ class _Estimate_PageState extends State<Estimate_Page> {
     String token = "";
 
     await Customer_Data.getCustomerToken(customer_id!).then((value) {
-      token = value;
+      setState(() {
+        token = value;
+      });
     });
 
     print("token : $token");
@@ -70,7 +72,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
       <String, dynamic>{
         "token": token,
         "title": "Alarm",
-        "body": tempController.pro.value.pro_name,
+        "body": '${tempController.pro.value.pro_name}로부터 견적이 도착했습니다',
       },
     );
     print(token);

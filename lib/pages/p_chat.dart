@@ -46,7 +46,6 @@ class _P_ChatState extends State<P_Chat> {
       print(value);
       chatRoom = value;
       ChatData.getPersonalChatList(controller.pro.value.pro_id).then((value) {
-        print(value);
         if (value.isNotEmpty) {
           chatRoom.addAll(value);
         }

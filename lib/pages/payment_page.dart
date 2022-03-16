@@ -140,9 +140,8 @@ class _Payment_PageState extends State<Payment_Page> {
                                     ),
                                     Spacer(),
                                     Container(
-                                      height: 20,
-                                      child: IconButton(
-                                        onPressed: () {
+                                      child: InkWell(
+                                        onTap: () {
                                           Get.defaultDialog(
                                               radius: 5.0,
                                               title: '계약금',
@@ -165,22 +164,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '전체 비용',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -188,24 +187,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '계약 수수료',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -217,22 +216,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '1~150,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -240,24 +239,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '15,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -269,22 +268,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '150,001~499,999 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -292,24 +291,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '전체 비용 10%',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -321,22 +320,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '500,000~1,000,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -344,24 +343,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '50,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -373,22 +372,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '1,000,001~1,500,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -396,24 +395,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '60,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -425,22 +424,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '1,500,001~2,000,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -448,24 +447,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '70,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -477,22 +476,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '2,000,001~2,500,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -500,24 +499,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '80,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -529,22 +528,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '2,500,000~3,000,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -552,24 +551,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '90,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -581,22 +580,22 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 3,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '3,000,001~ 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB'),
+                                                                          'NanumSquareB'),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -604,24 +603,24 @@ class _Payment_PageState extends State<Payment_Page> {
                                                               Expanded(
                                                                 flex: 2,
                                                                 child:
-                                                                    Container(
+                                                                Container(
                                                                   height: 25.0,
                                                                   decoration: BoxDecoration(
                                                                       border: Border.all(
                                                                           width:
-                                                                              0.5,
+                                                                          0.5,
                                                                           color:
-                                                                              Colors.black54)),
+                                                                          Colors.black54)),
                                                                   child: Center(
                                                                     child: Text(
                                                                       '100,000 원',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              13,
+                                                                          13,
                                                                           fontFamily:
-                                                                              'NanumSquareB',
+                                                                          'NanumSquareB',
                                                                           color:
-                                                                              Colors.deepOrange),
+                                                                          Colors.deepOrange),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -642,16 +641,16 @@ class _Payment_PageState extends State<Payment_Page> {
                                                                     0xFF025595),
                                                                 child: Center(
                                                                     child: Text(
-                                                                  '확인',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
+                                                                      '확인',
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
                                                                           13.0,
-                                                                      fontWeight:
+                                                                          fontWeight:
                                                                           FontWeight
                                                                               .w700),
-                                                                )),
+                                                                    )),
                                                               ))
                                                         ],
                                                       ),
@@ -660,7 +659,7 @@ class _Payment_PageState extends State<Payment_Page> {
                                                 ),
                                               ));
                                         },
-                                        icon: Row(
+                                        child: Row(
                                           children: [
                                             Text(
                                               '계약금 요율표',
@@ -673,7 +672,7 @@ class _Payment_PageState extends State<Payment_Page> {
                                                 size: 17.0),
                                           ],
                                         ),
-                                      ),
+                                      )
                                     )
                                   ],
                                 ),
