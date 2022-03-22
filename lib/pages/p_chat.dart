@@ -35,20 +35,24 @@ class _P_ChatState extends State<P_Chat> {
           if (value.isNotEmpty) {
             chatRoom.addAll(value);
           }
-        });
-        setState(() {
-          isLoading = true;
+          chatRoom.sort((a, b) =>
+              DateTime.parse(b.createAt).compareTo(DateTime.parse(a.createAt)));
+          setState(() {
+            isLoading = true;
+          });
         });
       });
     });
     ChatData.getChatList(controller.pro.value.pro_id, "").then((value) {
       // controller.pro.value.pro_id
-      print(value);
+      print("value : $value");
       chatRoom = value;
       ChatData.getPersonalChatList(controller.pro.value.pro_id).then((value) {
         if (value.isNotEmpty) {
           chatRoom.addAll(value);
         }
+        chatRoom.sort((a, b) =>
+            DateTime.parse(b.createAt).compareTo(DateTime.parse(a.createAt)));
         setState(() {
           isLoading = true;
         });

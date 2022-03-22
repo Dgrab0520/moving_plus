@@ -7,7 +7,7 @@ import 'package:moving_plus/datas/chat_data.dart';
 class AlarmSettings extends GetxController {
   final _isPush = true.obs;
   final _isNotice = true.obs;
-  final _isDisturb = true.obs;
+  final _isDisturb = false.obs;
 
   set isPush(bool value) => _isPush.value = value;
   bool get isPush => _isPush.value;
@@ -72,9 +72,9 @@ class AlarmSettings extends GetxController {
     });
     await storage.read(key: "isDisturb").then((value) {
       if (value != null) {
-        isDisturb = value.toLowerCase() == "true";
+        isDisturb = value.toLowerCase() == "false";
       } else {
-        isDisturb = true;
+        isDisturb = false;
       }
       if (isDisturb) {
         String from = "";

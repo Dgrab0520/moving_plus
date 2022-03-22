@@ -92,7 +92,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                   estimatePrice: 0,
                   finalPrice: 0,
                   isPro: 3,
-                  createAt: chatting[index].createAt));
+                  createAt: chatting[index].createAt,
+                  chatType: ''));
         }
       }
     });
@@ -268,7 +269,11 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                 DateTime.parse(chatting[index - 1].createAt),
                           );
                         } else {
-                          if (chatting[index].finalPrice != 0) {
+                          if (chatting[index].chatType == "final_end") {
+                            return FinalChat(
+                                currentDate:
+                                    DateTime.parse(chatting[index].createAt));
+                          } else if (chatting[index].chatType == "final") {
                             return FinalPrice(
                                 price: chatting[index].finalPrice,
                                 estimateId: chatting[index].estimateId,
@@ -327,93 +332,112 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               children: [
                 InkWell(
                   onTap: () {
-                    getFile();
+                    if (!(isPro == 1 &&
+                        chatting.length == 1 &&
+                        !widget.estimateId.contains("/"))) {
+                      getFile();
+                    }
                   },
                   child: Container(
                     width: 25,
                     height: 25,
-                    child: Image.asset('assets/gg.png', color: Colors.black54,),
-                  ),
-                ),
-                //채팅창
-                SizedBox(width: 10),
-                InkWell(
-                  onTap: () async {
-                    var result =
-                    await Get.to(P_Detail_Estimate(), arguments: {
-                      "estimateId": widget.estimateId,
-                      "serviceType": widget.serviceType,
-                    });
-                    print(result);
-                    setState(() {
-                      isSelect = false;
-
-                      Chat chat = Chat(
-                          id: 0,
-                          estimateId: widget.estimateId,
-                          text: "",
-                          image: "",
-                          estimatePrice: 0,
-                          finalPrice: result,
-                          isPro: isPro,
-                          createAt: "");
-                      ChatData.putChat(chat, "final").then((value) async {
-                        if (value.isNotEmpty) {
-                          print(value);
-                          chat.createAt = value[0];
-
-                          if (isPro == 1) {
-                            chatRoom[widget.chatRoomIndex].lastChat =
-                                chat.finalPrice.toString();
-                            chatRoom[widget.chatRoomIndex].chatType =
-                            "final";
-                            chatRoom[widget.chatRoomIndex].createAt =
-                                chat.createAt;
-                          } else {
-                            userChatRooms[widget.chatRoomIndex].lastChat =
-                                chat.finalPrice.toString();
-                            userChatRooms[widget.chatRoomIndex].chatType =
-                            "final";
-                            userChatRooms[widget.chatRoomIndex].createAt =
-                                chat.createAt;
-                          }
-
-                          setState(() {
-                            chatting.insert(0, chat);
-                            isSelect = false;
-                            Timer(
-                                Duration(milliseconds: 200),
-                                    () => scrollController.animateTo(0.0,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut));
-                          });
-                          final HttpsCallableResult result =
-                          await callable.call(
-                            <String, dynamic>{
-                              "token": token,
-                              "title": controller.pro.value.pro_name,
-                              "body": "최종 견적",
-                            },
-                          );
-                        }
-                      });
-                      Timer(
-                          Duration(milliseconds: 200),
-                              () => scrollController.animateTo(0.0,
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.easeInOut));
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(right: 8),
-                    width: 29,
-                    height: 29,
                     child: Image.asset(
-                      'assets/write_fill.png',
+                      'assets/gg.png',
                       color: Colors.black54,
                     ),
                   ),
                 ),
+                //채팅창
+                SizedBox(width: 10),
+                isPro == 0 ||
+                        chatting
+                            .where((element) => element.chatType == "final_end")
+                            .isNotEmpty
+                    ? Container()
+                    : InkWell(
+                        onTap: () async {
+                          if (!(isPro == 1 &&
+                              chatting.length == 1 &&
+                              !widget.estimateId.contains("/"))) {
+                            var result =
+                                await Get.to(P_Detail_Estimate(), arguments: {
+                              "estimateId": widget.estimateId,
+                              "serviceType": widget.serviceType,
+                            });
+                            print(result);
+                            setState(() {
+                              isSelect = false;
+
+                              Chat chat = Chat(
+                                  id: 0,
+                                  estimateId: widget.estimateId,
+                                  text: "",
+                                  image: "",
+                                  estimatePrice: 0,
+                                  finalPrice: result,
+                                  isPro: isPro,
+                                  createAt: "",
+                                  chatType: 'final');
+                              ChatData.putChat(chat, "final")
+                                  .then((value) async {
+                                if (value.isNotEmpty) {
+                                  print(value);
+                                  chat.createAt = value[0];
+
+                                  if (isPro == 1) {
+                                    chatRoom[widget.chatRoomIndex].lastChat =
+                                        chat.finalPrice.toString();
+                                    chatRoom[widget.chatRoomIndex].chatType =
+                                        "final";
+                                    chatRoom[widget.chatRoomIndex].createAt =
+                                        chat.createAt;
+                                  } else {
+                                    userChatRooms[widget.chatRoomIndex]
+                                        .lastChat = chat.finalPrice.toString();
+                                    userChatRooms[widget.chatRoomIndex]
+                                        .chatType = "final";
+                                    userChatRooms[widget.chatRoomIndex]
+                                        .createAt = chat.createAt;
+                                  }
+
+                                  setState(() {
+                                    chatting.insert(0, chat);
+                                    isSelect = false;
+                                    Timer(
+                                        Duration(milliseconds: 200),
+                                        () => scrollController.animateTo(0.0,
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            curve: Curves.easeInOut));
+                                  });
+                                  final HttpsCallableResult result =
+                                      await callable.call(
+                                    <String, dynamic>{
+                                      "token": token,
+                                      "title": controller.pro.value.pro_name,
+                                      "body": "최종 견적",
+                                    },
+                                  );
+                                }
+                              });
+                              Timer(
+                                  Duration(milliseconds: 200),
+                                  () => scrollController.animateTo(0.0,
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut));
+                            });
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(right: 8),
+                          width: 29,
+                          height: 29,
+                          child: Image.asset(
+                            'assets/write_fill.png',
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
                 SizedBox(width: 1),
                 Expanded(
                   child: Container(
@@ -432,8 +456,11 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextField(
-                      enabled:
-                          (isPro == 1 && chatting.length == 1) ? false : true,
+                      enabled: (isPro == 1 &&
+                              chatting.length == 1 &&
+                              !widget.estimateId.contains("/"))
+                          ? false
+                          : true,
                       controller: chatTextController,
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
@@ -463,7 +490,9 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       // style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(bottom: 2, top: 2),
-                        hintText: (isPro == 1 && chatting.length == 1)
+                        hintText: (isPro == 1 &&
+                                chatting.length == 1 &&
+                                !widget.estimateId.contains("/"))
                             ? '고객이 응답 할 경우 채팅이 활성화 됩니다.'
                             : '',
                         hintStyle: TextStyle(
@@ -482,11 +511,13 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                     onTap: () {
                       if (!isSelect) {
                         if (chatting.length == 1 &&
-                            controller.pro.value.type == 'pro') {
+                            controller.pro.value.type == 'pro' &&
+                            !widget.estimateId.contains("/")) {
                           Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다',
                               backgroundColor: Colors.white);
                         } else {
-                          if (chatting.length == 1) {
+                          if (chatting.length == 1 &&
+                              !widget.estimateId.contains("/")) {
                             AlarmData.putChat(
                                 controller.pro.value.pro_id,
                                 [userChatRooms[widget.chatRoomIndex].proId],
@@ -503,7 +534,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                 estimatePrice: 0,
                                 finalPrice: 0,
                                 isPro: isPro,
-                                createAt: "");
+                                createAt: "",
+                                chatType: 'text');
                             ChatData.putChat(chat, "text").then((value) async {
                               if (value.isNotEmpty) {
                                 print(value);
@@ -547,8 +579,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                             estimatePrice: 0,
                                             finalPrice: 0,
                                             isPro: 3,
-                                            createAt:
-                                                DateTime.now().toString()));
+                                            createAt: DateTime.now().toString(),
+                                            chatType: ''));
                                   }
                                   chatting.insert(0, chat);
 
@@ -621,7 +653,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
           estimatePrice: 0,
           finalPrice: 0,
           isPro: isPro,
-          createAt: "");
+          createAt: "",
+          chatType: 'image');
       print(isPro);
       ChatData.putChat(chat, "image", file: file).then((value) async {
         if (value.isNotEmpty) {
@@ -659,7 +692,8 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                       estimatePrice: 0,
                       finalPrice: 0,
                       isPro: 3,
-                      createAt: DateTime.now().toString()));
+                      createAt: DateTime.now().toString(),
+                      chatType: ''));
             }
             chatting.insert(0, chat);
             isSelect = false;
@@ -684,6 +718,30 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
   }
 }
 
+class FinalChat extends StatelessWidget {
+  const FinalChat({
+    Key? key,
+    required this.currentDate,
+  }) : super(key: key);
+  final DateTime currentDate;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> weekDay = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0),
+      child: Text(
+        '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}\n결제가 완료되었습니다',
+        style: const TextStyle(
+          fontSize: 14,
+          fontFamily: 'NanumSquareB',
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 class CenterDate extends StatelessWidget {
   const CenterDate({
     Key? key,
@@ -698,7 +756,7 @@ class CenterDate extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Text(
         '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           fontFamily: 'NanumSquareB',
         ),

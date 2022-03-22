@@ -83,7 +83,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
                   estimatePrice: 0,
                   finalPrice: 0,
                   isPro: 3,
-                  createAt: chatting[index].createAt));
+                  createAt: chatting[index].createAt,
+                  chatType: ''));
         }
       }
     });
@@ -150,8 +151,7 @@ class _ChatPersonalState extends State<ChatPersonal> {
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-            )
-        ),
+            )),
       ),
       body: Column(
         children: [
@@ -326,7 +326,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
                                 estimatePrice: 0,
                                 finalPrice: 0,
                                 isPro: isPro,
-                                createAt: "");
+                                createAt: "",
+                                chatType: 'text');
                             ChatData.putChat(chat, "text").then((value) async {
                               if (value.isNotEmpty) {
                                 print(value);
@@ -357,7 +358,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
                                               finalPrice: 0,
                                               isPro: 3,
                                               createAt:
-                                                  DateTime.now().toString()));
+                                                  DateTime.now().toString(),
+                                              chatType: ''));
                                     }
                                   }
                                   chatting.insert(0, chat);
@@ -431,7 +433,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
           estimatePrice: 0,
           finalPrice: 0,
           isPro: isPro,
-          createAt: "");
+          createAt: "",
+          chatType: 'image');
       print(isPro);
       ChatData.putChat(chat, "image", file: file).then((value) async {
         if (value.isNotEmpty) {

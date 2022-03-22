@@ -98,6 +98,8 @@ class Pro_Data extends GetxController {
       }
     } catch (e) {
       print(e);
+      proBest = [];
+      isBestLoading = true;
     }
   }
 

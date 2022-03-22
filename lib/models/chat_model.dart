@@ -6,6 +6,7 @@ class Chat {
   int estimatePrice;
   int finalPrice;
   int isPro;
+  String chatType;
   String createAt;
 
   Chat({
@@ -16,6 +17,7 @@ class Chat {
     required this.estimatePrice,
     required this.finalPrice,
     required this.isPro,
+    required this.chatType,
     required this.createAt,
   });
 
@@ -28,6 +30,7 @@ class Chat {
       estimatePrice: int.parse(json['estimatePrice']),
       finalPrice: int.parse(json['finalPrice']),
       isPro: int.parse(json['isPro']),
+      chatType: json['chatType'] as String,
       createAt: json['createAt'] as String,
     );
   }

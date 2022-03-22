@@ -175,15 +175,22 @@ class _Main_PageState extends State<Main_Page> {
     FirebaseMessaging.onMessage.listen((message) {
       print(message.data['title']);
       if (_selectedIndex == 1) {
-        setState(() {
-          if (message.notification!.title == "Alarm") {
+        if (Get.isSnackbarOpen) {
+          Get.closeAllSnackbars();
+        }
+        if (message.data['title'] == "Alarm") {
+          setState(() {
             mainController.isAlarm = true;
-          } else {
-            if (_selectedIndex != 2) {
+          });
+          Get.snackbar("알림", "알림이 도착했습니다");
+        } else {
+          if (_selectedIndex != 2) {
+            setState(() {
               mainController.isChat = true;
-            }
+            });
+            Get.snackbar("알림", "채팅이 도착했습니다");
           }
-        });
+        }
       }
     });
 //앱 실행중일때
@@ -238,6 +245,9 @@ class _Main_PageState extends State<Main_Page> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
+        if (_selectedIndex == 2) {
+          moveIndex(1);
+        }
         return Future.value(false);
       },
       child: Scaffold(

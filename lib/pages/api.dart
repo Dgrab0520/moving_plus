@@ -162,9 +162,13 @@ class Api {
   };
 
   String findMainCategory(String category) {
-    Iterable item = categories.keys
-        .where((element) => categories[element]!.contains(category));
-    return item.toList()[0];
+    if (category == "개인 문의") {
+      return "";
+    } else {
+      Iterable item = categories.keys
+          .where((element) => categories[element]!.contains(category));
+      return item.toList()[0];
+    }
   }
 
   String findCategoryImage(String category) {

@@ -268,7 +268,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        if(selectedDate2.compareTo(selectedDate) <1){
+        if (selectedDate2.compareTo(selectedDate) < 1) {
           selectedDate2 = selectedDate;
         }
       });
@@ -4050,121 +4050,137 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                                       ),
                                                       SizedBox(height: 40),
                                                       Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 15,
-                                                                right: 15),
-                                                        child: Column(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 15,
+                                                                  right: 15),
+                                                          child: Column(
                                                             children: [
                                                               Row(
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
                                                                 children: [
                                                                   Expanded(
                                                                     flex: 2,
                                                                     child: Text(
                                                                       '사이즈',
                                                                       style:
-                                                                      TextStyle(
-                                                                        fontSize: 14,
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14,
                                                                         fontFamily:
-                                                                        'NanumSquareB',
+                                                                            'NanumSquareB',
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  SizedBox(width: 5),
+                                                                  SizedBox(
+                                                                      width: 5),
                                                                   Expanded(
                                                                     flex: 10,
-                                                                    child: Container(
-                                                                      width: Get.width * 0.5,
-                                                                      child: TextField(
-                                                                        controller: a_Controller,
-                                                                        onChanged: (text) {
+                                                                    child:
+                                                                        Container(
+                                                                      width: Get
+                                                                              .width *
+                                                                          0.5,
+                                                                      child:
+                                                                          TextField(
+                                                                        controller:
+                                                                            a_Controller,
+                                                                        onChanged:
+                                                                            (text) {
                                                                           setState(
-                                                                                  () {
-                                                                                value2 =
+                                                                              () {
+                                                                            value2 =
                                                                                 '사이즈 |  $text ㎡';
-                                                                              });
-                                                                          print(value2);
+                                                                          });
+                                                                          print(
+                                                                              value2);
                                                                         },
-                                                                        style: TextStyle(
+                                                                        style:
+                                                                            TextStyle(
                                                                           fontSize:
-                                                                          17,
+                                                                              17,
                                                                           fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
+                                                                              FontWeight.bold,
                                                                           fontFamily:
-                                                                          'NanumSquareB',
+                                                                              'NanumSquareB',
                                                                         ),
                                                                         textAlign:
-                                                                        TextAlign.center,
+                                                                            TextAlign.center,
                                                                         keyboardType:
-                                                                        TextInputType.number,
-                                                                        decoration: InputDecoration(
+                                                                            TextInputType.number,
+                                                                        decoration:
+                                                                            InputDecoration(
                                                                           enabledBorder:
-                                                                          UnderlineInputBorder(
+                                                                              UnderlineInputBorder(
                                                                             borderSide:
-                                                                            BorderSide(
-                                                                                color: Color(0xFF025595)),
+                                                                                BorderSide(color: Color(0xFF025595)),
                                                                           ),
                                                                           focusedBorder:
-                                                                          UnderlineInputBorder(
+                                                                              UnderlineInputBorder(
                                                                             borderSide:
-                                                                            BorderSide(
-                                                                                color: Color(0xFF025595)),
+                                                                                BorderSide(color: Color(0xFF025595)),
                                                                           ),
                                                                           suffixText:
-                                                                          '㎡  ',
+                                                                              '㎡  ',
                                                                           suffixStyle: TextStyle(
-                                                                              fontSize:
-                                                                              17.0,
-                                                                              fontWeight:
-                                                                              FontWeight
-                                                                                  .bold,
-                                                                              color: Colors
-                                                                                  .black54),
+                                                                              fontSize: 17.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.black54),
                                                                           hintText:
-                                                                          '사이즈를 입력 해주세요.',
+                                                                              '사이즈를 입력 해주세요.',
                                                                           hintStyle:
-                                                                          TextStyle(
-                                                                            color: Color(
-                                                                                0xFF777777),
+                                                                              TextStyle(
+                                                                            color:
+                                                                                Color(0xFF777777),
                                                                             fontSize:
-                                                                            13,
+                                                                                13,
                                                                           ),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  SizedBox(width: 10),
+                                                                  SizedBox(
+                                                                      width:
+                                                                          10),
                                                                   Expanded(
                                                                       flex: 1,
-                                                                      child: SizedBox(
-                                                                        height: 15.0,
-                                                                        child: Checkbox(
-                                                                          value: _isChecked,
-                                                                          onChanged: (value) {
+                                                                      child:
+                                                                          SizedBox(
+                                                                        height:
+                                                                            15.0,
+                                                                        child:
+                                                                            Checkbox(
+                                                                          value:
+                                                                              _isChecked,
+                                                                          onChanged:
+                                                                              (value) {
                                                                             setState(() {
                                                                               _isChecked = value!;
                                                                               a_Controller!.text == '사이즈 모름';
                                                                             });
                                                                           },
-                                                                          activeColor: Color(0xFF025595),
+                                                                          activeColor:
+                                                                              Color(0xFF025595),
                                                                         ),
-                                                                      )
-                                                                  ),
+                                                                      )),
                                                                   Expanded(
                                                                     flex: 2,
                                                                     child: Text(
                                                                       '모름',
-                                                                      style: TextStyle(fontSize: 13.0),
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              13.0),
                                                                     ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ],
-                                                        )
-                                                      ),
+                                                          )),
                                                     ])
                                                   : _serviceForm == '10'
                                                       ? Container()
@@ -6137,7 +6153,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                                                                                                                           fontFamily: 'NanumSquareB',
                                                                                                                                         ),
                                                                                                                                         textAlign: TextAlign.center,
-                                                                                                                                        keyboardType: TextInputType.number,
+                                                                                                                                        //keyboardType: TextInputType.number,
                                                                                                                                         decoration: InputDecoration(
                                                                                                                                           border: InputBorder.none,
                                                                                                                                         ),
@@ -6398,7 +6414,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
                                                                                                                                           fontFamily: 'NanumSquareB',
                                                                                                                                         ),
                                                                                                                                         textAlign: TextAlign.center,
-                                                                                                                                        keyboardType: TextInputType.number,
+                                                                                                                                        //keyboardType: TextInputType.number,
                                                                                                                                         decoration: InputDecoration(
                                                                                                                                           enabledBorder: UnderlineInputBorder(
                                                                                                                                             borderSide: BorderSide(color: Color(0xFF025595)),

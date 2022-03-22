@@ -265,21 +265,25 @@ class _RequestFormState extends State<RequestForm> {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            var orderChat = OrderChat(
-                                                order_id: order[0].order_id,
-                                                address: order[0].address,
-                                                service_type:
-                                                    order[0].service_type,
-                                                order_status: "",
-                                                order_date: DateFormat(
-                                                        "yyyy.MM.dd")
-                                                    .format(DateTime.parse(
-                                                        order[0].order_date)));
-                                            Get.to(C_ChatList(
-                                                mainType: Api()
-                                                    .findMainCategory(
-                                                        order[0].service_type),
-                                                orderChat: orderChat));
+                                            if (controller.pro.value.type ==
+                                                "cus") {
+                                              var orderChat = OrderChat(
+                                                  order_id: order[0].order_id,
+                                                  address: order[0].address,
+                                                  service_type:
+                                                      order[0].service_type,
+                                                  order_status: "",
+                                                  order_date: DateFormat(
+                                                          "yyyy.MM.dd")
+                                                      .format(DateTime.parse(
+                                                          order[0]
+                                                              .order_date)));
+                                              Get.to(C_ChatList(
+                                                  mainType: Api()
+                                                      .findMainCategory(order[0]
+                                                          .service_type),
+                                                  orderChat: orderChat));
+                                            }
                                           },
                                           child: Text(
                                             _isLoading2

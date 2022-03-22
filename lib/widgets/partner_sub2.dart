@@ -11,8 +11,8 @@ class Partner_Sub2 extends StatelessWidget {
     return Obx(() => controller.isBestLoading
         ? SizedBox(
             width: Get.width,
-            height: 330,
             child: ListView.builder(
+              shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: controller.proBest.length,

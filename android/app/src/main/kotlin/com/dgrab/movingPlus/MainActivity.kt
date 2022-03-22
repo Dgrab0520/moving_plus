@@ -1,4 +1,4 @@
-package com.example.moving_plus
+package com.dgrab.movingPlus
 
 import io.flutter.embedding.android.FlutterActivity
 
