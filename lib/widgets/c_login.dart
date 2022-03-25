@@ -306,38 +306,38 @@ class _C_LoginState extends State<C_Login> {
                       ),
                     ),
                   ),
-                  Center(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          AlarmData().alarmCount('test@gmail.com');
-                          FirebaseMessaging.instance.getToken().then((value) =>
-                              Customer_Data.updateToken(
-                                      'test@gmail.com', value!)
-                                  .then((value2) {
-                                if (value2 == 'success') {
-                                  controller.change(
-                                    id: "0",
-                                    type: 'cus',
-                                    pro_id: 'test@gmail.com',
-                                    pro_pw: 'pw',
-                                    pro_name: '테스트',
-                                    pro_phone: 'None',
-                                    pro_email: 'None',
-                                    com_name: 'None',
-                                    profile_img: "default_image",
-                                    pro_token: value2,
-                                    recom: "TEST",
-                                  );
-                                  Get.offAll(Main_Page(index: 1));
-                                  print(value2);
-                                  print('update token success');
-                                } else {
-                                  print('update token fail');
-                                }
-                              }));
-                        },
-                        child: Text("테스트 로그인")),
-                  ),
+                  // Center(
+                  //   child: ElevatedButton(
+                  //       onPressed: () {
+                  //         AlarmData().alarmCount('test@gmail.com');
+                  //         FirebaseMessaging.instance.getToken().then((value) =>
+                  //             Customer_Data.updateToken(
+                  //                     'test@gmail.com', value!)
+                  //                 .then((value2) {
+                  //               if (value2 == 'success') {
+                  //                 controller.change(
+                  //                   id: "0",
+                  //                   type: 'cus',
+                  //                   pro_id: 'test@gmail.com',
+                  //                   pro_pw: 'pw',
+                  //                   pro_name: '테스트',
+                  //                   pro_phone: 'None',
+                  //                   pro_email: 'None',
+                  //                   com_name: 'None',
+                  //                   profile_img: "default_image",
+                  //                   pro_token: value2,
+                  //                   recom: "TEST",
+                  //                 );
+                  //                 Get.offAll(Main_Page(index: 1));
+                  //                 print(value2);
+                  //                 print('update token success');
+                  //               } else {
+                  //                 print('update token fail');
+                  //               }
+                  //             }));
+                  //       },
+                  //       child: Text("테스트 로그인")),
+                  // ),
                 ],
               ),
             ),
