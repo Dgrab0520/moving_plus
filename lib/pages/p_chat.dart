@@ -167,11 +167,47 @@ class _P_ChatState extends State<P_Chat> {
                               : chatRoom.length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            return ChatRoomBox(
-                              chatRoom: isSearch
-                                  ? searchEstimate[index]
-                                  : chatRoom[index],
-                              chatRoomIndex: index,
+                            return InkWell(
+                              onTap: () async {
+                                var chatRoomElement = isSearch
+                                    ? searchEstimate[index]
+                                    : chatRoom[index];
+                                var result = await Get.to(Chat_Estimate(
+                                  estimateId: chatRoomElement.estimateId,
+                                  chatRoomIndex: index,
+                                  serviceType: chatRoomElement.serviceType,
+                                  token: chatRoomElement.token,
+                                  otherName: chatRoomElement.userName,
+                                  proId: chatRoomElement.proId,
+                                ));
+                                print(result);
+                                ChatData.getChatList(
+                                        controller.pro.value.pro_id, "")
+                                    .then((value) {
+                                  // controller.pro.value.pro_id
+                                  print("value : $value");
+                                  chatRoom = value;
+                                  ChatData.getPersonalChatList(
+                                          controller.pro.value.pro_id)
+                                      .then((value) {
+                                    if (value.isNotEmpty) {
+                                      chatRoom.addAll(value);
+                                    }
+                                    chatRoom.sort((a, b) =>
+                                        DateTime.parse(b.createAt).compareTo(
+                                            DateTime.parse(a.createAt)));
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                  });
+                                });
+                              },
+                              child: ChatRoomBox(
+                                chatRoomElement: isSearch
+                                    ? searchEstimate[index]
+                                    : chatRoom[index],
+                                chatRoomIndex: index,
+                              ),
                             );
                           })
                   : const Center(
@@ -187,20 +223,23 @@ class _P_ChatState extends State<P_Chat> {
 
 class ChatRoomBox extends StatelessWidget {
   const ChatRoomBox(
-      {Key? key, required this.chatRoom, required this.chatRoomIndex})
+      {Key? key, required this.chatRoomElement, required this.chatRoomIndex})
       : super(key: key);
 
-  final ChatRoom chatRoom;
+  final ChatRoom chatRoomElement;
   final int chatRoomIndex;
 
   @override
   Widget build(BuildContext context) {
-    print(chatRoom.area);
-    String area =
-        chatRoom.area.split(" ")[0] + " " + chatRoom.area.split(" ")[1];
-    DateTime createAt = DateTime.parse(chatRoom.createAt);
+    print(chatRoomElement.area);
+    String area = chatRoomElement.area.split(" ").length < 2
+        ? chatRoomElement.area
+        : chatRoomElement.area.split(" ")[0] +
+            " " +
+            chatRoomElement.area.split(" ")[1];
+    DateTime createAt = DateTime.parse(chatRoomElement.createAt);
     DateTime now = DateTime.now();
-    print(chatRoom.estimateId);
+    print(chatRoomElement.estimateId);
     print(now);
     print(createAt);
     print(now.difference(createAt).inMinutes);
@@ -220,97 +259,84 @@ class ChatRoomBox extends StatelessWidget {
       }
     }
 
-    String lasChat = chatRoom.lastChat;
-    if (chatRoom.chatType == "image") {
+    String lasChat = chatRoomElement.lastChat;
+    if (chatRoomElement.chatType == "image") {
       lasChat = "사진을 보냈습니다";
-    } else if (chatRoom.chatType == "estimate") {
+    } else if (chatRoomElement.chatType == "estimate") {
       lasChat = "견적을 보냈습니다";
-    } else if (chatRoom.chatType == "final") {
+    } else if (chatRoomElement.chatType == "final") {
       lasChat = "최종 견적을 보냈습니다";
     }
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
-      child: InkWell(
-        onTap: () async {
-          var result = await Get.to(Chat_Estimate(
-            estimateId: chatRoom.estimateId,
-            chatRoomIndex: chatRoomIndex,
-            serviceType: chatRoom.serviceType,
-            token: chatRoom.token,
-            otherName: chatRoom.userName,
-            proId: chatRoom.proId,
-          ));
-          print(result);
-        },
-        child: Container(
-          margin: const EdgeInsets.only(left: 15, right: 15),
-          padding:
-              const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-          width: MediaQuery.of(context).size.width,
-          height: 120,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.0,
-              color: const Color(0xFFcccccc),
-            ),
-            borderRadius: BorderRadius.circular(5),
+      child: Container(
+        margin: const EdgeInsets.only(left: 15, right: 15),
+        padding:
+            const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+        width: MediaQuery.of(context).size.width,
+        height: 120,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1.0,
+            color: const Color(0xFFcccccc),
           ),
-          child: Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          chatRoom.userName,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'NanumSquareB',
-                          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        chatRoomElement.userName,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'NanumSquareB',
                         ),
-                        Text(
-                          time,
-                          style: const TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      chatRoom.serviceType == '개인 문의'
-                          ? chatRoom.serviceType
-                          : '${chatRoom.serviceType} | $area',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'NanumSquareR',
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(bottom: 10),
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  lasChat,
-                  style: const TextStyle(
-                    fontSize: 12,
+                      Text(
+                        time,
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                ),
+                  const SizedBox(height: 5),
+                  Text(
+                    chatRoomElement.serviceType == '개인 문의'
+                        ? chatRoomElement.serviceType
+                        : '${chatRoomElement.serviceType} | $area',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'NanumSquareR',
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                lasChat,
+                style: const TextStyle(
+                  fontSize: 12,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+              ),
+            ),
+          ],
         ),
       ),
     );

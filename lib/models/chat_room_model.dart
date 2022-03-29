@@ -23,10 +23,12 @@ class ChatRoom {
 
   factory ChatRoom.fromJson(Map<String, dynamic> json) {
     return ChatRoom(
-      estimateId: json['estimate_id'] as String,
-      userName: json['user_name'] as String,
-      serviceType: json['service_type'] as String,
-      area: json['address'] as String,
+      estimateId:
+          json['estimate_id'] == null ? "" : json['estimate_id'] as String,
+      userName: json['user_name'] == null ? "" : json['user_name'] as String,
+      serviceType:
+          json['service_type'] == null ? "" : json['service_type'] as String,
+      area: json['address'] == null ? "" : json['address'] as String,
       createAt: json['createAt'] == null ? "" : json['createAt'] as String,
       lastChat: json['lastChat'] == null ? "" : json['lastChat'] as String,
       chatType: json['chatType'] == null ? "" : json['chatType'] as String,

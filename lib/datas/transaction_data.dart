@@ -71,6 +71,8 @@ class TransActionData extends GetxController {
       }
     } catch (e) {
       print("exception : $e");
+      transAction = <TransAction>[];
+      isTransActionLoading = true;
     }
   }
 

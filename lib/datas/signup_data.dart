@@ -24,6 +24,7 @@ class SignUp_Data{
       map['area1'] = area1;
       map['area2'] = area2;
       map['area3'] = area3;
+      print(map);
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Insert Sign Up Response : ${response.body}');
       if(200 == response.statusCode){

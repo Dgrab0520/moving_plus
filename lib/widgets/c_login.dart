@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 import 'package:moving_plus/controllers/Getx_ProController.dart';
-import 'package:moving_plus/datas/alarm_data.dart';
 import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
+import '../datas/alarm_data.dart';
 import '../pages/main_page.dart';
 
 final controller = Get.put(ReactiveController());
@@ -134,6 +134,7 @@ class _C_LoginState extends State<C_Login> {
       var token = await AuthApi.instance.issueAccessToken(authCode);
       TokenManager.instance.setToken(token);
       print('token success');
+      if (user_id == "None") await _initTexts();
       controller.change(
         type: 'cus',
         id: '0',
@@ -306,38 +307,40 @@ class _C_LoginState extends State<C_Login> {
                       ),
                     ),
                   ),
-                  // Center(
-                  //   child: ElevatedButton(
-                  //       onPressed: () {
-                  //         AlarmData().alarmCount('test@gmail.com');
-                  //         FirebaseMessaging.instance.getToken().then((value) =>
-                  //             Customer_Data.updateToken(
-                  //                     'test@gmail.com', value!)
-                  //                 .then((value2) {
-                  //               if (value2 == 'success') {
-                  //                 controller.change(
-                  //                   id: "0",
-                  //                   type: 'cus',
-                  //                   pro_id: 'test@gmail.com',
-                  //                   pro_pw: 'pw',
-                  //                   pro_name: '테스트',
-                  //                   pro_phone: 'None',
-                  //                   pro_email: 'None',
-                  //                   com_name: 'None',
-                  //                   profile_img: "default_image",
-                  //                   pro_token: value2,
-                  //                   recom: "TEST",
-                  //                 );
-                  //                 Get.offAll(Main_Page(index: 1));
-                  //                 print(value2);
-                  //                 print('update token success');
-                  //               } else {
-                  //                 print('update token fail');
-                  //               }
-                  //             }));
-                  //       },
-                  //       child: Text("테스트 로그인")),
-                  // ),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          // Customer_Data.insertCustomer(
+                          //     'test@gmail.com', generateRandomString(8));
+                          AlarmData().alarmCount('test@gmail.com');
+                          FirebaseMessaging.instance.getToken().then((value) =>
+                              Customer_Data.updateToken(
+                                      'test@gmail.com', value!)
+                                  .then((value2) {
+                                if (value2 == 'success') {
+                                  controller.change(
+                                    id: "0",
+                                    type: 'cus',
+                                    pro_id: 'test@gmail.com',
+                                    pro_pw: 'pw',
+                                    pro_name: '테스트',
+                                    pro_phone: 'None',
+                                    pro_email: 'None',
+                                    com_name: 'None',
+                                    profile_img: "default_image",
+                                    pro_token: value2,
+                                    recom: "TEST",
+                                  );
+                                  Get.offAll(Main_Page(index: 1));
+                                  print(value2);
+                                  print('update token success');
+                                } else {
+                                  print('update token fail');
+                                }
+                              }));
+                        },
+                        child: Text("테스트 로그인")),
+                  ),
                 ],
               ),
             ),

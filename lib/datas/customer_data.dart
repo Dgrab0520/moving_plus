@@ -119,8 +119,9 @@ class Customer_Data {
     }
   }
 
-  //추천인 등록
+  //포인트 사용
   static Future<bool> usePoint(String point) async {
+    print(point);
     try {
       var map = <String, dynamic>{};
       map['action'] = "USE_POINT";
@@ -129,7 +130,8 @@ class Customer_Data {
       final response = await http.post(Uri.parse(ROOT), body: map);
       print('Use Point Response : ${response.body}');
       if (200 == response.statusCode) {
-        if (response.body == "success") {
+        print("response : ${response.body}");
+        if (response.body != "errors") {
           return true;
         } else {
           return false;

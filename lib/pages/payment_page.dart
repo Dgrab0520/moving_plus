@@ -43,7 +43,8 @@ class _Payment_PageState extends State<Payment_Page> {
       } else {
         setState(() {
           _isLoading = true;
-          Customer_Data.getCustomerPoint(payment[0].user_id).then((value) {
+          Customer_Data.getCustomerPoint(controller_Getx.pro.value.pro_id)
+              .then((value) {
             setState(() {
               point = int.parse(value);
               print(point);
@@ -1030,6 +1031,48 @@ class _Payment_PageState extends State<Payment_Page> {
                                     ),
                                   ),
                                 ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     FinalOrder_Data.updateStatus(estimate_id)
+                                //         .then((value) {
+                                //       if (value == 'success') {
+                                //         print('Update Status Success');
+                                //         Customer_Data.usePoint(
+                                //                 pointController.text == ""
+                                //                     ? "0"
+                                //                     : pointController.text)
+                                //             .then((value) {
+                                //           if (value) {
+                                //             Get.back(result: true);
+                                //             Get.to(TransactionBreakdown());
+                                //           }
+                                //         });
+                                //       } else {
+                                //         print('Update Status Fail');
+                                //       }
+                                //     });
+                                //   },
+                                //   child: Container(
+                                //     margin:
+                                //         EdgeInsets.only(left: 35, right: 35),
+                                //     width: Get.width,
+                                //     height: 45,
+                                //     decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(5),
+                                //       color: Color(0xFF025595),
+                                //     ),
+                                //     child: Center(
+                                //       child: Text(
+                                //         '테스트 결제하기',
+                                //         style: TextStyle(
+                                //           fontSize: 14,
+                                //           fontFamily: 'NanumSquareB',
+                                //           color: Colors.white,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           )
@@ -1068,7 +1111,8 @@ class Payment_IMP extends StatelessWidget {
         print('Update Status Success');
         Customer_Data.usePoint(point.toString()).then((value) {
           if (value) {
-            Get.offAll(TransactionBreakdown());
+            Get.back(result: true);
+            Get.to(TransactionBreakdown());
           }
         });
       } else {
@@ -1080,9 +1124,9 @@ class Payment_IMP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IamportPayment(
-      appBar: new AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        title: new Text(
+        title: const Text(
           '입주플러스 결제',
           style: TextStyle(color: Colors.black),
         ),
@@ -1090,21 +1134,14 @@ class Payment_IMP extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
       ),
       /* 웹뷰 로딩 컴포넌트 */
-      initialChild: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('잠시만 기다려주세요...', style: TextStyle(fontSize: 20)),
-            ],
-          ),
-        ),
+      initialChild: const Center(
+        child: Text('잠시만 기다려주세요...', style: TextStyle(fontSize: 20)),
       ),
       /* [필수입력] 가맹점 식별코드 */
       userCode: 'imp01232724',

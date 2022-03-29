@@ -100,6 +100,13 @@ class _ChatPersonalState extends State<ChatPersonal> {
     });
   }
 
+  addChatFinalEnd(Chat chat) {
+    print("chat add list");
+    setState(() {
+      chatting.insert(0, chat);
+    });
+  }
+
   @override
   void initState() {
     estimateId = widget.proId + "/" + controller.pro.value.pro_id;
@@ -180,6 +187,11 @@ class _ChatPersonalState extends State<ChatPersonal> {
                         } else {
                           if (chatting[index].finalPrice != 0) {
                             return FinalPrice(
+                                existFinal: chatting
+                                    .where((element) =>
+                                        element.chatType == "final_end")
+                                    .isNotEmpty,
+                                chatAdd: addChatFinalEnd,
                                 price: chatting[index].finalPrice,
                                 estimateId: chatting[index].estimateId,
                                 createAt: chatting[index].createAt,
@@ -694,6 +706,8 @@ class FinalPrice extends StatelessWidget {
     required this.isPro,
     required this.serviceType,
     required this.detail,
+    required this.chatAdd,
+    required this.existFinal,
   }) : super(key: key);
   final int price;
   final String estimateId;
@@ -701,6 +715,8 @@ class FinalPrice extends StatelessWidget {
   final bool isPro;
   final String serviceType;
   final String detail;
+  final Function(Chat) chatAdd;
+  final bool existFinal;
 
   @override
   Widget build(BuildContext context) {
@@ -852,8 +868,27 @@ class FinalPrice extends StatelessWidget {
                         ),
                         SizedBox(height: 13),
                         InkWell(
-                          onTap: () {
-                            Get.to(Payment_Page(), arguments: estimateId);
+                          onTap: () async {
+                            if (existFinal) {
+                              Get.snackbar("오류", "이미 결제가 완료되었습니다");
+                            } else {
+                              var result = await Get.to(Payment_Page(),
+                                  arguments: estimateId);
+                              print("result : $result");
+                              if (result != null) {
+                                print("chat add");
+                                chatAdd(Chat(
+                                    id: 0,
+                                    estimateId: estimateId,
+                                    text: "",
+                                    image: "",
+                                    estimatePrice: 0,
+                                    finalPrice: 0,
+                                    isPro: 0,
+                                    chatType: "final_end",
+                                    createAt: createAt));
+                              }
+                            }
                           },
                           child: Container(
                             width: Get.width,

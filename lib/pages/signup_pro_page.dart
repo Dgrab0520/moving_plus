@@ -36,7 +36,7 @@ class _SignUp_PageState extends State<SignUpPage> {
   bool _isChecked3 = false;
 
   insertSignUp() {
-    if(_isChecked3){
+    if (_isChecked3) {
       SignUp_Data.insertSignUp(
         idController.text,
         pwController.text,
@@ -63,7 +63,7 @@ class _SignUp_PageState extends State<SignUpPage> {
               backgroundColor: Color(0xBC000000), colorText: Colors.white);
         }
       });
-    }else{
+    } else {
       SignUp_Data.insertSignUp(
         idController.text,
         pwController.text,
@@ -116,14 +116,14 @@ class _SignUp_PageState extends State<SignUpPage> {
               children: [
                 Container(
                     child: Text(
-                      '입력하신 아이디 \n${idController.text}은(는)\n$aa',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.blueAccent,
-                        fontFamily: 'NanumSquareB',
-                      ),
-                      textAlign: TextAlign.center,
-                    )),
+                  '입력하신 아이디 \n${idController.text}은(는)\n$aa',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.blueAccent,
+                    fontFamily: 'NanumSquareB',
+                  ),
+                  textAlign: TextAlign.center,
+                )),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -162,14 +162,14 @@ class _SignUp_PageState extends State<SignUpPage> {
               children: [
                 Container(
                     child: Text(
-                      '입력하신 아이디 \n${idController.text}은(는)\n$aa',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.deepOrange,
-                        fontFamily: 'NanumSquareB',
-                      ),
-                      textAlign: TextAlign.center,
-                    )),
+                  '입력하신 아이디 \n${idController.text}은(는)\n$aa',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.deepOrange,
+                    fontFamily: 'NanumSquareB',
+                  ),
+                  textAlign: TextAlign.center,
+                )),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -332,7 +332,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           ),
                                         ),
                                         keyboardType:
-                                        TextInputType.emailAddress,
+                                            TextInputType.emailAddress,
                                       )),
                                 ),
                                 SizedBox(
@@ -357,7 +357,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                             color: Color(0xFF025595),
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(5.0),
+                                              BorderRadius.circular(5.0),
                                         ),
                                         child: Center(
                                           child: Text(
@@ -424,7 +424,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '비밀번호를 입력해주세요',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -495,7 +495,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '비밀번호를 한번 더 입력해주세요.',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -517,17 +517,17 @@ class _SignUp_PageState extends State<SignUpPage> {
                                 )),
                             _pwChecked
                                 ? Text(
-                              '비밀번호가 일치합니다',
-                              style: TextStyle(
-                                  fontSize: 10.0,
-                                  color: Colors.blueAccent),
-                            )
+                                    '비밀번호가 일치합니다',
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.blueAccent),
+                                  )
                                 : Text(
-                              '비밀번호가 일치하지 않습니다',
-                              style: TextStyle(
-                                  fontSize: 10.0,
-                                  color: Colors.deepOrange),
-                            ),
+                                    '비밀번호가 일치하지 않습니다',
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.deepOrange),
+                                  ),
                           ],
                         ),
                       ),
@@ -565,7 +565,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -622,7 +622,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -654,13 +654,13 @@ class _SignUp_PageState extends State<SignUpPage> {
                                         onChanged: (value) {
                                           setState(() {
                                             _isChecked3 = value!;
-                                            comNoController.text == '사업자 번호 등록 필요';
+                                            comNoController.text ==
+                                                '사업자 번호 등록 필요';
                                           });
                                         },
                                         activeColor: Color(0xFF025595),
                                       ),
-                                    )
-                                ),
+                                    )),
                                 Expanded(
                                   flex: 7,
                                   child: Text(
@@ -668,7 +668,6 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     style: TextStyle(fontSize: 10.0),
                                   ),
                                 ),
-
                               ],
                             ),
                           ],
@@ -708,7 +707,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -765,7 +764,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     ),
                                     hintText: '업체명을 입력해주세요.',
                                     labelStyle:
-                                    TextStyle(color: Color(0xFFACACAC)),
+                                        TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(5.0)),
@@ -862,7 +861,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                           Get.snackbar(
                                               '등록실패', '최대 5개의 서비스를 선택할 수 있습니다',
                                               backgroundColor:
-                                              Color(0xBC000000),
+                                                  Color(0xBC000000),
                                               colorText: Colors.white);
                                         }
                                       },
@@ -923,9 +922,9 @@ class _SignUp_PageState extends State<SignUpPage> {
                                         checkBoxActiveColor: Colors.blue,
                                         checkBoxCheckColor: Colors.white,
                                         dialogShapeBorder:
-                                        RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12.0))),
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12.0))),
                                         title: Text(
                                           "서비스 가능 지역",
                                           style: TextStyle(fontSize: 12),
@@ -960,7 +959,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                             Get.snackbar(
                                                 '등록실패', '최대 3개의 지역을 선택할 수 있습니다',
                                                 backgroundColor:
-                                                Color(0xBC000000),
+                                                    Color(0xBC000000),
                                                 colorText: Colors.white);
                                           }
                                         },
@@ -1514,10 +1513,10 @@ class _SignUp_PageState extends State<SignUpPage> {
     },
   ];
   String privacy =
-  """<입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
+      """<입주플러스>('http://입주플러스.kr/'이하 '입주플러스')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. ○ 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다. 
 
 
-제1조(개인정보의 처리 목적) <입주플러스>('http://입주플러스.com/'이하 '입주플러스')은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다. 
+제1조(개인정보의 처리 목적) <입주플러스>('http://입주플러스.kr/'이하 '입주플러스')은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다. 
 1. 홈페이지 회원가입 및 관리 회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증, 회원자격 유지·관리, 서비스 부정이용 방지, 만14세 미만 아동의 개인정보 처리 시 법정대리인의 동의여부 확인, 각종 고지·통지, 고충처리 목적으로 개인정보를 처리합니다. 
 2. 민원사무 처리 민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락·통지, 처리결과 통보 목적으로 개인정보를 처리합니다. 
 3. 재화 또는 서비스 제공 물품배송, 서비스 제공, 계약서·청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 요금결제·정산을 목적으로 개인정보를 처리합니다. 
@@ -1572,7 +1571,7 @@ class _SignUp_PageState extends State<SignUpPage> {
 제13조(개인정보 처리방침 변경) ① 이 개인정보처리방침은 2022년 02월 20부터 적용됩니다.""";
 
   String use =
-  """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.
+      """1. 고객 계약금은 운영사 (입주플러스_케이에스하우징매니지먼트) 수수료로 일괄 처리 됩니다. 잔금은 직접 수령하시고, 계약금  외 별도의 추가 수수료는 발생하지 않습니다.
       
                             \n2. 계약금 이외  착수금 및 선금은 계약 고객과 별도 협의 바랍니다.
 

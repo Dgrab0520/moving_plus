@@ -63,6 +63,8 @@ class ReactiveController extends GetxController {
     pro.refresh();
   }
 
+  setPoint(int point) {}
+
   change({
     required String type,
     required String id,
