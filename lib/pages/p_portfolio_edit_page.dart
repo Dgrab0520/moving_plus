@@ -66,6 +66,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
     ProIntro_Data.getProIntro(proId).then((value) {
       setState(() {
         pro = value;
+        area = '|   ';
         area += pro[0].pro_area1;
         if (pro[0].pro_area2 != "") area += " / ${pro[0].pro_area2}";
         if (pro[0].pro_area3 != "") area += " / ${pro[0].pro_area3}";
@@ -303,7 +304,6 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                             )
                           ],
                         )),
-
                     Container(
                       child: Column(
                         children: <Widget>[

@@ -100,7 +100,7 @@ class _Request_Estimate2State extends State<Request_Estimate2> {
       <String, dynamic>{
         "token": tokenList,
         "title": "Alarm",
-        "body": '${tempController.pro.value.pro_name}님의 견적 요청이 있습니다',
+        "body": '${tempController.pro.value.pro_id}님의 견적 요청이 있습니다',
       },
     );
     print(result);

@@ -21,6 +21,7 @@ class Order {
   String request_img2;
   String request_img3;
   String order_date;
+  String order_status;
   String index;
   String isOrder;
 
@@ -47,6 +48,7 @@ class Order {
     required this.request_img2,
     required this.request_img3,
     required this.order_date,
+    required this.order_status,
     required this.index,
     required this.isOrder,
   });
@@ -88,6 +90,8 @@ class Order {
           json['request_img3'] == null ? "" : json['request_img3'] as String,
       order_date:
           json['order_date'] == null ? "" : json['order_date'] as String,
+      order_status:
+          json['order_status'] == null ? "" : json['order_status'] as String,
       index: json['index'] == null ? "" : json['index'] as String,
       isOrder: json['isOrder'] == null ? "None" : json['isOrder'] as String,
     );

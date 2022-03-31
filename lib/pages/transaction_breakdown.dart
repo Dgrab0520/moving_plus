@@ -423,7 +423,7 @@ class TransactionBreakdown extends StatelessWidget {
                                                       TextEditingController
                                                           review =
                                                           TextEditingController();
-                                                      double ratingStars = 0.0;
+                                                      double ratingStars = 1.0;
                                                       Get.defaultDialog(
                                                           radius: 5.0,
                                                           title: "후기",
@@ -488,7 +488,7 @@ class TransactionBreakdown extends StatelessWidget {
                                                                   RatingBar
                                                                       .builder(
                                                                     initialRating:
-                                                                        3,
+                                                                        1,
                                                                     minRating:
                                                                         1,
                                                                     direction: Axis
@@ -566,6 +566,7 @@ class TransactionBreakdown extends StatelessWidget {
                                                                               .then((value) {
                                                                             if (value ==
                                                                                 "success") {
+                                                                              transactionController.setTransaction(index, ratingStars);
                                                                               Get.back();
                                                                             } else {
                                                                               Get.snackbar("실패", "리뷰 작성을 실패했습니다");

@@ -159,6 +159,74 @@ class _ChatPersonalState extends State<ChatPersonal> {
               Icons.arrow_back,
               color: Colors.white,
             )),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.defaultDialog(
+                  title: "채팅방 나가기",
+                  titleStyle: TextStyle(
+                    fontFamily: 'NanumSquareB',
+                  ),
+                  content: Text(
+                    "채팅방을 나가시겠습니까?\n채팅방을 나가신다면\n해당 채팅방의 모든 정보가 삭제됩니다",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                  ),
+                  confirm: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '아니오',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  cancel: InkWell(
+                    onTap: () {
+                      ChatData.exitChat(estimateId).then((value) {
+                        if (value) {
+                          Get.back();
+                          Get.back(result: true);
+                        }
+                      });
+                      //채팅방 나가기
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '예',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                "채팅방 나가기",
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
       ),
       body: Column(
         children: [

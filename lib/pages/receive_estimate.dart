@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/order_data.dart';
 import 'package:moving_plus/datas/order_list_data.dart';
 import 'package:moving_plus/models/order_chat_model.dart';
 import 'package:moving_plus/pages/api.dart';
@@ -24,10 +25,12 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
   bool isSearch = false;
   bool isLoading = false;
 
-  @override
-  void initState() {
+  chatInit() {
+    isLoading = false;
+    orders = [];
     OrderList_Data.getUserOrder(controller.pro.value.pro_id).then((value) {
       print(value);
+
       setState(() {
         orders = value;
         orders.add(OrderChat(
@@ -39,6 +42,11 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
         isLoading = true;
       });
     });
+  }
+
+  @override
+  void initState() {
+    chatInit();
     super.initState();
   }
 
@@ -191,6 +199,7 @@ class _Receive_EstimateState extends State<Receive_Estimate> {
                                 orderChat: isSearch
                                     ? searchOrders[index]
                                     : orders[index],
+                                index: index,
                               );
                             }
                           })
@@ -210,8 +219,10 @@ class CustomerEstimate extends StatefulWidget {
   const CustomerEstimate({
     Key? key,
     required this.orderChat,
+    required this.index,
   }) : super(key: key);
   final OrderChat orderChat;
+  final int index;
   @override
   _CustomerEstimateState createState() => _CustomerEstimateState();
 }
@@ -230,6 +241,7 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
         profile = value;
       });
     });
+    print(orderChat.order_date);
     super.initState();
   }
 
@@ -356,31 +368,122 @@ class _CustomerEstimateState extends State<CustomerEstimate> {
                       }),
             ),
             SizedBox(height: 20),
-            InkWell(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-                Get.to(C_ChatList(
-                  mainType: mainType,
-                  orderChat: orderChat,
-                ));
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 30,
-                decoration: BoxDecoration(
-                  color: Color(0xFF025595),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    '받은 견적 보기',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Get.defaultDialog(
+                        title: "견적 중단",
+                        titleStyle: TextStyle(
+                          fontFamily: 'NanumSquareB',
+                        ),
+                        content: Text(
+                          "견적을 중단하시겠습니까?\n견적을 중단하신다면\n해당 문의에 대한 견적이\n더이상 들어오지 않습니다",
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: Colors.grey[700], fontSize: 12),
+                        ),
+                        confirm: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                '아니오',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        cancel: InkWell(
+                          onTap: () {
+                            OrderData.disableOrder(orderChat.order_id)
+                                .then((value) {
+                              if (value == "success") {
+                                Get.back();
+                              }
+                            });
+
+                            //견적받지 않기
+                          },
+                          child: Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.red[400],
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                '예',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '견적 받지 않기',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      Get.to(C_ChatList(
+                        mainType: mainType,
+                        orderChat: orderChat,
+                      ));
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF025595),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '받은 견적 보기',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

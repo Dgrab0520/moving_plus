@@ -59,6 +59,7 @@ class _Request_ReceivedState extends State<Request_Received> {
   deleteOrder(String orderId) {
     OrderData.deleteOrder(orderId).then((value) {
       if (value == "success") {
+        Get.snackbar("성공", "보낸 요청을 삭제했습니다");
         print("Delete Success");
       } else {
         print("Delete Fail");
@@ -153,7 +154,16 @@ class _Request_ReceivedState extends State<Request_Received> {
                                             ),
                                           )
                                         : Container()
-                                    : Container(),
+                                    : order[index].order_status == "disable"
+                                        ? const Text(
+                                            "   비활성화된 견적",
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 10,
+                                              fontFamily: 'NanumSquareB',
+                                            ),
+                                          )
+                                        : Container(),
                               ],
                             ),
                             Text(
@@ -287,6 +297,7 @@ class _Request_ReceivedState extends State<Request_Received> {
                                       onTap: () {
                                         print(order[index].order_id);
                                         deleteOrder(order[index].order_id);
+
                                         getCusOrder();
                                       },
                                       child: Container(

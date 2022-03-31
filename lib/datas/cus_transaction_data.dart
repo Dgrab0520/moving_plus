@@ -104,6 +104,51 @@ class CusTransActionData extends GetxController {
     }
   }
 
+  //후기 수정
+  editReview(int index, String review, double ratings) async {
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "editReview";
+      map['review'] = review;
+      map['ratings'] = ratings.toString();
+      map['reviewId'] = transAction[index].id.toString();
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Review Edit Response : ${response.body}");
+      if (response.statusCode == 200) {
+        transAction[index].reviewContent = review;
+        transAction[index].reviewPoint = ratings;
+        _transAction.refresh();
+        Get.back();
+        if (!Get.isSnackbarOpen) {
+          Get.snackbar("성공", "성공적으로 후기를 수정했습니다");
+        }
+      }
+    } catch (e) {
+      print("exception : $e");
+    }
+  }
+
+  //후기 삭제
+  deleteReview(int index) async {
+    try {
+      var map = <String, dynamic>{};
+      map['action'] = "deleteReview";
+      map['reviewId'] = transAction[index].id.toString();
+      final response = await http.post(Uri.parse(ROOT), body: map);
+      print("Review Delete Response : ${response.body}");
+      if (response.statusCode == 200) {
+        transAction.removeAt(index);
+        _transAction.refresh();
+        Get.back();
+        if (!Get.isSnackbarOpen) {
+          Get.snackbar("성공", "성공적으로 후기를 삭제했습니다");
+        }
+      }
+    } catch (e) {
+      print("exception : $e");
+    }
+  }
+
   static List<CusTransAction> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed

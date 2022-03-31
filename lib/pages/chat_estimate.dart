@@ -167,89 +167,74 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
               Icons.arrow_back,
               color: Colors.white,
             )),
-        // actions: [
-        //   isPro == 0
-        //       ? Container()
-        //       : widget.serviceType == "개인 문의"
-        //           ? Container()
-        //           : InkWell(
-        //               onTap: () async {
-        //                 var result =
-        //                     await Get.to(P_Detail_Estimate(), arguments: {
-        //                   "estimateId": widget.estimateId,
-        //                   "serviceType": widget.serviceType,
-        //                 });
-        //                 print(result);
-        //                 setState(() {
-        //                   isSelect = false;
-        //
-        //                   Chat chat = Chat(
-        //                       id: 0,
-        //                       estimateId: widget.estimateId,
-        //                       text: "",
-        //                       image: "",
-        //                       estimatePrice: 0,
-        //                       finalPrice: result,
-        //                       isPro: isPro,
-        //                       createAt: "");
-        //                   ChatData.putChat(chat, "final").then((value) async {
-        //                     if (value.isNotEmpty) {
-        //                       print(value);
-        //                       chat.createAt = value[0];
-        //
-        //                       if (isPro == 1) {
-        //                         chatRoom[widget.chatRoomIndex].lastChat =
-        //                             chat.finalPrice.toString();
-        //                         chatRoom[widget.chatRoomIndex].chatType =
-        //                             "final";
-        //                         chatRoom[widget.chatRoomIndex].createAt =
-        //                             chat.createAt;
-        //                       } else {
-        //                         userChatRooms[widget.chatRoomIndex].lastChat =
-        //                             chat.finalPrice.toString();
-        //                         userChatRooms[widget.chatRoomIndex].chatType =
-        //                             "final";
-        //                         userChatRooms[widget.chatRoomIndex].createAt =
-        //                             chat.createAt;
-        //                       }
-        //
-        //                       setState(() {
-        //                         chatting.insert(0, chat);
-        //                         isSelect = false;
-        //                         Timer(
-        //                             Duration(milliseconds: 200),
-        //                             () => scrollController.animateTo(0.0,
-        //                                 duration: Duration(milliseconds: 300),
-        //                                 curve: Curves.easeInOut));
-        //                       });
-        //                       final HttpsCallableResult result =
-        //                           await callable.call(
-        //                         <String, dynamic>{
-        //                           "token": token,
-        //                           "title": controller.pro.value.pro_name,
-        //                           "body": "최종 견적",
-        //                         },
-        //                       );
-        //                     }
-        //                   });
-        //                   Timer(
-        //                       Duration(milliseconds: 200),
-        //                       () => scrollController.animateTo(0.0,
-        //                           duration: Duration(milliseconds: 300),
-        //                           curve: Curves.easeInOut));
-        //                 });
-        //               },
-        //               child: Container(
-        //                 padding: EdgeInsets.only(right: 8),
-        //                 width: 29,
-        //                 height: 29,
-        //                 child: Image.asset(
-        //                   'assets/write_fill.png',
-        //                   color: Colors.white,
-        //                 ),
-        //               ),
-        //             ),  //최종견적
-        // ],
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.defaultDialog(
+                  title: "채팅방 나가기",
+                  titleStyle: TextStyle(
+                    fontFamily: 'NanumSquareB',
+                  ),
+                  content: Text(
+                    "채팅방을 나가시겠습니까?\n채팅방을 나가신다면\n해당 채팅방의 모든 정보가 삭제됩니다",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                  ),
+                  confirm: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '아니오',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  cancel: InkWell(
+                    onTap: () {
+                      ChatData.exitChat(widget.estimateId).then((value) {
+                        if (value) {
+                          Get.back();
+                          Get.back(result: true);
+                        }
+                      });
+                      //채팅방 나가기
+                    },
+                    child: Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '예',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                "채팅방 나가기",
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
       ),
       body: Column(
         children: [

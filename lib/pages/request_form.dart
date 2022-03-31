@@ -238,12 +238,61 @@ class _RequestFormState extends State<RequestForm> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '${order[0].user_name}',
-                                      style: TextStyle(
-                                        fontFamily: 'NanumSquareEB',
-                                        fontSize: 15,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${order[0].user_name}',
+                                          style: TextStyle(
+                                            fontFamily: 'NanumSquareEB',
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                        order[0].order_status == "disable"
+                                            ? Row(
+                                                children: [
+                                                  const Text(
+                                                    "   비활성화된 견적",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 10,
+                                                      fontFamily:
+                                                          'NanumSquareB',
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {},
+                                                    child: Container(
+                                                      height: 20,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xFF025595),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: const Center(
+                                                        child: FittedBox(
+                                                          child: Text(
+                                                            '활성화',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Container(),
+                                      ],
                                     ),
                                     SizedBox(height: 10),
                                     Text(

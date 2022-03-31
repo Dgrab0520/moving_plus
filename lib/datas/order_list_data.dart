@@ -17,6 +17,7 @@ class OrderList_Data {
 
   //Pro order_list 불러오기
   static Future<List<Order>> getOrder(String pro_id) async {
+    print(pro_id);
     try {
       var map = Map<String, dynamic>();
       map['action'] = GET_ORDER_ACTION;

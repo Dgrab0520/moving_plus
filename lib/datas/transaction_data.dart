@@ -56,6 +56,11 @@ class TransActionData extends GetxController {
   bool get isAll => _isAll.value;
   set isAll(val) => _isAll.value = val;
 
+  setTransaction(int index, double rating) {
+    transAction[index].reviewRating = rating;
+    _transAction.refresh();
+  }
+
   //거래 내역 불러오기
   getTransaction() async {
     isAll = true;

@@ -200,6 +200,31 @@ class ChatData {
     }
   }
 
+  //채팅방 나가기
+  static Future<bool> exitChat(String estimateId) async {
+    try {
+      var url = Uri.parse(ROOT);
+      var request = http.MultipartRequest('POST', url);
+      request.fields['action'] = "EXIT_CHAT";
+      request.fields['estimateId'] = estimateId;
+      http.Response response =
+          await http.Response.fromStream(await request.send());
+      print("Exit Chat Response : ${response.body}");
+      if (response.statusCode == 200) {
+        if (response.body == "success") {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   static List<Chat> parseResponse(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Chat>((json) => Chat.fromJson(json)).toList();

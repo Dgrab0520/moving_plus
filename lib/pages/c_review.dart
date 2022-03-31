@@ -305,22 +305,258 @@ class _ReviewBoxState extends State<ReviewBox> {
                       ),
                     ),
                     SizedBox(height: 8),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              '${Api().findMainCategory(cusReviewController.transAction[index].proServiceType)} | ${cusReviewController.transAction[index].proServiceType}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xfF777777),
-                              ),
+                    SizedBox(
+                      width: 250,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${Api().findMainCategory(cusReviewController.transAction[index].proServiceType)} | ${cusReviewController.transAction[index].proServiceType}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xfF777777),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  TextEditingController review =
+                                      TextEditingController();
+                                  review.text = cusReviewController
+                                      .transAction[index].reviewContent;
+                                  double ratingStars = cusReviewController
+                                      .transAction[index].reviewPoint;
+                                  Get.defaultDialog(
+                                      radius: 5.0,
+                                      title: "후기",
+                                      titleStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 15,
+                                        fontFamily: 'NanumSquareB',
+                                      ),
+                                      content: Container(
+                                        width: Get.width,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              TextField(
+                                                controller: review,
+                                                maxLines: 7,
+                                                maxLength: 500,
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.black87,
+                                                  fontFamily: 'NanumSquareB',
+                                                ),
+                                                decoration: InputDecoration(
+                                                  hintText: '후기를 작성해주세요',
+                                                  hintStyle: TextStyle(
+                                                      fontSize: 13.0,
+                                                      color: Colors.black54),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            width: 0.8,
+                                                            color: Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        width: 1.0,
+                                                        color:
+                                                            Color(0xFF025595)),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                ),
+                                              ),
+                                              RatingBar.builder(
+                                                initialRating: ratingStars,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                glow: false,
+                                                onRatingUpdate: (rating) {
+                                                  ratingStars = rating;
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 20.0,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.back();
+                                                    },
+                                                    child: Container(
+                                                      width: Get.width * 0.3,
+                                                      height: 40.0,
+                                                      color: Colors.grey,
+                                                      child: const Center(
+                                                          child: Text(
+                                                        '취소',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'NanumSquareB',
+                                                        ),
+                                                      )),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      cusReviewController
+                                                          .editReview(
+                                                              index,
+                                                              review.text,
+                                                              ratingStars);
+                                                      //후기 수정하기
+                                                    },
+                                                    child: Container(
+                                                      width: Get.width * 0.3,
+                                                      height: 40.0,
+                                                      color: Color(0xFF025595),
+                                                      child: const Center(
+                                                          child: Text(
+                                                        '작성하기',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 13,
+                                                          fontFamily:
+                                                              'NanumSquareB',
+                                                        ),
+                                                      )),
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 3),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF025595),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    "수정",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.defaultDialog(
+                                    title: "후기 삭제",
+                                    titleStyle: TextStyle(
+                                      fontFamily: 'NanumSquareB',
+                                    ),
+                                    content: Text(
+                                      "후기를 삭제하시겠습니까?\n해당 전문가에대한 후기가 삭제됩니다",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.grey[700],
+                                          fontSize: 12),
+                                    ),
+                                    confirm: InkWell(
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            '아니오',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    cancel: InkWell(
+                                      onTap: () {
+                                        cusReviewController.deleteReview(index);
+                                        //후기 삭제
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red[400],
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            '예',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 3),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red[400],
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    "삭제",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
