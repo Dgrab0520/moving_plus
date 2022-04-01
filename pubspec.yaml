@@ -71,6 +71,7 @@ dependencies:
   checkbox_grouped: ^1.7.1
   group_button: ^4.5.0
   flutter_local_notifications: ^9.3.2
+  cached_network_image: ^3.2.0
 
 
 dev_dependencies:

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -89,9 +90,10 @@ class _ChatPersonalState extends State<ChatPersonal> {
       }
     });
     Timer(
-        Duration(milliseconds: 300),
+        const Duration(milliseconds: 300),
         () => scrollController.animateTo(0,
-            duration: Duration(milliseconds: 300), curve: Curves.easeInOut));
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut));
   }
 
   getToken(String proId) {
@@ -143,19 +145,19 @@ class _ChatPersonalState extends State<ChatPersonal> {
         elevation: 0,
         title: Text(
           otherName,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 17,
             fontFamily: 'NanumSquareB',
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -164,7 +166,7 @@ class _ChatPersonalState extends State<ChatPersonal> {
               onPressed: () {
                 Get.defaultDialog(
                   title: "채팅방 나가기",
-                  titleStyle: TextStyle(
+                  titleStyle: const TextStyle(
                     fontFamily: 'NanumSquareB',
                   ),
                   content: Text(
@@ -222,7 +224,7 @@ class _ChatPersonalState extends State<ChatPersonal> {
                   ),
                 );
               },
-              child: Text(
+              child: const Text(
                 "채팅방 나가기",
                 style: TextStyle(color: Colors.white),
               )),
@@ -303,14 +305,14 @@ class _ChatPersonalState extends State<ChatPersonal> {
                 )),
           ),
           Container(
-            padding: EdgeInsets.only(left: 15, right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             width: Get.width,
             // height: 60,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
                 width: 1,
-                color: Color(0xFFcccccc),
+                color: const Color(0xFFcccccc),
               ),
             ),
             child: Row(
@@ -319,26 +321,26 @@ class _ChatPersonalState extends State<ChatPersonal> {
                   onTap: () {
                     getFile();
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 25,
                     height: 25,
                     child: Image.asset('assets/gg.png'),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 15,
                       right: 15,
                     ),
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
                     // height: 42,
                     decoration: BoxDecoration(
-                      color: Color(0xFFF9F9F9),
+                      color: const Color(0xFFF9F9F9),
                       border: Border.all(
                         width: 1.0,
-                        color: Color(0xFFcccccc),
+                        color: const Color(0xFFcccccc),
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -355,9 +357,9 @@ class _ChatPersonalState extends State<ChatPersonal> {
                         isSelect = false;
                         print(0.0);
                         Timer(
-                            Duration(milliseconds: 200),
+                            const Duration(milliseconds: 200),
                             () => scrollController.animateTo(0.0,
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut));
                       },
                       onChanged: (text) {
@@ -373,14 +375,15 @@ class _ChatPersonalState extends State<ChatPersonal> {
                       },
                       // style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: 2, top: 2),
+                        contentPadding:
+                            const EdgeInsets.only(bottom: 2, top: 2),
                         hintText: (isPro == 1 && chatting.length == 1)
                             ? '고객이 응답 할 경우 채팅이 활성화 됩니다.'
                             : '',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           fontSize: 12,
                         ),
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           fontSize: 12,
                         ),
                         border: InputBorder.none,
@@ -388,7 +391,7 @@ class _ChatPersonalState extends State<ChatPersonal> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 InkWell(
                     onTap: () {
                       if (!isSelect) {
@@ -448,9 +451,10 @@ class _ChatPersonalState extends State<ChatPersonal> {
                                   isTextChange = false;
                                   isSelect = false;
                                   Timer(
-                                      Duration(milliseconds: 200),
+                                      const Duration(milliseconds: 200),
                                       () => scrollController.animateTo(0.0,
-                                          duration: Duration(milliseconds: 300),
+                                          duration:
+                                              const Duration(milliseconds: 300),
                                           curve: Curves.easeInOut));
                                 });
                                 print(token);
@@ -496,6 +500,11 @@ class _ChatPersonalState extends State<ChatPersonal> {
   }
 
   getFile() async {
+    Get.dialog(
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+        barrierDismissible: false);
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.image,
         allowMultiple: false,
@@ -539,9 +548,9 @@ class _ChatPersonalState extends State<ChatPersonal> {
             chatting.insert(0, chat);
             isSelect = false;
             Timer(
-                Duration(milliseconds: 200),
+                const Duration(milliseconds: 200),
                 () => scrollController.animateTo(0.0,
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut));
           });
           final HttpsCallableResult result = await callable.call(
@@ -551,6 +560,8 @@ class _ChatPersonalState extends State<ChatPersonal> {
               "body": "사진을 보냈습니다",
             },
           );
+          print(result.data);
+          Get.back();
         }
       });
     } else {
@@ -573,7 +584,7 @@ class CenterDate extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Text(
         '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           fontFamily: 'NanumSquareB',
         ),
@@ -614,11 +625,11 @@ class ImageChat extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               InkWell(
                 onTap: () {
                   Get.to(DetailScreen(path: image));
@@ -630,7 +641,20 @@ class ImageChat extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  child: Image.network(image),
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => SizedBox(
+                      width: 100,
+                      height: 150,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
                 ),
               ),
             ],
@@ -672,24 +696,24 @@ class MyChat extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Container(
                 constraints: BoxConstraints(maxWidth: Get.width / 2),
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                     border: Border.all(
                       width: 1,
-                      color: Color(0xFFcccccc),
+                      color: const Color(0xFFcccccc),
                     )),
                 child: Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     height: 1.5,
                   ),
@@ -731,26 +755,26 @@ class OtherChat extends StatelessWidget {
             children: [
               Container(
                 constraints: BoxConstraints(maxWidth: Get.width / 2),
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFd8e3eb),
+                    color: const Color(0xFFd8e3eb),
                     border: Border.all(
                       width: 1,
-                      color: Color(0xFFcccccc),
+                      color: const Color(0xFFcccccc),
                     )),
                 child: Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     height: 1.5,
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
                 time,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),
@@ -833,20 +857,20 @@ class FinalPrice extends StatelessWidget {
               children: [
                 Text(
                   time,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                         border: Border.all(
                           width: 1,
-                          color: Color(0xFFcccccc),
+                          color: const Color(0xFFcccccc),
                         )),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -857,8 +881,8 @@ class FinalPrice extends StatelessWidget {
                           children: [
                             Image.asset('assets/won_g.png',
                                 width: 23, height: 23),
-                            SizedBox(width: 7),
-                            Text(
+                            const SizedBox(width: 7),
+                            const Text(
                               '최종 견적서',
                               style: TextStyle(
                                 fontSize: 16,
@@ -867,19 +891,19 @@ class FinalPrice extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           detail,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             height: 1.5,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           width: Get.width,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xFFD8E3EB),
                           ),
                           child: Column(
@@ -889,43 +913,43 @@ class FinalPrice extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('서비스',
+                                  const Text('서비스',
                                       style: TextStyle(
                                         fontSize: 13,
                                       )),
                                   Text(serviceType,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           fontFamily: 'NanumSquareB')),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('최종 금액',
+                                  const Text('최종 금액',
                                       style: TextStyle(
                                         fontSize: 13,
                                       )),
                                   Text('${finalPriceController.text}원',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           color: Color(0xFF025595),
                                           fontFamily: 'NanumSquareB')),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('계약금',
+                                  const Text('계약금',
                                       style: TextStyle(
                                         fontSize: 13,
                                       )),
                                   Text('${finalPriceController2.text}원',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 13,
                                           color: Color(0xFF025595),
                                           fontFamily: 'NanumSquareB')),
@@ -934,7 +958,7 @@ class FinalPrice extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 13),
+                        const SizedBox(height: 13),
                         InkWell(
                           onTap: () async {
                             if (existFinal) {
@@ -963,9 +987,9 @@ class FinalPrice extends StatelessWidget {
                             height: 28,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2),
-                              color: Color(0xFF025595),
+                              color: const Color(0xFF025595),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 '안전 결제 하기',
                                 style: TextStyle(
@@ -1016,7 +1040,7 @@ class EstimatePrice extends StatelessWidget {
     return Column(
       children: [
         CenterDate(currentDate: createAtTime),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Padding(
           padding: const EdgeInsets.only(bottom: 30.0),
           child: Row(
@@ -1035,20 +1059,20 @@ class EstimatePrice extends StatelessWidget {
                   children: [
                     Text(
                       time,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                             border: Border.all(
                               width: 1,
-                              color: Color(0xFFcccccc),
+                              color: const Color(0xFFcccccc),
                             )),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -1059,8 +1083,8 @@ class EstimatePrice extends StatelessWidget {
                               children: [
                                 Image.asset('assets/won_g.png',
                                     width: 23, height: 23),
-                                SizedBox(width: 7),
-                                Text(
+                                const SizedBox(width: 7),
+                                const Text(
                                   '견적서',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -1069,21 +1093,21 @@ class EstimatePrice extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                               detail,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 height: 1.5,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Flexible(
                               child: Container(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 width: Get.width,
                                 height: 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Color(0xFFD8E3EB),
                                 ),
                                 child: Column(
@@ -1093,29 +1117,29 @@ class EstimatePrice extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('서비스',
+                                          const Text('서비스',
                                               style: TextStyle(
                                                 fontSize: 13,
                                               )),
                                           Text(serviceType,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 13,
                                                   fontFamily: 'NanumSquareB')),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Expanded(
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('예상 금액',
+                                          const Text('예상 금액',
                                               style: TextStyle(
                                                 fontSize: 13,
                                               )),
                                           Text('${finalPriceController.text}원~',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 13,
                                                   color: Color(0xFF025595),
                                                   fontFamily: 'NanumSquareB')),
@@ -1126,19 +1150,20 @@ class EstimatePrice extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 13),
+                            const SizedBox(height: 13),
                             InkWell(
                               onTap: () {
-                                Get.to(PortfolioEdit_Page(), arguments: proId);
+                                Get.to(const PortfolioEdit_Page(),
+                                    arguments: proId);
                               },
                               child: Container(
                                 width: Get.width,
                                 height: 28,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(2),
-                                  color: Color(0xFF025595),
+                                  color: const Color(0xFF025595),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     '파트너 프로필 보기',
                                     style: TextStyle(

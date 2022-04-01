@@ -25,7 +25,7 @@ class ChatRoom {
     return ChatRoom(
       estimateId:
           json['estimate_id'] == null ? "" : json['estimate_id'] as String,
-      userName: json['user_name'] == null ? "" : json['user_name'] as String,
+      userName: json['user_id'] == null ? "" : json['user_id'] as String,
       serviceType:
           json['service_type'] == null ? "" : json['service_type'] as String,
       area: json['address'] == null ? "" : json['address'] as String,
