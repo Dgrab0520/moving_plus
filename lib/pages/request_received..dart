@@ -209,7 +209,7 @@ class _Request_ReceivedState extends State<Request_Received> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '${order[index].service_type}',
+                                  order[index].service_type,
                                   style: TextStyle(
                                     fontSize: 11,
                                   ),
@@ -226,7 +226,7 @@ class _Request_ReceivedState extends State<Request_Received> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '${order[index].space_type}',
+                                  order[index].space_type,
                                   style: TextStyle(
                                     fontSize: 11,
                                   ),
@@ -243,7 +243,7 @@ class _Request_ReceivedState extends State<Request_Received> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '${order[index].space_size}',
+                                  order[index].space_size,
                                   style: TextStyle(
                                     fontSize: 11,
                                   ),
@@ -269,15 +269,16 @@ class _Request_ReceivedState extends State<Request_Received> {
                             ),
                             SizedBox(width: 5),
                             Container(
-                              width: 30,
                               height: 20,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
                                 color: Color(0xFFE9E9E9),
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
                                 child: Text(
-                                  '${order[index].address}'.split(" ")[0],
+                                  order[index].address.split(" ")[0],
                                   style: TextStyle(
                                     fontSize: 11,
                                   ),

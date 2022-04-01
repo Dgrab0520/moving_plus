@@ -1031,48 +1031,48 @@ class _Payment_PageState extends State<Payment_Page> {
                                     ),
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    FinalOrder_Data.updateStatus(estimate_id)
-                                        .then((value) {
-                                      if (value == 'success') {
-                                        print('Update Status Success');
-                                        Customer_Data.usePoint(
-                                                pointController.text == ""
-                                                    ? "0"
-                                                    : pointController.text)
-                                            .then((value) {
-                                          if (value) {
-                                            Get.back(result: true);
-                                            Get.to(TransactionBreakdown());
-                                          }
-                                        });
-                                      } else {
-                                        print('Update Status Fail');
-                                      }
-                                    });
-                                  },
-                                  child: Container(
-                                    margin:
-                                        EdgeInsets.only(left: 35, right: 35),
-                                    width: Get.width,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Color(0xFF025595),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '테스트 결제하기',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'NanumSquareB',
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // InkWell(
+                                //   onTap: () {
+                                //     FinalOrder_Data.updateStatus(estimate_id)
+                                //         .then((value) {
+                                //       if (value == 'success') {
+                                //         print('Update Status Success');
+                                //         Customer_Data.usePoint(
+                                //                 pointController.text == ""
+                                //                     ? "0"
+                                //                     : pointController.text)
+                                //             .then((value) {
+                                //           if (value) {
+                                //             Get.back(result: true);
+                                //             Get.to(TransactionBreakdown());
+                                //           }
+                                //         });
+                                //       } else {
+                                //         print('Update Status Fail');
+                                //       }
+                                //     });
+                                //   },
+                                //   child: Container(
+                                //     margin:
+                                //         EdgeInsets.only(left: 35, right: 35),
+                                //     width: Get.width,
+                                //     height: 45,
+                                //     decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(5),
+                                //       color: Color(0xFF025595),
+                                //     ),
+                                //     child: Center(
+                                //       child: Text(
+                                //         '테스트 결제하기',
+                                //         style: TextStyle(
+                                //           fontSize: 14,
+                                //           fontFamily: 'NanumSquareB',
+                                //           color: Colors.white,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           )
