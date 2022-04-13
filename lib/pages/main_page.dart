@@ -247,6 +247,8 @@ class _Main_PageState extends State<Main_Page> {
       onWillPop: () {
         if (_selectedIndex == 2) {
           moveIndex(1);
+        } else if (_selectedIndex == 1) {
+          return Future.value(true);
         }
         return Future.value(false);
       },

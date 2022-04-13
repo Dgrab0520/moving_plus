@@ -277,7 +277,13 @@ class TransactionBreakdown extends StatelessWidget {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${Api().findMainCategory(transactionController.transAction[index].proServiceType)} | ${transactionController.transAction[index].proServiceType}',
+                                                      transactionController
+                                                                  .transAction[
+                                                                      index]
+                                                                  .proServiceType ==
+                                                              ""
+                                                          ? "개인문의"
+                                                          : '${Api().findMainCategory(transactionController.transAction[index].proServiceType)} | ${transactionController.transAction[index].proServiceType}',
                                                       style: const TextStyle(
                                                         fontSize: 12,
                                                         color:

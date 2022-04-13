@@ -1111,6 +1111,7 @@ class Payment_IMP extends StatelessWidget {
         print('Update Status Success');
         Customer_Data.usePoint(point.toString()).then((value) {
           if (value) {
+            Get.back();
             Get.back(result: true);
             Get.to(TransactionBreakdown());
           }
@@ -1160,10 +1161,12 @@ class Payment_IMP extends StatelessWidget {
           ),
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) {
-        if (result['success'] == 'true') {
+        print(result);
+        if (result['success'] == 'true' || result['imp_success'] == 'true') {
           updateStatus();
         } else {
           Get.back();
+          Get.snackbar("실패", "결제가 실패했습니다", backgroundColor: Colors.white);
         }
       },
     );

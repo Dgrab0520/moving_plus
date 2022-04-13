@@ -9,6 +9,7 @@ import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/models/customer_model.dart';
 import 'package:moving_plus/widgets/p_login.dart';
 
+import '../datas/alarm_data.dart';
 import '../pages/main_page.dart';
 
 final controller = Get.put(ReactiveController());
@@ -32,6 +33,7 @@ class _C_LoginState extends State<C_Login> {
   bool _default_Image = true;
   String loginRoot = '';
   List<Customer> customer = [];
+  String firebaseToken = 'none';
 
   getCus() {
     Customer_Data.get_Customer(user_id).then((value) {
@@ -50,13 +52,16 @@ class _C_LoginState extends State<C_Login> {
         print('Insert Success');
         FirebaseMessaging.instance.getToken().then((value) =>
             Customer_Data.updateToken(user_id, value!).then((value2) {
+              setState(() {
+                firebaseToken = value;
+              });
               if (value2 == 'success') {
                 print('update token success');
               } else {
                 print('update token fail');
               }
             }));
-        Get.offAll(Main_Page(index: 1));
+        //Get.offAll(Main_Page(index: 1));
       } else {
         print('$value : Insert Fails');
       }
@@ -134,6 +139,10 @@ class _C_LoginState extends State<C_Login> {
       TokenManager.instance.setToken(token);
       print('token success');
       if (user_id == "None") await _initTexts();
+      await getCus();
+      if (customer.isEmpty) {
+        insertCus();
+      }
       controller.change(
         type: 'cus',
         id: '0',
@@ -141,39 +150,16 @@ class _C_LoginState extends State<C_Login> {
         pro_pw: "pw",
         pro_name: user_name,
         pro_phone: user_phone,
-        pro_email: 'None',
+        pro_email: user_id,
         com_name: 'None',
         profile_img: _default_Image ? "default_image" : profile_image,
-        pro_token: 'None',
-        recom: "None",
+        pro_token: firebaseToken,
+        recom: user_recom!,
       );
-      if (customer.isEmpty) {
-        insertCus();
+      if (loginRoot == 'main_page') {
+        Get.offAll(Main_Page(index: 1));
       } else {
-        if (loginRoot == 'main_page') {
-          FirebaseMessaging.instance.getToken().then((value) =>
-              Customer_Data.updateToken(user_id, value!).then((value) {
-                if (value == 'success') {
-                  print('update token success');
-                } else {
-                  print('update token fail');
-                }
-              }));
-          Get.offAll(Main_Page(index: 1));
-        } else {
-          FirebaseMessaging.instance.getToken().then((value) =>
-              Customer_Data.updateToken(user_id, value!).then((value2) {
-                if (value2 == 'success') {
-                  print('update token success');
-                  setState(() {
-                    FCM_token = value;
-                  });
-                } else {
-                  print('update token fail');
-                }
-              }));
-          Get.back(result: FCM_token);
-        }
+        Get.back(result: FCM_token);
       }
       print('fcm tokensd : $FCM_token');
     } catch (e) {
@@ -306,40 +292,40 @@ class _C_LoginState extends State<C_Login> {
                       ),
                     ),
                   ),
-                  // Center(
-                  //   child: ElevatedButton(
-                  //       onPressed: () {
-                  //         // Customer_Data.insertCustomer(
-                  //         //     'test@gmail.com', generateRandomString(8));
-                  //         AlarmData().alarmCount('test@gmail.com');
-                  //         FirebaseMessaging.instance.getToken().then((value) =>
-                  //             Customer_Data.updateToken(
-                  //                     'test@gmail.com', value!)
-                  //                 .then((value2) {
-                  //               if (value2 == 'success') {
-                  //                 controller.change(
-                  //                   id: "0",
-                  //                   type: 'cus',
-                  //                   pro_id: 'test@gmail.com',
-                  //                   pro_pw: 'pw',
-                  //                   pro_name: '테스트',
-                  //                   pro_phone: 'None',
-                  //                   pro_email: 'None',
-                  //                   com_name: 'None',
-                  //                   profile_img: "default_image",
-                  //                   pro_token: value2,
-                  //                   recom: "TEST",
-                  //                 );
-                  //                 Get.offAll(Main_Page(index: 1));
-                  //                 print(value2);
-                  //                 print('update token success');
-                  //               } else {
-                  //                 print('update token fail');
-                  //               }
-                  //             }));
-                  //       },
-                  //       child: Text("테스트 로그인")),
-                  // ),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          // Customer_Data.insertCustomer(
+                          //     'test@gmail.com', generateRandomString(8));
+                          AlarmData().alarmCount('test@gmail.com');
+                          FirebaseMessaging.instance.getToken().then((value) =>
+                              Customer_Data.updateToken(
+                                      'test@gmail.com', value!)
+                                  .then((value2) {
+                                if (value2 == 'success') {
+                                  controller.change(
+                                    id: "0",
+                                    type: 'cus',
+                                    pro_id: 'test@gmail.com',
+                                    pro_pw: 'pw',
+                                    pro_name: '테스트',
+                                    pro_phone: 'None',
+                                    pro_email: 'None',
+                                    com_name: 'None',
+                                    profile_img: "default_image",
+                                    pro_token: value2,
+                                    recom: "TEST",
+                                  );
+                                  Get.offAll(Main_Page(index: 1));
+                                  print(value2);
+                                  print('update token success');
+                                } else {
+                                  print('update token fail');
+                                }
+                              }));
+                        },
+                        child: Text("테스트 로그인")),
+                  ),
                 ],
               ),
             ),

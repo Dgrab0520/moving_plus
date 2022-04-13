@@ -16,6 +16,7 @@ import 'package:moving_plus/models/chat_model.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
 import 'package:moving_plus/pages/payment_page.dart';
 
+import '../datas/alarm_data.dart';
 import '../datas/pro_data.dart';
 import '../main.dart';
 import 'p_portfolio_edit_page.dart';
@@ -400,6 +401,11 @@ class _ChatPersonalState extends State<ChatPersonal> {
                           Get.snackbar('전송 실패', '고객이 응답 후 메시지 전송이 가능합니다',
                               backgroundColor: Colors.white);
                         } else {
+                          if (chatting.isEmpty) {
+                            AlarmData.putChat(controller.pro.value.pro_id,
+                                [widget.proId], "personal chat",
+                                order_id: "", mainType: "personal");
+                          }
                           if (chatTextController.text != "") {
                             Chat chat = Chat(
                                 id: 0,

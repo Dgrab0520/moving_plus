@@ -91,7 +91,8 @@ class AlarmBox extends StatelessWidget {
           Get.off(() => const Request_Received());
         } else if (currentAlarm.alarmType == "notice") {
           Get.off(() => Notice());
-        } else if (currentAlarm.alarmType == "first chat") {
+        } else if (currentAlarm.alarmType == "first chat" ||
+            currentAlarm.alarmType == "personal chat") {
           Get.off(() => const P_Chat());
         }
         alarmController.alarmDelete(index);
@@ -135,8 +136,11 @@ class AlarmBox extends StatelessWidget {
                                     ),
                                   ),
                                   TextSpan(
-                                      text:
-                                          currentAlarm.alarmType == "first chat"
+                                      text: currentAlarm.alarmType ==
+                                              "personal chat"
+                                          ? "님이 개인문의를 보냈습니다"
+                                          : currentAlarm.alarmType ==
+                                                  "first chat"
                                               ? "님이 견적서 응답했습니다"
                                               : currentAlarm.alarmType ==
                                                       "estimated price"

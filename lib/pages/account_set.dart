@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:moving_plus/datas/customer_data.dart';
 import 'package:moving_plus/datas/delete_account_data.dart';
 import 'package:moving_plus/datas/recom_data.dart';
 
@@ -14,11 +15,17 @@ class Account_Set extends StatefulWidget {
 }
 
 class _Account_SetState extends State<Account_Set> {
+  int point = 0;
   @override
   void initState() {
     print(controller.pro.value.pro_name);
     print(controller.pro.value.pro_id);
     print(controller.pro.value.pro_phone);
+    Customer_Data.getCustomerPoint(controller.pro.value.pro_id).then((value) {
+      setState(() {
+        point = int.parse(value);
+      });
+    });
 
     super.initState();
   }
@@ -138,6 +145,32 @@ class _Account_SetState extends State<Account_Set> {
                         Image.asset('assets/kakao_b.png',
                             width: 16, height: 16),
                       ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '포인트',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'NanumSquareR',
+                      ),
+                    ),
+                    SizedBox(height: 7),
+                    Text(
+                      "$point 포인트",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'NanumSquareB',
+                      ),
                     ),
                   ],
                 ),
