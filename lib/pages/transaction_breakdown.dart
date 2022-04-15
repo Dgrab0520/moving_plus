@@ -221,12 +221,22 @@ class TransactionBreakdown extends StatelessWidget {
                                         Row(
                                           children: [
                                             ClipRRect(
-                                              child: Image.network(
-                                                "http://211.110.44.91/plus/pro_profile/${transactionController.transAction[index].profileImg}",
-                                                width: 70,
-                                                height: 70,
-                                                fit: BoxFit.cover,
-                                              ),
+                                              child: transactionController
+                                                          .transAction[index]
+                                                          .profileImg ==
+                                                      ""
+                                                  ? Image.asset(
+                                                      "assets/defaultImage.png",
+                                                      width: 70,
+                                                      height: 70,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Image.network(
+                                                      "http://211.110.44.91/plus/pro_profile/${transactionController.transAction[index].profileImg}",
+                                                      width: 70,
+                                                      height: 70,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
