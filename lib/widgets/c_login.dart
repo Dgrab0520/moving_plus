@@ -83,12 +83,14 @@ class _C_LoginState extends State<C_Login> {
 
   _initTexts() async {
     final User user = await UserApi.instance.me();
+    print(user);
     setState(() {
       user_id = user.kakaoAccount!.email!;
       user_name = user.kakaoAccount!.profile!.nickname;
-      user_phone = user.kakaoAccount!.phoneNumber!;
-      _default_Image = user.kakaoAccount!.profile!.isDefaultImage!;
-      profile_image = user.kakaoAccount!.profile!.profileImageUrl!;
+      //user_phone = user.kakaoAccount!.phoneNumber!;
+      //print(user.kakaoAccount!.phoneNumber);
+      //_default_Image = user.kakaoAccount!.profile!.isDefaultImage!;
+      //profile_image = user.kakaoAccount!.profile!.profileImageUrl!;
     });
     print('user_name: $user_name');
     print('user_phone: $user_phone');
@@ -127,7 +129,7 @@ class _C_LoginState extends State<C_Login> {
       var token = await AuthApi.instance.issueAccessToken(authCode);
       TokenManager.instance.setToken(token);
       print('token success');
-      //if (user_id == "None") await _initTexts();
+      if (user_id == "None") await _initTexts();
       await getCus();
       if (customer.isEmpty) {
         insertCus();
