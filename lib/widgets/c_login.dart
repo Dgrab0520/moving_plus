@@ -35,21 +35,55 @@ class _C_LoginState extends State<C_Login> {
   String firebaseToken = 'none';
 
   getCus() {
-    Customer_Data.get_Customer(user_id).then((value) {
+    print("getCus : $user_id");
+    Customer_Data.get_Customer(user_id).then((value) async {
       customer = value;
+      if (customer.isEmpty) {
+        print(value);
+        print('customers length : ${customer.length}');
+        print("insert Cus");
+        print(user_id);
+        await insertCus();
+      } else {
+        print('customer length : ${customer.length}');
+      }
     });
-    if (customer.length == 0) {
-      print('customers length : ${customer.length}');
-    } else {
-      print('customer length : ${customer.length}');
-    }
   }
 
   insertCus() {
     Customer_Data.insertCustomer(user_id, user_recom!).then((value) {
       if (value == "success") {
         print('Insert Success');
-
+        FirebaseMessaging.instance.getToken().then((value) =>
+            Customer_Data.updateToken(user_id, value!).then((value2) {
+              setState(() {
+                firebaseToken = value;
+              });
+              if (value2 == 'success') {
+                print('update token success');
+                controller.change(
+                  type: 'cus',
+                  id: '0',
+                  pro_id: user_id,
+                  pro_pw: "pw",
+                  pro_name: user_name,
+                  pro_phone: user_phone,
+                  pro_email: user_id,
+                  com_name: 'None',
+                  profile_img: _default_Image ? "default_image" : profile_image,
+                  pro_token: firebaseToken,
+                  recom: user_recom!,
+                );
+                if (loginRoot == 'main_page') {
+                  Get.offAll(Main_Page(index: 1));
+                } else {
+                  Get.back(result: firebaseToken);
+                }
+                print('fcm tokensd : $firebaseToken');
+              } else {
+                print('update token fail');
+              }
+            }));
         //Get.offAll(Main_Page(index: 1));
       } else {
         print('$value : Insert Fails');
@@ -86,6 +120,7 @@ class _C_LoginState extends State<C_Login> {
     print(user);
     setState(() {
       user_id = user.kakaoAccount!.email!;
+      print(user_id);
       user_name = user.kakaoAccount!.profile!.nickname;
       //user_phone = user.kakaoAccount!.phoneNumber!;
       //print(user.kakaoAccount!.phoneNumber);
@@ -131,39 +166,36 @@ class _C_LoginState extends State<C_Login> {
       print('token success');
       if (user_id == "None") await _initTexts();
       await getCus();
-      if (customer.isEmpty) {
-        insertCus();
-      }
-      FirebaseMessaging.instance.getToken().then(
-          (value) => Customer_Data.updateToken(user_id, value!).then((value2) {
-                setState(() {
-                  firebaseToken = value;
-                });
-                if (value2 == 'success') {
-                  print('update token success');
-                } else {
-                  print('update token fail');
-                }
-              }));
-      controller.change(
-        type: 'cus',
-        id: '0',
-        pro_id: user_id,
-        pro_pw: "pw",
-        pro_name: user_name,
-        pro_phone: user_phone,
-        pro_email: user_id,
-        com_name: 'None',
-        profile_img: _default_Image ? "default_image" : profile_image,
-        pro_token: firebaseToken,
-        recom: user_recom!,
-      );
-      if (loginRoot == 'main_page') {
-        Get.offAll(Main_Page(index: 1));
-      } else {
-        Get.back(result: FCM_token);
-      }
-      print('fcm tokensd : $FCM_token');
+      FirebaseMessaging.instance.getToken().then((value) =>
+          Customer_Data.updateToken(user_id, value!).then((value2) {
+            setState(() {
+              firebaseToken = value;
+            });
+            if (value2 == 'success') {
+              print('update token success');
+              controller.change(
+                type: 'cus',
+                id: '0',
+                pro_id: user_id,
+                pro_pw: "pw",
+                pro_name: user_name,
+                pro_phone: user_phone,
+                pro_email: user_id,
+                com_name: 'None',
+                profile_img: _default_Image ? "default_image" : profile_image,
+                pro_token: firebaseToken,
+                recom: user_recom!,
+              );
+              if (loginRoot == 'main_page') {
+                Get.offAll(Main_Page(index: 1));
+              } else {
+                Get.back(result: firebaseToken);
+              }
+              print('fcm tokensd : $firebaseToken');
+            } else {
+              print('update token fail');
+            }
+          }));
     } catch (e) {
       print("Error on issuing access token: $e");
     }

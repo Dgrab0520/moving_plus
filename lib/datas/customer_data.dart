@@ -54,6 +54,8 @@ class Customer_Data {
 
   //고객 토큰 저장
   static Future<String> updateToken(String cus_id, String token) async {
+    print("cus_id : $cus_id");
+    print("token : $token");
     try {
       var map = Map<String, dynamic>();
       map['action'] = CUSTOMER_TOKEN_ACTION;
