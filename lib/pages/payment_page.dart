@@ -1076,7 +1076,7 @@ class _Payment_PageState extends State<Payment_Page> {
                               ],
                             ),
                           )
-                        : Container(),
+                        : Center(child: CircularProgressIndicator(),),
                   ],
                 ),
               ),
