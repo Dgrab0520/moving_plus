@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kakao_flutter_sdk/all.dart';
@@ -248,6 +249,16 @@ class _Main_PageState extends State<Main_Page> {
         if (_selectedIndex == 2) {
           moveIndex(1);
         } else if (_selectedIndex == 1) {
+          DateTime now = DateTime.now();
+          if (now.difference(currentBackPressTime) >
+              const Duration(milliseconds: 1500)) {
+            currentBackPressTime = now;
+            Fluttertoast.showToast(
+                msg: "뒤로가기 버튼을 한번 더 누르면 종료됩니다",
+                toastLength: Toast.LENGTH_SHORT);
+            //////////////////////////////////////뒤로가기 텍스트
+            return Future.value(false);
+          }
           return Future.value(true);
         }
         return Future.value(false);

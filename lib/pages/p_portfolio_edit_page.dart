@@ -11,6 +11,7 @@ import 'package:moving_plus/models/pro_intro_model.dart';
 import 'package:moving_plus/models/review_model.dart';
 import 'package:moving_plus/pages/chat_personal.dart';
 import 'package:moving_plus/pages/detailscreen_gallery.dart';
+import 'package:moving_plus/pages/network_image_widget.dart';
 import 'package:moving_plus/pages/p_portfolio_page.dart';
 
 final controller = Get.put(ReactiveController());
@@ -835,38 +836,30 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return InkWell(
-                                              onTap: () {
-                                                Get.to(DetailScreenGallery(
-                                                  files: files,
-                                                  pageController:
-                                                      PageController(
-                                                          initialPage: index),
-                                                ));
-                                              },
-                                              child: Container(
-                                                width: 80.0,
-                                                height: 80.0,
-                                                margin:
-                                                    EdgeInsets.only(right: 10),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0)),
-                                                child: Image.network(
-                                                  "http://211.110.44.91/plus/portfolio_file/${files[index].fileName}${files[index].fileType}",
-                                                  fit: BoxFit.cover,
-                                                  errorBuilder: (BuildContext
-                                                          context,
-                                                      Object exception,
-                                                      StackTrace? stackTrace) {
-                                                    return Container(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.5),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            );
+                                                onTap: () {
+                                                  Get.to(DetailScreenGallery(
+                                                    files: files,
+                                                    pageController:
+                                                        PageController(
+                                                            initialPage: index),
+                                                  ));
+                                                },
+                                                child: Container(
+                                                    width: 80.0,
+                                                    height: 80.0,
+                                                    margin: EdgeInsets.only(
+                                                        right: 10),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                      child: FittedBox(
+                                                        fit: BoxFit.cover,
+                                                        child: NetworkImageWidget(
+                                                            url:
+                                                                "http://211.110.44.91/plus/portfolio_file/${files[index].fileName}${files[index].fileType}"),
+                                                      ),
+                                                    )));
                                           }),
                                     )
                                   ],

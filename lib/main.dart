@@ -20,17 +20,30 @@ void onSelectNotification(String? payload) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isIOS) {
-    await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: "AIzaSyBoZtVOfbB3tr26NL_CKne4zGexOwpLYaE",
-          appId: "1:120006776704:ios:0e2bf2dbca3db9f86c5365",
-          messagingSenderId: "120006776704",
-          projectId:
-              "moving-plus-8223e"), //DefaultFirebaseOptions.currentPlatform,
-    );
-  } else {
-    await Firebase.initializeApp();
+  print(Firebase.apps);
+  try {
+    if (Platform.isIOS) {
+      await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: "AIzaSyClCpPqST0evY-ENorxI2T5O0tMeSKGe_w",
+            appId: "1:145519627490:ios:eb33c3626f6ba231f1e2bb",
+            messagingSenderId: "145519627490",
+            projectId:
+                "moving-plus-ed05f"), //DefaultFirebaseOptions.currentPlatform,
+      );
+    } else {
+      print("firebase");
+      await Firebase.initializeApp(
+        name: "androidFirebase",
+        options: FirebaseOptions(
+            apiKey: "AIzaSyAgx4AKRJsX_oxkRfUgfokD-uPu3mH1FH4",
+            appId: "1:145519627490:android:4b415c526e0e7c53f1e2bb",
+            messagingSenderId: "145519627490",
+            projectId: "moving-plus-ed05f"),
+      );
+    }
+  } catch (e) {
+    Firebase.app();
   }
 
   final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb &&

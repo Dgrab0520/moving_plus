@@ -8,16 +8,18 @@ import 'package:moving_plus/pages/main_page.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
   @override
   _SignUp_PageState createState() => _SignUp_PageState();
 }
 
 class _SignUp_PageState extends State<SignUpPage> {
-  final formKey_Service = new GlobalKey<FormState>();
+  final formKey_Service = GlobalKey<FormState>();
   List? _myServices;
   late String _myServicesResult;
 
-  final formKey_Area = new GlobalKey<FormState>();
+  final formKey_Area = GlobalKey<FormState>();
   List? _myAreas;
   late String _myAreasResult;
 
@@ -620,7 +622,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     hintStyle: TextStyle(
                                       fontSize: 10,
                                     ),
-                                    hintText: '업체명을 입력해주세요.',
+                                    hintText: '사업자 등록번호를 입력해주세요.',
                                     labelStyle:
                                         TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
@@ -705,7 +707,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     hintStyle: TextStyle(
                                       fontSize: 10,
                                     ),
-                                    hintText: '업체명을 입력해주세요.',
+                                    hintText: '담당자 이름을 입력해주세요.',
                                     labelStyle:
                                         TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
@@ -762,7 +764,7 @@ class _SignUp_PageState extends State<SignUpPage> {
                                     hintStyle: TextStyle(
                                       fontSize: 10,
                                     ),
-                                    hintText: '업체명을 입력해주세요.',
+                                    hintText: '담당자 연락처를 입력해주세요.',
                                     labelStyle:
                                         TextStyle(color: Color(0xFFACACAC)),
                                     focusedBorder: OutlineInputBorder(
