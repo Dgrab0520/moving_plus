@@ -59,7 +59,7 @@ class FinalOrder_Data {
       map['action'] = SELECT_PAYMENT_ACTION;
       map['estimate_id'] = estimate_id;
       final response = await http.post(Uri.parse(ROOT), body: map);
-      print("Select Final Response : ${response.body}");
+      print("Select Payment Response : ${response.body}");
       if (200 == response.statusCode) {
         List<Payment> list = parseResponse2(response.body);
         return list;

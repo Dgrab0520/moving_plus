@@ -81,31 +81,30 @@ class _Interior_PageState extends State<Interior_Page>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xFF025595)),
+        iconTheme: const IconThemeData(color: Color(0xFF025595)),
         elevation: 0,
         backgroundColor: Colors.white,
         title: Image.asset("assets/logo_3.jpg", width: 65, height: 35),
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              Get.offAll(Main_Page(index: 1));
+              Get.offAll(const Main_Page(index: 1));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Color(0xFF025595),
             )),
         actions: [
           Container(
-            padding: EdgeInsets.only(left: 15, right: 15),
+            padding: const EdgeInsets.only(left: 15, right: 15),
             child: InkWell(
               onTap: () {
                 Get.to(() => MainAlarm());
               },
-              child: Align(
+              child: const Align(
                 alignment: Alignment.centerRight,
-                child: Container(
-                    child: Icon(Icons.notifications,
-                        color: Color(0xFF025595), size: 22)),
+                child: Icon(Icons.notifications,
+                    color: Color(0xFF025595), size: 22),
               ),
             ),
           ),
@@ -121,21 +120,21 @@ class _Interior_PageState extends State<Interior_Page>
                       VerticalScrollableTabBarStatus.setIndex(index);
                     },
                     controller: _tabController,
-                    labelPadding:
-                        EdgeInsets.only(left: 11, right: 11, top: 3, bottom: 0),
+                    labelPadding: const EdgeInsets.only(
+                        left: 11, right: 11, top: 3, bottom: 0),
                     isScrollable: true,
                     labelColor: Colors.black,
-                    labelStyle: TextStyle(
+                    labelStyle: const TextStyle(
                       fontSize: 12,
                     ),
                     unselectedLabelColor: Colors.black,
-                    indicatorColor: Color(0xFF025595),
+                    indicatorColor: const Color(0xFF025595),
                     indicatorWeight: 4,
                     tabs: [
                       for (Category category in categories)
                         Tab(text: category.name)
                     ]),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Expanded(
                   child: _tabController == null
                       ? const Center(child: CircularProgressIndicator())
@@ -160,16 +159,16 @@ class _Interior_PageState extends State<Interior_Page>
           : const CircularProgressIndicator(),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15)),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xFF025595),
+          backgroundColor: const Color(0xFF025595),
           unselectedFontSize: 12,
           currentIndex: 1, //현재 선택된 Index
           onTap: (int index) {
             if (index == 2 && controller.pro.value.pro_id == "None") {
-              Get.dialog(P_Login());
+              Get.dialog(const P_Login());
             } else if (index == 0) {
             } else {
               Get.offAll(Main_Page(
@@ -177,11 +176,11 @@ class _Interior_PageState extends State<Interior_Page>
               ));
             }
           },
-          selectedLabelStyle: TextStyle(
+          selectedLabelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 11,
           ),
-          unselectedLabelStyle: TextStyle(
+          unselectedLabelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 11,
           ),
@@ -257,27 +256,27 @@ class _TabViewState extends State<TabView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Column(
           children: [
             Text(
               widget.category.name + " 서비스",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 23,
                 fontFamily: 'NanumSquareB',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               widget.category.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 fontFamily: 'NanumSquareR',
               ),
             ),
           ],
         ),
-        SizedBox(height: 25),
+        const SizedBox(height: 25),
         for (CategorySub category in widget.category.sub)
           Padding(
               padding: const EdgeInsets.only(bottom: 25.0),
@@ -290,7 +289,7 @@ class _TabViewState extends State<TabView> {
                             Get.toNamed(
                                 '/request_estimage/true?serviceType=${category.title}');
                           } else if (controller.pro.value.type == 'None') {
-                            Get.dialog(C_Login(
+                            Get.dialog(const C_Login(
                               index: 1,
                             ));
                           } else {
@@ -301,8 +300,9 @@ class _TabViewState extends State<TabView> {
                         child: category.image == ''
                             ? Container()
                             : Container(
-                                margin: EdgeInsets.only(left: 5.0, right: 15.0),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(
+                                    left: 5.0, right: 15.0),
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 12.0, vertical: 25.0),
                                 height: 120.0,
                                 decoration: BoxDecoration(
@@ -313,13 +313,13 @@ class _TabViewState extends State<TabView> {
                                   fit: BoxFit.fill,
                                 )),
                                 child: Container(
-                                  padding: EdgeInsets.all(3.0),
+                                  padding: const EdgeInsets.all(3.0),
                                   height: 50.0,
                                   color: Colors.black87.withOpacity(0.5),
                                   child: Center(
                                     child: Text(
                                       category.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: 'NanumSquareB',
                                           fontSize: 15,
                                           color: Colors.white),
@@ -335,7 +335,7 @@ class _TabViewState extends State<TabView> {
                             Get.toNamed(
                                 '/request_estimage/true?serviceType=${category.title2}');
                           } else if (controller.pro.value.type == 'None') {
-                            Get.dialog(C_Login(
+                            Get.dialog(const C_Login(
                               index: 1,
                             ));
                           } else {
@@ -346,8 +346,9 @@ class _TabViewState extends State<TabView> {
                         child: category.image2 == ''
                             ? Container()
                             : Container(
-                                margin: EdgeInsets.only(left: 5.0, right: 15.0),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(
+                                    left: 5.0, right: 15.0),
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 12.0, vertical: 25.0),
                                 height: 120.0,
                                 decoration: BoxDecoration(
@@ -358,13 +359,13 @@ class _TabViewState extends State<TabView> {
                                   fit: BoxFit.fill,
                                 )),
                                 child: Container(
-                                  padding: EdgeInsets.all(3.0),
+                                  padding: const EdgeInsets.all(3.0),
                                   height: 50.0,
                                   color: Colors.black87.withOpacity(0.5),
                                   child: Center(
                                     child: Text(
                                       category.title2,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: 'NanumSquareB',
                                           fontSize: 15,
                                           color: Colors.white),

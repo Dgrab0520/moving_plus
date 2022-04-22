@@ -106,7 +106,7 @@ class _Payment_PageState extends State<Payment_Page> {
                   children: [
                     SizedBox(height: 30),
                     Text(
-                      '$strToday',
+                      strToday,
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: 'NanumSquareB',
@@ -1076,7 +1076,9 @@ class _Payment_PageState extends State<Payment_Page> {
                               ],
                             ),
                           )
-                        : Center(child: CircularProgressIndicator(),),
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
                   ],
                 ),
               ),
@@ -1139,6 +1141,26 @@ class Payment_IMP extends StatelessWidget {
               Icons.arrow_back,
               color: Colors.black,
             )),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    width: 30,
+                    height: 30,
+                    padding: const EdgeInsets.all(5),
+                    child: const FittedBox(child: CircularProgressIndicator())),
+                const Text(
+                  "진행중",
+                  style: TextStyle(color: Colors.black, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       /* 웹뷰 로딩 컴포넌트 */
       initialChild: const Center(

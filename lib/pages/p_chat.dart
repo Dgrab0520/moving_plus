@@ -83,9 +83,10 @@ class _P_ChatState extends State<P_Chat> {
           leading: IconButton(
               onPressed: () {
                 if (controller.pro.value.type == "pro") {
-                  Get.offAll(Main_Page(index: 1));
-                } else
+                  Get.offAll(const Main_Page(index: 1));
+                } else {
                   Get.back();
+                }
               },
               icon: const Icon(
                 Icons.arrow_back,

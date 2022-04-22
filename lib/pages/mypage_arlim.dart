@@ -41,7 +41,7 @@ class MyPageAlarm extends StatelessWidget {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(left: 15.0, right: 15, top: 20),
+                padding: const EdgeInsets.only(left: 15.0, right: 15, top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -95,7 +95,7 @@ class MyPageAlarm extends StatelessWidget {
                                 ],
                               ),
                               FlutterSwitch(
-                                activeColor: Color(0xFF025595),
+                                activeColor: const Color(0xFF025595),
                                 width: 38.0,
                                 height: 25.0,
                                 valueFontSize: 12.0,
@@ -178,7 +178,7 @@ class MyPageAlarm extends StatelessWidget {
                                           },
                                           child: Row(
                                             children: [
-                                              Icon(CupertinoIcons.clock),
+                                              const Icon(CupertinoIcons.clock),
                                               const SizedBox(
                                                 width: 5,
                                               ),
@@ -198,7 +198,7 @@ class MyPageAlarm extends StatelessWidget {
                                           },
                                           child: Row(
                                             children: [
-                                              Icon(CupertinoIcons.clock),
+                                              const Icon(CupertinoIcons.clock),
                                               const SizedBox(
                                                 width: 5,
                                               ),

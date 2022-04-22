@@ -15,13 +15,13 @@ class _P_SignupState extends State<P_Signup> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
         Radius.circular(32),
       )),
       backgroundColor: Colors.white,
       content: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -31,12 +31,12 @@ class _P_SignupState extends State<P_Signup> {
                 child: InkWell(
                     onTap: () {
                       Get.back();
-                      Get.dialog(P_Login());
+                      Get.dialog(const P_Login());
                     },
-                    child: Container(child: Icon(Icons.close))),
+                    child: const Icon(Icons.close)),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 '파트너 회원가입',
                 style: TextStyle(
                   color: Color(0xFF444444),
@@ -44,8 +44,8 @@ class _P_SignupState extends State<P_Signup> {
                   fontFamily: 'NanumSquareB',
                 ),
               ),
-              SizedBox(height: 7),
-              Text(
+              const SizedBox(height: 7),
+              const Text(
                 '로그인 후 입주 플러스를 이용해 주세요.',
                 style: TextStyle(
                   color: Color(0xFF444444),
@@ -53,14 +53,14 @@ class _P_SignupState extends State<P_Signup> {
                   fontFamily: 'NanumSquareR',
                 ),
               ),
-              SizedBox(height: 28),
+              const SizedBox(height: 28),
               Container(
-                padding: EdgeInsets.only(left: 8, right: 8),
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '아이디',
                       style: TextStyle(
                         color: Color(0xFF444444),
@@ -68,8 +68,8 @@ class _P_SignupState extends State<P_Signup> {
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
-                    Container(
+                    const SizedBox(height: 7),
+                    const SizedBox(
                         width: double.infinity,
                         height: 45,
                         child: TextField(
@@ -103,11 +103,11 @@ class _P_SignupState extends State<P_Signup> {
                           ),
                           keyboardType: TextInputType.emailAddress,
                         )),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           '비밀번호',
                           style: TextStyle(
@@ -117,7 +117,7 @@ class _P_SignupState extends State<P_Signup> {
                           ),
                         ),
                         SizedBox(height: 7),
-                        Container(
+                        SizedBox(
                             width: double.infinity,
                             height: 45,
                             child: TextField(
@@ -153,11 +153,11 @@ class _P_SignupState extends State<P_Signup> {
                             )),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           '비밀번호 확인',
                           style: TextStyle(
@@ -167,7 +167,7 @@ class _P_SignupState extends State<P_Signup> {
                           ),
                         ),
                         SizedBox(height: 7),
-                        Container(
+                        SizedBox(
                             width: double.infinity,
                             height: 45,
                             child: TextField(
@@ -203,11 +203,11 @@ class _P_SignupState extends State<P_Signup> {
                             )),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           '업체명',
                           style: TextStyle(
@@ -217,7 +217,7 @@ class _P_SignupState extends State<P_Signup> {
                           ),
                         ),
                         SizedBox(height: 7),
-                        Container(
+                        SizedBox(
                             width: double.infinity,
                             height: 45,
                             child: TextField(
@@ -256,26 +256,26 @@ class _P_SignupState extends State<P_Signup> {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Main_Page(
+                        builder: (context) => const Main_Page(
                               index: 1,
                             )),
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 8, right: 8),
+                  margin: const EdgeInsets.only(left: 8, right: 8),
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Color(0xFF025595),
+                    color: const Color(0xFF025595),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       '가입하기',
                       style: TextStyle(
@@ -287,7 +287,7 @@ class _P_SignupState extends State<P_Signup> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),

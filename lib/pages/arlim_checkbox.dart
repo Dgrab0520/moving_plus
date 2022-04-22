@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:custom_check_box/custom_check_box.dart';
+import 'package:flutter/material.dart';
 
 class Arlim_checkbox extends StatefulWidget {
   const Arlim_checkbox({Key? key}) : super(key: key);
@@ -17,14 +17,14 @@ class _Arlim_checkboxState extends State<Arlim_checkbox> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width:30,
-          height:30,
+        SizedBox(
+          width: 30,
+          height: 30,
           child: CustomCheckBox(
             value: shouldCheck,
             shouldShowBorder: true,
-            borderColor: Color(0xFF025595),
-            checkedFillColor: Color(0xFF025595),
+            borderColor: const Color(0xFF025595),
+            checkedFillColor: const Color(0xFF025595),
             borderRadius: 4,
             borderWidth: 2,
             checkBoxSize: 10,

@@ -1,7 +1,7 @@
 class Api {
   Future<List<Category>> getCategories() async {
     return Future.delayed(
-      Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       () {
         return Category.allCategories;
       },

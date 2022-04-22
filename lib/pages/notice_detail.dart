@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moving_plus/pages/detailscreen.dart';
@@ -60,12 +61,19 @@ class NoticeDetail extends StatelessWidget {
                       path:
                           "http://211.110.44.91/plus/notice_img/${notice.noticeContentImg}"));
                 },
-                child: Image.network(
-                  "http://211.110.44.91/plus/notice_img/${notice.noticeContentImg}",
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return Container();
-                  },
+                child: CachedNetworkImage(
+                  imageUrl:
+                      "http://211.110.44.91/plus/notice_img/${notice.noticeContentImg}",
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      SizedBox(
+                    width: 100,
+                    height: 150,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Container(),
                 ),
               ),
               const SizedBox(

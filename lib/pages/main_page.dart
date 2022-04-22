@@ -226,15 +226,15 @@ class _Main_PageState extends State<Main_Page> {
     print('user_idd : $user_id');
     if (controller.pro.value.type == "pro") {
       _widgetOptions = [
-        Interior_Page(categoryTitle: 0),
-        HomePage(),
-        P_Chat(),
+        const Interior_Page(categoryTitle: 0),
+        const HomePage(),
+        const P_Chat(),
       ];
     } else {
       _widgetOptions = [
-        Interior_Page(categoryTitle: 0),
-        HomePage(),
-        Receive_Estimate(
+        const Interior_Page(categoryTitle: 0),
+        const HomePage(),
+        const Receive_Estimate(
           isMain: true,
         ),
       ];
@@ -266,7 +266,7 @@ class _Main_PageState extends State<Main_Page> {
       child: Scaffold(
         appBar: _selectedIndex == 1
             ? AppBar(
-                iconTheme: IconThemeData(color: Color(0xFF025595)),
+                iconTheme: const IconThemeData(color: Color(0xFF025595)),
                 elevation: 0,
                 backgroundColor: Colors.white,
                 title: InkWell(
@@ -282,18 +282,19 @@ class _Main_PageState extends State<Main_Page> {
                   controller.pro.value.type == 'None'
                       ? InkWell(
                           onTap: () {
-                            Get.dialog(C_Login(index: 0));
+                            Get.dialog(const C_Login(index: 0));
                           },
                           child: Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 top: 15.0, bottom: 15, left: 2, right: 5),
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
                             decoration: BoxDecoration(
-                              color: Color(0xFF025595),
+                              color: const Color(0xFF025595),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Text(
+                            child: const Text(
                               '로그인',
                               style: TextStyle(
                                 color: Colors.white,
@@ -324,14 +325,15 @@ class _Main_PageState extends State<Main_Page> {
                           },
                           child: Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 top: 15.0, bottom: 15, left: 2, right: 5),
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
                             decoration: BoxDecoration(
-                              color: Color(0xFF025595),
+                              color: const Color(0xFF025595),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Text(
+                            child: const Text(
                               '로그아웃',
                               style: TextStyle(
                                 color: Colors.white,
@@ -341,9 +343,9 @@ class _Main_PageState extends State<Main_Page> {
                             ),
                           ),
                         ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Container(
-                    padding: EdgeInsets.only(right: 15),
+                    padding: const EdgeInsets.only(right: 15),
                     child: InkWell(
                         onTap: () {
                           if (controller.pro.value.type != "None") {
@@ -360,10 +362,10 @@ class _Main_PageState extends State<Main_Page> {
                                   top: 15,
                                   child: CircleAvatar(
                                     radius: mainController.isAlarm ? 3 : 0,
-                                    backgroundColor: Color(0xFF025595),
+                                    backgroundColor: const Color(0xFF025595),
                                   )),
                             ),
-                            Align(
+                            const Align(
                               alignment: Alignment.center,
                               child: Icon(Icons.notifications,
                                   color: Color(0xFF025595), size: 22),
@@ -376,7 +378,7 @@ class _Main_PageState extends State<Main_Page> {
             : _selectedIndex == 0
                 ? AppBar(
                     elevation: 0,
-                    title: Text(
+                    title: const Text(
                       '견적 신청',
                       style: TextStyle(
                         color: Colors.white,
@@ -385,12 +387,12 @@ class _Main_PageState extends State<Main_Page> {
                       ),
                     ),
                     centerTitle: true,
-                    backgroundColor: Color(0xFF025595),
+                    backgroundColor: const Color(0xFF025595),
                     leading: IconButton(
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back,
                           color: Colors.white,
                         )),
@@ -403,18 +405,16 @@ class _Main_PageState extends State<Main_Page> {
                   children: <Widget>[
                     Container(
                       width: Get.width,
-                      color: Color(0xFF025595),
+                      color: const Color(0xFF025595),
                       height: 150,
                       child: DrawerHeader(
                           child: controller.pro.value.type == 'None'
-                              ? Container(
-                                  child: Center(
-                                    child: Text(
-                                      '로그인 후 이용해주세요',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'NanumSquareB',
-                                      ),
+                              ? const Center(
+                                  child: Text(
+                                    '로그인 후 이용해주세요',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NanumSquareB',
                                     ),
                                   ),
                                 )
@@ -449,7 +449,7 @@ class _Main_PageState extends State<Main_Page> {
                                                 foregroundImage: NetworkImage(
                                                     "http://211.110.44.91/plus/pro_profile/${controller.pro.value.profile_img}"),
                                               )),
-                                    SizedBox(width: 10),
+                                    const SizedBox(width: 10),
                                     Expanded(
                                       flex: 5,
                                       child: Column(
@@ -462,13 +462,13 @@ class _Main_PageState extends State<Main_Page> {
                                             controller.pro.value.type == 'cus'
                                                 ? controller.pro.value.pro_name
                                                 : controller.pro.value.com_name,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 14,
                                               color: Colors.white,
                                               fontFamily: 'NanumSquareB',
                                             ),
                                           ),
-                                          SizedBox(height: 5),
+                                          const SizedBox(height: 5),
                                           Row(
                                             children: [
                                               Flexible(
@@ -476,7 +476,7 @@ class _Main_PageState extends State<Main_Page> {
                                                   child: Text(
                                                       controller
                                                           .pro.value.pro_id,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12,
                                                         fontFamily:
@@ -484,7 +484,7 @@ class _Main_PageState extends State<Main_Page> {
                                                       )),
                                                 ),
                                               ),
-                                              SizedBox(width: 7),
+                                              const SizedBox(width: 7),
                                               controller.pro.value.type == 'cus'
                                                   ? Image.asset(
                                                       'assets/kakao.png',
@@ -512,7 +512,7 @@ class _Main_PageState extends State<Main_Page> {
                                                   Navigator.pop(context);
                                                   print('ss');
                                                 },
-                                                child: Icon(
+                                                child: const Icon(
                                                   CupertinoIcons.clear,
                                                   size: 18.0,
                                                   color: Colors.white,
@@ -526,20 +526,21 @@ class _Main_PageState extends State<Main_Page> {
                         ? GestureDetector(
                             onTap: () {
                               print('로그인');
-                              Get.dialog(C_Login(
+                              Get.dialog(const C_Login(
                                 index: 0,
                               ));
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 100.0, horizontal: 80.0),
                               height: 30.0,
                               width: 30.0,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5.0),
                                   border: Border.all(
-                                      width: 1.0, color: Color(0xFF025595))),
-                              child: Center(
+                                      width: 1.0,
+                                      color: const Color(0xFF025595))),
+                              child: const Center(
                                 child: Text(
                                   '로그인',
                                   style: TextStyle(
@@ -554,21 +555,21 @@ class _Main_PageState extends State<Main_Page> {
                             children: <Widget>[
                               InkWell(
                                 onTap: () {
-                                  Get.to(Request_Received());
+                                  Get.to(const Request_Received());
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 25, left: 25.0, bottom: 15),
                                   child: Row(
                                     children: [
                                       Image.asset("assets/list_g.png",
                                           width: 18, height: 18),
-                                      SizedBox(width: 15),
+                                      const SizedBox(width: 15),
                                       Text(
                                           controller.pro.value.type == 'cus'
                                               ? '보낸 요청서'
                                               : '받은 요청서', //
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: 'NanumSquareB',
                                             fontSize: 14,
                                           )),
@@ -579,15 +580,15 @@ class _Main_PageState extends State<Main_Page> {
                               InkWell(
                                 onTap: () {
                                   if (controller.pro.value.type == "pro") {
-                                    Get.to(P_Chat());
+                                    Get.to(const P_Chat());
                                   } else {
-                                    Get.to(Receive_Estimate(
+                                    Get.to(const Receive_Estimate(
                                       isMain: false,
                                     ));
                                   }
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 10, left: 25.0, bottom: 15),
                                   child: Row(
                                     children: [
@@ -596,13 +597,13 @@ class _Main_PageState extends State<Main_Page> {
                                       // Icon(Icons.speaker_notes_rounded,
                                       //   color: Color(0xFf444444),
                                       // ),
-                                      SizedBox(width: 15),
-                                      Text('채팅',
+                                      const SizedBox(width: 15),
+                                      const Text('채팅',
                                           style: TextStyle(
                                             fontFamily: 'NanumSquareB',
                                             fontSize: 14,
                                           )),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       // Container(
                                       //   width: 20,
                                       //   height: 15,
@@ -630,18 +631,18 @@ class _Main_PageState extends State<Main_Page> {
                                     await Get.to(P_Mypage());
                                     setState(() {});
                                   } else {
-                                    Get.to(C_Mypage());
+                                    Get.to(const C_Mypage());
                                   }
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 10, left: 25.0, bottom: 15),
                                   child: Row(
                                     children: [
                                       Image.asset("assets/user_g.png",
                                           width: 18, height: 18),
-                                      SizedBox(width: 14),
-                                      Text('마이페이지',
+                                      const SizedBox(width: 14),
+                                      const Text('마이페이지',
                                           style: TextStyle(
                                             fontFamily: 'NanumSquareB',
                                             fontSize: 14,
@@ -652,12 +653,12 @@ class _Main_PageState extends State<Main_Page> {
                               ),
                             ],
                           ),
-                    Divider(
+                    const Divider(
                       thickness: 3.0,
                       height: 1.0,
                       color: Color(0xFFf1f1f1),
                     ),
-                    SizedBox(height: 10.0),
+                    const SizedBox(height: 10.0),
                     controller.pro.value.type == 'None'
                         ? Container()
                         : InkWell(
@@ -680,14 +681,14 @@ class _Main_PageState extends State<Main_Page> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                   top: 10, left: 25.0, bottom: 15),
                               child: Row(
                                 children: [
                                   Image.asset("assets/logout-(1)_g@2x.png",
                                       width: 18, height: 18),
-                                  SizedBox(width: 15),
-                                  Text('로그아웃',
+                                  const SizedBox(width: 15),
+                                  const Text('로그아웃',
                                       style: TextStyle(
                                         fontFamily: 'NanumSquareB',
                                         fontSize: 14,
@@ -702,11 +703,11 @@ class _Main_PageState extends State<Main_Page> {
             : null,
         extendBody: true,
         bottomNavigationBar: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Color(0xFF025595),
+            backgroundColor: const Color(0xFF025595),
             unselectedFontSize: 11,
             currentIndex: _selectedIndex, //현재 선택된 Index
             onTap: (int index) {
@@ -746,11 +747,11 @@ class _Main_PageState extends State<Main_Page> {
               }
             },
 
-            selectedLabelStyle: TextStyle(
+            selectedLabelStyle: const TextStyle(
               color: Colors.white,
               fontSize: 11,
             ),
-            unselectedLabelStyle: TextStyle(
+            unselectedLabelStyle: const TextStyle(
               color: Colors.white,
               fontSize: 10,
             ),
@@ -804,7 +805,7 @@ class _Main_PageState extends State<Main_Page> {
             ],
           ),
         ),
-        backgroundColor: Color(0xFF616CA1),
+        backgroundColor: const Color(0xFF616CA1),
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),

@@ -88,17 +88,17 @@ class _ChatListPersonalState extends State<ChatListPersonal> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 45),
+                  children: const [
+                    SizedBox(height: 45),
                     Text(
                       "개인 문의",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontFamily: 'NanumSquareB',
                       ),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: 5),
                   ],
                 ),
               ),
@@ -143,7 +143,7 @@ class _ChatListPersonalState extends State<ChatListPersonal> {
                   child: userChatRooms.isEmpty
                       ? const Text("받은 견적이 없습니다")
                       : ListView.builder(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemCount: isSearch
                               ? searchEstimate.length
                               : userChatRooms.length,

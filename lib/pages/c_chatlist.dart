@@ -159,7 +159,7 @@ class _C_ChatListState extends State<C_ChatList> {
                   child: userChatRooms.isEmpty
                       ? const Text("받은 견적이 없습니다")
                       : ListView.builder(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemCount: isSearch
                               ? searchEstimate.length
                               : userChatRooms.length,

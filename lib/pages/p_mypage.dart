@@ -120,7 +120,7 @@ class P_Mypage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(P_Transaction_Breakdown());
+                      Get.to(const P_Transaction_Breakdown());
                     },
                     child: Container(
                       padding: const EdgeInsets.only(top: 15, bottom: 10),

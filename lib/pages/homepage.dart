@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         physics: const BouncingScrollPhysics(),
         controller: homeScrollController,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           Container(
@@ -75,19 +75,19 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             color: Colors.white,
-            padding: EdgeInsets.only(top: 50, left: 10.0, right: 10),
+            padding: const EdgeInsets.only(top: 50, left: 10.0, right: 10),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 0,
                           ));
                         },
@@ -102,8 +102,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                               Image.asset("assets/main_icon1-1.png",
                                   width: 40, height: 40),
                               const SizedBox(height: 10),
-                              Text(
+                              const Text(
                                 '클린',
                                 style: TextStyle(
                                   fontFamily: 'NanumSquareB',
@@ -126,12 +126,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 1,
                           ));
                         },
@@ -146,8 +146,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -170,12 +170,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 2,
                           ));
                         },
@@ -190,8 +190,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -214,20 +214,20 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 3,
                           ));
                         },
@@ -242,8 +242,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -266,12 +266,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Expanded(
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 4,
                           ));
                         },
@@ -286,8 +286,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -315,7 +315,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: () {
                           print('success');
-                          Get.to(Interior_Page(
+                          Get.to(const Interior_Page(
                             categoryTitle: 5,
                           ));
                         },
@@ -330,8 +330,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.grey.withOpacity(0.3),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -354,12 +354,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
                   ],
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10),
                   child: Column(
                     children: [
                       Row(
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
               ],
             ),
           ),
@@ -387,22 +387,22 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             color: Colors.white,
-            padding: EdgeInsets.only(top: 50, left: 20.0, right: 20),
+            padding: const EdgeInsets.only(top: 50, left: 20.0, right: 20),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('파트너 추천',
+                    const Text('파트너 추천',
                         style: TextStyle(
                           fontFamily: 'NanumSquareEB',
                           fontSize: 15,
                         )),
                     InkWell(
                       onTap: () {
-                        Get.to(Partner_Search());
+                        Get.to(const Partner_Search());
                       },
-                      child: Text(
+                      child: const Text(
                         '더 보기',
                         style: TextStyle(
                           color: Color(0xFF444444),
@@ -413,37 +413,37 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Partner_Sub(),
                 Partner_Sub2(),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 100.0,
           ),
-          Divider(
+          const Divider(
             height: 1.0,
             thickness: 2.0,
             color: Color(0xFFe6e6e6),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              color: Color(0xfff3f3f3),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              color: const Color(0xfff3f3f3),
               width: Get.width,
               height: 300.0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           '상호',
@@ -471,11 +471,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           '대표자',
@@ -503,11 +503,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           '사업자번호',
@@ -535,11 +535,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           '통신판매업',
@@ -567,11 +567,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           'TEL',
@@ -599,11 +599,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: Text(
                           '이메일',
@@ -631,7 +631,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
                       Expanded(
@@ -641,12 +641,12 @@ class _HomePageState extends State<HomePage> {
                                 Get.defaultDialog(
                                     radius: 5.0,
                                     title: '이용약관',
-                                    titleStyle: TextStyle(
+                                    titleStyle: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'NanumSquareR',
                                         fontSize: 14),
                                     content: Container(
-                                      margin: EdgeInsets.all(20),
+                                      margin: const EdgeInsets.all(20),
                                       height: Get.height * 0.6,
                                       width: Get.width,
                                       child: SingleChildScrollView(
@@ -654,7 +654,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ));
                               },
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   '이용약관',
                                   style: TextStyle(
@@ -667,7 +667,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                           child: TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           '|',
                           style: TextStyle(
                             color: Colors.black,
@@ -683,12 +683,12 @@ class _HomePageState extends State<HomePage> {
                                 Get.defaultDialog(
                                     radius: 5.0,
                                     title: '개인정보처리방침',
-                                    titleStyle: TextStyle(
+                                    titleStyle: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'NanumSquareR',
                                         fontSize: 14),
                                     content: Container(
-                                      margin: EdgeInsets.all(20),
+                                      margin: const EdgeInsets.all(20),
                                       height: Get.height * 0.6,
                                       width: Get.width,
                                       child: SingleChildScrollView(
@@ -696,7 +696,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ));
                               },
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   '개인정보처리방침',
                                   style: TextStyle(
@@ -709,7 +709,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                           child: TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           '|',
                           style: TextStyle(
                             color: Colors.black,
@@ -725,12 +725,12 @@ class _HomePageState extends State<HomePage> {
                                 Get.defaultDialog(
                                     radius: 5.0,
                                     title: '환불정보',
-                                    titleStyle: TextStyle(
+                                    titleStyle: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'NanumSquareR',
                                         fontSize: 14),
                                     content: Container(
-                                      margin: EdgeInsets.all(20),
+                                      margin: const EdgeInsets.all(20),
                                       height: Get.height * 0.6,
                                       width: Get.width,
                                       child: SingleChildScrollView(
@@ -738,7 +738,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ));
                               },
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   '환불정보',
                                   style: TextStyle(
@@ -750,8 +750,8 @@ class _HomePageState extends State<HomePage> {
                               ))),
                     ],
                   ),
-                  Spacer(),
-                  Center(
+                  const Spacer(),
+                  const Center(
                     child: Text(
                       '경기도 안양시 동안구 시민대로 327번길 11-41 안양창업지원센터 3층 3133호',
                       style: TextStyle(
@@ -762,8 +762,8 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Spacer(),
-                  Text(
+                  const Spacer(),
+                  const Text(
                     '입주플러스에서는 모든 중개 계약에 대한 취소 또는 계약 불이행에 따른 환불 및 민원등의 처리를 입주플러스(케이에스하우스매니지먼트)에서 진행합니다.\n민원 담당자 : 최현성 (1533-1196)',
                     style: TextStyle(
                       color: Colors.black38,
@@ -775,10 +775,10 @@ class _HomePageState extends State<HomePage> {
                     maxLines: 3,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5.0,
                   ),
-                  Center(
+                  const Center(
                     child: Text(
                       'Copyright © 2022 케이에스하우징매니지먼트. All rights reserved.',
                       style: TextStyle(
@@ -789,10 +789,10 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               )),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
         ],

@@ -57,7 +57,7 @@ class _Carousel_MainState extends State<Carousel_Main> {
                           )),
                         ),
                         const SizedBox(
-                          height: 20.0,
+                          height: 5.0,
                         ),
                         Text(
                           item.banner_title,
@@ -65,6 +65,16 @@ class _Carousel_MainState extends State<Carousel_Main> {
                           style: TextStyle(
                             color: Color(0xFF0e0e0e),
                             fontSize: 15.0,
+                            fontFamily: 'Gmarket_Medium',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          item.banner_sub,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 13.0,
                             fontFamily: 'Gmarket_Medium',
                             fontWeight: FontWeight.bold,
                           ),

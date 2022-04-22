@@ -269,17 +269,20 @@ class _Chat_EstimateState extends State<Chat_Estimate> {
                                     DateTime.parse(chatting[index].createAt));
                           } else if (chatting[index].chatType == "final") {
                             return FinalPrice(
-                                existFinal: chatting
-                                    .where((element) =>
-                                        element.chatType == "final_end")
-                                    .isNotEmpty,
-                                chatAdd: addChatFinalEnd,
-                                price: chatting[index].finalPrice,
-                                estimateId: chatting[index].estimateId,
-                                createAt: chatting[index].createAt,
-                                detail: chatting[index].text,
-                                isPro: isPro == 1 ? true : false,
-                                serviceType: widget.serviceType);
+                              existFinal: chatting
+                                  .where((element) =>
+                                      element.chatType == "final_end")
+                                  .isNotEmpty,
+                              chatAdd: addChatFinalEnd,
+                              price: chatting[index].finalPrice,
+                              estimateId: chatting[index].estimateId,
+                              createAt: chatting[index].createAt,
+                              detail: chatting[index].text,
+                              isPro: isPro == 1 ? true : false,
+                              serviceType: widget.serviceType,
+                              callable: callable,
+                              token: token,
+                            );
                           } else if (chatting[index].image != "") {
                             return ImageChat(
                               image:
@@ -741,7 +744,7 @@ class FinalChat extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: Text(
-        '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}\n결제가 완료되었습니다',
+        '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}\n결제가 완료되었습니다\n상세 주소 및 고객/파트너 연락처를 확인하세요',
         style: const TextStyle(
           fontSize: 14,
           fontFamily: 'NanumSquareB',
@@ -982,6 +985,8 @@ class FinalPrice extends StatelessWidget {
     required this.detail,
     required this.chatAdd,
     required this.existFinal,
+    required this.callable,
+    required this.token,
   }) : super(key: key);
   final int price;
   final String estimateId;
@@ -991,6 +996,8 @@ class FinalPrice extends StatelessWidget {
   final String detail;
   final Function(Chat) chatAdd;
   final bool existFinal;
+  final HttpsCallable callable;
+  final String token;
 
   @override
   Widget build(BuildContext context) {
@@ -1640,6 +1647,15 @@ class FinalPrice extends StatelessWidget {
                                     isPro: 0,
                                     chatType: "final_end",
                                     createAt: createAt));
+                                final HttpsCallableResult result =
+                                    await callable.call(
+                                  <String, dynamic>{
+                                    "token": token,
+                                    "title": controller.pro.value.pro_name,
+                                    "body": "최종견적 결제가 완료됐습니다",
+                                  },
+                                );
+                                print(result.data);
                               }
                             }
                           },

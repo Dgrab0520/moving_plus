@@ -116,7 +116,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           '포트폴리오',
           style: TextStyle(
             color: Colors.white,
@@ -125,12 +125,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -138,12 +138,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
       body: _isLoading
           ? SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Container(
+              child: SizedBox(
                 width: Get.width,
                 child: Column(
                   children: <Widget>[
                     Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 30.0),
                         child: Column(
                           children: <Widget>[
@@ -153,26 +153,26 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                               backgroundImage: NetworkImage(
                                   'http://211.110.44.91/plus/pro_profile/${pro[0].profile_img}'),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10.0,
                             ),
                             Text(
-                              '${pro[0].com_name}',
-                              style: TextStyle(
+                              pro[0].com_name,
+                              style: const TextStyle(
                                 fontSize: 18.0,
                                 fontFamily: 'NanumSquareEB',
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 3.0,
                             ),
                             Text(
                               pro[0].pro_email,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14.0,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10.0,
                             ),
                             controller.pro.value.pro_id == pro[0].pro_id ||
@@ -200,7 +200,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       width: Get.width * 0.4,
                                       height: 30.0,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFF025595),
+                                          color: const Color(0xFF025595),
                                           borderRadius:
                                               BorderRadius.circular(7.0)),
                                       child: Center(
@@ -208,7 +208,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           controller.pro.value.type == "cus"
                                               ? '문의하기'
                                               : '수정하기',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.white,
                                           ),
@@ -217,7 +217,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                     ),
                                   )
                                 : Container(),
-                            SizedBox(
+                            const SizedBox(
                               height: 30.0,
                             ),
                             Row(
@@ -229,15 +229,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   children: <Widget>[
                                     Text(
                                       '${pro[0].estimateCount}개',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18.0,
                                         fontFamily: 'NanumSquareEB',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '받은 견적서',
                                       style: TextStyle(
                                         fontSize: 13.0,
@@ -251,15 +251,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   children: <Widget>[
                                     Text(
                                       '${review.length}개',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18.0,
                                         fontFamily: 'NanumSquareEB',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '리뷰',
                                       style: TextStyle(
                                         fontSize: 13.0,
@@ -273,27 +273,27 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Icon(
+                                        const Icon(
                                           Icons.star,
                                           color: Color(0xFFFFC107),
                                           size: 15.0,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 1.0,
                                         ),
                                         Text(
                                           average.toStringAsFixed(2),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w600,
                                               color: Colors.black87),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '고객 만족도',
                                       style: TextStyle(
                                         fontSize: 13.0,
@@ -305,74 +305,72 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                             )
                           ],
                         )),
-                    Container(
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                  flex: 1,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _isBtn = true;
-                                      });
-                                    },
-                                    child: Container(
-                                      height: 35.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(
-                                            _isBtn ? 0xFF025595 : 0xFFe6e6e6),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '파트너 정보',
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: _isBtn
-                                                  ? Colors.white
-                                                  : Colors.black87),
-                                        ),
+                    Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _isBtn = true;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 35.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(
+                                          _isBtn ? 0xFF025595 : 0xFFe6e6e6),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '파트너 정보',
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: _isBtn
+                                                ? Colors.white
+                                                : Colors.black87),
                                       ),
                                     ),
-                                  )),
-                              Expanded(
-                                  flex: 1,
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _isBtn = false;
-                                      });
-                                    },
-                                    child: Container(
-                                      height: 35.0,
-                                      decoration: BoxDecoration(
-                                        color: Color(
-                                            _isBtn ? 0xFFe6e6e6 : 0xFF025595),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '파트너 후기',
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: _isBtn
-                                                  ? Colors.black87
-                                                  : Colors.white),
-                                        ),
+                                  ),
+                                )),
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _isBtn = false;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 35.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(
+                                          _isBtn ? 0xFFe6e6e6 : 0xFF025595),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '파트너 후기',
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: _isBtn
+                                                ? Colors.black87
+                                                : Colors.white),
                                       ),
                                     ),
-                                  ))
-                            ],
-                          ),
-                        ],
-                      ),
+                                  ),
+                                ))
+                          ],
+                        ),
+                      ],
                     ),
                     _isBtn
                         ? Column(
                             children: [
                               Container(
                                 width: Get.width,
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 20.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -533,12 +531,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         // )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     Text(
                                       pro[0].pro_intro,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black54,
                                         fontSize: 14.0,
                                       ),
@@ -546,10 +544,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       softWrap: false,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 35.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '기본정보',
                                       style: TextStyle(
                                         color: Colors.black87,
@@ -557,12 +555,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         fontFamily: 'NanumSquareB',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Expanded(
+                                        const Expanded(
                                           flex: 2,
                                           child: Text('대표자'),
                                         ),
@@ -572,12 +570,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 2.0,
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Expanded(
+                                        const Expanded(
                                           flex: 2,
                                           child: Text('시공지역'),
                                         ),
@@ -592,12 +590,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 2.0,
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Expanded(
+                                        const Expanded(
                                           flex: 2,
                                           child: Text('경력'),
                                         ),
@@ -612,12 +610,12 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 2.0,
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        Expanded(
+                                        const Expanded(
                                           flex: 2,
                                           child: Text('결제'),
                                         ),
@@ -632,10 +630,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 35.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '제공 서비스',
                                       style: TextStyle(
                                         color: Colors.black87,
@@ -643,7 +641,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         fontFamily: 'NanumSquareB',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     SingleChildScrollView(
@@ -652,7 +650,8 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         children: <Widget>[
                                           pro[0].pro_service1 != ''
                                               ? Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 5.0),
                                                   decoration: BoxDecoration(
@@ -661,14 +660,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             10.0),
                                                     border: Border.all(
                                                         width: 0.5,
-                                                        color:
-                                                            Color(0xffd4d4d4)),
-                                                    color: Color(0xFFe6e6e6),
+                                                        color: const Color(
+                                                            0xffd4d4d4)),
+                                                    color:
+                                                        const Color(0xFFe6e6e6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      '${pro[0].pro_service1}',
-                                                      style: TextStyle(
+                                                      pro[0].pro_service1,
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontSize: 14,
                                                       ),
@@ -679,12 +679,13 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                   ),
                                                 )
                                               : Container(),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10.0,
                                           ),
                                           pro[0].pro_service2 != ''
                                               ? Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 5.0),
                                                   decoration: BoxDecoration(
@@ -693,14 +694,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             10.0),
                                                     border: Border.all(
                                                         width: 0.5,
-                                                        color:
-                                                            Color(0xffd4d4d4)),
-                                                    color: Color(0xFFe6e6e6),
+                                                        color: const Color(
+                                                            0xffd4d4d4)),
+                                                    color:
+                                                        const Color(0xFFe6e6e6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      '${pro[0].pro_service2}',
-                                                      style: TextStyle(
+                                                      pro[0].pro_service2,
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontSize: 14,
                                                       ),
@@ -711,12 +713,13 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                   ),
                                                 )
                                               : Container(),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10.0,
                                           ),
                                           pro[0].pro_service3 != ''
                                               ? Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 5.0),
                                                   decoration: BoxDecoration(
@@ -725,14 +728,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             10.0),
                                                     border: Border.all(
                                                         width: 0.5,
-                                                        color:
-                                                            Color(0xffd4d4d4)),
-                                                    color: Color(0xFFe6e6e6),
+                                                        color: const Color(
+                                                            0xffd4d4d4)),
+                                                    color:
+                                                        const Color(0xFFe6e6e6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      '${pro[0].pro_service3}',
-                                                      style: TextStyle(
+                                                      pro[0].pro_service3,
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontSize: 14,
                                                       ),
@@ -743,12 +747,13 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                   ),
                                                 )
                                               : Container(),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10.0,
                                           ),
                                           pro[0].pro_service4 != ''
                                               ? Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 5.0),
                                                   decoration: BoxDecoration(
@@ -757,14 +762,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             10.0),
                                                     border: Border.all(
                                                         width: 0.5,
-                                                        color:
-                                                            Color(0xffd4d4d4)),
-                                                    color: Color(0xFFe6e6e6),
+                                                        color: const Color(
+                                                            0xffd4d4d4)),
+                                                    color:
+                                                        const Color(0xFFe6e6e6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      '${pro[0].pro_service4}',
-                                                      style: TextStyle(
+                                                      pro[0].pro_service4,
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontSize: 14,
                                                       ),
@@ -775,12 +781,13 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                   ),
                                                 )
                                               : Container(),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10.0,
                                           ),
                                           pro[0].pro_service5 != ''
                                               ? Container(
-                                                  padding: EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0,
                                                       vertical: 5.0),
                                                   decoration: BoxDecoration(
@@ -789,14 +796,15 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             10.0),
                                                     border: Border.all(
                                                         width: 0.5,
-                                                        color:
-                                                            Color(0xffd4d4d4)),
-                                                    color: Color(0xFFe6e6e6),
+                                                        color: const Color(
+                                                            0xffd4d4d4)),
+                                                    color:
+                                                        const Color(0xFFe6e6e6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      '${pro[0].pro_service5}',
-                                                      style: TextStyle(
+                                                      pro[0].pro_service5,
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontSize: 14,
                                                       ),
@@ -810,10 +818,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 35.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       '사진',
                                       style: TextStyle(
                                         color: Colors.black87,
@@ -821,13 +829,13 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         fontFamily: 'NanumSquareB',
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     Container(
                                       height: 80,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
                                       child: ListView.builder(
                                           physics:
                                               const BouncingScrollPhysics(),
@@ -847,8 +855,9 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                 child: Container(
                                                     width: 80.0,
                                                     height: 80.0,
-                                                    margin: EdgeInsets.only(
-                                                        right: 10),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -865,29 +874,29 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20.0,
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 1.5,
                                 height: 1.0,
                                 color: Color(0xFFe6e6e6),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20.0,
                               ),
                               Column(
                                 children: <Widget>[
                                   Container(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0),
                                     width: Get.width,
                                     height: 60.0,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
-                                        Container(
+                                        SizedBox(
                                           width: width_star,
                                           height: 50.0,
                                           child: ListView.builder(
@@ -898,7 +907,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                               return Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: [
+                                                children: const [
                                                   Icon(
                                                     Icons.star,
                                                     color: Color(0xFFFFC107),
@@ -909,27 +918,27 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                             },
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                             width: 120.0,
                                             child: Row(
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 10.0,
                                                 ),
                                                 Text(
-                                                  '${average.toStringAsFixed(2)}',
-                                                  style: TextStyle(
+                                                  average.toStringAsFixed(2),
+                                                  style: const TextStyle(
                                                     color: Colors.black87,
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 25,
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 10.0,
                                                 ),
                                                 Text(
                                                   '( ${review.length}개 )',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black87,
                                                     fontSize: 13,
                                                   ),
@@ -939,19 +948,20 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       ],
                                     ),
                                   ),
-                                  Divider(
+                                  const Divider(
                                     thickness: 0.5,
                                     height: 1.0,
                                     color: Color(0xFFe6e6e6),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10.0,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: Get.width,
                                     height: 300.0,
                                     child: ListView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: review.length > 5
                                             ? 5
                                             : review.length,
@@ -959,7 +969,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                             (BuildContext context, int index) {
                                           return Container(
                                             width: Get.width,
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 horizontal: 25.0,
                                                 vertical: 10.0),
                                             child: Column(
@@ -975,19 +985,20 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                       MainAxisAlignment.start,
                                                   children: <Widget>[
                                                     Text(
-                                                      '${review[index].cus_id}'
+                                                      review[index]
+                                                          .cus_id
                                                           .split('@')[0],
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.black87,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 15,
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 10.0,
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: double.parse(review[
                                                                       index]
                                                                   .review_point)
@@ -1007,7 +1018,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
-                                                            children: [
+                                                            children: const [
                                                               Icon(
                                                                 Icons.star,
                                                                 color: Color(
@@ -1019,25 +1030,26 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                         },
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 5.0,
                                                     ),
                                                     Text(
-                                                      '${review[index].register_date}'
+                                                      review[index]
+                                                          .register_date
                                                           .split(" ")[0],
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.black54,
                                                         fontSize: 12,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5.0,
                                                 ),
                                                 Text(
-                                                  '${review[index].review_content}',
-                                                  style: TextStyle(
+                                                  review[index].review_content,
+                                                  style: const TextStyle(
                                                     color: Colors.black54,
                                                     fontSize: 13,
                                                   ),
@@ -1047,10 +1059,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                       TextOverflow.ellipsis,
                                                   textAlign: TextAlign.start,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5.0,
                                                 ),
-                                                Divider(
+                                                const Divider(
                                                   thickness: 0.5,
                                                   height: 1.0,
                                                   color: Color(0xFFe6e6e6),
@@ -1062,7 +1074,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 60.0,
                               ),
                               review.length > 5
@@ -1081,9 +1093,9 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                 BorderRadius.circular(15.0),
                                             border: Border.all(
                                                 width: 0.8,
-                                                color: Color(0xFFCCCCCC)),
-                                            color: Color(0xFFF9F9F9)),
-                                        child: Center(
+                                                color: const Color(0xFFCCCCCC)),
+                                            color: const Color(0xFFF9F9F9)),
+                                        child: const Center(
                                           child: Text(
                                             '후기 더보기',
                                             style: TextStyle(
@@ -1096,7 +1108,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                       ),
                                     )
                                   : Container(),
-                              SizedBox(
+                              const SizedBox(
                                 height: 80.0,
                               ),
                             ],
@@ -1104,13 +1116,14 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                         : Column(
                             children: <Widget>[
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
                                 width: Get.width,
                                 height: 60.0,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Container(
+                                    SizedBox(
                                       width: width_star,
                                       height: 50.0,
                                       child: ListView.builder(
@@ -1123,7 +1136,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                           return Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
-                                            children: [
+                                            children: const [
                                               Icon(
                                                 Icons.star,
                                                 color: Color(0xFFFFC107),
@@ -1134,27 +1147,27 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         },
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                         width: 120.0,
                                         child: Row(
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10.0,
                                             ),
                                             Text(
                                               average.toStringAsFixed(2),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black87,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 25,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10.0,
                                             ),
                                             Text(
                                               '( ${review.length}개 )',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black87,
                                                 fontSize: 13,
                                               ),
@@ -1164,19 +1177,19 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                   ],
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 thickness: 0.5,
                                 height: 1.0,
                                 color: Color(0xFFe6e6e6),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               Column(
                                 children: review
                                     .map((e) => Container(
                                           width: Get.width,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 25.0, vertical: 10.0),
                                           child: Column(
                                             crossAxisAlignment:
@@ -1192,17 +1205,17 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                 children: <Widget>[
                                                   Text(
                                                     e.cus_id.split('@')[0],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       color: Colors.black87,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15,
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10.0,
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: double.parse(
                                                                 e.review_point)
                                                             .toInt() *
@@ -1220,7 +1233,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .center,
-                                                          children: [
+                                                          children: const [
                                                             Icon(
                                                               Icons.star,
                                                               color: Color(
@@ -1232,25 +1245,25 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                       },
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 5.0,
                                                   ),
                                                   Text(
                                                     e.register_date
                                                         .split(" ")[0],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       color: Colors.black54,
                                                       fontSize: 12,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 5.0,
                                               ),
                                               Text(
                                                 e.review_content,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Colors.black54,
                                                   fontSize: 13,
                                                 ),
@@ -1259,10 +1272,10 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.start,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 5.0,
                                               ),
-                                              Divider(
+                                              const Divider(
                                                 thickness: 0.5,
                                                 height: 1.0,
                                                 color: Color(0xFFe6e6e6),
@@ -1272,7 +1285,7 @@ class _PortfolioEdit_PageState extends State<PortfolioEdit_Page> {
                                         ))
                                     .toList(),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20.0,
                               ),
                             ],

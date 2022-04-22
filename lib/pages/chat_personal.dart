@@ -256,19 +256,26 @@ class _ChatPersonalState extends State<ChatPersonal> {
                                 DateTime.parse(chatting[index - 1].createAt),
                           );
                         } else {
-                          if (chatting[index].finalPrice != 0) {
+                          if (chatting[index].chatType == "final_end") {
+                            return FinalChat(
+                                currentDate:
+                                    DateTime.parse(chatting[index].createAt));
+                          } else if (chatting[index].finalPrice != 0) {
                             return FinalPrice(
-                                existFinal: chatting
-                                    .where((element) =>
-                                        element.chatType == "final_end")
-                                    .isNotEmpty,
-                                chatAdd: addChatFinalEnd,
-                                price: chatting[index].finalPrice,
-                                estimateId: chatting[index].estimateId,
-                                createAt: chatting[index].createAt,
-                                detail: chatting[index].text,
-                                isPro: isPro == 1 ? true : false,
-                                serviceType: serviceType);
+                              existFinal: chatting
+                                  .where((element) =>
+                                      element.chatType == "final_end")
+                                  .isNotEmpty,
+                              chatAdd: addChatFinalEnd,
+                              price: chatting[index].finalPrice,
+                              estimateId: chatting[index].estimateId,
+                              createAt: chatting[index].createAt,
+                              detail: chatting[index].text,
+                              isPro: isPro == 1 ? true : false,
+                              serviceType: serviceType,
+                              callable: callable,
+                              token: token,
+                            );
                           } else if (chatting[index].image != "") {
                             return ImageChat(
                               image:
@@ -576,6 +583,30 @@ class _ChatPersonalState extends State<ChatPersonal> {
   }
 }
 
+class FinalChat extends StatelessWidget {
+  const FinalChat({
+    Key? key,
+    required this.currentDate,
+  }) : super(key: key);
+  final DateTime currentDate;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> weekDay = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0),
+      child: Text(
+        '${currentDate.year}년 ${currentDate.month}월 ${currentDate.day}일 ${weekDay[currentDate.weekday - 1]}\n결제가 완료되었습니다\n상세 주소 및 고객/파트너 연락처를 확인하세요',
+        style: const TextStyle(
+          fontSize: 14,
+          fontFamily: 'NanumSquareB',
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 class CenterDate extends StatelessWidget {
   const CenterDate({
     Key? key,
@@ -806,6 +837,8 @@ class FinalPrice extends StatelessWidget {
     required this.detail,
     required this.chatAdd,
     required this.existFinal,
+    required this.callable,
+    required this.token,
   }) : super(key: key);
   final int price;
   final String estimateId;
@@ -815,6 +848,8 @@ class FinalPrice extends StatelessWidget {
   final String detail;
   final Function(Chat) chatAdd;
   final bool existFinal;
+  final HttpsCallable callable;
+  final String token;
 
   @override
   Widget build(BuildContext context) {
@@ -985,6 +1020,15 @@ class FinalPrice extends StatelessWidget {
                                     isPro: 0,
                                     chatType: "final_end",
                                     createAt: createAt));
+                                final HttpsCallableResult result =
+                                    await callable.call(
+                                  <String, dynamic>{
+                                    "token": token,
+                                    "title": controller.pro.value.pro_name,
+                                    "body": "최종견적 결제가 완료됐습니다",
+                                  },
+                                );
+                                print(result.data);
                               }
                             }
                           },

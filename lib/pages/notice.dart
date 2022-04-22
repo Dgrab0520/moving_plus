@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:moving_plus/datas/notice_data.dart';
 import 'package:moving_plus/pages/notice_detail.dart';
 
@@ -90,7 +91,9 @@ class Notice extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    noticeController.notice[index].registerDate,
+                                    DateFormat('yyyy-MM-dd').format(
+                                        DateTime.parse(noticeController
+                                            .notice[index].registerDate)),
                                     style: const TextStyle(
                                       color: Color(0xFF888888),
                                       fontSize: 12,

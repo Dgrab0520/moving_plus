@@ -35,7 +35,7 @@ class _Account_SetState extends State<Account_Set> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           '계정',
           style: TextStyle(
             color: Colors.white,
@@ -44,12 +44,12 @@ class _Account_SetState extends State<Account_Set> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -58,7 +58,7 @@ class _Account_SetState extends State<Account_Set> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Container(
@@ -83,8 +83,8 @@ class _Account_SetState extends State<Account_Set> {
                           height: 80)),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(bottom: 25, left: 15, right: 15),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.only(bottom: 25, left: 15, right: 15),
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1.0, color: Color(0xFFcccccc)),
                   ),
@@ -92,23 +92,23 @@ class _Account_SetState extends State<Account_Set> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding:
-                    EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 25, bottom: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '이름',
                       style: TextStyle(
                         fontSize: 12,
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     Text(
                       controller.pro.value.pro_name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
@@ -118,30 +118,30 @@ class _Account_SetState extends State<Account_Set> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding:
-                    EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 15, bottom: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '이메일',
                       style: TextStyle(
                         fontSize: 12,
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     Row(
                       children: [
                         Text(
                           controller.pro.value.pro_id,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontFamily: 'NanumSquareB',
                           ),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Image.asset('assets/kakao_b.png',
                             width: 16, height: 16),
                       ],
@@ -151,23 +151,23 @@ class _Account_SetState extends State<Account_Set> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding:
-                    EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 15, bottom: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '포인트',
                       style: TextStyle(
                         fontSize: 12,
                         fontFamily: 'NanumSquareR',
                       ),
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     Text(
                       "$point 포인트",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontFamily: 'NanumSquareB',
                       ),
@@ -175,7 +175,7 @@ class _Account_SetState extends State<Account_Set> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Row(
@@ -188,7 +188,7 @@ class _Account_SetState extends State<Account_Set> {
                         Get.snackbar("복사", "추천인 코드가 복사되었습니다");
                       },
                       child: Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 15,
                           right: 15,
                         ),
@@ -196,20 +196,20 @@ class _Account_SetState extends State<Account_Set> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               '추천인 코드',
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: 'NanumSquareR',
                               ),
                             ),
-                            SizedBox(height: 7),
+                            const SizedBox(height: 7),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
                                   controller.pro.value.recom,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'NanumSquareB',
                                   ),
@@ -229,7 +229,7 @@ class _Account_SetState extends State<Account_Set> {
                         TextEditingController code = TextEditingController();
                         Get.defaultDialog(
                           title: "추천인 코드 등록",
-                          titleStyle: TextStyle(
+                          titleStyle: const TextStyle(
                             fontSize: 15,
                             color: Colors.black,
                             fontFamily: 'NanumSquareB',
@@ -355,7 +355,7 @@ class _Account_SetState extends State<Account_Set> {
                                   '취소',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: const Color(0xFF025595),
+                                    color: Color(0xFF025595),
                                     fontFamily: 'NanumSquareB',
                                   ),
                                 ),
@@ -366,12 +366,12 @@ class _Account_SetState extends State<Account_Set> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
-                          color: Color(0xFF025595),
+                          color: const Color(0xFF025595),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Text(
+                        child: const Text(
                           '코드 등록',
                           style: TextStyle(
                             color: Colors.white,
@@ -454,12 +454,12 @@ class _Account_SetState extends State<Account_Set> {
               //     ),
               //   ),
               // ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               InkWell(
                 onTap: () {
                   Get.defaultDialog(
                       title: "계정 탈퇴",
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                         fontFamily: 'NanumSquareR',
                       ),
                       content: const Text(
@@ -500,7 +500,7 @@ class _Account_SetState extends State<Account_Set> {
                           style: TextStyle(fontSize: 12),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xFF025595),
+                          primary: const Color(0xFF025595),
                         ),
                       ),
                       cancel: OutlinedButton(
@@ -512,21 +512,21 @@ class _Account_SetState extends State<Account_Set> {
                           style: TextStyle(fontSize: 12),
                         ),
                         style: OutlinedButton.styleFrom(
-                          primary: Color(0xFF025595),
+                          primary: const Color(0xFF025595),
                         ),
                       ));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  padding:
-                      EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 15),
+                  padding: const EdgeInsets.only(
+                      left: 15, right: 15, top: 20, bottom: 15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: const [
                           Text(
                             '계정 탈퇴',
                             style: TextStyle(

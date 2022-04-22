@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,8 @@ import 'package:moving_plus/models/estimate_model.dart';
 final controller = Get.put(ReactiveController());
 
 class Estimate_Page extends StatefulWidget {
+  const Estimate_Page({Key? key}) : super(key: key);
+
   @override
   _Estimate_PageState createState() => _Estimate_PageState();
 }
@@ -143,7 +144,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
       child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: Text(
+            title: const Text(
               '견적서 작성',
               style: TextStyle(
                 color: Colors.white,
@@ -152,12 +153,12 @@ class _Estimate_PageState extends State<Estimate_Page> {
               ),
             ),
             centerTitle: true,
-            backgroundColor: Color(0xFF025595),
+            backgroundColor: const Color(0xFF025595),
             leading: IconButton(
                 onPressed: () {
                   Get.back();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 )),
@@ -173,10 +174,10 @@ class _Estimate_PageState extends State<Estimate_Page> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 70.0,
                         ),
-                        Text(
+                        const Text(
                           '요청서를 보고 예상 견적 비용을 적어주세요',
                           style: TextStyle(
                             color: Colors.black87,
@@ -184,13 +185,13 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             fontFamily: 'NanumSquareB',
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
-                        Text(
+                        const Text(
                           '입력하신 견적 비용은\n고객님에게 채팅으로 전달 됩니다',
                           style: TextStyle(
                             color: Colors.black87,
@@ -199,7 +200,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40.0,
                         ),
                         Container(
@@ -209,8 +210,8 @@ class _Estimate_PageState extends State<Estimate_Page> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(15.0),
                               border: Border.all(
-                                  width: 1.5, color: Color(0xFF025595))),
-                          child: Center(
+                                  width: 1.5, color: const Color(0xFF025595))),
+                          child: const Center(
                             child: Text(
                               '예상 견적 비용',
                               style: TextStyle(
@@ -221,18 +222,18 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 60.0,
                         ),
-                        Container(
+                        SizedBox(
                           width: Get.width * 0.7,
                           child: TextField(
                             controller: priceController,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 22.0, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFF025595)),
@@ -253,19 +254,19 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40.0,
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           width: Get.width * 0.71,
                           height: 110.0,
                           decoration: BoxDecoration(
-                              color: Color(0xFFe6e6e6),
+                              color: const Color(0xFFe6e6e6),
                               borderRadius: BorderRadius.circular(5.0)),
                           child: TextField(
                             controller: detailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "견적 정보에 대해 입력해주세요",
                                 hintStyle: TextStyle(
@@ -275,7 +276,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         // Spacer(),
@@ -286,10 +287,10 @@ class _Estimate_PageState extends State<Estimate_Page> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     width: Get.width,
                     height: 80.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Color(0xFF025595),
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10.0),
@@ -297,7 +298,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           '견적서 보내기',
                           style: TextStyle(
                             color: Colors.white,
@@ -323,7 +324,7 @@ class _Estimate_PageState extends State<Estimate_Page> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 color: Colors.white),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               '보내기',
                               style: TextStyle(

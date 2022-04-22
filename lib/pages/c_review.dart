@@ -30,12 +30,12 @@ class CReview extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF025595),
+        backgroundColor: const Color(0xFF025595),
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             )),
@@ -44,7 +44,7 @@ class CReview extends StatelessWidget {
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class CReview extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     '후기 내역',
                     style: TextStyle(fontFamily: 'NanumSquareB', fontSize: 15),
                   ),
@@ -60,8 +60,8 @@ class CReview extends StatelessWidget {
                     onTap: () {
                       Get.defaultDialog(
                         title: "필터",
-                        titleStyle:
-                            TextStyle(fontFamily: 'NanumSquareB', fontSize: 15),
+                        titleStyle: const TextStyle(
+                            fontFamily: 'NanumSquareB', fontSize: 15),
                         content: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -135,7 +135,7 @@ class CReview extends StatelessWidget {
                             style: TextStyle(fontSize: 12),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xFF025595),
+                            primary: const Color(0xFF025595),
                           ),
                         ),
                       );
@@ -165,7 +165,7 @@ class CReview extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Obx(
                 () => Row(
                   children: [
@@ -189,7 +189,7 @@ class CReview extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Obx(
                 () => cusReviewController.isTransActionLoading
                     ? cusReviewController.transAction.isNotEmpty
@@ -258,7 +258,7 @@ class _ReviewBoxState extends State<ReviewBox> {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -275,7 +275,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,7 +296,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                           Text(
                             DateFormat("yyyy.MM.dd").format(cusReviewController
                                 .transAction[index].registerDate),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xFf777777),
                             ),
@@ -304,7 +304,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     SizedBox(
                       width: 250,
                       child: Row(
@@ -312,7 +312,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                         children: [
                           Text(
                             '${Api().findMainCategory(cusReviewController.transAction[index].proServiceType)} | ${cusReviewController.transAction[index].proServiceType}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xfF777777),
                             ),
@@ -330,12 +330,12 @@ class _ReviewBoxState extends State<ReviewBox> {
                                   Get.defaultDialog(
                                       radius: 5.0,
                                       title: "후기",
-                                      titleStyle: TextStyle(
+                                      titleStyle: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 15,
                                         fontFamily: 'NanumSquareB',
                                       ),
-                                      content: Container(
+                                      content: SizedBox(
                                         width: Get.width,
                                         child: SingleChildScrollView(
                                           child: Column(
@@ -344,14 +344,14 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                 controller: review,
                                                 maxLines: 7,
                                                 maxLength: 500,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.black87,
                                                   fontFamily: 'NanumSquareB',
                                                 ),
                                                 decoration: InputDecoration(
                                                   hintText: '후기를 작성해주세요',
-                                                  hintStyle: TextStyle(
+                                                  hintStyle: const TextStyle(
                                                       fontSize: 13.0,
                                                       color: Colors.black54),
                                                   enabledBorder:
@@ -366,10 +366,11 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 1.0,
-                                                        color:
-                                                            Color(0xFF025595)),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            width: 1.0,
+                                                            color: Color(
+                                                                0xFF025595)),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5),
@@ -383,10 +384,10 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                 allowHalfRating: true,
                                                 itemCount: 5,
                                                 itemPadding:
-                                                    EdgeInsets.symmetric(
+                                                    const EdgeInsets.symmetric(
                                                         horizontal: 4.0),
                                                 itemBuilder: (context, _) =>
-                                                    Icon(
+                                                    const Icon(
                                                   Icons.star,
                                                   color: Colors.amber,
                                                 ),
@@ -395,7 +396,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                   ratingStars = rating;
                                                 },
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 20.0,
                                               ),
                                               Row(
@@ -422,7 +423,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                       )),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10.0,
                                                   ),
                                                   InkWell(
@@ -437,7 +438,8 @@ class _ReviewBoxState extends State<ReviewBox> {
                                                     child: Container(
                                                       width: Get.width * 0.3,
                                                       height: 40.0,
-                                                      color: Color(0xFF025595),
+                                                      color: const Color(
+                                                          0xFF025595),
                                                       child: const Center(
                                                           child: Text(
                                                         '작성하기',
@@ -461,10 +463,10 @@ class _ReviewBoxState extends State<ReviewBox> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 3),
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF025595),
+                                    color: const Color(0xFF025595),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     "수정",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -473,14 +475,14 @@ class _ReviewBoxState extends State<ReviewBox> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               InkWell(
                                 onTap: () {
                                   Get.defaultDialog(
                                     title: "후기 삭제",
-                                    titleStyle: TextStyle(
+                                    titleStyle: const TextStyle(
                                       fontFamily: 'NanumSquareB',
                                     ),
                                     content: Text(
@@ -544,7 +546,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                                     color: Colors.red[400],
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     "삭제",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -560,10 +562,10 @@ class _ReviewBoxState extends State<ReviewBox> {
                     ),
                   ],
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -577,8 +579,8 @@ class _ReviewBoxState extends State<ReviewBox> {
                       allowHalfRating: true,
                       itemSize: 14,
                       itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
@@ -588,15 +590,15 @@ class _ReviewBoxState extends State<ReviewBox> {
                       updateOnDrag: false,
                       ignoreGestures: true,
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       '${cusReviewController.transAction[index].reviewPoint} ',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF025595),
                         fontSize: 13,
                       ),
                     ),
-                    Text(
+                    const Text(
                       '/ 5.0',
                       style: TextStyle(
                         fontSize: 13,
@@ -606,7 +608,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Row(
@@ -615,7 +617,7 @@ class _ReviewBoxState extends State<ReviewBox> {
                   Flexible(
                     child: Text(
                       cusReviewController.transAction[index].reviewContent,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 10,
                       ),
                       softWrap: true,
